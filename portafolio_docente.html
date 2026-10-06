@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Portafolio Docente - Ing. Gery Lorenzo Marcillo Merino</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.8}
+.container{max-width:1200px;margin:0 auto}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:32px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:18px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:14px;font-weight:normal;font-style:italic}
+.badge{display:inline-block;background:#e74c3c;color:white;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:12px;letter-spacing:1px}
+.badge-verde{background:#2ecc71}
+.badge-azul{background:#3498db}
+.badge-purpura{background:#9b59b6}
+
+/* SECCIONES */
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+
+/* TABLAS */
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+.tabla tr:nth-child(even){background:#34495e}
+.tabla a{color:#5dade2;text-decoration:none}
+.tabla a:hover{text-decoration:underline}
+
+/* TARJETAS */
+.tarjeta{background:#1e1e2e;border-radius:10px;padding:20px;margin:15px 0;border-left:4px solid #2ecc71}
+.tarjeta h4{color:#2ecc71;margin-bottom:10px;font-size:16px}
+.tarjeta p{font-size:14px;margin-bottom:8px}
+
+/* MÉTRICAS */
+.metricas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:15px 0}
+.metrica-card{background:#1e1e2e;border-radius:8px;padding:18px;text-align:center;border-left:4px solid #f39c12}
+.metrica-card .num{font-size:32px;font-weight:bold;color:#f39c12}
+.metrica-card .label{font-size:11px;color:#bdc3c7;margin-top:5px}
+.metrica-card.verde{border-left-color:#2ecc71}
+.metrica-card.verde .num{color:#2ecc71}
+.metrica-card.azul{border-left-color:#3498db}
+.metrica-card.azul .num{color:#3498db}
+.metrica-card.rojo{border-left-color:#e74c3c}
+.metrica-card.rojo .num{color:#e74c3c}
+
+/* CITA */
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:25px 0;padding:25px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px;font-size:17px;line-height:1.8}
+.cita .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+
+/* BOTONES */
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.btn-purple{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+.btn-red{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+.botones{text-align:center;margin:30px 0}
+
+/* PIE */
+.pie{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie p{margin:6px 0}
+
+/* ENLACES */
+.enlace{color:#5dade2;text-decoration:none;word-break:break-all}
+.enlace:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>👨‍🏫 PORTAFOLIO DOCENTE E INVESTIGADOR</h1>
+<h2>Ing. Gery Lorenzo Marcillo Merino, Msc.</h2>
+<h3>Docente — Estructura I / Estructura II | Carrera de Ingeniería Civil</h3>
+<h3>Universidad Estatal del Sur de Manabí (UNESUM)</h3>
+<span class="badge badge-verde">INVESTIGADOR ACREDITADO — REG-INV-25-08261</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- CITA DE APERTURA -->
+<!-- ============================================================ -->
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 1: DATOS DEL DOCENTE -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>👤 1. DATOS DEL DOCENTE</h2>
+<table class="tabla">
+<tbody>
+<tr><td><b>Nombre completo</b></td><td>Gery Lorenzo Marcillo Merino</td></tr>
+<tr><td><b>Cédula</b></td><td>1304744921</td></tr>
+<tr><td><b>Género</b></td><td>Masculino</td></tr>
+<tr><td><b>Nacionalidad</b></td><td>Ecuatoriana</td></tr>
+<tr><td><b>Fecha de nacimiento</b></td><td>10 de agosto de 1965</td></tr>
+<tr><td><b>Ciudad de nacimiento</b></td><td>Jipijapa, Manabí, Ecuador</td></tr>
+<tr><td><b>Ciudad de residencia</b></td><td>Jipijapa, Manabí, Ecuador</td></tr>
+<tr><td><b>Dirección</b></td><td>Cdla. Ricardo Loor</td></tr>
+<tr><td><b>Teléfono / Celular</b></td><td>0959037103</td></tr>
+<tr><td><b>Email personal</b></td><td>gerylorenzo@hotmail.com</td></tr>
+<tr><td><b>Email institucional</b></td><td>gery.marcillo@unesum.edu.ec</td></tr>
+<tr><td><b>ORCID</b></td><td><a href="https://orcid.org/0009-0000-5583-0042" target="_blank" class="enlace">https://orcid.org/0009-0000-5583-0042</a></td></tr>
+<tr><td><b>Institución</b></td><td>Universidad Estatal del Sur de Manabí (UNESUM)</td></tr>
+<tr><td><b>Facultad</b></td><td>Ciencias Técnicas</td></tr>
+<tr><td><b>Carrera</b></td><td>Ingeniería Civil</td></tr>
+<tr><td><b>Cargo</b></td><td>Docente — Estructura I / Estructura II</td></tr>
+<tr><td><b>Período actual</b></td><td>PI 2026 (noviembre 2025 – marzo 2026)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 2: FORMACIÓN ACADÉMICA -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🎓 2. FORMACIÓN ACADÉMICA</h2>
+<table class="tabla">
+<thead>
+<tr>
+<th>Título</th>
+<th>Institución</th>
+<th>Año</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Ingeniero Civil</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Msc. Ciencias de la Ingeniería Civil Estructural</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Maestría en Planificación de Infraestructura Física de Obras Civiles</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Diplomado en Presas de Tierra</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Diplomado en Edificaciones con Tierra</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Diplomado en Cimentaciones</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Diplomado en Ingeniería Sísmica</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+<tr><td>Diplomado en Ciencia de Datos</td><td>(POR COMPLETAR)</td><td>(POR COMPLETAR)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 3: CATEGORÍA SENESCYT -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🔬 3. CATEGORÍA SENESCYT</h2>
+<p>El docente está registrado y acreditado en el <b>Sistema de Registro, Acreditación y Categorización de Investigadores Nacionales y Extranjeros</b> del Ministerio de Educación, Deporte y Cultura del Ecuador.</p>
+<table class="tabla">
+<tbody>
+<tr><td><b>Categoría oficial</b></td><td><span style="color:#2ecc71;font-weight:bold">INVESTIGADOR ACREDITADO — Investigador Auxiliar 1</span></td></tr>
+<tr><td><b>Código de registro</b></td><td><span style="color:#f39c12;font-weight:bold">REG-INV-25-08261</span></td></tr>
+<tr><td><b>Institución</b></td><td>Universidad Estatal del Sur de Manabí (UNESUM)</td></tr>
+<tr><td><b>ORCID</b></td><td><a href="https://orcid.org/0009-0000-5583-0042" target="_blank" class="enlace">https://orcid.org/0009-0000-5583-0042</a></td></tr>
+<tr><td><b>Grado académico más alto</b></td><td>Msc. Ciencias de la Ingeniería Estructural</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 4: PRODUCCIÓN CIENTÍFICA -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>📚 4. PRODUCCIÓN CIENTÍFICA</h2>
+
+<h3>📖 Libros</h3>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Título</th><th>Autores</th><th>Editorial</th><th>Año</th><th>ISBN</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Rigidez Energética aplicada a la Ingeniería Civil</td><td>Marcillo Merino, G. L., et al.</td><td>Runaiki</td><td>2026</td><td>En trámite (No. Radicación 2026-018)</td></tr>
+<tr><td>2</td><td>Estructuras Integradas: Análisis matricial, modelado estocástico y validación experimental</td><td>Marcillo Merino, G. L., & Ponce Regalado, D. S.</td><td>Runaiki</td><td>2026</td><td>En trámite</td></tr>
+<tr><td>3</td><td>Estructuras Especiales enfocadas en puentes colgantes</td><td>Montalbán Moreira, E. G., et al.</td><td>Runaiki</td><td>2025</td><td>978-9942-846-95-2</td></tr>
+<tr><td>4</td><td>Estructuras de proceso en proyectos de vinculación con la sociedad</td><td>Ponce Regalado, D., et al.</td><td>Runaiki</td><td>2025</td><td>978-9942-571-08-3</td></tr>
+</tbody>
+</table>
+
+<h3>📄 Artículos Científicos</h3>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Título</th><th>Revista</th><th>Año</th><th>DOI/URL</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Modelado estocástico de la migración energética en el Cinturón de Fuego</td><td>YACHASUN, 10(19), 282–297</td><td>2026</td><td><a href="https://doi.org/10.46296/yc.v10i19.0936" target="_blank" class="enlace">10.46296/yc.v10i19.0936</a></td></tr>
+<tr><td>2</td><td>Evaluación probabilística del peligro sísmico temporal con modelos de Markov</td><td>Innova Science Journal, 3(4), 570–588</td><td>2025</td><td><a href="https://doi.org/10.63618/omd/isj/v3/n4/159" target="_blank" class="enlace">10.63618/omd/isj/v3/n4/159</a></td></tr>
+<tr><td>3</td><td>Estructuras de proceso en proyectos de vinculación con la sociedad</td><td>Runaiki</td><td>2025</td><td><a href="https://runaiki.es/index.php/runaiki/article/view/142" target="_blank" class="enlace">runaiki.es/.../142</a></td></tr>
+<tr><td>4</td><td>Metodología de cálculo de un puente colgante</td><td>YACHASUN, 7(13), 56–67</td><td>2023</td><td><a href="https://editorialibkn.com/index.php/Yachasun/article/view/411" target="_blank" class="enlace">editorialibkn.com/.../411</a></td></tr>
+<tr><td>5</td><td>Proyectos de vinculación y su aporte en la responsabilidad social</td><td>Cuadernos de Educación y Desarrollo, 12(7)</td><td>2023</td><td><a href="https://ojs.europubpublications.com/ojs/index.php/ced/article/view/692" target="_blank" class="enlace">ojs.europubpublications.com/.../692</a></td></tr>
+</tbody>
+</table>
+
+<h3>📑 Capítulos de Libro</h3>
+<ul>
+<li><b>Cap. 1:</b> Fundamentos de la Rigidez Energética — Rigidez Energética (2026)</li>
+<li><b>Cap. 5:</b> Sistemas Masa-Resorte — Rigidez Energética (2026)</li>
+<li><b>Cap. 9:</b> Pedagogía Constructivista, TAC y Evaluación — Rigidez Energética (2026)</li>
+<li><b>Caps. 2, 3, 4, 6, 7, 8:</b> Otros capítulos — Rigidez Energética (2026)</li>
+</ul>
+
+<h3>🎤 Ponencias</h3>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Tema</th><th>Evento</th><th>Año</th><th>Estado</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Ordenamiento Territorial y su perspectiva en la dinamización comercial de la ciudad de Jipijapa</td><td>I Congreso de Vinculación con la Sociedad UNESUM 2025</td><td>2025</td><td>En proceso</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 5: PROYECTOS DE INVESTIGACIÓN -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🔬 5. PROYECTOS DE INVESTIGACIÓN</h2>
+
+<div class="tarjeta">
+<h4>📌 Proyecto Multidisciplinario: Valoración del Ordenamiento Territorial</h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título</b></td><td>Valoración del Ordenamiento, espacio y logística de los territorios, como herramienta de desarrollo sostenible</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Básica — Multidisciplinario</td></tr>
+<tr><td><b>Línea</b></td><td>Planificación y gestión del desarrollo territorial sostenible</td></tr>
+<tr><td><b>Facultad líder</b></td><td>Ciencias Económicas — Administración de Empresas</td></tr>
+<tr><td><b>Facultad co-investigadora</b></td><td>Ciencias Técnicas — Ingeniería Civil</td></tr>
+<tr><td><b>Período</b></td><td>PII 2024 — 1/3/2025 al 1/3/2026</td></tr>
+<tr><td><b>Mi rol</b></td><td><span style="color:#2ecc71;font-weight:bold">Investigador (Ingeniería Civil)</span></td></tr>
+<tr><td><b>Registro SENESCYT</b></td><td>REG-INV-25-08261</td></tr>
+<tr><td><b>Estado</b></td><td>✅ Normal (en ejecución)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="tarjeta">
+<h4>📌 UNESUM-REZ-2026-JIPIJAPA-001</h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título</b></td><td>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Aplicada — Multidisciplinario</td></tr>
+<tr><td><b>Mi rol</b></td><td>Investigador principal (Ingeniería Civil)</td></tr>
+<tr><td><b>Período</b></td><td>2026</td></tr>
+<tr><td><b>Estado</b></td><td>En ejecución</td></tr>
+<tr><td><b>Responsorio</b></td><td><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank" class="enlace">https://sebastianremache01.wixsite.com/proyecto-mult</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="tarjeta">
+<h4>📌 Modelado Estocástico del Cinturón de Fuego</h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título</b></td><td>Modelado estocástico de la migración energética en el Cinturón de Fuego</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Aplicada</td></tr>
+<tr><td><b>Mi rol</b></td><td>Investigador principal</td></tr>
+<tr><td><b>Período</b></td><td>2025-2026</td></tr>
+<tr><td><b>Estado</b></td><td>✅ Publicado</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 6: TESIS DIRIGIDAS -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🎓 6. TESIS DIRIGIDAS</h2>
+<p>El docente ha dirigido <b>6 tesis de pregrado</b> en la Carrera de Ingeniería Civil de la UNESUM, todas ellas con impacto directo en el territorio.</p>
+
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Título</th><th>Autor</th><th>Año</th><th>Enlace</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Criterio para el desarrollo de los análisis probabilísticos del riesgo sísmico en el cantón Jipijapa aplicando sucesión de Fibonacci</td><td>Cedeño Figueroa, Cristhian Rene</td><td>2024</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/6082" target="_blank" class="enlace">Ver</a></td></tr>
+<tr><td>2</td><td>Evaluación estructural de un bloque de aulas de la Unidad Educativa Fiscal Alejo Lascano de la ciudad Jipijapa</td><td>Lino Quiroz, María Manuela</td><td>2024</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/6896" target="_blank" class="enlace">Ver</a></td></tr>
+<tr><td>3</td><td>Análisis de vulnerabilidad de puente colgante (peatonal), en el sitio La Mocora del cantón Portoviejo</td><td>Montalbán Moreira, Elian Gabriel</td><td>2024</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/6107" target="_blank" class="enlace">Ver</a></td></tr>
+<tr><td>4</td><td>Propuesta de remodelación de escalinatas designadas al deporte en las calles Antepara y Alejo Lascano en la ciudad de Jipijapa</td><td>Pérez Fienco, Franklin Ricardo</td><td>2024</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/7127" target="_blank" class="enlace">Ver</a></td></tr>
+<tr><td>5</td><td>Cálculo estructural de un galpón tipo para uso de almacenamiento de madera en el sector Los Algodones cantón 24 de Mayo</td><td>Panta Baque, Jimmy Leonardo</td><td>2025</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/8423" target="_blank" class="enlace">Ver</a></td></tr>
+<tr><td>6</td><td>Evaluación estructural de un bloque de aulas de la Unidad Educativa Jipijapa, de la ciudad de Jipijapa</td><td>Indio Barahona, Rosa Estefanía</td><td>2026</td><td><a href="https://repositorio.unesum.edu.ec/handle/53000/9623" target="_blank" class="enlace">Ver</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 7: VINCULACIÓN CON LA SOCIEDAD -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🤝 7. VINCULACIÓN CON LA SOCIEDAD</h2>
+
+<div class="tarjeta">
+<h4>📌 Proyecto Agua Dulce</h4>
+<p><b>Territorio:</b> Recinto Agua Dulce, Parroquia La América, Jipijapa, Manabí</p>
+<p><b>Beneficiarios:</b> 9 estudiantes, 1 docente, ~200 habitantes</p>
+<p><b>Productos:</b> Evaluación estructural, señalización turística, sistema de agua potable</p>
+<p><b>Responsorio:</b> <a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank" class="enlace">https://sebastianremache01.wixsite.com/proyecto-mult</a></p>
+</div>
+
+<div class="tarjeta">
+<h4>📌 Cortometraje "La Honestidad"</h4>
+<p><b>Propósito:</b> Relacionar la ética profesional con la calidad, la trazabilidad y la responsabilidad en las decisiones de ingeniería.</p>
+<p><b>Mensaje:</b> La integridad profesional debe mantenerse incluso cuando las deficiencias de una decisión técnica no son visibles de inmediato.</p>
+</div>
+
+<div class="tarjeta">
+<h4>📌 Cascada Agua Dulce</h4>
+<p><b>Recurso:</b> Atractivo turístico principal del recinto.</p>
+<p><b>Desafío:</b> Falta de señalización y acceso.</p>
+<p><b>Lección:</b> La honestidad es reconocer las limitaciones y trabajar para superarlas.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 8: INDICADORES DE IMPACTO -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>📊 8. INDICADORES DE IMPACTO</h2>
+
+<div class="metricas-grid">
+<div class="metrica-card"><div class="num">7</div><div class="label">PUBLICACIONES REGISTRADAS</div></div>
+<div class="metrica-card verde"><div class="num">4</div><div class="label">LIBROS</div></div>
+<div class="metrica-card azul"><div class="num">5</div><div class="label">ARTÍCULOS</div></div>
+<div class="metrica-card"><div class="num">9</div><div class="label">CAPÍTULOS DE LIBRO</div></div>
+<div class="metrica-card verde"><div class="num">6</div><div class="label">TESIS DIRIGIDAS</div></div>
+<div class="metrica-card azul"><div class="num">5</div><div class="label">PROYECTOS DE INVESTIGACIÓN</div></div>
+<div class="metrica-card"><div class="num">1</div><div class="label">PONENCIA</div></div>
+<div class="metrica-card rojo"><div class="num">1</div><div class="label">CATEGORÍA SENESCYT</div></div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 9: ENLACES VERIFICABLES -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🔗 9. ENLACES VERIFICABLES</h2>
+<table class="tabla">
+<thead><tr><th>Plataforma</th><th>Enlace</th></tr></thead>
+<tbody>
+<tr><td><b>ORCID</b></td><td><a href="https://orcid.org/0009-0000-5583-0042" target="_blank" class="enlace">https://orcid.org/0009-0000-5583-0042</a></td></tr>
+<tr><td><b>Responsorio UNESUM-REZ</b></td><td><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank" class="enlace">https://sebastianremache01.wixsite.com/proyecto-mult</a></td></tr>
+<tr><td><b>Repositorio UNESUM</b></td><td><a href="https://repositorio.unesum.edu.ec" target="_blank" class="enlace">https://repositorio.unesum.edu.ec</a></td></tr>
+<tr><td><b>Revista YACHASUN</b></td><td><a href="https://editorialibkn.com/index.php/Yachasun" target="_blank" class="enlace">https://editorialibkn.com/index.php/Yachasun</a></td></tr>
+<tr><td><b>Innova Science Journal</b></td><td><a href="https://doi.org/10.63618/omd/isj/v3/n4/159" target="_blank" class="enlace">https://doi.org/10.63618/omd/isj/v3/n4/159</a></td></tr>
+<tr><td><b>Editorial Runaiki</b></td><td><a href="https://runaiki.es" target="_blank" class="enlace">https://runaiki.es</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 10: DECLARACIÓN DE HONESTIDAD -->
+<!-- ============================================================ -->
+<div class="seccion">
+<h2>🛡️ 10. DECLARACIÓN DE HONESTIDAD</h2>
+<p>Los datos aquí presentados son <b>verificables</b>. No oculto la incertidumbre. No subestimo el riesgo. No comprometo la seguridad.</p>
+<p>Este portafolio es una herramienta de transparencia y trazabilidad. Cada producto científico aquí listado tiene un enlace verificable a su fuente original.</p>
+
+<div class="cita">
+"Un portafolio honesto vale más que uno inflado."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BOTONES -->
+<!-- ============================================================ -->
+<div class="botones">
+<a href="index.html" class="btn">← Volver al Inicio</a>
+<a href="bibliografia.html" class="btn btn-orange">📚 Ver Bibliografía</a>
+<a href="honestidad_territorial.html" class="btn btn-green">🤝 Ver Honestidad</a>
+<button class="btn btn-purple" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PIE -->
+<!-- ============================================================ -->
+<div class="pie">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"La honestidad refresca el pensamiento académico porque lo obliga a mirar el territorio."</p>
+</div>
+
+</div>
+</body>
+</html>

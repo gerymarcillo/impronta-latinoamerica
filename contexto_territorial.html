@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contexto Territorial - ECT-UNESUM-2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.8}
+.container{max-width:1400px;margin:0 auto}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:80px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:28px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:16px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+.badge{display:inline-block;background:#16a085;color:white;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:bold;margin-top:12px;letter-spacing:1px}
+
+/* SECCIONES */
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #16a085}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+
+/* MÉTRICAS */
+.metricas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:15px 0}
+.metrica-card{background:#1e1e2e;border-radius:8px;padding:18px;text-align:center;border-left:4px solid #f39c12}
+.metrica-card .num{font-size:32px;font-weight:bold;color:#f39c12}
+.metrica-card .label{font-size:11px;color:#bdc3c7;margin-top:5px}
+.metrica-card.verde{border-left-color:#2ecc71}
+.metrica-card.verde .num{color:#2ecc71}
+.metrica-card.azul{border-left-color:#3498db}
+.metrica-card.azul .num{color:#3498db}
+.metrica-card.rojo{border-left-color:#e74c3c}
+.metrica-card.rojo .num{color:#e74c3c}
+
+/* MAPAS */
+.grid-mapas{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:900px){.grid-mapas{grid-template-columns:1fr}}
+.mapa-box{background:#2c3e50;border-radius:12px;padding:15px;border-left:4px solid #3498db}
+.mapa-box h3{color:#f39c12;margin-bottom:12px;font-size:15px}
+.mapa{height:450px;border-radius:8px;border:2px solid #34495e}
+
+/* FALLAS */
+.falla-item{display:flex;align-items:center;gap:12px;padding:12px;background:#1e1e2e;border-radius:6px;margin:8px 0;border-left:4px solid #e74c3c}
+.falla-color{width:40px;height:4px;border-radius:2px;flex-shrink:0}
+.falla-info{flex:1}
+.falla-info strong{color:#f39c12}
+.falla-info p{font-size:12px;color:#bdc3c7;margin:0}
+
+/* TABLAS */
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+
+/* CASOS */
+.caso{background:#1e1e2e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.caso h4{color:#2ecc71;margin-bottom:10px}
+.caso p{font-size:14px}
+
+/* GALERÍA */
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:20px 0}
+.foto-item{background:#1e1e2e;border-radius:10px;overflow:hidden;border-left:4px solid #f39c12}
+.foto-item img{width:100%;height:200px;object-fit:cover;display:block;border-bottom:2px solid #34495e}
+.foto-desc{padding:18px}
+.foto-desc h4{color:#f39c12;margin-bottom:8px;font-size:15px}
+.foto-desc p{font-size:13px;color:#bdc3c7;line-height:1.6}
+
+/* CITA */
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:25px 0;padding:25px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px;font-size:17px;line-height:1.8}
+.cita .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+
+/* BOTONES */
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.btn-purple{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+.btn-red{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+.botones{text-align:center;margin:30px 0}
+
+/* PIE */
+.pie{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>🗺️ CONTEXTO TERRITORIAL</h1>
+<h2>PROYECTO MULTIDISCIPLINARIO UNESUM-REZ-2026-JIPIJAPA-001</h2>
+<h3>Zona Sur de Manabí — Área Piloto 50.47 ha — 22 puntos UTM</h3>
+<h3>Liderado por: Administración de Empresas — Ingeniería Civil UNESUM</h3>
+<span class="badge">TERRITORIO PILOTO: AGUA DULCE</span>
+</div>
+
+<!-- CITA FUNDACIONAL -->
+<div class="cita">
+"La escuela que el sistema olvidó, la comunidad que la recuerda, la UNESUM que la recupera. Vamos a cambiar la historia."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- SECCIÓN 1: MÉTRICAS -->
+<div class="seccion">
+<h2>📊 MÉTRICAS DEL ÁREA PILOTO</h2>
+<p>El área piloto del proyecto multidisciplinario comprende <b>50.47 hectáreas</b> en la Zona Sur de Manabí, delimitadas por 22 puntos de control UTM.</p>
+
+<div class="metricas-grid">
+<div class="metrica-card"><div class="num">50.47</div><div class="label">HECTÁREAS</div></div>
+<div class="metrica-card"><div class="num">3,690</div><div class="label">PERÍMETRO (m)</div></div>
+<div class="metrica-card"><div class="num">863</div><div class="label">EXTENSIÓN E-W (m)</div></div>
+<div class="metrica-card"><div class="num">964</div><div class="label">EXTENSIÓN N-S (m)</div></div>
+<div class="metrica-card"><div class="num">22</div><div class="label">PUNTOS UTM</div></div>
+<div class="metrica-card rojo"><div class="num">3</div><div class="label">FALLAS GEOLÓGICAS</div></div>
+</div>
+</div>
+
+<!-- SECCIÓN 2: MAPAS -->
+<div class="seccion">
+<h2>🗺️ MAPAS INTERACTIVOS</h2>
+<div class="grid-mapas">
+<div class="mapa-box">
+<h3>📍 MAPA 1 — ÁREA DEL PROYECTO (UTM 17S)</h3>
+<div id="mapa-area" class="mapa"></div>
+</div>
+<div class="mapa-box">
+<h3>🔴 MAPA 2 — FALLAS DE CEDEÑO (2024)</h3>
+<div id="mapa-fallas" class="mapa"></div>
+</div>
+</div>
+<p style="color:#bdc3c7;font-size:13px;text-align:center;margin-top:10px">
+Fuente: Cedeño Figueroa (2024) | Sistema: UTM Zona 17S — WGS84 | Elaboración: Ing. Gery Lorenzo Marcillo Merino, Msc.
+</p>
+</div>
+
+<!-- SECCIÓN 3: FALLAS -->
+<div class="seccion">
+<h2>🔴 FALLAS GEOLÓGICAS IDENTIFICADAS</h2>
+<p>Según el estudio de Cedeño Figueroa (2024), en el área piloto se identifican <b>3 fallas geológicas probables</b>.</p>
+
+<div class="falla-item">
+<div class="falla-color" style="background:#FF006E"></div>
+<div class="falla-info">
+<strong>Falla Jipijapa</strong> — Probable, Normal
+<p>Impacto: Alto | Atraviesa el área de NO a E</p>
+</div>
+</div>
+
+<div class="falla-item">
+<div class="falla-color" style="background:#FFB703"></div>
+<div class="falla-info">
+<strong>Falla La Unión</strong> — Probable, Inversa
+<p>Impacto: Alto | Atraviesa el área de O a SE</p>
+</div>
+</div>
+
+<div class="falla-item">
+<div class="falla-color" style="background:#8AC926"></div>
+<div class="falla-info">
+<strong>Falla El Anegado</strong> — Probable, Normal
+<p>Impacto: Medio | Atraviesa el área central a E</p>
+</div>
+</div>
+</div>
+
+<!-- SECCIÓN 4: CENTROS ACADÉMICOS -->
+<div class="seccion">
+<h2>🏫 CENTROS ACADÉMICOS DEL CANTÓN JIPIJAPA</h2>
+<p>El proyecto articula <b>61 centros académicos</b> del Distrito 13D03, distribuidos en 12 parroquias.</p>
+
+<div class="caso">
+<h4>⭐ Territorio Piloto: Agua Dulce (AGUA-001)</h4>
+<p><b>Centro:</b> Escuela Presidente Urbina (AMIE 13H04567)</p>
+<p><b>Parroquia:</b> La América | <b>Estudiantes:</b> 9 | <b>Docentes:</b> 1</p>
+<p><b>Problemática:</b> Riesgo de cierre por falta de infraestructura adecuada.</p>
+</div>
+</div>
+
+<!-- SECCIÓN 5: RECURSOS HÍDRICOS -->
+<div class="seccion">
+<h2>💧 RECURSOS HÍDRICOS Y TRASVASE DEL RÍO DAULE</h2>
+<p>La Zona Sur de Manabí enfrenta una crisis hídrica estructural. El <b>Plan Hidráulico del Sur de Manabí</b> propone el trasvase del río Daule.</p>
+
+<h3>Nueva Alternativa: Acueducto Daule → Paján → Sancán</h3>
+<table class="tabla">
+<thead><tr><th>Tramo</th><th>Ruta</th><th>Longitud (km)</th><th>Tipo</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>Salida Daule → Colimes</td><td>79.26</td><td>Gravedad</td></tr>
+<tr><td>T2</td><td>Colimes → Paján</td><td>46.26</td><td>Impulsión (FLYGT)</td></tr>
+<tr><td>T3</td><td>Paján → El Páramo</td><td>13.91</td><td>Impulsión (FLYGT)</td></tr>
+<tr><td>T4</td><td>El Páramo → Julcuy</td><td>10.44</td><td>Gravedad</td></tr>
+<tr><td>T5</td><td>Julcuy → Jipijapa</td><td>14.91</td><td>Gravedad</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"El agua no solo es un recurso natural, es la esencia de la vida y del desarrollo sostenible."
+<span class="autor">— Ing. Mauricio Castillo Vásquez, Concejal de Jipijapa</span>
+</div>
+</div>
+
+<!-- SECCIÓN 6: LA CASCADA -->
+<div class="seccion">
+<h2>🎥 RECURSO TURÍSTICO: LA CASCADA AGUA DULCE</h2>
+<p>La <b>Cascada Agua Dulce</b> es el principal atractivo turístico del recinto. Representa una oportunidad de desarrollo económico comunitario.</p>
+
+<div class="galeria">
+<div class="foto-item">
+<img src="Captura_pantalla_cascada.png" alt="Cascada Agua Dulce">
+<div class="foto-desc">
+<h4>💧 La Cascada Agua Dulce</h4>
+<p>La cascada en todo su esplendor. Un recurso natural que la comunidad quiere compartir con el mundo.</p>
+</div>
+</div>
+</div>
+
+<div class="caso">
+<h4>📍 Reflexión: La Cascada como Recurso y Desafío</h4>
+<p><b>Recurso:</b> La cascada es un atractivo turístico que puede generar ingresos para la comunidad.</p>
+<p><b>Desafío:</b> La falta de señalización limita el acceso y la experiencia turística.</p>
+<p><b>Lección de honestidad:</b> La UNESUM no puede prometer un paraíso turístico si no se invierte en infraestructura.</p>
+</div>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="index.html" class="btn">← Volver al Inicio</a>
+<a href="honestidad_territorial.html" class="btn btn-orange">🤝 Ver Honestidad</a>
+<a href="articulo_honestidad.html" class="btn btn-purple">📄 Ver Artículo</a>
+<button class="btn btn-green" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"La honestidad refresca el pensamiento académico porque lo obliga a mirar el territorio."</p>
+</div>
+
+</div>
+
+<!-- LEAFLET JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+function utmALatLon(este, norte) {
+    var lon = (este - 500000) / 111000 + (-81);
+    var lat = norte / 111000 - 90;
+    return [lat, lon];
+}
+
+var areaUTM = [
+    [546403.5163, 9851268.9779],[546696.4269, 9851314.1392],
+    [546956.2094, 9851350.8820],[547257.6890, 9851397.0860],
+    [547226.3650, 9851081.8347],[547103.0614, 9851091.1226],
+    [547096.5989, 9851072.4420],[547125.4571, 9851026.5070],
+    [547159.3009, 9851011.6220],[547166.5189, 9850999.9030],
+    [546992.8363, 9850959.7089],[547015.8536, 9850762.6791],
+    [547063.6641, 9850462.6132],[546889.4345, 9850432.6208],
+    [546829.1488, 9850678.8224],[546662.0275, 9850636.2783],
+    [546491.8904, 9850590.1309],[546435.8643, 9850741.5426],
+    [546394.9791, 9850860.4618],[546411.2445, 9850915.2352],
+    [546453.1684, 9850947.9278],[546504.3942, 9850932.9552],
+    [546403.5163, 9851268.9779]
+];
+var areaLatLon = areaUTM.map(function(p) { return utmALatLon(p[0], p[1]); });
+
+var fallas = [
+    { nombre: "Falla Jipijapa", color: "#FF006E", coords: [
+        [-1.3388, -80.5900],[-1.3396, -80.5882],[-1.3404, -80.5864],
+        [-1.3412, -80.5846],[-1.3420, -80.5828],[-1.3405, -80.5830]
+    ]},
+    { nombre: "Falla La Unión", color: "#FFB703", coords: [
+        [-1.3436, -80.5900],[-1.3441, -80.5885],[-1.3446, -80.5870],
+        [-1.3451, -80.5855],[-1.3456, -80.5840],[-1.3461, -80.5834]
+    ]},
+    { nombre: "Falla El Anegado", color: "#8AC926", coords: [
+        [-1.3429, -80.5891],[-1.3433, -80.5877],[-1.3437, -80.5864],
+        [-1.3441, -80.5850],[-1.3445, -80.5837],[-1.3404, -80.5830]
+    ]}
+];
+
+var map1 = L.map('mapa-area').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map1);
+
+L.polygon(areaLatLon, {
+    color: '#FFD60A', fillColor: '#00B4D8',
+    fillOpacity: 0.3, weight: 3
+}).addTo(map1).bindPopup('<b>Área del Proyecto</b><br>50.47 ha | 22 puntos UTM');
+
+areaLatLon.slice(0, -1).forEach(function(p, i) {
+    L.circleMarker(p, {
+        radius: 4, color: '#D62828', fillColor: '#D62828',
+        fillOpacity: 1, weight: 1
+    }).addTo(map1).bindPopup('P' + (i+1));
+});
+
+var map2 = L.map('mapa-fallas').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map2);
+
+L.polygon(areaLatLon, {
+    color: '#FFD60A', fillColor: '#00B4D8',
+    fillOpacity: 0.15, weight: 2
+}).addTo(map2);
+
+fallas.forEach(function(f) {
+    L.polyline(f.coords, {
+        color: f.color, weight: 4, dashArray: '10, 5'
+    }).addTo(map2).bindPopup('<b>' + f.nombre + '</b>');
+});
+
+console.log('✅ Contexto Territorial cargado');
+</script>
+
+</body>
+</html>

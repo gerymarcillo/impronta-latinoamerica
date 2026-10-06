@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tabla NEC-15 - Cargas Viv as y Combinaciones</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #16a085;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #16a085}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#16a085;color:white;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.tabla tr:hover{background:#3d566e}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>TABLA NEC-15</h1>
+<h2>CARGAS VIVAS Y COMBINACIONES DE CARGA</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="seccion">
+<h2>1. CARGAS VIVAS SEGÚN USO (NEC-15, TABLA 9)</h2>
+<p>Valores mínimos de carga viva distribuida según la ocupación de la estructura.</p>
+<table class="tabla">
+<thead><tr><th>Uso / Ocupación</th><th>Cv (t/m²)</th><th>Unidad</th><th>Aplicación típica</th></tr></thead>
+<tbody>
+<tr><td>Vivienda (unifamiliar/bifamiliar)</td><td>0.20</td><td>t/m²</td><td>Casas, departamentos</td></tr>
+<tr><td>Oficinas</td><td>0.24</td><td>t/m²</td><td>Edificios administrativos</td></tr>
+<tr><td>Aulas / Salas de lectura</td><td>0.29</td><td>t/m²</td><td>Colegios, universidades</td></tr>
+<tr><td>Bodega liviana</td><td>0.60</td><td>t/m²</td><td>Almacenes ligeros</td></tr>
+<tr><td>Bodega pesada</td><td>1.20</td><td>t/m²</td><td>Almacenes industriales</td></tr>
+<tr><td>Pasillos y escaleras</td><td>0.48</td><td>t/m²</td><td>Circulación</td></tr>
+<tr><td>Cubierta inaccesible</td><td>0.07</td><td>t/m²</td><td>Techos sin acceso</td></tr>
+<tr><td>Cubierta accesible (terraza)</td><td>0.30</td><td>t/m²</td><td>Terrazas</td></tr>
+<tr><td>Áreas de reunión</td><td>0.29</td><td>t/m²</td><td>Salas con asientos</td></tr>
+<tr><td>Comedores y restaurantes</td><td>0.48</td><td>t/m²</td><td>Restaurantes</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>2. COMPONENTES DE LA CARGA MUERTA (NEC-15)</h2>
+<p>Pesos de los elementos permanentes de la estructura.</p>
+<table class="tabla">
+<thead><tr><th>Componente</th><th>Peso (t/m²)</th><th>Fuente</th></tr></thead>
+<tbody>
+<tr><td>Losa alivianada 15 cm</td><td>0.25</td><td>NEC-15 Tabla 2</td></tr>
+<tr><td>Losa alivianada 20 cm</td><td>0.30</td><td>NEC-15 Tabla 2</td></tr>
+<tr><td>Losa alivianada 25 cm</td><td>0.36</td><td>NEC-15 Tabla 2</td></tr>
+<tr><td>Acabado superior (cerámica + mortero)</td><td>0.04</td><td>NEC-15</td></tr>
+<tr><td>Acabado inferior (enlucido)</td><td>0.04</td><td>NEC-15</td></tr>
+<tr><td>Instalaciones (sanitarias, eléctricas)</td><td>0.02</td><td>NEC-15</td></tr>
+<tr><td>Mampostería pesada (bloque/ladrillo)</td><td>0.18</td><td>NEC-15</td></tr>
+<tr><td>Mampostería liviana (gypsum/steel)</td><td>0.09</td><td>NEC-15</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>3. COMBINACIONES DE CARGA (NEC-15, CAPÍTULO 3)</h2>
+<p>Para el estado límite de resistencia, la NEC-15 establece las siguientes combinaciones:</p>
+
+<h3>3.1 Combinación básica (más usada)</h3>
+<div class="formula">Cu = 1.2 D + 1.6 L</div>
+<p>Donde:</p>
+<ul>
+<li><strong>1.2</strong> = factor de mayoración para carga muerta (D)</li>
+<li><strong>1.6</strong> = factor de mayoración para carga viva (L)</li>
+</ul>
+
+<h3>3.2 Otras combinaciones</h3>
+<div class="formula">1.4 D</div>
+<div class="formula">1.2 D + 1.6 L + 0.5 (Lr o R)</div>
+<div class="formula">1.2 D + 1.0 W + L + 0.5 (Lr o R)</div>
+<div class="formula">1.2 D + 1.0 E + L</div>
+<div class="formula">0.9 D + 1.0 W</div>
+<div class="formula">0.9 D + 1.0 E</div>
+
+<div class="alerta">
+<h4>¿Por qué se mayoran las cargas?</h4>
+<p>Porque las cargas reales pueden ser <strong>mayores</strong> que las estimadas. Los factores de seguridad garantizan que la estructura no falle por flexión, cortante o deflexión excesiva.</p>
+</div>
+</div>
+
+<div class="seccion">
+<h2>4. EJEMPLO DE APLICACIÓN (Caso Colegio Alejo Lascano)</h2>
+<table class="tabla">
+<thead><tr><th>Componente</th><th>Valor (t/m²)</th></tr></thead>
+<tbody>
+<tr><td>Losa alivianada 25 cm</td><td>0.36</td></tr>
+<tr><td>Acabado superior</td><td>0.04</td></tr>
+<tr><td>Acabado inferior</td><td>0.04</td></tr>
+<tr><td>Instalaciones</td><td>0.02</td></tr>
+<tr><td>Mampostería pesada</td><td>0.18</td></tr>
+<tr><td><strong>Cm total</strong></td><td><strong>0.64</strong></td></tr>
+<tr><td>Cv (vivienda)</td><td>0.20</td></tr>
+<tr><td><strong>Cu = 1.2·0.64 + 1.6·0.20</strong></td><td><strong>1.088</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>5. REFERENCIAS</h2>
+<ul>
+<li>NEC-15 (2015). <em>Norma Ecuatoriana de la Construcción: Cargas No Sísmicas</em>. MIDUVI.</li>
+<li>ACI 318-19 (2019). <em>Building Code Requirements for Structural Concrete</em>.</li>
+<li>Marcillo Merino, G. L., et al. (2026). <em>Rigidez Energética aplicada a la Ingeniería Civil</em>. Editorial Runaiki.</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="index.html" class="btn">Volver al Inicio</a>
+<button class="btn btn-orange" onclick="window.print()">Descargar PDF</button>
+</div>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+</body>
+</html>

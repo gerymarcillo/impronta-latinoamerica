@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Responsorio Digital UNESUM-REZ - ECT-UNESUM-2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;padding:20px;line-height:1.7}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #9b59b6;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:80px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:28px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:15px;font-weight:normal;margin-bottom:6px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.badge-prof{display:inline-block;background:#9b59b6;color:white;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:bold;margin-top:12px;letter-spacing:1px}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0;margin:10px 0}
+.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.metricas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:15px 0}
+.metrica-card{background:#1e1e2e;border-radius:8px;padding:18px;text-align:center;border-left:4px solid #f39c12}
+.metrica-card .num{font-size:32px;font-weight:bold;color:#f39c12}
+.metrica-card .label{font-size:11px;color:#bdc3c7;margin-top:5px}
+.metrica-card.verde{border-left-color:#2ecc71}
+.metrica-card.verde .num{color:#2ecc71}
+.metrica-card.azul{border-left-color:#3498db}
+.metrica-card.azul .num{color:#3498db}
+.productos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:15px 0}
+.producto-card{background:#1e1e2e;border-radius:8px;padding:15px;border-left:4px solid #9b59b6;text-align:center}
+.producto-card .icono{font-size:28px;margin-bottom:8px}
+.producto-card .nombre{color:#5dade2;font-size:13px;font-weight:bold;margin-bottom:5px}
+.producto-card .cantidad{color:#f39c12;font-size:20px;font-weight:bold}
+.producto-card .desc{color:#bdc3c7;font-size:11px;margin-top:5px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-purple{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:20px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px;font-size:15px}
+.autores{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:15px 0}
+.autor{background:#1e1e2e;border-radius:8px;padding:12px 15px;border-left:4px solid #3498db;min-width:220px}
+.autor .nombre{color:#5dade2;font-size:13px;font-weight:bold}
+.autor .rol{color:#bdc3c7;font-size:11px;margin-top:3px}
+.pie-pagina{text-align:center;margin-top:30px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:11px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📚 RESPONSORIO DIGITAL UNESUM-REZ</h1>
+<h2>Plataforma integradora para la gestión del conocimiento</h2>
+<h3>Resiliencia sísmica | Ingeniería forense | Modelado estocástico avanzado</h3>
+<h3>Sur de Manabí — Ecuador</h3>
+<span class="badge-prof">ARTICULADO CON ECT-UNESUM-2026</span>
+</div>
+
+<!-- AUTORES -->
+<div class="seccion">
+<h2>👥 AUTORES DEL RESPONSORIO</h2>
+<div class="autores">
+<div class="autor">
+<div class="nombre">Gery Lorenzo Marcillo Merino</div>
+<div class="rol">UNESUM — Ing. Civil</div>
+</div>
+<div class="autor">
+<div class="nombre">Douglas Stalin Ponce Regalado</div>
+<div class="rol">Investigador Independiente</div>
+</div>
+<div class="autor">
+<div class="nombre">Arturo Andrés Hernández Escobar</div>
+<div class="rol">MSc. Geología y Geofísica</div>
+</div>
+<div class="autor">
+<div class="nombre">Julio César Pino Tarragó</div>
+<div class="rol">UNESUM — Ing. Civil</div>
+</div>
+</div>
+</div>
+
+<!-- MÉTRICAS -->
+<div class="seccion">
+<h2>📊 MÉTRICAS DEL RESPONSORIO</h2>
+<div class="metricas-grid">
+<div class="metrica-card"><div class="num">51</div><div class="label">PRODUCTOS CATALOGADOS</div></div>
+<div class="metrica-card verde"><div class="num">100%</div><div class="label">ACCESIBILIDAD</div></div>
+<div class="metrica-card azul"><div class="num">3</div><div class="label">ÁREAS INTEGRADAS</div></div>
+<div class="metrica-card"><div class="num">88%</div><div class="label">CON DOI/ENLACE</div></div>
+</div>
+</div>
+
+<!-- PRODUCTOS -->
+<div class="seccion">
+<h2>📦 PRODUCTOS DEL RESPONSORIO</h2>
+<div class="productos-grid">
+<div class="producto-card"><div class="icono">📄</div><div class="nombre">Informes técnicos</div><div class="cantidad">5</div></div>
+<div class="producto-card"><div class="icono">🔍</div><div class="nombre">Fichas forenses</div><div class="cantidad">9</div></div>
+<div class="producto-card"><div class="icono">📈</div><div class="nombre">Modelos predictivos</div><div class="cantidad">5</div></div>
+<div class="producto-card"><div class="icono">📰</div><div class="nombre">Artículos científicos</div><div class="cantidad">5</div></div>
+<div class="producto-card"><div class="icono">🎓</div><div class="nombre">Tesis</div><div class="cantidad">3</div></div>
+<div class="producto-card"><div class="icono">📚</div><div class="nombre">Capítulos de libro</div><div class="cantidad">9</div></div>
+<div class="producto-card"><div class="icono">🎥</div><div class="nombre">Videos</div><div class="cantidad">1</div></div>
+<div class="producto-card"><div class="icono">📋</div><div class="nombre">Materiales curriculares</div><div class="cantidad">14</div></div>
+</div>
+</div>
+
+<!-- ARTICULACIÓN -->
+<div class="seccion">
+<h2>🔗 ARTICULACIÓN MULTIDISCIPLINARIA</h2>
+<h3>Ingeniería Civil</h3>
+<ul>
+<li>Diagnóstico estructural</li>
+<li>Ingeniería forense</li>
+<li>Modelos predictivos</li>
+<li>Resiliencia sísmica (PLATINUM/GOLD/SILVER/BRONZE)</li>
+</ul>
+<h3>Administración de Empresas</h3>
+<ul>
+<li>Gestión del proyecto</li>
+<li>Análisis socioeconómico</li>
+<li>Liderazgo del proyecto multidisciplinario</li>
+</ul>
+<h3>Educación</h3>
+<ul>
+<li>Articulación curricular (PIS, GE)</li>
+<li>Estructura I y Estructuras II</li>
+<li>Diseño instruccional ADDIE</li>
+</ul>
+</div>
+
+<!-- MODELO UNESUM-H2O -->
+<div class="seccion">
+<h2>💧 MODELO UNESUM-H2O</h2>
+<p>Modelo de <b>aprendizaje continuo</b> que integra:</p>
+<ul>
+<li>Modelado estocástico (Markov, Fibonacci, Monte Carlo)</li>
+<li>Machine Learning (Random Forest, XGBoost, LSTM)</li>
+<li>Física informada (Physics-informed ML)</li>
+<li>Actualización continua sin olvidar lo aprendido</li>
+</ul>
+<p style="color:#f39c12;font-style:italic;margin-top:10px">Este modelo es la base conceptual del sistema de evaluación adaptativa de nuestra plataforma.</p>
+</div>
+
+<!-- PROYECTO PILOTO -->
+<div class="seccion">
+<h2>🎯 PROYECTO PILOTO</h2>
+<p><b>UNESUM-REZ-2026-JIPIJAPA-001</b></p>
+<ul>
+<li><b>Área:</b> 50.47 ha (22 puntos UTM)</li>
+<li><b>Fallas:</b> 3 (Jipijapa, La Unión, El Anegado) — Cedeño (2024)</li>
+<li><b>Escuela piloto:</b> Presidente Urbina (Agua Dulce)</li>
+<li><b>Liderazgo:</b> Administración de Empresas + Ing. Civil UNESUM</li>
+<li><b>Coordenadas:</b> UTM Zona 17S — WGS84</li>
+</ul>
+<div style="text-align:center;margin-top:15px">
+<a href="contexto_territorial.html" class="btn btn-orange">🗺️ Ver Contexto Territorial</a>
+</div>
+</div>
+
+<!-- ENLACES -->
+<div class="seccion">
+<h2>🔗 ENLACES DEL RESPONSORIO</h2>
+<p><b>Responsorio web oficial:</b></p>
+<p><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank" style="color:#5dade2;word-break:break-all">https://sebastianremache01.wixsite.com/proyecto-mult</a></p>
+<p style="margin-top:12px"><b>ORCID del autor principal:</b></p>
+<p><a href="https://orcid.org/0009-0000-5583-0042" target="_blank" style="color:#5dade2">https://orcid.org/0009-0000-5583-0042</a></p>
+<p style="margin-top:12px"><b>Correspondencia:</b></p>
+<p>gery.marcillo@unesum.edu.ec</p>
+</div>
+
+<!-- CITA -->
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."<br>
+<strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+
+<!-- BOTONES -->
+<div style="text-align:center;margin:25px 0">
+<a href="index.html" class="btn">← Volver al Inicio</a>
+<a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank" class="btn btn-purple">🌐 Ir al Responsorio Web</a>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:10px">Articulado con el Responsorio Digital UNESUM-REZ</p>
+</div>
+
+</div>
+</body>
+</html>

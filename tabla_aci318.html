@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tabla ACI 318 - Factores de Mayoración y Reducción</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #9b59b6;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #9b59b6}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#9b59b6;color:white;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.tabla tr:hover{background:#3d566e}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>TABLA ACI 318</h1>
+<h2>FACTORES DE MAYORACIÓN Y REDUCCIÓN</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="seccion">
+<h2>1. FACTORES DE MAYORACIÓN DE CARGAS (ACI 318 §5.3)</h2>
+<p>Combinaciones de carga mayoradas para el diseño por resistencia.</p>
+<table class="tabla">
+<thead><tr><th>Combinación</th><th>Fórmula</th></tr></thead>
+<tbody>
+<tr><td>Básica</td><td>U = 1.4 D</td></tr>
+<tr><td>Con carga viva</td><td>U = 1.2 D + 1.6 L + 0.5 (Lr o R)</td></tr>
+<tr><td>Con viento</td><td>U = 1.2 D + 1.0 W + L + 0.5 (Lr o R)</td></tr>
+<tr><td>Con sismo</td><td>U = 1.2 D + 1.0 E + L</td></tr>
+<tr><td>Contra viento</td><td>U = 0.9 D + 1.0 W</td></tr>
+<tr><td>Contra sismo</td><td>U = 0.9 D + 1.0 E</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>Notación</h4>
+<ul>
+<li><strong>D</strong> = carga muerta</li>
+<li><strong>L</strong> = carga viva</li>
+<li><strong>Lr</strong> = carga viva de cubierta</li>
+<li><strong>R</strong> = carga de lluvia</li>
+<li><strong>W</strong> = carga de viento</li>
+<li><strong>E</strong> = carga sísmica</li>
+</ul>
+</div>
+</div>
+
+<div class="seccion">
+<h2>2. FACTORES DE REDUCCIÓN φ (ACI 318 §21.2)</h2>
+<p>Factores que reducen la resistencia nominal para considerar la incertidumbre.</p>
+<table class="tabla">
+<thead><tr><th>Elemento / Solicitación</th><th>Factor φ</th></tr></thead>
+<tbody>
+<tr><td>Flexión (sin carga axial)</td><td>0.90</td></tr>
+<tr><td>Cortante (con o sin estribos)</td><td>0.75</td></tr>
+<tr><td>Compresión con espiral</td><td>0.75</td></tr>
+<tr><td>Compresión con estribos</td><td>0.65</td></tr>
+<tr><td>Torsión</td><td>0.75</td></tr>
+<tr><td>Compresión axial pura</td><td>0.65</td></tr>
+<tr><td>Aplastamiento en el concreto</td><td>0.65</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>3. RESISTENCIAS NOMINALES DEL CONCRETO</h2>
+
+<h3>3.1 Módulo de elasticidad</h3>
+<div class="formula">E = 4700 √(fc')  [MPa]</div>
+<div class="formula">E = 15100 √(fc)  [kg/cm²] - NEC-15</div>
+
+<h3>3.2 Cortante del concreto</h3>
+<div class="formula">Vc = 0.53 √(fc) · b · d  [kg]</div>
+<div class="formula">Vc = 0.17 √(fc') · b · d  [N]</div>
+
+<h3>3.3 Momento nominal</h3>
+<div class="formula">Mn = As · fy · (d - a/2)</div>
+<div class="formula">a = As · fy / (0.85 · fc · b)</div>
+
+<h3>3.4 Cuantías mínimas y máximas</h3>
+<table class="tabla">
+<thead><tr><th>Elemento</th><th>Cuantía</th><th>Valor</th></tr></thead>
+<tbody>
+<tr><td>Viga a flexión</td><td>ρ_min</td><td>0.0018 · b · h / b · d</td></tr>
+<tr><td>Viga a flexión</td><td>ρ_max</td><td>0.75 · ρ_balance</td></tr>
+<tr><td>Columna</td><td>ρ_mín</td><td>1.2 %</td></tr>
+<tr><td>Columna</td><td>ρ_máx</td><td>4.0 %</td></tr>
+<tr><td>Losa (temperatura)</td><td>ρ_mín</td><td>0.0018</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>4. GEOMETRÍA DE LA SECCIÓN</h2>
+
+<h3>4.1 Peralte efectivo</h3>
+<div class="formula">d = h - rec - φ_est - φ_var/2</div>
+
+<h3>4.2 Recubrimientos mínimos (ACI 318 §20.6.1)</h3>
+<table class="tabla">
+<thead><tr><th>Exposición</th><th>Recubrimiento (cm)</th></tr></thead>
+<tbody>
+<tr><td>No expuesto (vigas, columnas)</td><td>4.0</td></tr>
+<tr><td>Expuesto a intemperie</td><td>5.0</td></tr>
+<tr><td>En contacto con suelo</td><td>7.5</td></tr>
+<tr><td>Expuesto a agua de mar</td><td>7.5</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>5. APLICACIÓN AL PROYECTO (Colegio Alejo Lascano)</h2>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+<tbody>
+<tr><td>fc (resistencia)</td><td>210 kg/cm²</td></tr>
+<tr><td>fy (fluencia)</td><td>4200 kg/cm²</td></tr>
+<tr><td>E (módulo)</td><td>218819 kg/cm²</td></tr>
+<tr><td>φ flexión</td><td>0.90</td></tr>
+<tr><td>φ cortante</td><td>0.75</td></tr>
+<tr><td>φ compresión</td><td>0.65</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion">
+<h2>6. REFERENCIAS</h2>
+<ul>
+<li>ACI 318-19 (2019). <em>Building Code Requirements for Structural Concrete</em>.</li>
+<li>NEC-15 (2015). <em>Norma Ecuatoriana de la Construcción: Estructuras de Hormigón Armado</em>.</li>
+<li>Marcillo Merino, G. L., et al. (2026). <em>Rigidez Energética aplicada a la Ingeniería Civil</em>. Editorial Runaiki.</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="index.html" class="btn">Volver al Inicio</a>
+<button class="btn btn-orange" onclick="window.print()">Descargar PDF</button>
+</div>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+</body>
+</html>

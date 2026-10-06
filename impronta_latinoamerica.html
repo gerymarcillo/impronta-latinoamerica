@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Impronta Única para Latinoamérica - UNESUM-REZ-2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0D1B2A;color:#F5F5F5;min-height:100vh;padding:20px;line-height:1.8}
+.container{max-width:1400px;margin:0 auto}
+
+/* ============ HEADER ============ */
+.header{background:linear-gradient(135deg,#1B263B,#0D1B2A);border-left:8px solid #E0A800;border-right:8px solid #E0A800;border-radius:12px;padding:40px 30px;margin-bottom:30px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#2E8B57,#E0A800,#1E5AA8,#9D4EDD,#E63946)}
+.header-logo{height:100px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(224,168,0,0.5))}
+.header h1{color:#5dade2;font-size:36px;margin-bottom:15px;letter-spacing:2px;text-shadow:0 0 30px rgba(93,173,226,0.5)}
+.header h2{color:#F5F5F5;font-size:18px;font-weight:normal;margin-bottom:10px;letter-spacing:1px}
+.header h3{color:#bdc3c7;font-size:14px;font-weight:normal;font-style:italic}
+.badge-impronta{display:inline-block;background:linear-gradient(135deg,#E0A800,#e67e22);color:white;padding:14px 32px;border-radius:40px;font-size:16px;font-weight:bold;margin-top:20px;letter-spacing:3px;box-shadow:0 10px 40px rgba(224,168,0,0.5);animation:pulso 3s infinite}
+@keyframes pulso{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* ============ SECCIONES ============ */
+.seccion{background:#1B263B;border-radius:12px;padding:35px;margin-bottom:30px;border-left:6px solid #E0A800}
+.seccion h2{color:#5dade2;font-size:26px;margin-bottom:25px;padding-bottom:15px;border-bottom:3px solid #2C3E50}
+.seccion h3{color:#E0A800;font-size:19px;margin:25px 0 15px 0}
+.seccion p{color:#F5F5F5;margin-bottom:15px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:15px 0}
+.seccion ul li{padding:10px 0 10px 30px;position:relative;font-size:14px;line-height:1.7}
+.seccion ul li:before{content:"▸";color:#E0A800;position:absolute;left:0;font-weight:bold;font-size:16px}
+
+/* ============ IMPRONTA GRID ============ */
+.impronta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px;margin:30px 0}
+.impronta-card{background:#0D1B2A;border-radius:15px;padding:30px;text-align:center;border:3px solid #E0A800;transition:all 0.4s;position:relative;overflow:hidden}
+.impronta-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg,#E0A800,#e67e22)}
+.impronta-card:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(224,168,0,0.4);border-color:#e67e22}
+.impronta-card .icono{font-size:56px;margin-bottom:20px;display:block}
+.impronta-card h4{color:#E0A800;font-size:16px;margin-bottom:15px;letter-spacing:1.5px;font-weight:bold}
+.impronta-card p{color:#bdc3c7;font-size:13px;line-height:1.8}
+
+/* ============ MÉTRICAS ============ */
+.metricas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;margin:25px 0}
+.metrica-card{background:#0D1B2A;border-radius:12px;padding:22px;text-align:center;border-left:5px solid #E0A800;transition:transform 0.3s}
+.metrica-card:hover{transform:scale(1.05)}
+.metrica-card .num{font-size:38px;font-weight:bold;color:#E0A800;display:block;margin-bottom:8px}
+.metrica-card .label{font-size:11px;color:#bdc3c7;letter-spacing:1px;text-transform:uppercase}
+.metrica-card.verde{border-left-color:#2E8B57}
+.metrica-card.verde .num{color:#2E8B57}
+.metrica-card.azul{border-left-color:#1E5AA8}
+.metrica-card.azul .num{color:#5dade2}
+.metrica-card.rojo{border-left-color:#E63946}
+.metrica-card.rojo .num{color:#E63946}
+.metrica-card.purpura{border-left-color:#9D4EDD}
+.metrica-card.purpura .num{color:#9D4EDD}
+
+/* ============ TABLAS ============ */
+.tabla{width:100%;border-collapse:collapse;margin:20px 0;background:#0D1B2A;border-radius:10px;overflow:hidden}
+.tabla th{background:#2C3E50;color:#5dade2;padding:15px;text-align:left;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.tabla td{padding:12px;font-size:12px;border-bottom:1px solid #1B263B;color:#F5F5F5;vertical-align:top}
+.tabla tr:nth-child(even){background:#152238}
+.tabla tr:hover{background:#1e3a5f}
+.tabla a{color:#5dade2;text-decoration:none;transition:color 0.2s}
+.tabla a:hover{color:#E0A800;text-decoration:underline}
+
+/* ============ CASOS ============ */
+.caso{background:#0D1B2A;border-left:5px solid #2E8B57;border-radius:10px;padding:25px;margin:20px 0}
+.caso h4{color:#2E8B57;margin-bottom:15px;font-size:16px}
+.caso p{font-size:14px;margin-bottom:10px}
+
+/* ============ GALERÍA ============ */
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin:25px 0}
+.foto-item{background:#0D1B2A;border-radius:12px;overflow:hidden;border-left:5px solid #E0A800;transition:transform 0.3s}
+.foto-item:hover{transform:translateY(-5px)}
+.foto-item img{width:100%;height:220px;object-fit:cover;display:block;border-bottom:2px solid #2C3E50}
+.foto-desc{padding:20px}
+.foto-desc h4{color:#E0A800;margin-bottom:10px;font-size:15px}
+.foto-desc p{font-size:13px;color:#bdc3c7;line-height:1.7}
+
+/* ============ CITA ============ */
+.cita{font-style:italic;color:#E0A800;text-align:center;margin:35px 0;padding:30px;border-left:5px solid #E0A800;border-right:5px solid #E0A800;background:#152238;border-radius:12px;font-size:18px;line-height:1.9}
+.cita .autor{display:block;margin-top:20px;font-size:14px;color:#bdc3c7;font-style:normal;letter-spacing:1px}
+
+/* ============ MAPAS ============ */
+.grid-mapas{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin:25px 0}
+@media(max-width:900px){.grid-mapas{grid-template-columns:1fr}}
+.mapa-box{background:#1B263B;border-radius:12px;padding:20px;border-left:5px solid #5dade2}
+.mapa-box h3{color:#E0A800;margin-bottom:15px;font-size:15px}
+.mapa{height:400px;border-radius:10px;border:2px solid #2C3E50}
+
+/* ============ BOTONES ============ */
+.btn{background:linear-gradient(135deg,#1E5AA8,#152238);color:white;border:none;padding:15px 32px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:bold;margin:8px;text-decoration:none;display:inline-block;transition:all 0.3s;letter-spacing:1px}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(30,90,168,0.4)}
+.btn-impronta{background:linear-gradient(135deg,#E0A800,#e67e22);box-shadow:0 5px 20px rgba(224,168,0,0.4)}
+.btn-verde{background:linear-gradient(135deg,#2E8B57,#1e5f3d)}
+.btn-rosa{background:linear-gradient(135deg,#E63946,#c0392b)}
+.btn-purpura{background:linear-gradient(135deg,#9D4EDD,#7b2cbf)}
+.botones{text-align:center;margin:40px 0}
+
+/* ============ PIE ============ */
+.pie{text-align:center;margin-top:50px;padding:35px;border-top:3px solid #2C3E50;color:#7f8c8d;font-size:13px;background:#0D1B2A;border-radius:12px}
+.pie p{margin:8px 0}
+.pie .destacado{color:#E0A800;font-style:italic;font-size:15px;margin-top:20px}
+
+/* ============ NIVELES JERÁRQUICOS ============ */
+.nivel{background:#152238;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #E0A800}
+.nivel h4{color:#E0A800;font-size:15px;margin-bottom:15px;letter-spacing:1px}
+.nivel .badge-nivel{display:inline-block;background:#E0A800;color:#0D1B2A;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold;margin-left:10px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============ HEADER ============ -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>🌎 IMPRONTA ÚNICA PARA LATINOAMÉRICA</h1>
+<h2>PROYECTO MULTIDISCIPLINARIO UNESUM-REZ-2026</h2>
+<h3>VALORACIÓN DEL ORDENAMIENTO, ESPACIO Y LOGÍSTICA DE LOS TERRITORIOS</h3>
+<h3>UNESUM-REZ-2026-JIPIJAPA-001 | Zona Sur de Manabí — Ecuador</h3>
+<span class="badge-impronta">🏆 UNA SOLA IMPRONTA, SIN DUPLICADOS</span>
+</div>
+
+<!-- ============ CITA DE APERTURA ============ -->
+<div class="cita">
+"La impronta no se declara. Se demuestra con evidencias verificables.<br>
+Este proyecto es la prueba de que la universidad pública latinoamericana<br>
+puede transformar su territorio."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ============ SECCIÓN 1: LA IMPRONTA ÚNICA ============ -->
+<div class="seccion">
+<h2>🏆 1. LA IMPRONTA ÚNICA PARA LATINOAMÉRICA</h2>
+<p>Este proyecto no es un proyecto más. Es una <b>impronta</b> que marca un antes y un después en la forma de hacer investigación universitaria en Latinoamérica. Seis pilares lo sostienen:</p>
+
+<div class="impronta-grid">
+<div class="impronta-card">
+<div class="icono">🌍</div>
+<h4>UN TERRITORIO, MÚLTIPLES DISCIPLINAS</h4>
+<p>Jipijapa es estudiado simultáneamente por Administración de Empresas, Ingeniería Civil, Geología y Educación. Un solo territorio, múltiples miradas.</p>
+</div>
+<div class="impronta-card">
+<div class="icono">📚</div>
+<h4>UN PROYECTO, MÚLTIPLES PRODUCTOS</h4>
+<p>4 libros, 5 artículos, 6 tesis, 1 plataforma web, 1 cortometraje, 22 mapas, 8 fichas técnicas. La investigación se traduce en productos verificables.</p>
+</div>
+<div class="impronta-card">
+<div class="icono">👥</div>
+<h4>UN EQUIPO, MÚLTIPLES NIVELES</h4>
+<p>Desde el decano hasta el estudiante de sexto semestre. 9 niveles jerárquicos, 30+ personas, un solo objetivo: transformar el territorio.</p>
+</div>
+<div class="impronta-card">
+<div class="icono">🎯</div>
+<h4>UN MÉTODO, MÚLTIPLES RESULTADOS</h4>
+<p>El modelado estocástico se aplica a la economía, la ingeniería y la educación. La incertidumbre se cuantifica, no se ignora.</p>
+</div>
+<div class="impronta-card">
+<div class="icono">🤝</div>
+<h4>UNA HONESTIDAD, MÚLTIPLES EVIDENCIAS</h4>
+<p>El oficio del GAD, los informes, los mapas, los datos abiertos. Todo es verificable. La honestidad no se declara: se demuestra.</p>
+</div>
+<div class="impronta-card">
+<div class="icono">🌟</div>
+<h4>UN REFERENTE PARA LATINOAMÉRICA</h4>
+<p>Este proyecto demuestra que la universidad pública latinoamericana puede articular docencia, investigación y vinculación en un solo territorio.</p>
+</div>
+</div>
+</div>
+
+<!-- ============ SECCIÓN 2: DATOS GENERALES ============ -->
+<div class="seccion">
+<h2>📋 2. DATOS GENERALES DEL PROYECTO</h2>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título</b></td><td>Valoración del Ordenamiento, espacio y logística de los territorios, como herramienta de desarrollo sostenible</td></tr>
+<tr><td><b>Código</b></td><td>UNESUM-REZ-2026-JIPIJAPA-001</td></tr>
+<tr><td><b>Tipo de investigación</b></td><td>Investigación Básica</td></tr>
+<tr><td><b>Tipo de proyecto</b></td><td>Multidisciplinario</td></tr>
+<tr><td><b>Línea de investigación</b></td><td>Planificación y gestión del desarrollo territorial sostenible</td></tr>
+<tr><td><b>Campo detallado</b></td><td>COD: 83-13A (geográfica y territorio)</td></tr>
+<tr><td><b>Facultad líder</b></td><td>Ciencias Económicas — Administración de Empresas</td></tr>
+<tr><td><b>Facultad co-investigadora</b></td><td>Ciencias Técnicas — Ingeniería Civil</td></tr>
+<tr><td><b>Período de ejecución</b></td><td>Mayo – Octubre 2025 (PI-2025) | 2025 – 2027 (I+D+i)</td></tr>
+<tr><td><b>Estado</b></td><td>✅ Normal (en ejecución)</td></tr>
+<tr><td><b>Aval institucional</b></td><td>Oficio GADMJ-2026-DPOT-OFI-00005 (26/01/2026)</td></tr>
+<tr><td><b>Plataforma web</b></td><td><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank">https://sebastianremache01.wixsite.com/proyecto-mult</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 3: OBJETIVOS ============ -->
+<div class="seccion">
+<h2>🎯 3. OBJETIVOS DEL PROYECTO</h2>
+
+<h3>🎯 Objetivo General</h3>
+<p>Analizar los indicadores de sostenibilidad que, mediante las políticas públicas, evaluarán la valoración del ordenamiento, espacios y logística de los territorios, como herramienta de desarrollo sostenible en el casco comercial de la ciudad de Jipijapa.</p>
+
+<h3>🎯 Objetivos Específicos</h3>
+
+<div class="caso">
+<h4>1. Diagnóstico territorial</h4>
+<p>Diagnosticar la situación actual del ordenamiento, espacio y logística de los territorios, identificando las áreas empresariales que fomenten el desarrollo económico.</p>
+</div>
+
+<div class="caso">
+<h4>2. Mapeo integral</h4>
+<p>Realizar un mapeo integral del área de intervención para la recopilación, detalle y clasificación de la ubicación de los elementos clave, lo que permitirá orientar el desarrollo sostenible desde una perspectiva empresarial y técnica.</p>
+</div>
+
+<div class="caso">
+<h4>3. Indicadores de sostenibilidad</h4>
+<p>Establecer indicadores de sostenibilidad que permitan el monitoreo y evaluación del impacto de las políticas de ordenamiento territorial y logística para el desarrollo sostenible empresarial a largo plazo.</p>
+</div>
+</div>
+
+<!-- ============ SECCIÓN 4: ÁREAS DE INTERVENCIÓN ============ -->
+<div class="seccion">
+<h2>🗺️ 4. ÁREAS DE INTERVENCIÓN</h2>
+<p>El proyecto multidisciplinario interviene en <b>5 áreas estratégicas</b> de la Zona Sur de Manabí:</p>
+
+<div class="metricas-grid">
+<div class="metrica-card"><div class="num">5</div><div class="label">ÁREAS DE INTERVENCIÓN</div></div>
+<div class="metrica-card verde"><div class="num">50.47</div><div class="label">HECTÁREAS (ÁREA PILOTO)</div></div>
+<div class="metrica-card azul"><div class="num">22</div><div class="label">PUNTOS UTM (ÁREA PILOTO)</div></div>
+<div class="metrica-card rojo"><div class="num">3</div><div class="label">SUBCIRCUITOS</div></div>
+<div class="metrica-card purpura"><div class="num">1.04</div><div class="label">km² (CASCO COMERCIAL)</div></div>
+</div>
+
+<h3>📍 4.1 Área Piloto Jipijapa</h3>
+<table class="tabla">
+<tbody>
+<tr><td><b>Extensión</b></td><td>50.47 hectáreas (504,738 m²)</td></tr>
+<tr><td><b>Perímetro</b></td><td>3,690 m</td></tr>
+<tr><td><b>Dimensiones</b></td><td>863 m × 964 m</td></tr>
+<tr><td><b>Puntos de control</b></td><td>22 puntos UTM (Zona 17S — WGS84)</td></tr>
+<tr><td><b>Fallas geológicas</b></td><td>3 fallas probables (Cedeño Figueroa, 2024)</td></tr>
+</tbody>
+</table>
+
+<h3>📍 4.2 Subcircuito 3.2</h3>
+<table class="tabla">
+<tbody>
+<tr><td><b>Puntos de control</b></td><td>9 puntos UTM</td></tr>
+<tr><td><b>Puntos compartidos</b></td><td>4 puntos con el Área Piloto</td></tr>
+<tr><td><b>Ubicación</b></td><td>Dentro del Área Piloto (zona oeste)</td></tr>
+</tbody>
+</table>
+
+<h3>📍 4.3 Subcircuito 3.3</h3>
+<table class="tabla">
+<tbody>
+<tr><td><b>Puntos de control</b></td><td>7 puntos UTM</td></tr>
+<tr><td><b>Puntos compartidos</b></td><td>Puntos con el Área Piloto y el Subcircuito 3.2</td></tr>
+<tr><td><b>Ubicación</b></td><td>Dentro del Área Piloto (zona noreste)</td></tr>
+</tbody>
+</table>
+
+<h3>📍 4.4 Casco Comercial de Jipijapa</h3>
+<table class="tabla">
+<tbody>
+<tr><td><b>Extensión</b></td><td>1.0407 km² (104.07 hectáreas)</td></tr>
+<tr><td><b>Ubicación</b></td><td>Zona urbana del cantón Jipijapa</td></tr>
+<tr><td><b>Manzanas</b></td><td>8 bloques con códigos de manzana</td></tr>
+<tr><td><b>Calles principales</b></td><td>Rocafuerte, Bolívar, Mejía, Alejo Lascano, Chimborazo, Colón, Santistevan, Montalvo, Guayas, Tungurahua, Noboa, Imbabura, Río Frío, Parrales y Guale, Macará, Febres Cordero, Cotopaxi</td></tr>
+</tbody>
+</table>
+
+<h3>📍 4.5 Agua Dulce (Territorio Piloto)</h3>
+<table class="tabla">
+<tbody>
+<tr><td><b>Ubicación</b></td><td>Recinto Agua Dulce, Parroquia La América, Jipijapa</td></tr>
+<tr><td><b>Beneficiarios</b></td><td>9 estudiantes, 1 docente, ~200 habitantes</td></tr>
+<tr><td><b>Escuela piloto</b></td><td>Presidente Urbina (AMIE 13H04567)</td></tr>
+<tr><td><b>Atractivo turístico</b></td><td>Cascada San Nicolás</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 5: LOS 8 BLOQUES DEL ÁREA PILOTO ============ -->
+<div class="seccion">
+<h2>🏘️ 5. LOS 8 BLOQUES DEL ÁREA PILOTO</h2>
+<p>El Área Piloto está dividida en 8 bloques con códigos de manzana, coordenadas UTM y calles de referencia:</p>
+
+<table class="tabla">
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Manzanas</th>
+<th>Coordenadas UTM</th>
+<th>Calles de Referencia</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><b>BLOQUE 001</b></td><td>031, 032, 046, 047, 048, 049</td><td>E: 546,403–547,257 / N: 9,851,268–9,851,397</td><td>Rocafuerte, Mejía, Guayas, Chimborazo, Alejo Lascano, Cotopaxi</td></tr>
+<tr><td><b>BLOQUE 002</b></td><td>012, 013, 014, 015, 029, 030</td><td>E: 546,463–546,576 / N: 9,850,511–9,850,728</td><td>Cotopaxi, Rocafuerte, Febres Cordero, Bolívar, Sangay, Guayas</td></tr>
+<tr><td><b>BLOQUE 003</b></td><td>002, 003, 029, 030, 031, 032, 033, 034</td><td>E: 546,415–546,435 / N: 9,851,131–9,851,258</td><td>Macará, Imbabura, Parrales y Guale, Río Frío, Noboa, Tungurahua</td></tr>
+<tr><td><b>BLOQUE 004</b></td><td>027, 028, 033, 034, 044, 045, 050, 051</td><td>E: 546,195–546,750 / N: 9,850,598–9,850,984</td><td>Guayas, Rocafuerte, Mejía, Chimborazo, 9 de Octubre, Montalvo</td></tr>
+<tr><td><b>BLOQUE 005</b></td><td>025, 026, 035, 036, 041, 042, 043</td><td>E: 546,345–546,475 / N: 9,850,483–9,850,867</td><td>Montalvo, Rocafuerte, Bolívar, Colón, Santistevan, Mejía</td></tr>
+<tr><td><b>BLOQUE 006</b></td><td>025, 035, 036, 042, 043</td><td>E: 546,578–546,644 / N: 9,850,729–9,851,034</td><td>Bolívar, Santistevan, Colón, Rocafuerte, Montalvo</td></tr>
+<tr><td><b>BLOQUE 007</b></td><td>008, 009, 010, 023, 024, 025, 038, 039, 040, 041</td><td>E: 546,625–546,644 / N: 9,850,785–9,851,000</td><td>Tungurahua, Noboa, Pichincha, Rocafuerte, Espejo, V. Manuel Rendón</td></tr>
+<tr><td><b>BLOQUE 008</b></td><td>005, 006, 007, 026, 027, 028, 035, 036, 037</td><td>E: 546,571–547,589 / N: 9,850,615–9,850,889</td><td>Montalvo, Colón, Santistevan, Noboa, Tungurahua, V. Manuel Rendón</td></tr>
+</tbody>
+</table>
+
+<h3>📋 Propietarios Registrados (Bloque 001)</h3>
+<table class="tabla">
+<thead>
+<tr><th>Punto</th><th>Propietario / Partida</th></tr>
+</thead>
+<tbody>
+<tr><td>P1</td><td>Patio Yacio</td></tr>
+<tr><td>P2</td><td>Zambrano Alciya Manuel Braulio</td></tr>
+<tr><td>P3</td><td>Patio Yacio</td></tr>
+<tr><td>P4</td><td>Plúa Familia</td></tr>
+<tr><td>P5</td><td>Parrales Pachay Silvia Felicita</td></tr>
+<tr><td>P6</td><td>Jardín de Infantes Víctor Manuel Nieto</td></tr>
+<tr><td>P7</td><td>Patio Yacio</td></tr>
+<tr><td>P8</td><td>Gordon Carranza Cruzcaya</td></tr>
+<tr><td>P9</td><td>Sánchez Baque Eduardo</td></tr>
+<tr><td>P10</td><td>Asociaciones Mecánicos</td></tr>
+<tr><td>P11</td><td>Gordon Carranza Cruzcaya</td></tr>
+<tr><td>P12</td><td>Guimis Conforme Glenda</td></tr>
+<tr><td>P13</td><td>Regalado Guimis Fernando</td></tr>
+<tr><td>P14</td><td>Solís Merchán Juan</td></tr>
+<tr><td>P15</td><td>Galarza Elio Enrique</td></tr>
+<tr><td>P16</td><td>O'Brien Vera Juan Marcos</td></tr>
+<tr><td>P17</td><td>Pincay Víctor</td></tr>
+<tr><td>P18</td><td>Menéndez Báque Mercedes</td></tr>
+<tr><td>P19</td><td>Menéndez Rodríguez</td></tr>
+<tr><td>P20</td><td>Ortega Ponce Zaida</td></tr>
+<tr><td>P21</td><td>Morán Borja Segundo</td></tr>
+<tr><td>P22</td><td>Baque Plúa Piedad</td></tr>
+<tr><td>P23</td><td>Gonzalles Plúa</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 6: EQUIPO DEL PROYECTO ============ -->
+<div class="seccion">
+<h2>👥 6. EQUIPO DEL PROYECTO — ESTRUCTURA JERÁRQUICA</h2>
+<p>El proyecto cuenta con <b>9 niveles jerárquicos</b> y más de <b>40 personas</b> involucradas:</p>
+
+<!-- NIVEL 1 -->
+<div class="nivel">
+<h4>🏛️ NIVEL 1: AUTORIDADES ACADÉMICAS <span class="badge-nivel">DIRECCIÓN INSTITUCIONAL</span></h4>
+<table class="tabla">
+<thead><tr><th>Rol</th><th>Nombre</th><th>Cargo</th></tr></thead>
+<tbody>
+<tr><td><b>Decano</b></td><td>Ec. Carlos Zea Rodríguez</td><td>Facultad de Ciencias Económicas</td></tr>
+<tr><td><b>Coordinadora Adm. Empresas</b></td><td>Ec. Narda Merchán Ponce</td><td>Carrera de Administración de Empresas</td></tr>
+<tr><td><b>Coordinadora Ing. Civil</b></td><td>Ing. Martha Álvarez Álvarez</td><td>Carrera de Ingeniería Civil</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 2 -->
+<div class="nivel">
+<h4>🎓 NIVEL 2: DIRECCIÓN DEL PROYECTO <span class="badge-nivel">DIRECCIÓN CIENTÍFICA</span></h4>
+<table class="tabla">
+<thead><tr><th>Rol</th><th>Nombre</th><th>Cédula</th><th>Categoría SENESCYT</th></tr></thead>
+<tbody>
+<tr><td><b>Directora del Proyecto</b></td><td>Dra. Karina Lourdes Santistevan Villacreses, PhD</td><td>1305102673</td><td>Investigador Agregado 2 — REG-INV-24-07479</td></tr>
+<tr><td><b>Investigadora Principal</b></td><td>Dra. Viviana Del Rocío Saltos Buri</td><td>1309818712</td><td>Investigadora Asociada</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 3 -->
+<div class="nivel">
+<h4>🎯 NIVEL 3: COORDINACIÓN TÉCNICA <span class="badge-nivel">COORDINACIÓN ING. CIVIL</span></h4>
+<table class="tabla">
+<thead><tr><th>Rol</th><th>Nombre</th><th>Cédula</th><th>Categoría SENESCYT</th><th>Carrera</th></tr></thead>
+<tbody>
+<tr><td><b>Coordinador Técnico del Proyecto</b></td><td>Ing. Gery Lorenzo Marcillo Merino, Msc.</td><td>1304744921</td><td>REG-INV-25-08261</td><td>Ingeniería Civil</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 4 -->
+<div class="nivel">
+<h4>👥 NIVEL 4: INVESTIGADORES <span class="badge-nivel">EQUIPO CIENTÍFICO</span></h4>
+<table class="tabla">
+<thead><tr><th>Nombre</th><th>Cédula</th><th>Categoría SENESCYT</th><th>Carrera</th></tr></thead>
+<tbody>
+<tr><td>Dra. Ruth Yadira Sumba Bustamante</td><td>1307072056</td><td>REG-INV-23-06597</td><td>Adm. Empresas</td></tr>
+<tr><td>Dra. Jenny Elizabeth Parrales Reyes</td><td>1305105676</td><td>—</td><td>Adm. Empresas</td></tr>
+<tr><td>Xavier Enrique Soledispa Rodríguez</td><td>1307508596</td><td>—</td><td>Adm. Empresas</td></tr>
+<tr><td>María Raquel Moreno Ponce</td><td>1310393184</td><td>REG-INV-25-08930</td><td>Adm. Empresas</td></tr>
+<tr><td>Carlos Renan Mero Suárez</td><td>1308576261</td><td>—</td><td>Adm. Empresas</td></tr>
+<tr><td>Antonio Eduardo Osejos Vásquez</td><td>1307201663</td><td>REG-INV-25-09220</td><td>Adm. Empresas</td></tr>
+<tr><td>Yomira Lilibeth Solis Barreto</td><td>1314832195</td><td>REG-INV-21-05291</td><td>Adm. Empresas</td></tr>
+<tr><td>Tania Lisbeth Macías Villacreses</td><td>1312756461</td><td>—</td><td>Adm. Empresas</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 5 -->
+<div class="nivel">
+<h4>🔬 NIVEL 5: TÉCNICOS DE APOYO <span class="badge-nivel">SOPORTE ESPECIALIZADO</span></h4>
+<table class="tabla">
+<thead><tr><th>Nombre</th><th>Especialidad</th></tr></thead>
+<tbody>
+<tr><td>Dr. Arturo Andrés Hernández Escobar</td><td>Geología y Geofísica</td></tr>
+<tr><td>Ing. Suárez Peñafiel E.</td><td>Ingeniería Civil</td></tr>
+<tr><td>Ing. Douglas Stalin Ponce Regalado</td><td>Ingeniería Estructural</td></tr>
+<tr><td>Ing. Williams Ausberto Merchán García</td><td>Validación Experimental</td></tr>
+<tr><td>Ing. María Lorena Ponce Vinces</td><td>Docente de la Carrera</td></tr>
+<tr><td>Ing. Luis Vicente Ceballos Castro</td><td>Docente de la Carrera</td></tr>
+<tr><td>Ing. Alex Vicente Quimiz Tumbaco</td><td>Docente de la Carrera</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 6 -->
+<div class="nivel">
+<h4>🏢 NIVEL 6: SECTOR EMPRESARIAL <span class="badge-nivel">VINCULACIÓN EMPRESARIAL</span></h4>
+<table class="tabla">
+<thead><tr><th>Nombre</th><th>Cargo</th></tr></thead>
+<tbody>
+<tr><td>Ing. Marcos Sumba G.</td><td>Desarrollo Empresarial</td></tr>
+<tr><td>Ing. Douglas Ponce R.</td><td>Técnico Externo Invitado</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 7 -->
+<div class="nivel">
+<h4>🤝 NIVEL 7: ARTICULACIÓN INTERINSTITUCIONAL <span class="badge-nivel">GAD JIPIJAPA</span></h4>
+<table class="tabla">
+<thead><tr><th>Nombre</th><th>Cargo</th><th>Institución</th></tr></thead>
+<tbody>
+<tr><td>Ing. Cristhian Humberto Romero Guaranda</td><td>Director de Planificación y Ordenamiento Territorial</td><td>GAD Municipal de Jipijapa</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 8 -->
+<div class="nivel">
+<h4>👨‍🎓 NIVEL 8: ESTUDIANTES INVESTIGADORES <span class="badge-nivel">ADM. EMPRESAS</span></h4>
+<p>11 estudiantes de la Carrera de Administración de Empresas:</p>
+<table class="tabla">
+<thead><tr><th>#</th><th>Nombre</th><th>Cédula</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>María José Guerrero Baque</td><td>1350230809</td></tr>
+<tr><td>2</td><td>Pedro Guillermo Mejillón Mejillones</td><td>2450463357</td></tr>
+<tr><td>3</td><td>Andy Lenin Pincay Sánchez</td><td>1315891265</td></tr>
+<tr><td>4</td><td>Ruth Esther Reina Micolta</td><td>0805138260</td></tr>
+<tr><td>5</td><td>Robert Joel Rivas Cusme</td><td>1313665604</td></tr>
+<tr><td>6</td><td>Damaris Geanella Soledispa Sánchez</td><td>1314605997</td></tr>
+<tr><td>7</td><td>William Adrián González Pozo</td><td>2400176422</td></tr>
+<tr><td>8</td><td>María Camila Rodríguez Gómez</td><td>1314832740</td></tr>
+<tr><td>9</td><td>Irene Guadalupe Mejía Cordoba</td><td>0804616852</td></tr>
+<tr><td>10</td><td>Lorena Maricela Vera Vera</td><td>1313606293</td></tr>
+<tr><td>11</td><td>Samantha Nicole Celi Mejia</td><td>2300431414</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- NIVEL 9 -->
+<div class="nivel">
+<h4>👷 NIVEL 9: GRUPOS DE TRABAJO ING. CIVIL <span class="badge-nivel">SÉPTIMO SEMESTRE</span></h4>
+<p>6 grupos de trabajo del séptimo y sexto semestre de Ingeniería Civil:</p>
+<table class="tabla">
+<thead><tr><th>Grupo</th><th>Integrantes</th><th>Tema</th></tr></thead>
+<tbody>
+<tr><td><b>Grupo 1</b></td><td>Anchundia Delgado Jair Yeremy, Calva Vera Jhoisy Nataly, Cedeño Sancho Oscar Alexander, Chiquito Murillo Johan Gabriel, Choez Pin Luis Alexander, Delgado Baque Carlos Eduardo, Delgado Cordero Mailly Jamileth</td><td>Mapeo geoespacial</td></tr>
+<tr><td><b>Grupo 2</b></td><td>Estrella Mañay Diana Esthefania, Franklin Jair Segovia Gutiérrez, García Cedeño Luis Andrés, García Palma Jose Fabricio, Giler Alvia Angel Steven, Gómez Ávila Jhonny Manuel, Guamán Ordoñez Christian Alexander</td><td>Sistema de codificación</td></tr>
+<tr><td><b>Grupo 3</b></td><td>Loor Alvarado Henry Jhon, Medina Coello Jostyn Fernando, Palma Calderon Rosa Angelica, Pita Vasquez Carlos Gabriel, Pomavilla Aguayza Marco Vinicio, Ponce Tubay Roberto Ruben, Puglla Benitez Eudoro</td><td>Dibujo de implantaciones</td></tr>
+<tr><td><b>Grupo 4</b></td><td>Punina Acosta Gabriel Lizandro, Quijije Chancay Jordan Dario, Quimis Franco Anthony Joel, Remache Pérez Angel Sebastián, Rodríguez Baque Winston Camilo, Rosero Tarira Arlena Rosero, Salazar Molina Hugo Eduardo</td><td>Temas de agua</td></tr>
+<tr><td><b>Grupo 5</b></td><td>Suarez Cantos Andres Jasmany, Tumbaco Ortiz Tommy Alexander, Tumbaco Sancan Bryan David, Vera Vera Jenny María, Yupangui Rodríguez Arelys Dayana, Zea Morales Darvin Jose</td><td>Informe Final</td></tr>
+<tr><td><b>Grupo 6</b></td><td>Estudiantes del Sexto Semestre</td><td>Levantamiento de fichas</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ============ SECCIÓN 6.5: PROYECTOS DE INVESTIGACIÓN CON NOMBRES ============ -->
+<div class="seccion">
+<h2>🔬 6.5. PROYECTOS DE INVESTIGACIÓN — NOMBRES Y ROLES</h2>
+<p>El proyecto multidisciplinario articula <b>4 proyectos de investigación</b> debidamente documentados con memorandos y certificados oficiales de la UNESUM. Cada proyecto tiene su propio equipo, roles y productos verificables.</p>
+
+<!-- PROYECTO 1 -->
+<div class="nivel">
+<h4>📌 PROYECTO 1: VALORACIÓN DEL ORDENAMIENTO TERRITORIAL <span class="badge-nivel">I+D+i</span></h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título completo</b></td><td>Valoración del ordenamiento, espacio y logística de los territorios, como herramienta de desarrollo sostenible</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Básica — Multidisciplinario</td></tr>
+<tr><td><b>Línea de investigación</b></td><td>Planificación y gestión del desarrollo territorial sostenible</td></tr>
+<tr><td><b>Campo detallado</b></td><td>COD: 83-13A (geográfica y territorio)</td></tr>
+<tr><td><b>Facultad líder</b></td><td>Ciencias Económicas — Administración de Empresas</td></tr>
+<tr><td><b>Facultad co-investigadora</b></td><td>Ciencias Técnicas — Ingeniería Civil</td></tr>
+<tr><td><b>Período de ejecución</b></td><td>2025 – 2027</td></tr>
+<tr><td><b>Estado</b></td><td>✅ En ejecución</td></tr>
+<tr><td><b>Documento oficial</b></td><td>Certificado I+D+i (21/09/2026)</td></tr>
+<tr><td><b>Firmado por</b></td><td>Ing. Kleber Orellana Suarez, Mg. — Director de Investigación UNESUM</td></tr>
+</tbody>
+</table>
+
+<h4>👥 Equipo del Proyecto</h4>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Nombre</th><th>Rol</th><th>Categoría SENESCYT</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><b>Dra. Karina Lourdes Santistevan Villacreses, PhD</b></td><td><b>Directora del Proyecto</b></td><td>Investigador Agregado 2 — REG-INV-24-07479</td></tr>
+<tr><td>2</td><td>Dra. Viviana Del Rocío Saltos Buri</td><td>Investigadora Principal</td><td>Investigadora Asociada</td></tr>
+<tr><td>3</td><td><b>Ing. Gery Lorenzo Marcillo Merino, Msc.</b></td><td><b>Investigador (Coordinador Técnico)</b></td><td>REG-INV-25-08261</td></tr>
+<tr><td>4</td><td>Dra. Ruth Yadira Sumba Bustamante</td><td>Investigadora</td><td>REG-INV-23-06597</td></tr>
+<tr><td>5</td><td>Dra. Jenny Elizabeth Parrales Reyes</td><td>Investigadora</td><td>—</td></tr>
+<tr><td>6</td><td>Xavier Enrique Soledispa Rodríguez</td><td>Investigador</td><td>—</td></tr>
+<tr><td>7</td><td>María Raquel Moreno Ponce</td><td>Investigadora</td><td>REG-INV-25-08930</td></tr>
+<tr><td>8</td><td>Carlos Renan Mero Suárez</td><td>Investigador</td><td>—</td></tr>
+<tr><td>9</td><td>Antonio Eduardo Osejos Vásquez</td><td>Investigador</td><td>REG-INV-25-09220</td></tr>
+<tr><td>10</td><td>Yomira Lilibeth Solis Barreto</td><td>Investigadora</td><td>REG-INV-21-05291</td></tr>
+<tr><td>11</td><td>Tania Lisbeth Macías Villacreses</td><td>Investigadora</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- PROYECTO 2 -->
+<div class="nivel">
+<h4>📌 PROYECTO 2: GESTIÓN INTEGRAL DEL RECURSO AGUA <span class="badge-nivel">CUENCA MA-01</span></h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título completo</b></td><td>Gestión integral del recurso agua en la cuenca hidrográfica MA-01 de la zona sur de Manabí</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Aplicada — Recursos Hídricos</td></tr>
+<tr><td><b>Período</b></td><td>PII 2025</td></tr>
+<tr><td><b>Estado</b></td><td>✅ En ejecución</td></tr>
+<tr><td><b>Documento oficial</b></td><td>Memorando Circular N° UNESUM-FCTE-CIC-106-2025-MC (20/11/2025)</td></tr>
+<tr><td><b>Firmado por</b></td><td>Ing. Martha Johana Álvarez Álvarez — Coordinadora de la Carrera de Ingeniería Civil</td></tr>
+<tr><td><b>Reunión de trabajo</b></td><td>Jueves 27 de noviembre de 2025, 10:00 AM, Centro de Cómputo</td></tr>
+</tbody>
+</table>
+
+<h4>👥 Equipo del Proyecto</h4>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Nombre</th><th>Rol</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><b>Ing. Pablo Arturo Gallardo Armijos</b></td><td><b>Director del Proyecto</b></td></tr>
+<tr><td>2</td><td>Ing. Martha Johana Álvarez Álvarez</td><td>Miembro</td></tr>
+<tr><td>3</td><td>Ing. María Lorena Ponce Vinces</td><td>Miembro</td></tr>
+<tr><td>4</td><td>Ing. Luis Vicente Ceballos Castro</td><td>Miembro</td></tr>
+<tr><td>5</td><td>Ing. Alex Vicente Quimiz Tumbaco</td><td>Miembro</td></tr>
+<tr><td>6</td><td>Ing. Marcos Antonio Sumba García</td><td>Miembro</td></tr>
+<tr><td>7</td><td>Soc. Marco Santos Peña</td><td>Miembro</td></tr>
+<tr><td>8</td><td><b>Ing. Gery Lorenzo Marcillo Merino, Msc.</b></td><td><b>Miembro del Proyecto</b></td></tr>
+<tr><td>9</td><td>Lic. Marco Antonio Toala Pilay</td><td>Miembro</td></tr>
+<tr><td>10</td><td>Ing. Gonzalo Alexander Castro Villacres</td><td>Miembro</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- PROYECTO 3 -->
+<div class="nivel">
+<h4>📌 PROYECTO 3: UNESUM-REZ-2026-JIPIJAPA-001 <span class="badge-nivel">COORDINADOR TÉCNICO</span></h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título completo</b></td><td>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</td></tr>
+<tr><td><b>Tipo</b></td><td>Investigación Aplicada — Multidisciplinario</td></tr>
+<tr><td><b>Línea de investigación</b></td><td>Estructuras e ingeniería de materiales</td></tr>
+<tr><td><b>Facultad líder</b></td><td>Ciencias Técnicas — Ingeniería Civil</td></tr>
+<tr><td><b>Período</b></td><td>2026</td></tr>
+<tr><td><b>Estado</b></td><td>✅ En ejecución</td></tr>
+<tr><td><b>Responsorio web</b></td><td><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank">https://sebastianremache01.wixsite.com/proyecto-mult</a></td></tr>
+</tbody>
+</table>
+
+<h4>👥 Equipo del Proyecto</h4>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Nombre</th><th>Rol</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><b>Ing. Gery Lorenzo Marcillo Merino, Msc.</b></td><td><b>Coordinador Técnico del Proyecto</b></td></tr>
+<tr><td>2</td><td>Dr. Arturo Andrés Hernández Escobar</td><td>Técnico de Apoyo (Geología)</td></tr>
+<tr><td>3</td><td>Ing. Douglas Stalin Ponce Regalado</td><td>Técnico de Apoyo (Estructural)</td></tr>
+<tr><td>4</td><td>Ing. Williams Ausberto Merchán García</td><td>Técnico de Apoyo (Experimental)</td></tr>
+<tr><td>5</td><td>Ing. Marcos Sumba G.</td><td>Consultor Externo (Empresarial)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- PROYECTO 4 -->
+<div class="nivel">
+<h4>📌 PROYECTO 4: AGUA DULCE (TERRITORIO PILOTO) <span class="badge-nivel">CO-INVESTIGADOR</span></h4>
+<table class="tabla">
+<tbody>
+<tr><td><b>Título completo</b></td><td>Proyecto Multidisciplinario Agua Dulce</td></tr>
+<tr><td><b>Tipo</b></td><td>Vinculación con la Sociedad + Investigación</td></tr>
+<tr><td><b>Territorio</b></td><td>Recinto Agua Dulce, Parroquia La América, Jipijapa</td></tr>
+<tr><td><b>Beneficiarios</b></td><td>9 estudiantes, 1 docente, ~200 habitantes</td></tr>
+<tr><td><b>Período</b></td><td>2025-2026</td></tr>
+<tr><td><b>Estado</b></td><td>✅ En ejecución</td></tr>
+<tr><td><b>Productos</b></td><td>Evaluación estructural, señalización turística, sistema de agua potable</td></tr>
+</tbody>
+</table>
+
+<h4>👥 Equipo del Proyecto</h4>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Nombre</th><th>Rol</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><b>Ing. Gery Lorenzo Marcillo Merino, Msc.</b></td><td><b>Co-investigador (Ingeniería Civil)</b></td></tr>
+<tr><td>2</td><td>Dra. Karina Lourdes Santistevan Villacreses, PhD</td><td>Directora del Proyecto</td></tr>
+<tr><td>3</td><td>Dr. Arturo Andrés Hernández Escobar</td><td>Técnico de Apoyo</td></tr>
+<tr><td>4</td><td>Ing. Douglas Stalin Ponce Regalado</td><td>Técnico de Apoyo</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- RESUMEN DE PROYECTOS -->
+<div class="cita">
+"Cuatro proyectos, un solo objetivo: transformar el territorio desde la investigación aplicada y la vinculación con la sociedad."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<h3>📊 Resumen de Proyectos de Investigación</h3>
+<table class="tabla">
+<thead>
+<tr><th>#</th><th>Proyecto</th><th>Rol del Docente</th><th>Período</th><th>Documento Oficial</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Valoración del Ordenamiento Territorial</td><td>Investigador</td><td>2025-2027</td><td>Certificado I+D+i</td></tr>
+<tr><td>2</td><td>Gestión Integral del Recurso Agua (Cuenca MA-01)</td><td>Miembro del Proyecto</td><td>PII 2025</td><td>Memorando Circular 106-2025-MC</td></tr>
+<tr><td>3</td><td>UNESUM-REZ-2026-JIPIJAPA-001</td><td>Coordinador Técnico</td><td>2026</td><td>Documentos varios</td></tr>
+<tr><td>4</td><td>Proyecto Multidisciplinario Agua Dulce</td><td>Co-investigador</td><td>2025-2026</td><td>Informes</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 7: DOCUMENTACIÓN OFICIAL ============ -->
+<div class="seccion">
+<h2>📄 7. DOCUMENTACIÓN OFICIAL</h2>
+<p>El proyecto cuenta con documentación oficial verificable:</p>
+
+<div class="caso">
+<h4>📋 Oficio de Aceptación del GAD Jipijapa</h4>
+<p><b>Código:</b> GADMJ-2026-DPOT-OFI-00005</p>
+<p><b>Fecha:</b> 26 de enero de 2026</p>
+<p><b>Dirigido a:</b> Ing. Gery Lorenzo Marcillo Merino</p>
+<p><b>De:</b> Ing. Cristhian Humberto Romero Guaranda, Director de Planificación y Ordenamiento Territorial</p>
+<p><b>Estado:</b> ✅ Aval otorgado</p>
+</div>
+
+<div class="caso">
+<h4>📋 Certificado I+D+i</h4>
+<p><b>Código:</b> Certificado de Participación en Proyectos de Investigación (I+D+i)</p>
+<p><b>Fecha:</b> 21/09/2026</p>
+<p><b>Firmado por:</b> Ing. Kleber Orellana Suarez, Mg. — Director de Investigación UNESUM</p>
+<p><b>Estado:</b> ✅ Certificado</p>
+</div>
+
+<div class="caso">
+<h4>📋 Memorando Circular de Vinculación</h4>
+<p><b>Código:</b> UNESUM-FCTE-CIC-106-2025-MC</p>
+<p><b>Fecha:</b> 20 de noviembre de 2025</p>
+<p><b>Firmado por:</b> Ing. Martha Johana Álvarez Álvarez — Coordinadora de la Carrera de Ingeniería Civil</p>
+<p><b>Estado:</b> ✅ Convocado</p>
+</div>
+
+<div class="caso">
+<h4>📋 Memorando de Designación como Docente-Tutor</h4>
+<p><b>Código:</b> UNESUM-FCTE-CICI-VIN-MOCG-2026-021-M</p>
+<p><b>Fecha:</b> 18 de mayo del 2026</p>
+<p><b>Proyecto:</b> Exploración del terreno con sistemas Lidar y GNSS en la subcuenca Hidrográfica del Río Jipijapa (Segunda Etapa)</p>
+<p><b>Firmado por:</b> Ing. Manuel Cordero Garcés, Mg. — Responsable de Proyectos de Vinculación</p>
+<p><b>Estado:</b> ✅ Designado</p>
+</div>
+</div>
+
+<!-- ============ SECCIÓN 8: PRODUCTOS GENERADOS ============ -->
+<div class="seccion">
+<h2>📦 8. PRODUCTOS GENERADOS</h2>
+<p>El proyecto ha generado los siguientes productos verificables:</p>
+
+<div class="metricas-grid">
+<div class="metrica-card"><div class="num">4</div><div class="label">LIBROS</div></div>
+<div class="metrica-card verde"><div class="num">5</div><div class="label">ARTÍCULOS PUBLICADOS</div></div>
+<div class="metrica-card azul"><div class="num">6</div><div class="label">TESIS DIRIGIDAS</div></div>
+<div class="metrica-card rojo"><div class="num">4</div><div class="label">PONENCIAS</div></div>
+<div class="metrica-card purpura"><div class="num">22</div><div class="label">MAPAS GENERADOS</div></div>
+<div class="metrica-card"><div class="num">8</div><div class="label">FICHAS TÉCNICAS</div></div>
+<div class="metrica-card verde"><div class="num">1</div><div class="label">PLATAFORMA WEB</div></div>
+<div class="metrica-card azul"><div class="num">1</div><div class="label">CORTOMETRAJE</div></div>
+</div>
+
+<h3>📖 Libros Publicados</h3>
+<table class="tabla">
+<thead><tr><th>#</th><th>Título</th><th>Autores</th><th>Año</th><th>ISBN</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Rigidez Energética aplicada a la Ingeniería Civil</td><td>Marcillo Merino, G. L., et al.</td><td>2026</td><td>En trámite</td></tr>
+<tr><td>2</td><td>Estructuras Integradas</td><td>Marcillo Merino, G. L., & Ponce Regalado, D. S.</td><td>2026</td><td>En trámite</td></tr>
+<tr><td>3</td><td>Estructuras Especiales enfocadas en puentes colgantes</td><td>Montalbán Moreira, E. G., et al.</td><td>2025</td><td>978-9942-846-95-2</td></tr>
+<tr><td>4</td><td>Estructuras de proceso en proyectos de vinculación</td><td>Ponce Regalado, D., et al.</td><td>2025</td><td>978-9942-571-08-3</td></tr>
+</tbody>
+</table>
+
+<h3>📄 Artículos Científicos</h3>
+<table class="tabla">
+<thead><tr><th>#</th><th>Título</th><th>Revista</th><th>Año</th><th>DOI/URL</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Modelado estocástico de la migración energética</td><td>YACHASUN</td><td>2026</td><td><a href="https://doi.org/10.46296/yc.v10i19.0936" target="_blank">DOI</a></td></tr>
+<tr><td>2</td><td>Evaluación probabilística con Markov</td><td>Innova Science</td><td>2025</td><td><a href="https://doi.org/10.63618/omd/isj/v3/n4/159" target="_blank">DOI</a></td></tr>
+<tr><td>3</td><td>Estructuras de proceso en vinculación</td><td>Runaiki</td><td>2025</td><td><a href="https://runaiki.es/index.php/runaiki/article/view/142" target="_blank">URL</a></td></tr>
+<tr><td>4</td><td>Metodología de cálculo de un puente colgante</td><td>YACHASUN</td><td>2023</td><td><a href="https://editorialibkn.com/index.php/Yachasun/article/view/411" target="_blank">URL</a></td></tr>
+<tr><td>5</td><td>Proyectos de vinculación y responsabilidad social</td><td>Cuadernos de Educación</td><td>2023</td><td><a href="https://ojs.europubpublications.com/ojs/index.php/ced/article/view/692" target="_blank">URL</a></td></tr>
+</tbody>
+</table>
+
+<h3>📋 Fichas Técnicas</h3>
+<table class="tabla">
+<thead><tr><th>#</th><th>Ficha</th><th>Contenido</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>FICHA 1: Servicios Básicos</td><td>Agua potable, alcantarillado, energía eléctrica</td></tr>
+<tr><td>2</td><td>FICHA 2: Vías de Comunicación</td><td>Tipo de vía, estado, seguridad vial, transporte público</td></tr>
+<tr><td>3</td><td>FICHA 3: Agua Potable</td><td>Fuente de abastecimiento, conexión, calidad, almacenamiento</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 9: MAPAS INTERACTIVOS ============ -->
+<div class="seccion">
+<h2>🗺️ 9. MAPAS INTERACTIVOS</h2>
+
+<div class="grid-mapas">
+<div class="mapa-box">
+<h3>📍 MAPA 1 — ÁREA PILOTO (50.47 ha)</h3>
+<div id="mapa-area" class="mapa"></div>
+</div>
+<div class="mapa-box">
+<h3>🔴 MAPA 2 — FALLAS GEOLÓGICAS</h3>
+<div id="mapa-fallas" class="mapa"></div>
+</div>
+</div>
+
+<div class="grid-mapas">
+<div class="mapa-box">
+<h3>🟣 MAPA 3 — SUBCIRCUITO 3.2</h3>
+<div id="mapa-sub32" class="mapa"></div>
+</div>
+<div class="mapa-box">
+<h3>🟪 MAPA 4 — SUBCIRCUITO 3.3</h3>
+<div id="mapa-sub33" class="mapa"></div>
+</div>
+</div>
+
+<p style="color:#bdc3c7;font-size:12px;text-align:center;margin-top:15px">
+Fuente: Cedeño Figueroa (2024) | Sistema: UTM Zona 17S — WGS84 | Elaboración: Ing. Gery Lorenzo Marcillo Merino, Msc.
+</p>
+</div>
+
+<!-- ============ SECCIÓN 10: ENLACES VERIFICABLES ============ -->
+<div class="seccion">
+<h2>🔗 10. ENLACES VERIFICABLES</h2>
+<table class="tabla">
+<thead><tr><th>Plataforma</th><th>Enlace</th></tr></thead>
+<tbody>
+<tr><td><b>Responsorio Web del Proyecto</b></td><td><a href="https://sebastianremache01.wixsite.com/proyecto-mult" target="_blank">https://sebastianremache01.wixsite.com/proyecto-mult</a></td></tr>
+<tr><td><b>ORCID del Coordinador Técnico</b></td><td><a href="https://orcid.org/0009-0000-5583-0042" target="_blank">https://orcid.org/0009-0000-5583-0042</a></td></tr>
+<tr><td><b>Repositorio Digital UNESUM</b></td><td><a href="https://repositorio.unesum.edu.ec" target="_blank">https://repositorio.unesum.edu.ec</a></td></tr>
+<tr><td><b>Revista YACHASUN</b></td><td><a href="https://editorialibkn.com/index.php/Yachasun" target="_blank">https://editorialibkn.com/index.php/Yachasun</a></td></tr>
+<tr><td><b>Editorial Runaiki</b></td><td><a href="https://runaiki.es" target="_blank">https://runaiki.es</a></td></tr>
+<tr><td><b>GAD Municipal de Jipijapa</b></td><td><a href="https://jipijapa.gob.ec" target="_blank">https://jipijapa.gob.ec</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECCIÓN 11: DECLARACIÓN DE HONESTIDAD ============ -->
+<div class="seccion">
+<h2>🛡️ 11. DECLARACIÓN DE HONESTIDAD</h2>
+<p>Los datos aquí presentados son <b>verificables</b>. No oculto la incertidumbre. No subestimo el riesgo. No comprometo la seguridad.</p>
+<p>Este proyecto es una herramienta de transparencia y trazabilidad. Cada producto científico aquí listado tiene un enlace verificable a su fuente original.</p>
+
+<div class="cita">
+"Un proyecto honesto vale más que uno inflado.<br>
+La impronta única para Latinoamérica no se declara: se demuestra."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+</div>
+
+<!-- ============ BOTONES ============ -->
+<div class="botones">
+<a href="index.html" class="btn">← Volver al Inicio</a>
+<a href="bibliografia.html" class="btn btn-verde">📚 Ver Bibliografía</a>
+<a href="honestidad_territorial.html" class="btn btn-rosa">🤝 Ver Honestidad</a>
+<a href="portafolio_docente.html" class="btn btn-purpura">👨‍🏫 Ver Portafolio Docente</a>
+<button class="btn btn-impronta" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- ============ PIE ============ -->
+<div class="pie">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</p>
+<p class="destacado">"La honestidad refresca el pensamiento académico porque lo obliga a mirar el territorio."</p>
+</div>
+
+</div>
+
+<!-- ============ LEAFLET JS ============ -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+function utmALatLon(este, norte) {
+    var lon = (este - 500000) / 111000 + (-81);
+    var lat = norte / 111000 - 90;
+    return [lat, lon];
+}
+
+// Área Piloto (22 puntos UTM)
+var areaUTM = [
+    [546403.5163, 9851268.9779],[546696.4269, 9851314.1392],
+    [546956.2094, 9851350.8820],[547257.6890, 9851397.0860],
+    [547226.3650, 9851081.8347],[547103.0614, 9851091.1226],
+    [547096.5989, 9851072.4420],[547125.4571, 9851026.5070],
+    [547159.3009, 9851011.6220],[547166.5189, 9850999.9030],
+    [546992.8363, 9850959.7089],[547015.8536, 9850762.6791],
+    [547063.6641, 9850462.6132],[546889.4345, 9850432.6208],
+    [546829.1488, 9850678.8224],[546662.0275, 9850636.2783],
+    [546491.8904, 9850590.1309],[546435.8643, 9850741.5426],
+    [546394.9791, 9850860.4618],[546411.2445, 9850915.2352],
+    [546453.1684, 9850947.9278],[546504.3942, 9850932.9552],
+    [546403.5163, 9851268.9779]
+];
+var areaLatLon = areaUTM.map(function(p) { return utmALatLon(p[0], p[1]); });
+
+// Subcircuito 3.2 (9 puntos)
+var sub32UTM = [
+    [546403.5163, 9851268.9779],[546696.4269, 9851314.1392],
+    [546730.3207, 9851130.7858],[546723.6427, 9851106.4355],
+    [546676.5176, 9851053.7482],[546629.0153, 9851031.7043],
+    [546619.3152, 9850998.6085],[546599.1924, 9850933.2724],
+    [546504.3942, 9850932.9552],[546403.5163, 9851268.9779]
+];
+var sub32LatLon = sub32UTM.map(function(p) { return utmALatLon(p[0], p[1]); });
+
+// Subcircuito 3.3 (7 puntos)
+var sub33UTM = [
+    [546696.4269, 9851314.1392],[546956.2094, 9851350.8820],
+    [546980.5830, 9851131.5840],[546891.3719, 9851131.5900],
+    [546859.0337, 9851134.0611],[546798.9674, 9851144.1769],
+    [546730.3207, 9851130.7858],[546696.4269, 9851314.1392]
+];
+var sub33LatLon = sub33UTM.map(function(p) { return utmALatLon(p[0], p[1]); });
+
+// Fallas geológicas
+var fallas = [
+    { nombre: "Falla Jipijapa", color: "#FF006E", coords: [
+        [-1.3388, -80.5900],[-1.3396, -80.5882],[-1.3404, -80.5864],
+        [-1.3412, -80.5846],[-1.3420, -80.5828],[-1.3405, -80.5830]
+    ]},
+    { nombre: "Falla La Unión", color: "#FFB703", coords: [
+        [-1.3436, -80.5900],[-1.3441, -80.5885],[-1.3446, -80.5870],
+        [-1.3451, -80.5855],[-1.3456, -80.5840],[-1.3461, -80.5834]
+    ]},
+    { nombre: "Falla El Anegado", color: "#8AC926", coords: [
+        [-1.3429, -80.5891],[-1.3433, -80.5877],[-1.3437, -80.5864],
+        [-1.3441, -80.5850],[-1.3445, -80.5837],[-1.3404, -80.5830]
+    ]}
+];
+
+// MAPA 1: ÁREA PILOTO
+var map1 = L.map('mapa-area').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map1);
+L.polygon(areaLatLon, { color: '#FFD60A', fillColor: '#00B4D8', fillOpacity: 0.3, weight: 3 })
+    .addTo(map1).bindPopup('<b>Área Piloto</b><br>50.47 ha | 22 puntos UTM');
+areaLatLon.slice(0, -1).forEach(function(p, i) {
+    L.circleMarker(p, { radius: 4, color: '#D62828', fillColor: '#D62828', fillOpacity: 1, weight: 1 })
+        .addTo(map1).bindPopup('P' + (i+1));
+});
+
+// MAPA 2: FALLAS
+var map2 = L.map('mapa-fallas').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map2);
+L.polygon(areaLatLon, { color: '#FFD60A', fillColor: '#00B4D8', fillOpacity: 0.15, weight: 2 }).addTo(map2);
+fallas.forEach(function(f) {
+    L.polyline(f.coords, { color: f.color, weight: 4, dashArray: '10, 5' })
+        .addTo(map2).bindPopup('<b>' + f.nombre + '</b>');
+});
+
+// MAPA 3: SUBCIRCUITO 3.2
+var map3 = L.map('mapa-sub32').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map3);
+L.polygon(areaLatLon, { color: '#FFD60A', fillColor: 'transparent', fillOpacity: 0.1, weight: 2 }).addTo(map3);
+L.polygon(sub32LatLon, { color: '#FF006E', fillColor: '#FF006E', fillOpacity: 0.4, weight: 3 })
+    .addTo(map3).bindPopup('<b>Subcircuito 3.2</b><br>9 puntos UTM');
+
+// MAPA 4: SUBCIRCUITO 3.3
+var map4 = L.map('mapa-sub33').setView([-1.3420, -80.5865], 14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri'
+}).addTo(map4);
+L.polygon(areaLatLon, { color: '#FFD60A', fillColor: 'transparent', fillOpacity: 0.1, weight: 2 }).addTo(map4);
+L.polygon(sub33LatLon, { color: '#9D4EDD', fillColor: '#9D4EDD', fillOpacity: 0.4, weight: 3 })
+    .addTo(map4).bindPopup('<b>Subcircuito 3.3</b><br>7 puntos UTM');
+
+console.log('✅ Impronta Única para Latinoamérica cargada');
+console.log('📊 Área Piloto: 50.47 ha | 22 puntos UTM');
+console.log('🟣 Subcircuito 3.2: 9 puntos UTM');
+console.log('🟪 Subcircuito 3.3: 7 puntos UTM');
+console.log('🔴 Fallas: 3');
+console.log('🔬 Proyectos de Investigación: 4');
+console.log('👥 Equipo: 9 niveles jerárquicos');
+console.log('🏘️ Bloques: 8');
+</script>
+
+</body>
+</html>

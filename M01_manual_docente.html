@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual del Docente M01 - Inercia Equivalente</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #e74c3c;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+.badge-prof{display:inline-block;background:#e74c3c;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #3498db}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:20px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+.tabla tr:nth-child(even){background:#34495e}
+.rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #e74c3c}
+.rubrica-card h4{color:#e74c3c;margin-bottom:12px;font-size:16px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.criterio .peso{display:inline-block;background:#e74c3c;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
+.ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
+.ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
+.ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+.indice h3{color:#f39c12;margin-bottom:12px}
+.indice ol{padding-left:25px;margin:0}
+.indice li{padding:6px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
+.frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.botones{text-align:center;margin:30px 0}
+.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+.pie-pagina p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📙 MANUAL DEL DOCENTE — M01</h1>
+<h2>INERCIA EQUIVALENTE Y ALTURA EQUIVALENTE</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
+</div>
+
+<div class="frase-destacada">
+"Los números son solo el vehículo.<br>
+El verdadero ingeniero interpreta, decide,<br>
+contextualiza, se responsabiliza."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ÍNDICE -->
+<div class="indice">
+<h3>📑 ÍNDICE DEL MANUAL DOCENTE</h3>
+<ol>
+<li><a href="#proposito">Propósito del manual</a></li>
+<li><a href="#modelo">Modelo base del proyecto</a></li>
+<li><a href="#bloques">Estructura de los 4 bloques</a></li>
+<li><a href="#rubrica">Rúbrica de evaluación detallada</a></li>
+<li><a href="#evaluacion">Cómo evaluar cada bloque</a></li>
+<li><a href="#reportes">Cómo interpretar reportes</a></li>
+<li><a href="#retroalimentacion">Cómo dar retroalimentación</a></li>
+<li><a href="#alertas">Alertas pedagógicas</a></li>
+<li><a href="#uso">Uso del módulo en clase</a></li>
+</ol>
+</div>
+
+<!-- 1. PROPÓSITO -->
+<div class="seccion" id="proposito">
+<h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M01 — Inercia Equivalente.</p>
+<p>A diferencia de la evaluación tradicional (que compara palabras clave), este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
+
+<div class="alerta">
+<h4>⚠️ IMPORTANTE</h4>
+<p>Este manual es <strong>confidencial</strong>. Contiene las respuestas esperadas y los criterios de evaluación. No debe ser distribuido a los estudiantes.</p>
+</div>
+</div>
+
+<!-- 2. MODELO BASE -->
+<div class="seccion" id="modelo">
+<h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
+<p>Todas las preguntas del M01 están ancladas al <strong>modelo base del Colegio Alejo Lascano</strong>:</p>
+
+<table class="tabla">
+<thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>H (altura total losa)</td><td>25.0</td><td>cm</td></tr>
+<tr><td>bn (ancho nervio)</td><td>10.0</td><td>cm</td></tr>
+<tr><td>bb (ancho bloque)</td><td>50.0</td><td>cm</td></tr>
+<tr><td>tc (capa de compresión)</td><td>5.0</td><td>cm</td></tr>
+<tr><td>hn (altura del nervio)</td><td>20.0</td><td>cm</td></tr>
+</tbody>
+</table>
+
+<h3>Resultados esperados:</h3>
+<table class="tabla">
+<thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>A_capa</td><td>250</td><td>cm²</td></tr>
+<tr><td>A_nervio</td><td>200</td><td>cm²</td></tr>
+<tr><td>A_total</td><td>450</td><td>cm²</td></tr>
+<tr><td>y_cg (centroide)</td><td>16.94</td><td>cm</td></tr>
+<tr><td>I_total</td><td>24548</td><td>cm⁴</td></tr>
+<tr><td><strong>h_eq (altura equivalente)</strong></td><td><strong>18.06</strong></td><td><strong>cm</strong></td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>💡 Valores de referencia del libro</h4>
+<p>El valor h_eq = 18.06 cm coincide con la tabla del libro de Marcelo Guerra para una losa alivianada de 25 cm. Esto valida el cálculo.</p>
+</div>
+</div>
+
+<!-- 3. ESTRUCTURA DE BLOQUES -->
+<div class="seccion" id="bloques">
+<h2>3. 🏗 ESTRUCTURA DE LOS 4 BLOQUES</h2>
+<table class="tabla">
+<thead>
+<tr><th>Bloque</th><th>Tipo</th><th>Preguntas</th><th>Puntaje</th><th>Método</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
+<tr><td><strong>D</strong></td><td>Decisión profesional</td><td>2</td><td>25 pts</td><td><strong>Rúbrica + ética</strong></td></tr>
+<tr><td colspan="3"><strong>TOTAL</strong></td><td><strong>100 pts</strong></td><td>—</td></tr>
+</tbody>
+</table>
+
+<h3>3.1 Nivel cognitivo por bloque (Bloom)</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Nivel de Bloom</th><th>Qué se evalúa</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Recordar / Entender</td><td>El estudiante comprende el concepto</td></tr>
+<tr><td>B</td><td>Aplicar</td><td>El estudiante usa las fórmulas</td></tr>
+<tr><td>C</td><td>Analizar / Evaluar</td><td>El estudiante interpreta los valores</td></tr>
+<tr><td>D</td><td>Crear / Decidir</td><td>El estudiante decide como profesional</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 4. RÚBRICA -->
+<div class="seccion" id="rubrica">
+<h2>4. 📏 RÚBRICA DE EVALUACIÓN DETALLADA</h2>
+<p>Esta sección define <strong>cómo evaluar cada pregunta</strong>, especialmente las de los bloques C y D.</p>
+
+<h3>4.1 Rúbrica para el Bloque A (Conceptos)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Respuesta completa y correcta</td><td>100%</td></tr>
+<tr><td>Respuesta parcialmente correcta</td><td>60%</td></tr>
+<tr><td>Respuesta incompleta o imprecisa</td><td>30%</td></tr>
+<tr><td>Sin respuesta o incorrecta</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>4.2 Rúbrica para el Bloque B (Cálculo)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Resultado exacto con procedimiento correcto</td><td>100%</td></tr>
+<tr><td>Resultado exacto sin procedimiento</td><td>80%</td></tr>
+<tr><td>Procedimiento correcto con error de cálculo</td><td>60%</td></tr>
+<tr><td>Procedimiento incompleto</td><td>30%</td></tr>
+<tr><td>Sin procedimiento o incorrecto</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>4.3 Rúbrica para el Bloque C (Interpretación) — Criterios ponderados</h3>
+<p>Cada pregunta del Bloque C tiene <strong>3 criterios</strong> con pesos específicos:</p>
+
+<div class="rubrica-card">
+<h4>Pregunta C1 — Deflexión al reducir bb</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span>
+<p>Menciona: inercia, deflexión, relación inversa, o impacto estructural.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Justifica con números</strong><span class="peso">30%</span>
+<p>Menciona: -7.5%, cambio porcentual, o compara I_total antes/después.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Conecta con otros módulos</strong><span class="peso">30%</span>
+<p>Menciona: M06 (losa), L/240, NEC-15, o consecuencias estructurales.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C2 — ¿Por qué h_eq < H?</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica los vacíos</strong><span class="peso">40%</span>
+<p>Menciona: vacíos, aligeramiento, bloques huecos.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Reconoce el aporte del nervio y capa</strong><span class="peso">30%</span>
+<p>Menciona: nervio, capa de compresión, aportan inercia.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Explica el concepto de equivalencia</strong><span class="peso">30%</span>
+<p>Menciona: misma inercia, modelado ETABS, losa maciza equivalente.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C3 — Relación con M06</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica la conexión</strong><span class="peso">40%</span>
+<p>Menciona: h_eq alimenta a M06, I_eq para verificar deflexión.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span>
+<p>Menciona: cálculo de deflexión, verificación L/240.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Consecuencia si no se calcula bien</strong><span class="peso">30%</span>
+<p>Menciona: sobreestima rigidez, subestima deflexión, diseño no seguro.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C4 — Reducción de tc</h4>
+<div class="criterio">
+<strong>Criterio 1 — Impacto en la inercia</strong><span class="peso">40%</span>
+<p>Menciona: I_total baja, h_eq baja.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Explicación física</strong><span class="peso">30%</span>
+<p>Menciona: menor área alejada del centroide, menor aporte.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Consecuencia estructural</strong><span class="peso">30%</span>
+<p>Menciona: mayor deflexión, riesgo de no cumplir L/240.</p>
+</div>
+</div>
+
+<h3>4.4 Rúbrica para el Bloque D (Decisión) — Criterios + Ética</h3>
+<p>Cada pregunta del Bloque D tiene <strong>4 criterios</strong> con pesos específicos:</p>
+
+<div class="rubrica-card">
+<h4>Pregunta D1 — Reducción de bb (12 pts)</h4>
+<div class="criterio">
+<strong>Criterio 1 — Técnico</strong><span class="peso">25%</span>
+<p>Menciona: impacto en inercia, deflexión, L/240, rigidez.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Normativo</strong><span class="peso">25%</span>
+<p>Menciona: NEC-15, ACI 318, normativa aplicable.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Ético</strong><span class="peso">25%</span>
+<p>Menciona: responsabilidad profesional, firma, rechazo justificado.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span>
+<p>Menciona: documentar, análisis estocástico, P95, memoria.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta D2 — Bloques de menor resistencia (13 pts)</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica el problema</strong><span class="peso">25%</span>
+<p>Menciona: resistencia especificada vs real, déficit del 20%.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Aplica normativa</strong><span class="peso">25%</span>
+<p>Menciona: NEC-15, ACI 318, NTE INEN.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Acciones concretas</strong><span class="peso">25%</span>
+<p>Menciona: rechazar, notificar, suspender obra, documentar.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 4 — Consecuencias legales</strong><span class="peso">25%</span>
+<p>Menciona: responsabilidad civil y penal, denuncia, Colegio de Ingenieros.</p>
+</div>
+</div>
+</div>
+
+<!-- 5. CÓMO EVALUAR -->
+<div class="seccion" id="evaluacion">
+<h2>5. ✍️ CÓMO EVALUAR CADA BLOQUE</h2>
+
+<h3>5.1 Evaluación del Bloque A</h3>
+<p><strong>Método:</strong> Comparación por palabras clave con la respuesta esperada.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> ¿Qué es la inercia centroidal?
+<div class="respuesta">Respuesta esperada: "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</div>
+<div class="resultado">Palabras clave: propiedad, geométrica, resistencia, flexión, eje, centroidal</div>
+</div>
+
+<h3>5.2 Evaluación del Bloque B</h3>
+<p><strong>Método:</strong> Comparación numérica exacta con tolerancia del 5%.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> Calcule I_total.
+<div class="respuesta">Respuesta esperada: 24548 cm⁴</div>
+<div class="resultado">Tolerancia: ±1227 cm⁴ (5%)</div>
+</div>
+
+<h3>5.3 Evaluación del Bloque C</h3>
+<p><strong>Método:</strong> Rúbrica por criterios ponderados.</p>
+<ol>
+<li>Verifique cada criterio individualmente</li>
+<li>Asigne puntos por criterio cumplido</li>
+<li>Sume los puntos de todos los criterios</li>
+<li>Multiplique por el puntaje de la pregunta</li>
+</ol>
+
+<div class="ejemplo">
+<strong>Ejemplo de evaluación C1:</strong>
+<div class="respuesta">Respuesta del estudiante: "La inercia baja 7.5% y la deflexión sube aproximadamente lo mismo. Esto afecta la verificación con L/240 en el M06."</div>
+<div class="resultado">
+✅ Criterio 1 (40%): "inercia", "deflexión" → 40%<br>
+✅ Criterio 2 (30%): "-7.5%", "mismo" → 30%<br>
+✅ Criterio 3 (30%): "L/240", "M06" → 30%<br>
+<strong>Total: 100% × 6 pts = 6/6 pts</strong>
+</div>
+</div>
+
+<h3>5.4 Evaluación del Bloque D</h3>
+<p><strong>Método:</strong> Rúbrica por criterios + bonificación por ética.</p>
+<p>Se evalúan los 4 criterios con pesos iguales (25% cada uno). El criterio ético es fundamental porque la pregunta aborda una decisión profesional real.</p>
+</div>
+
+<!-- 6. REPORTES -->
+<div class="seccion" id="reportes">
+<h2>6. 📊 CÓMO INTERPRETAR LOS REPORTES</h2>
+<p>Al finalizar cada módulo, el sistema genera un <strong>Reporte de Desempeño</strong> con:</p>
+<ul>
+<li>Puntaje por pregunta</li>
+<li>Preguntas correctas vs total</li>
+<li>Resumen por bloque</li>
+<li>Comparación con la respuesta esperada</li>
+</ul>
+
+<h3>6.1 Lectura del reporte</h3>
+<table class="tabla">
+<thead><tr><th>Indicador</th><th>Interpretación</th></tr></thead>
+<tbody>
+<tr><td>Bloque A alto, D bajo</td><td>El estudiante memoriza pero no decide</td></tr>
+<tr><td>Bloque B alto, C bajo</td><td>Calcula pero no interpreta</td></tr>
+<tr><td>Bloques C y D altos</td><td>Excelente criterio profesional</td></tr>
+<tr><td>Todos los bloques bajos</td><td>Requiere refuerzo general</td></tr>
+</tbody>
+</table>
+
+<h3>6.2 Alertas pedagógicas</h3>
+<div class="alerta">
+<h4>🚨 Alerta 1: Bloque D bajo</h4>
+<p>Si el promedio de la clase en el Bloque D es menor a 50%, el docente debe reforzar el criterio ético profesional con casos reales.</p>
+</div>
+<div class="alerta">
+<h4>🚨 Alerta 2: Bloque C bajo</h4>
+<p>Si el promedio del Bloque C es menor a 50%, el estudiante no está interpretando correctamente los valores. Reforzar con ejercicios de interpretación.</p>
+</div>
+<div class="alerta">
+<h4>🚨 Alerta 3: Bloque B bajo</h4>
+<p>Si el promedio del Bloque B es menor a 50%, hay vacíos en el manejo de fórmulas. Reforzar con práctica guiada.</p>
+</div>
+</div>
+
+<!-- 7. RETROALIMENTACIÓN -->
+<div class="seccion" id="retroalimentacion">
+<h2>7. 💬 CÓMO DAR RETROALIMENTACIÓN</h2>
+<p>La retroalimentación debe ser <strong>formativa</strong>, no punitiva. El objetivo es que el estudiante mejore su criterio profesional.</p>
+
+<h3>7.1 Estructura de la retroalimentación</h3>
+<ol>
+<li><strong>Lo que estuvo bien:</strong> Reconocer los aciertos específicos</li>
+<li><strong>Lo que falta:</strong> Señalar los criterios no cumplidos</li>
+<li><strong>Cómo mejorar:</strong> Dar una recomendación concreta</li>
+</ol>
+
+<h3>7.2 Ejemplos de retroalimentación</h3>
+<div class="ejemplo">
+<strong>Caso:</strong> Estudiante con puntaje 60 en Bloque D1.
+<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (inercia baja 7.5%), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
+</div>
+</div>
+
+<!-- 8. ALERTAS -->
+<div class="seccion" id="alertas">
+<h2>8. 🚨 ALERTAS PEDAGÓGICAS DEL M01</h2>
+
+<div class="alerta">
+<h4>Alerta 1: Confusión entre H y h_eq</h4>
+<p>Los estudiantes suelen confundir la altura real con la altura equivalente. Reforzar la diferencia conceptual.</p>
+</div>
+
+<div class="alerta">
+<h4>Alerta 2: Error en Steiner</h4>
+<p>El error más común es usar la inercia propia sin sumar el término A·d². Reforzar la aplicación del teorema.</p>
+</div>
+
+<div class="alerta">
+<h4>Alerta 3: No interpretar el resultado</h4>
+<p>Muchos estudiantes obtienen h_eq = 18.06 pero no saben qué significa. Reforzar la interpretación física.</p>
+</div>
+
+<div class="alerta">
+<h4>Alerta 4: Bloque D vacío</h4>
+<p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales.</p>
+</div>
+</div>
+
+<!-- 9. USO EN CLASE -->
+<div class="seccion" id="uso">
+<h2>9. 🎓 USO DEL MÓDULO EN CLASE</h2>
+
+<h3>9.1 Antes del módulo</h3>
+<ul>
+<li>Revisar la Guía de Estudio M01 con los estudiantes</li>
+<li>Reforzar los conceptos clave (Steiner, h_eq, deflexión)</li>
+<li>Discutir el caso real del Colegio Alejo Lascano</li>
+</ul>
+
+<h3>9.2 Durante el módulo</h3>
+<ul>
+<li>Los estudiantes acceden al módulo por computadora o celular</li>
+<li>60 minutos para responder las 15 preguntas</li>
+<li>El docente acompaña pero no da respuestas</li>
+</ul>
+
+<h3>9.3 Después del módulo</h3>
+<ul>
+<li>Generar reportes individuales</li>
+<li>Identificar las preguntas más falladas</li>
+<li>Dar retroalimentación formativa</li>
+<li>Reforzar los conceptos débiles</li>
+</ul>
+
+<h3>9.4 Tiempo estimado</h3>
+<table class="tabla">
+<thead><tr><th>Actividad</th><th>Tiempo</th></tr></thead>
+<tbody>
+<tr><td>Revisión de la guía de estudio</td><td>30 min</td></tr>
+<tr><td>Cuestionario</td><td>60 min</td></tr>
+<tr><td>Retroalimentación</td><td>30 min</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>2 horas</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="M01_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
+<a href="manual_programa.html" class="btn">📖 Manual del Programa</a>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+<button class="btn" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M01 - Inercia Equivalente</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #3498db;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M01</h1>
+<h2>INERCIA EQUIVALENTE Y ALTURA EQUIVALENTE DE LOSA ALIVIANADA</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+</ol>
+</div>
+
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el concepto de <strong>inercia equivalente</strong> y <strong>altura equivalente</strong> en losas alivianadas de hormigón armado.</p>
+<p>La losa alivianada es un sistema estructural compuesto por una <strong>capa de compresión</strong> superior, <strong>nervios</strong> que resisten la flexión y <strong>bloques aligerantes</strong> que reducen el peso propio.</p>
+<p>Debido a los vacíos del aligeramiento, la losa alivianada <strong>no se comporta</strong> como una losa maciza de igual espesor. Por eso calculamos una <strong>altura equivalente</strong> que permita modelarla como losa maciza en ETABS o SAP2000.</p>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 90 minutos (guía)</p>
+</div>
+
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Aplicar el Teorema de Steiner para calcular la inercia centroidal de una losa alivianada y determinar su altura equivalente.</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Comprender la diferencia entre losa alivianada y losa maciza equivalente</li>
+<li>Aplicar el Teorema de Steiner para secciones compuestas</li>
+<li>Calcular la inercia centroidal total</li>
+<li>Determinar la altura equivalente h_eq</li>
+<li>Interpretar el impacto de h_eq en la deflexión de la losa</li>
+</ul>
+</div>
+
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+<h3>3.1 Inercia centroidal</h3>
+<p>La <strong>inercia centroidal</strong> mide la resistencia de una sección a la flexión respecto a su eje centroidal:</p>
+<div class="formula">I0 = (b · h³) / 12</div>
+
+<h3>3.2 Teorema de Steiner</h3>
+<p>Cuando una sección está formada por varias partes, la inercia total se calcula aplicando el Teorema de Steiner:</p>
+<div class="formula">I_total = suma (I0,i + Ai · di²)</div>
+
+<h3>3.3 Altura equivalente</h3>
+<p>Es el espesor de una losa maciza ficticia de ancho bb que tendría la misma inercia que la losa alivianada real:</p>
+<div class="formula formula-grande">h_eq = ∛ (12 · I_total / bb)</div>
+</div>
+
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Área capa de compresión</td><td>A_capa = bb · tc</td><td>cm²</td></tr>
+<tr><td>Área del nervio</td><td>A_nervio = bn · (H - tc)</td><td>cm²</td></tr>
+<tr><td>Centroide global</td><td>y_cg = suma(Ai · yi) / suma(Ai)</td><td>cm</td></tr>
+<tr><td>Inercia propia</td><td>I0 = b · h³ / 12</td><td>cm⁴</td></tr>
+<tr><td>Inercia por Steiner</td><td>I_total = suma(I0 + A · d²)</td><td>cm⁴</td></tr>
+<tr><td>Altura equivalente</td><td>h_eq = ∛(12 · I_total / bb)</td><td>cm</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema</h4>
+<ul>
+<li>H = 25 cm | bn = 10 cm | bb = 50 cm | tc = 5 cm</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> hn = H - tc = 25 - 5 = <strong>20 cm</strong></div>
+<div class="paso"><strong>PASO 2:</strong> A_capa = 50 · 5 = <strong>250 cm²</strong> | A_nervio = 10 · 20 = <strong>200 cm²</strong> | A_total = <strong>450 cm²</strong></div>
+<div class="paso"><strong>PASO 3:</strong> y_capa = 22.5 cm | y_nervio = 10 cm | y_cg = <strong>16.94 cm</strong></div>
+<div class="paso"><strong>PASO 4:</strong> I_capa = 520.8 cm⁴ | I_nervio = 6666.7 cm⁴</div>
+<div class="paso"><strong>PASO 5:</strong> d_capa = +5.56 cm | d_nervio = -6.94 cm</div>
+<div class="paso"><strong>PASO 6:</strong> I_total = <strong>24548 cm⁴</strong></div>
+<div class="paso"><strong>PASO 7:</strong> h_eq = ∛(12 · 24548 / 50) = <strong>18.06 cm</strong></div>
+
+<div class="ejemplo">
+<h4>Verificación</h4>
+<p>El resultado coincide con la tabla del libro de Marcelo Guerra para losa alivianada de 25 cm.</p>
+</div>
+</div>
+
+<div class="seccion" id="evaluacion">
+<h2>6. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<div class="seccion" id="ejercicios">
+<h2>7. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1</h4>
+<p>Calcule h_eq para H = 20 cm.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>h_eq = 14.50 cm</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2</h4>
+<p>¿Qué pasa con h_eq si tc baja de 5 a 3 cm?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p>h_eq disminuye porque la capa de compresión aporta menos inercia.</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3</h4>
+<p>Si I_total baja 7.5%, ¿cuánto sube δ?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p>La deflexión sube aproximadamente 7.5% (de 1.71 a 1.84 mm).</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4</h4>
+<p>Compare h_eq = 18.06 cm con el libro. ¿Coincide?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p>Sí, coincide exactamente con la tabla del libro de Marcelo Guerra.</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5</h4>
+<p>¿Por qué es importante h_eq en el modelado estructural?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p>Permite modelar la losa alivianada como maciza equivalente en ETABS, manteniendo la misma inercia.</p></div>
+</div>
+</div>
+
+<div class="seccion" id="conexion">
+<h2>8. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M02</td><td>h_eq</td><td>Cálculo de carga muerta</td></tr>
+<tr><td>M03</td><td>h_eq</td><td>Análisis de viga</td></tr>
+<tr><td>M06</td><td>h_eq, I_total</td><td>Diseño de losa</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_01_inercia_equivalente.html" class="btn btn-orange">Ir al Cuestionario M01</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual del Programa - El Conocimiento Transforma</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:32px;margin-bottom:10px;letter-spacing:2px}
+.header h2{color:#ecf0f1;font-size:18px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:14px;font-weight:normal;font-style:italic}
+.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:18px;color:#f39c12;font-style:italic;line-height:1.8}
+.frase-destacada .autor{display:block;margin-top:15px;font-size:14px;color:#bdc3c7;font-style:normal}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #3498db}
+.seccion h2{color:#5dade2;font-size:24px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e;display:flex;align-items:center;gap:10px}
+.seccion h3{color:#f39c12;font-size:18px;margin:20px 0 12px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:15px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold;font-size:16px}
+.seccion ol{padding-left:25px;margin:12px 0}
+.seccion ol li{padding:6px 0;font-size:15px}
+.tabla{width:100%;border-collapse:collapse;margin:20px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:14px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.tarjeta{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:4px solid #2ecc71}
+.tarjeta h4{color:#2ecc71;margin-bottom:10px;font-size:16px}
+.tarjeta p{font-size:14px;margin-bottom:8px}
+.modulo-card{background:#1e1e2e;border-radius:10px;padding:20px;margin:12px 0;border-left:4px solid #3498db;display:flex;gap:15px;align-items:flex-start}
+.modulo-card .icono{font-size:36px;flex-shrink:0}
+.modulo-card .contenido{flex:1}
+.modulo-card h4{color:#5dade2;margin-bottom:6px;font-size:16px}
+.modulo-card .desc{color:#bdc3c7;font-size:13px;margin-bottom:8px}
+.modulo-card .meta{color:#f39c12;font-size:12px;font-weight:bold}
+.pilares{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:20px 0}
+.pilar{background:#1e1e2e;border-radius:10px;padding:20px;text-align:center;border:2px solid #f39c12}
+.pilar .icono{font-size:36px;margin-bottom:10px}
+.pilar h4{color:#f39c12;margin-bottom:8px;font-size:15px}
+.pilar p{font-size:12px;color:#bdc3c7}
+.botones{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:25px 0}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;transition:transform 0.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(52,152,219,0.4)}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+.indice h3{color:#f39c12;margin-bottom:12px}
+.indice ol{padding-left:25px;margin:0}
+.indice li{padding:6px 0;font-size:15px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+.pie-pagina p{margin:6px 0}
+.cita-final{font-style:italic;color:#f39c12;text-align:center;margin:25px 0;padding:20px;background:#34495e;border-radius:10px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📘 MANUAL DEL PROGRAMA</h1>
+<h2>EL CONOCIMIENTO TRANSFORMA</h2>
+<h3>PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I — ESTRUCTURA II</h3>
+<h3>Carrera de Ingeniería Civil — UNESUM</h3>
+<h3 style="margin-top:12px">PI 2026 | Docente: Ing. Gery Lorenzo Marcillo Merino</h3>
+</div>
+
+<!-- FRASE DESTACADA -->
+<div class="frase-destacada">
+"Los números son solo el vehículo.<br>
+El verdadero ingeniero interpreta, decide,<br>
+contextualiza, se responsabiliza."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ÍNDICE -->
+<div class="indice">
+<h3>📑 ÍNDICE DEL MANUAL</h3>
+<ol>
+<li><a href="#presentacion">Presentación del programa</a></li>
+<li><a href="#filosofia">Filosofía pedagógica</a></li>
+<li><a href="#pilares">Los 4 pilares del ingeniero</a></li>
+<li><a href="#estructura">Estructura del programa</a></li>
+<li><a href="#modulos">Los 6 módulos temáticos</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#certificacion">Certificación</a></li>
+<li><a href="#contexto">Contexto territorial</a></li>
+<li><a href="#referencias">Referencias bibliográficas</a></li>
+</ol>
+</div>
+
+<!-- 1. PRESENTACIÓN -->
+<div class="seccion" id="presentacion">
+<h2>1. 📖 PRESENTACIÓN DEL PROGRAMA</h2>
+<p>El <strong>Proyecto de Formación Modular "El Conocimiento Transforma"</strong> es una plataforma educativa desarrollada en la Universidad Estatal del Sur de Manabí (UNESUM) para la formación de ingenieros civiles con criterio profesional, pensamiento crítico y responsabilidad social.</p>
+<p>El programa articula las asignaturas <strong>Estructura I</strong> (sexto semestre, código IC27) y <strong>Estructura II</strong> (séptimo semestre, código IC31) en un recorrido formativo compuesto por 6 módulos temáticos que cubren el análisis y diseño de estructuras de hormigón armado.</p>
+<p>A diferencia de los enfoques tradicionales centrados en el cálculo numérico, este programa prioriza el <strong>criterio profesional</strong>: la capacidad de interpretar, decidir, contextualizar y responsabilizarse por las decisiones técnicas.</p>
+
+<div class="tarjeta">
+<h4>🎯 Objetivo general</h4>
+<p>Formar ingenieros civiles capaces de tomar decisiones técnicas fundamentadas en el análisis estructural, con criterio profesional, conciencia ética y responsabilidad social.</p>
+</div>
+</div>
+
+<!-- 2. FILOSOFÍA -->
+<div class="seccion" id="filosofia">
+<h2>2. 🧠 FILOSOFÍA PEDAGÓGICA</h2>
+<p>El programa se fundamenta en un principio rector:</p>
+<div class="cita-final">
+"Los números son solo el vehículo.<br>
+El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+</div>
+<p>Este principio implica que:</p>
+<ul>
+<li>El cálculo numérico <strong>no es el fin</strong> de la formación, sino el medio</li>
+<li>La interpretación de los valores es tan importante como su obtención</li>
+<li>La decisión técnica debe estar fundamentada y justificada</li>
+<li>La responsabilidad profesional es inseparable del ejercicio de la ingeniería</li>
+</ul>
+
+<h3>2.1 Marco pedagógico</h3>
+<p>El programa se articula con:</p>
+<table class="tabla">
+<thead><tr><th>Enfoque</th><th>Aplicación</th></tr></thead>
+<tbody>
+<tr><td><strong>ABP</strong> (Aprendizaje Basado en Proyectos)</td><td>Caso real: Colegio Alejo Lascano (Jipijapa)</td></tr>
+<tr><td><strong>Aula Invertida</strong></td><td>Guía de estudio antes del cuestionario</td></tr>
+<tr><td><strong>Andamiaje cognitivo</strong></td><td>Ejercicio previo + pregunta principal</td></tr>
+<tr><td><strong>Taxonomía de Bloom</strong></td><td>Bloques A→B→C→D (niveles cognitivos crecientes)</td></tr>
+<tr><td><strong>Modelo estocástico</strong></td><td>Simulación Monte Carlo (N=5000)</td></tr>
+<tr><td><strong>Nonaka-Takeuchi</strong></td><td>Socialización → Externalización → Combinación → Internalización</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 3. PILARES -->
+<div class="seccion" id="pilares">
+<h2>3. 🏛 LOS 4 PILARES DEL INGENIERO</h2>
+<p>El programa forma al estudiante en cuatro dimensiones fundamentales del ejercicio profesional:</p>
+
+<div class="pilares">
+<div class="pilar">
+<div class="icono">🔍</div>
+<h4>INTERPRETA</h4>
+<p>Comprende qué significan los valores en el contexto del proyecto</p>
+</div>
+<div class="pilar">
+<div class="icono">⚖️</div>
+<h4>DECIDE</h4>
+<p>Elige entre alternativas con criterio técnico fundamentado</p>
+</div>
+<div class="pilar">
+<div class="icono">🌍</div>
+<h4>CONTEXTUALIZA</h4>
+<p>Ancla las decisiones al territorio y sus realidades</p>
+</div>
+<div class="pilar">
+<div class="icono">🛡️</div>
+<h4>SE RESPONSABILIZA</h4>
+<p>Firma, documenta y responde por sus decisiones</p>
+</div>
+</div>
+</div>
+
+<!-- 4. ESTRUCTURA -->
+<div class="seccion" id="estructura">
+<h2>4. 🏗 ESTRUCTURA DEL PROGRAMA</h2>
+<p>El programa se compone de <strong>6 módulos temáticos</strong> que articulan las unidades curriculares de Estructura I y Estructura II:</p>
+
+<h3>4.1 Articulación con Estructura I (IC27)</h3>
+<table class="tabla">
+<thead><tr><th>Unidad temática</th><th>Módulos asociados</th></tr></thead>
+<tbody>
+<tr><td>UT1 — Análisis estructural de elementos isostáticos</td><td>M01, M02, M03</td></tr>
+<tr><td>UT2 — Análisis estructural de elementos hiperestáticos</td><td>M03, M04</td></tr>
+<tr><td>UT3 — Líneas de influencia</td><td>M09 (nuevo)</td></tr>
+<tr><td>UT4 — Introducción al método de la rigidez</td><td>M01, M06</td></tr>
+</tbody>
+</table>
+
+<h3>4.2 Articulación con Estructura II (IC31)</h3>
+<table class="tabla">
+<thead><tr><th>Unidad temática</th><th>Módulos asociados</th></tr></thead>
+<tbody>
+<tr><td>UT1 — Coordenadas generalizadas y GDL</td><td>M10 (nuevo)</td></tr>
+<tr><td>UT2 — Sistema de carga y coordenadas</td><td>M03, M04</td></tr>
+<tr><td>UT3 — Matriz de rigidez cercha/viga</td><td>M03, M04</td></tr>
+<tr><td>UT4 — Matriz de rigidez columna</td><td>M05</td></tr>
+<tr><td>UT5 — Matriz de rigidez 3D</td><td>M06, M07</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 5. MÓDULOS -->
+<div class="seccion" id="modulos">
+<h2>5. 📚 LOS 6 MÓDULOS TEMÁTICOS</h2>
+
+<div class="modulo-card">
+<div class="icono">🎯</div>
+<div class="contenido">
+<h4>M01 — Inercia Equivalente</h4>
+<div class="desc">Cálculo de la inercia centroidal de losa alivianada mediante el Teorema de Steiner y obtención de la altura equivalente h_eq.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+
+<div class="modulo-card">
+<div class="icono">⚖️</div>
+<div class="contenido">
+<h4>M02 — Cálculo de Cargas</h4>
+<div class="desc">Determinación de cargas muertas y vivas según NEC-15, aplicación de la combinación 1.2D + 1.6L.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+
+<div class="modulo-card">
+<div class="icono">🏗️</div>
+<div class="contenido">
+<h4>M03 — Viga + Sismo</h4>
+<div class="desc">Análisis de viga articulada, cálculo de reacciones, cortantes, momentos y deflexiones. Diseño sismorresistente.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+
+<div class="modulo-card">
+<div class="icono">✂️</div>
+<div class="contenido">
+<h4>M04 — Acero a Cortante</h4>
+<div class="desc">Diseño de estribos en zona protegida y zona central. Cálculo de confinamiento según NEC-15.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+
+<div class="modulo-card">
+<div class="icono">🏛️</div>
+<div class="contenido">
+<h4>M05 — Diseño de Columna</h4>
+<div class="desc">Predimensionamiento, cálculo de acero longitudinal y confinamiento. Diagrama de interacción P-M.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+
+<div class="modulo-card">
+<div class="icono">🧱</div>
+<div class="contenido">
+<h4>M06 — Diseño de Losa</h4>
+<div class="desc">Diseño de losa alivianada con nervios articulados. Cálculo de acero positivo, temperatura y verificación de deflexión.</div>
+<div class="meta">15 preguntas | 60 min | 100 pts</div>
+</div>
+</div>
+</div>
+
+<!-- 6. EVALUACIÓN -->
+<div class="seccion" id="evaluacion">
+<h2>6. 🎯 SISTEMA DE EVALUACIÓN</h2>
+<p>Cada módulo contiene <strong>15 preguntas</strong> organizadas en 4 bloques con niveles cognitivos crecientes:</p>
+
+<table class="tabla">
+<thead>
+<tr><th>Bloque</th><th>Tipo</th><th>Método de evaluación</th><th>Puntaje</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>Palabras clave</td><td>10 pts</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>Comparación numérica</td><td>40 pts</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>Rúbrica por criterios</td><td>25 pts</td></tr>
+<tr><td><strong>D</strong></td><td>Decisión profesional</td><td>Rúbrica por criterios + ética</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<h3>6.1 Rúbrica por criterios (Bloques C y D)</h3>
+<p>Las preguntas de los bloques C y D <strong>no tienen una única respuesta correcta</strong>. Se evalúan mediante criterios ponderados:</p>
+
+<div class="tarjeta">
+<h4>Criterio 1 — Técnico (25%)</h4>
+<p>Menciona el impacto estructural del valor o decisión</p>
+</div>
+<div class="tarjeta">
+<h4>Criterio 2 — Normativo (25%)</h4>
+<p>Cita y aplica la normativa vigente (NEC-15, ACI 318)</p>
+</div>
+<div class="tarjeta">
+<h4>Criterio 3 — Ético (25%)</h4>
+<p>Aplica criterio profesional y responsabilidad</p>
+</div>
+<div class="tarjeta">
+<h4>Criterio 4 — Trazabilidad (25%)</h4>
+<p>Menciona documentación, análisis o defensa técnica</p>
+</div>
+
+<h3>6.2 Clasificación final</h3>
+<table class="tabla">
+<thead><tr><th>Puntaje</th><th>Clasificación</th></tr></thead>
+<tbody>
+<tr><td>0 - 40</td><td>INSUFICIENTE</td></tr>
+<tr><td>40 - 60</td><td>BÁSICO</td></tr>
+<tr><td>60 - 80</td><td>COMPETENTE</td></tr>
+<tr><td>80 - 95</td><td>DESTACADO</td></tr>
+<tr><td>95 - 100</td><td>EXCELENTE</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 7. CERTIFICACIÓN -->
+<div class="seccion" id="certificacion">
+<h2>7. 📜 CERTIFICACIÓN</h2>
+<p>Al completar satisfactoriamente cada módulo (puntaje ≥ 60), el estudiante recibe un <strong>certificado individual</strong> con:</p>
+<ul>
+<li>Nombre completo y cédula del estudiante</li>
+<li>Lugar de intervención del proyecto</li>
+<li>Módulo aprobado y puntaje obtenido</li>
+<li>Clasificación final</li>
+<li>Modalidad de aprobación (PFAE + TA)</li>
+<li>Código único de verificación</li>
+<li>Firmas del docente y coordinador</li>
+</ul>
+
+<div class="tarjeta">
+<h4>🎓 Certificado Global</h4>
+<p>Al completar los 6 módulos con puntaje promedio ≥ 80, el estudiante obtiene el <strong>Certificado Global del Programa "El Conocimiento Transforma"</strong>, con todos los módulos aprobados y su puntaje individual.</p>
+</div>
+</div>
+
+<!-- 8. CONTEXTO -->
+<div class="seccion" id="contexto">
+<h2>8. 🌍 CONTEXTO TERRITORIAL</h2>
+<p>El programa está anclado al <strong>Proyecto Multidisciplinario UNESUM</strong>, cuyo caso de estudio es el <strong>Colegio Alejo Lascano</strong>, ubicado en Jipijapa, Manabí, Ecuador.</p>
+
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+<tbody>
+<tr><td>Ubicación</td><td>Jipijapa, Manabí, Ecuador</td></tr>
+<tr><td>Zona sísmica</td><td>VI (Z = 0.50)</td></tr>
+<tr><td>Estructura</td><td>Pórtico de 2 pisos, Grid 3×3</td></tr>
+<tr><td>Altura de entrepiso</td><td>2.6 m</td></tr>
+<tr><td>Luces</td><td>4.5 m, 5.5 m, 6.0 m</td></tr>
+<tr><td>Secciones</td><td>Columna 38×38 cm, Viga 30×45 cm, Losa 25 cm</td></tr>
+<tr><td>Materiales</td><td>fc = 210 kg/cm², fy = 4200 kg/cm²</td></tr>
+</tbody>
+</table>
+
+<h3>8.1 Impacto social</h3>
+<p>El programa tiene un impacto directo en la comunidad de Jipijapa porque:</p>
+<ul>
+<li>Forma ingenieros capaces de diseñar estructuras seguras para niños y docentes</li>
+<li>Aplica la normativa sismorresistente en una zona de alto riesgo sísmico</li>
+<li>Contribuye a la resiliencia de la infraestructura educativa del territorio</li>
+<li>Vincula la formación académica con las necesidades reales de la zona sur de Manabí</li>
+</ul>
+
+<div class="cita-final">
+"La rigidez de una viga y la rigidez de una comunidad<br>
+son una misma cosa: la capacidad de sostenerse sin romperse."<br>
+<strong>— Rigidez Energética, Reflexión Final</strong>
+</div>
+</div>
+
+<!-- 9. REFERENCIAS -->
+<div class="seccion" id="referencias">
+<h2>9. 📚 REFERENCIAS BIBLIOGRÁFICAS</h2>
+
+<h3>Bibliografía básica</h3>
+<ul>
+<li>Marcillo Merino, G. L., Ponce Regalado, D. S., Hernández Escobar, A., et al. (2026). <em>Rigidez Energética aplicada a la Ingeniería Civil: Fundamentos, Modelación y Formación Profesional en Latinoamérica</em>. Editorial Internacional Runaiki. ISBN en trámite.</li>
+<li>Hibbeler, R. C. (2018). <em>Análisis de Estructuras</em> (10.ª ed.). Pearson.</li>
+<li>NEC-15 (2015). <em>Norma Ecuatoriana de la Construcción: Cargas No Sísmicas</em>. MIDUVI.</li>
+<li>ACI 318-19 (2019). <em>Building Code Requirements for Structural Concrete</em>.</li>
+</ul>
+
+<h3>Bibliografía complementaria</h3>
+<ul>
+<li>Argüelles Álvarez, R. (2015). <em>Cálculo de estructuras</em> (Vols. 1-2). Bellisco.</li>
+<li>Aguilar Falconí, R. (2020). <em>Análisis matricial de estructuras con CEINCI-LAB</em>. Universidad de las Fuerzas Armadas ESPE.</li>
+<li>Paz, M., & Leigh, W. (2001). <em>Integrated Matrix Analysis of Structures: Theory and Computation</em>. Springer.</li>
+</ul>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="M01_guia_estudio.html" class="btn btn-green">📘 Ver Guía de Estudio M01</a>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+<button class="btn btn-orange" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>
+</div>
+
+</div>
+</body>
+</html>
