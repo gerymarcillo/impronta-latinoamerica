@@ -414,6 +414,12 @@ body{
   text-align:center;
   font-weight:bold;
   border:1px solid #e74c3c;
+  animation:shake 0.5s;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-8px)}
+  75%{transform:translateX(8px)}
 }
 .alerta-ok{
   background:rgba(39,174,96,0.8);
@@ -424,6 +430,12 @@ body{
   text-align:center;
   font-weight:bold;
   border:1px solid #2ecc71;
+  animation:pulseOk 0.6s;
+}
+@keyframes pulseOk{
+  0%{transform:scale(0.9);opacity:0}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1);opacity:1}
 }
 
 /* ========== HEADER ========== */
@@ -520,7 +532,7 @@ body{
   letter-spacing:1px;
 }
 
-/* ========== GRID DE MÓDULOS (7 TARJETAS 3D) ========== */
+/* ========== GRID DE MÓDULOS ========== */
 .modulos-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -600,7 +612,7 @@ body{
   border:1px solid rgba(46,204,113,0.3);
 }
 
-/* ========== TIMELINE VISUAL ========== */
+/* ========== TIMELINE ========== */
 .timeline{
   display:flex;
   justify-content:space-between;
@@ -657,7 +669,7 @@ body{
   opacity:0.5;
 }
 
-/* ========== MÉTRICAS ANIMADAS ========== */
+/* ========== MÉTRICAS ========== */
 .metricas-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -845,7 +857,7 @@ body{
 </div>
 
 <!-- ============================================================ -->
-<!-- PANTALLA 2: LOGIN -->
+<!-- PANTALLA 2: LOGIN SUPERADO -->
 <!-- ============================================================ -->
 <div id="pantalla-login" class="hidden">
   <div class="header">
@@ -876,8 +888,8 @@ body{
 
     <input type="text" id="input-nombre" placeholder="Nombre completo">
     <input type="text" id="input-cedula" placeholder="Cédula / Matrícula">
-    <input type="text" id="input-codigo" placeholder="Código del proyecto (ej: ECT-002)">
-    <div class="campo-ayuda">💡 El docente le asignará un código. Ejemplos: ECT-001, ECT-002, AGUA-001</div>
+    <input type="text" id="input-codigo" placeholder="Código de acceso (UNESUM-2026, ALU-2026-XXX, ECT-002)">
+    <div class="campo-ayuda" id="ayuda-codigo">💡 Use: <b>UNESUM-2026</b> (global), <b>ALU-2026-XXX</b> (personal), <b>ECT-002</b> (proyecto) o <b>DOCENTE-2026</b></div>
 
     <button class="btn btn-orange" onclick="ingresar()" style="width:100%;padding:16px;font-size:16px;letter-spacing:2px">🚀 INGRESAR Y VER PROYECTO</button>
 
@@ -961,40 +973,19 @@ body{
   <p class="seccion-subtitulo">De la inercia al análisis dinámico: 7 módulos en 17 semanas</p>
 
   <div class="timeline">
-    <div class="timeline-hito">
-      <div class="timeline-circle">M01</div>
-      <div class="timeline-label">Inercia<br>Sem 3-4</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M01</div><div class="timeline-label">Inercia<br>Sem 3-4</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M02</div>
-      <div class="timeline-label">Cargas<br>Sem 5-6</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M02</div><div class="timeline-label">Cargas<br>Sem 5-6</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M03</div>
-      <div class="timeline-label">Viga<br>Sem 7-9</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M03</div><div class="timeline-label">Viga<br>Sem 7-9</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M04</div>
-      <div class="timeline-label">Cortante<br>Sem 10-11</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M04</div><div class="timeline-label">Cortante<br>Sem 10-11</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M05</div>
-      <div class="timeline-label">Columna<br>Sem 12-14</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M05</div><div class="timeline-label">Columna<br>Sem 12-14</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M06</div>
-      <div class="timeline-label">Losa<br>Sem 15-16</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M06</div><div class="timeline-label">Losa<br>Sem 15-16</div></div>
     <div class="timeline-line"></div>
-    <div class="timeline-hito">
-      <div class="timeline-circle">M07</div>
-      <div class="timeline-label">Dinámico<br>Sem 17</div>
-    </div>
+    <div class="timeline-hito"><div class="timeline-circle">M07</div><div class="timeline-label">Dinámico<br>Sem 17</div></div>
   </div>
 
   <!-- MÉTRICAS -->
@@ -1002,22 +993,10 @@ body{
   <p class="seccion-subtitulo">Todo lo que el estudiante aprenderá</p>
 
   <div class="metricas-grid">
-    <div class="metrica-card">
-      <div class="metrica-num" data-target="7">0</div>
-      <div class="metrica-label">MÓDULOS</div>
-    </div>
-    <div class="metrica-card">
-      <div class="metrica-num" data-target="105">0</div>
-      <div class="metrica-label">PREGUNTAS</div>
-    </div>
-    <div class="metrica-card">
-      <div class="metrica-num" data-target="17">0</div>
-      <div class="metrica-label">ALGORITMOS PYTHON</div>
-    </div>
-    <div class="metrica-card">
-      <div class="metrica-num" data-target="2">0</div>
-      <div class="metrica-label">NORMA (NEC-15 + ACI)</div>
-    </div>
+    <div class="metrica-card"><div class="metrica-num" data-target="7">0</div><div class="metrica-label">MÓDULOS</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="105">0</div><div class="metrica-label">PREGUNTAS</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="17">0</div><div class="metrica-label">ALGORITMOS PYTHON</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="2">0</div><div class="metrica-label">NORMAS (NEC-15 + ACI)</div></div>
   </div>
 
   <!-- RECURSOS -->
@@ -1108,20 +1087,59 @@ var PROYECTOS = {
 };
 
 // ============================================================
+// BASE DE DATOS DE CÓDIGOS DE ACCESO
+// ============================================================
+var CODIGOS_ACCESO = {
+  // 🌐 CÓDIGO GLOBAL
+  "UNESUM-2026": {tipo:"global", nombre:"Acceso General UNESUM", rol:"estudiante", valido:true, proyecto_default:"ECT-002"},
+
+  // 🎓 CÓDIGO DOCENTE
+  "DOCENTE-2026": {tipo:"docente", nombre:"Ing. Gery Lorenzo Marcillo Merino, Msc.", rol:"docente", valido:true}
+};
+
+// 👤 GENERAR CÓDIGOS DE ESTUDIANTES (ALU-2026-001 a ALU-2026-035)
+var NOMBRES_ESTUDIANTES = [
+  "Estudiante 001","Estudiante 002","Estudiante 003","Estudiante 004","Estudiante 005",
+  "Estudiante 006","Estudiante 007","Estudiante 008","Estudiante 009","Estudiante 010",
+  "Estudiante 011","Estudiante 012","Estudiante 013","Estudiante 014","Estudiante 015",
+  "Estudiante 016","Estudiante 017","Estudiante 018","Estudiante 019","Estudiante 020",
+  "Estudiante 021","Estudiante 022","Estudiante 023","Estudiante 024","Estudiante 025",
+  "Estudiante 026","Estudiante 027","Estudiante 028","Estudiante 029","Estudiante 030",
+  "Estudiante 031","Estudiante 032","Estudiante 033","Estudiante 034","Estudiante 035"
+];
+
+for(var i = 0; i < NOMBRES_ESTUDIANTES.length; i++){
+  var num = (i + 1).toString().padStart(3, '0');
+  var codigo = "ALU-2026-" + num;
+  CODIGOS_ACCESO[codigo] = {
+    tipo: "estudiante",
+    nombre: NOMBRES_ESTUDIANTES[i],
+    paralelo: "A",
+    valido: true,
+    proyecto_default: "ECT-002"
+  };
+}
+
+// ============================================================
 // CAMBIAR ROL
 // ============================================================
 function cambiarRol(){
   var rol = document.querySelector('input[name="rol"]:checked').value;
   var opEst = document.getElementById('rol-estudiante');
   var opDoc = document.getElementById('rol-docente');
+  var ayuda = document.getElementById('ayuda-codigo');
+  var inputCodigo = document.getElementById('input-codigo');
+  
   if(rol === 'docente'){
     opDoc.classList.add('activa');
     opEst.classList.remove('activa');
-    document.getElementById('input-codigo').placeholder = 'Modo docente — No requiere código';
+    inputCodigo.placeholder = 'Código docente (DOCENTE-2026)';
+    ayuda.innerHTML = '💡 Docente: use <b>DOCENTE-2026</b>';
   } else {
     opEst.classList.add('activa');
     opDoc.classList.remove('activa');
-    document.getElementById('input-codigo').placeholder = 'Código del proyecto (ej: ECT-002)';
+    inputCodigo.placeholder = 'Código de acceso (UNESUM-2026, ALU-2026-XXX, ECT-002)';
+    ayuda.innerHTML = '💡 Use: <b>UNESUM-2026</b> (global), <b>ALU-2026-XXX</b> (personal), <b>ECT-002</b> (proyecto)';
   }
 }
 
@@ -1135,7 +1153,7 @@ function irAlLogin(){
 }
 
 // ============================================================
-// INGRESAR
+// INGRESAR — SISTEMA SUPERADO
 // ============================================================
 function ingresar(){
   var rol = document.querySelector('input[name="rol"]:checked').value;
@@ -1144,53 +1162,105 @@ function ingresar(){
   var codigo = document.getElementById('input-codigo').value.trim().toUpperCase();
   var alerta = document.getElementById('alerta-codigo');
 
+  // Validar nombre y cédula
   if(!n || !c){
     alerta.innerHTML = '<div class="alerta-error">⚠️ Complete nombre y cédula</div>';
     return;
   }
 
+  if(!codigo){
+    alerta.innerHTML = '<div class="alerta-error">⚠️ Escriba el código de acceso</div>';
+    return;
+  }
+
   var proyecto = null;
-  if(rol === 'estudiante'){
-    if(!codigo){
-      alerta.innerHTML = '<div class="alerta-error">⚠️ Escriba el código del proyecto</div>';
+  var codigoInfo = null;
+
+  // ============================================================
+  // 1. VERIFICAR CÓDIGO DE ACCESO (UNESUM, ALU, DOCENTE)
+  // ============================================================
+  if(CODIGOS_ACCESO[codigo]){
+    codigoInfo = CODIGOS_ACCESO[codigo];
+    
+    // Validar rol
+    if(rol === 'docente' && codigoInfo.tipo !== 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Este código no es de docente. Use DOCENTE-2026</div>';
       return;
     }
-    if(!PROYECTOS[codigo]){
-      alerta.innerHTML = '<div class="alerta-error">❌ Código "' + codigo + '" no encontrado</div>';
+    if(rol === 'estudiante' && codigoInfo.tipo === 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Este código es solo para docentes</div>';
+      return;
+    }
+
+    // Asignar proyecto
+    if(codigoInfo.tipo === 'docente'){
+      proyecto = {nombre:"Acceso Docente — Todos los proyectos", amie:"—", parroquia:"Jipijapa", sector:"Todos", tipo:"Docente"};
+    } else {
+      var codigoProyecto = codigoInfo.proyecto_default || "ECT-002";
+      proyecto = PROYECTOS[codigoProyecto] || PROYECTOS["ECT-002"];
+    }
+
+    var mensaje = '✅ Código válido: ' + codigo;
+    if(codigoInfo.tipo === 'estudiante') mensaje += ' (' + codigoInfo.nombre + ')';
+    if(codigoInfo.tipo === 'global') mensaje += ' (Acceso General)';
+    if(codigoInfo.tipo === 'docente') mensaje += ' (Docente)';
+    alerta.innerHTML = '<div class="alerta-ok">' + mensaje + '</div>';
+  }
+  // ============================================================
+  // 2. VERIFICAR CÓDIGO DE PROYECTO (ECT-001, AGUA-001)
+  // ============================================================
+  else if(PROYECTOS[codigo]){
+    if(rol === 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Los docentes usan DOCENTE-2026</div>';
       return;
     }
     proyecto = PROYECTOS[codigo];
-    alerta.innerHTML = '<div class="alerta-ok">✅ Código válido: ' + codigo + '</div>';
-  } else {
-    proyecto = {nombre:"Acceso Docente — Todos los proyectos", amie:"—", parroquia:"Jipijapa", sector:"Todos", tipo:"Docente"};
+    codigoInfo = {tipo:"proyecto", nombre:proyecto.nombre};
+    alerta.innerHTML = '<div class="alerta-ok">✅ Código de proyecto válido: ' + codigo + '</div>';
+  }
+  // ============================================================
+  // 3. CÓDIGO NO RECONOCIDO
+  // ============================================================
+  else {
+    alerta.innerHTML = '<div class="alerta-error">❌ Código "' + codigo + '" no encontrado<br><small style="font-size:11px">Pruebe: UNESUM-2026, ALU-2026-001, DOCENTE-2026 o ECT-002</small></div>';
+    return;
   }
 
+  // Guardar en localStorage
   localStorage.setItem('usuario_rol', rol);
   localStorage.setItem('estudiante_nombre', n);
   localStorage.setItem('estudiante_cedula', c);
-  localStorage.setItem('codigo_proyecto', codigo);
+  localStorage.setItem('codigo_acceso', codigo);
+  localStorage.setItem('tipo_codigo', codigoInfo.tipo);
+  if(codigoInfo.nombre) localStorage.setItem('codigo_nombre', codigoInfo.nombre);
+  if(codigoInfo.paralelo) localStorage.setItem('estudiante_paralelo', codigoInfo.paralelo);
 
+  // Cambiar de pantalla
   setTimeout(function(){
     document.getElementById('pantalla-login').classList.add('hidden');
     document.getElementById('pantalla-modulos').classList.remove('hidden');
     var saludo = (rol === 'docente') ? '🎓 Docente: ' : '👤 Estudiante: ';
     document.getElementById('saludo-estudiante').textContent = saludo + n;
-    mostrarProyecto(proyecto, codigo, rol);
+    mostrarProyecto(proyecto, codigo, rol, codigoInfo);
     animarContadores();
     window.scrollTo({top:0, behavior:'smooth'});
   }, 800);
 }
 
 // ============================================================
-// MOSTRAR PROYECTO
+// MOSTRAR PROYECTO ASIGNADO
 // ============================================================
-function mostrarProyecto(p, codigo, rol){
+function mostrarProyecto(p, codigo, rol, codigoInfo){
   var contenedor = document.getElementById('proyecto-asignado-box');
   var html = '<div class="proyecto-box">';
   html += '<div class="proyecto-titulo">🎯 PROYECTO ASIGNADO</div>';
   html += '<div class="proyecto-nombre">' + p.nombre + '</div>';
   html += '<div class="proyecto-datos">';
   if(codigo) html += '<span class="proyecto-dato">🔑 ' + codigo + '</span>';
+  if(codigoInfo && codigoInfo.nombre && codigoInfo.tipo === 'estudiante') 
+    html += '<span class="proyecto-dato">👤 ' + codigoInfo.nombre + '</span>';
+  if(codigoInfo && codigoInfo.paralelo) 
+    html += '<span class="proyecto-dato">📚 Paralelo ' + codigoInfo.paralelo + '</span>';
   if(p.amie && p.amie !== '—') html += '<span class="proyecto-dato">📋 AMIE: ' + p.amie + '</span>';
   if(p.parroquia) html += '<span class="proyecto-dato">📍 ' + p.parroquia + '</span>';
   if(p.sector) html += '<span class="proyecto-dato">🏘️ ' + p.sector + '</span>';
@@ -1229,9 +1299,13 @@ function animarContadores(){
 // ============================================================
 document.addEventListener('DOMContentLoaded', function(){
   console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
-  console.log('📋 Proyectos disponibles:', Object.keys(PROYECTOS).length);
+  console.log('🔑 Códigos disponibles:');
+  console.log('   • UNESUM-2026 (global)');
+  console.log('   • ALU-2026-001 ... ALU-2026-035 (estudiantes)');
+  console.log('   • DOCENTE-2026 (docente)');
+  console.log('   • ECT-001, ECT-002, AGUA-001 (proyectos)');
+  console.log('📋 Proyectos:', Object.keys(PROYECTOS).length);
   console.log('📚 Módulos: M01 → M07');
-  console.log('🔑 Códigos:', Object.keys(PROYECTOS).join(', '));
 });
 </script>
 </body>
