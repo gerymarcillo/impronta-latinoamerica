@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>M01 - Inercia Equivalente</title>
+<title>M03 - Viga + Sismo</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
 .container{max-width:1100px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #3498db;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
 .header-logo{height:70px}
-.header-imagen{height:70px;border-radius:8px;border:2px solid #3498db}
+.header-imagen{height:70px;border-radius:8px;border:2px solid #f39c12}
 .header-texto{text-align:center;flex:1;min-width:300px}
 .header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
 .header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
@@ -17,18 +17,18 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
 .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
 .tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
-.tab.active{background:linear-gradient(135deg,#3498db,#2980b9);border-color:#3498db;color:white}
+.tab.active{background:linear-gradient(135deg,#f39c12,#e67e22);border-color:#f39c12;color:white}
 .tab-content{display:none}
 .tab-content.active{display:block}
 .info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
 .progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
-.progreso-bar{background:linear-gradient(90deg,#2ecc71,#3498db);height:100%;width:0%;transition:width 0.4s}
+.progreso-bar{background:linear-gradient(90deg,#2ecc71,#f39c12);height:100%;width:0%;transition:width 0.4s}
 .btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
 .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
 .btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
 .btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
 .btn-desactivado:hover{transform:none !important;box-shadow:none !important}
-.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
 .seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
 .seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
 .seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
@@ -55,7 +55,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .descarga-info h4{color:#5dade2;font-size:15px;margin-bottom:4px}
 .descarga-info p{color:#bdc3c7;font-size:12px;margin:0}
 .pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
-.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #3498db}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #f39c12}
 .badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
 .badge.orange{background:#f39c12}
 .badge.red{background:#e74c3c}
@@ -81,7 +81,6 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 .certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
 .certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
 .certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
-.certificado code{background:#ecf0f1;padding:6px 12px;border-radius:6px;font-size:14px}
 .firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
 .firma{text-align:center;min-width:220px}
 .linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
@@ -94,8 +93,6 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 .qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
 .qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
 .qr-datos p{margin:5px 0}
-.verificacion-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:12px;padding:25px;margin:20px 0;text-align:center}
-.verificacion-box h3{color:#2ecc71;font-size:20px;margin-bottom:15px}
 .condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
 .condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
 .condiciones-box ul{list-style:none;padding-left:0}
@@ -116,7 +113,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <div class="header">
 <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
 <div class="header-texto">
-<h1>🎯 M01 — INERCIA EQUIVALENTE</h1>
+<h1>🏗️ M03 — VIGA + SISMO</h1>
 <h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
 <h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
 <p>PI 2026 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
@@ -134,40 +131,23 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <!-- TAB VIDEOS -->
 <div id="tab-videos" class="tab-content active">
 <div class="videos-section">
-<h2>🎥 CLASES GRABADAS — M01</h2>
+<h2>🎥 CLASES GRABADAS — M03</h2>
 <p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
 <div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 1 — Fundamento Teórico</h4>
-<p>📅 10/10/2026 | ⏱ 10 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
+<div class="video-info"><h4>🎬 Clase 1 — Viga Simplemente Apoyada (V, M)</h4><p>📅 12/10/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
 </div>
 <div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 2 — Ejemplo Resuelto</h4>
-<p>📅 12/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
+<div class="video-info"><h4>🎬 Clase 2 — Viga Empotrada (Diagrama Mariposa)</h4><p>📅 14/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
 </div>
 <div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 3 — Caso Real: Laboratorio Vivo Agua Dulce</h4>
-<p>📅 15/10/2026 | ⏱ 8 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<div class="video-info"><h4>🎬 Clase 3 — Momento de Diseño Sísmico (Md)</h4><p>📅 16/10/2026 | ⏱ 18 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
 </div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div style="background:#1e1e2e;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin-top:20px;text-align:center">
-<p style="color:#f39c12;font-size:13px;margin:0">💡 <b>Nota:</b> Las clases se activarán después de cada grabación con Google Meet.</p>
+<div class="video-item">
+<div class="video-info"><h4>🎬 Clase 4 — Modelo Estocástico (Monte Carlo)</h4><p>📅 18/10/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
 </div>
 </div>
 </div>
@@ -175,40 +155,50 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <!-- TAB CONSULTA -->
 <div id="tab-consulta" class="tab-content">
 <div class="seccion">
-<h2>📚 CONSULTA — M01 INERCIA EQUIVALENTE</h2>
-<h3>🎯 ¿Qué es la inercia equivalente?</h3>
-<p>La <b>inercia equivalente</b> es la propiedad geométrica que permite modelar una losa alivianada como una losa maciza ficticia en programas como ETABS o SAP2000, manteniendo la misma rigidez a flexión.</p>
+<h2>📚 CONSULTA — M03 VIGA + SISMO</h2>
+<h3>🎯 ¿Qué es el análisis de viga + sismo?</h3>
+<p>Es el proceso de determinar las fuerzas internas (cortante, momento, rotación, deflexión) en una viga, considerando tanto cargas gravitacionales como sísmicas, aplicando la NEC-15 y el ACI 318.</p>
 <h3>📐 Fórmulas clave</h3>
-<div class="formula-box">Inercia propia:  I₀ = b · h³ / 12</div>
-<div class="formula-box">Teorema de Steiner:  I = I₀ + A · d²</div>
-<div class="formula-box">Inercia total:  I_total = Σ (I₀ + A · d²)</div>
-<div class="formula-box grande">Altura equivalente:  h_eq = ∛ (12 · I_total / bb)</div>
+<div class="formula-box">Carga lineal: w = Cu · b_trib</div>
+<div class="formula-box">Reacciones: R1 = R2 = w·Lv/2</div>
+<div class="formula-box">Cortante: V(x) = R1 - w·x</div>
+<div class="formula-box">Momento: M(x) = R1·x - w·x²/2</div>
+<div class="formula-box">Momento máximo: Mmax = w·Lv²/8</div>
+<div class="formula-box">Deflexión: δmax = 5·w·Lv⁴/(384·EI)</div>
+<div class="formula-box grande">Momento de diseño: Md = Me · 0.65 · 0.85 · Fm</div>
 <h3>🔑 Conceptos clave</h3>
 <ul>
-<li><b>Inercia centroidal:</b> resistencia a flexión respecto al eje centroidal</li>
-<li><b>Teorema de Steiner:</b> traslado de inercia de ejes paralelos</li>
-<li><b>Altura equivalente:</b> espesor ficticio de losa maciza equivalente</li>
-<li><b>Diferencia H vs h_eq:</b> H es el espesor real, h_eq es el equivalente</li>
+<li><b>Viga simplemente apoyada:</b> extremos articulados (M=0)</li>
+<li><b>Viga empotrada:</b> extremos fijos (M≠0), resiste sismo</li>
+<li><b>Diagrama Mariposa:</b> momentos que cambian de signo</li>
+<li><b>Md:</b> momento de diseño sísmico</li>
+<li><b>L/240:</b> deflexión admisible según NEC-15</li>
 </ul>
 <h3>📊 Datos del modelo base</h3>
 <table class="tabla">
-<tr><th>Dato</th><th>Valor</th></tr>
-<tr><td>H (altura total)</td><td>25 cm</td></tr>
-<tr><td>bn (ancho nervio)</td><td>10 cm</td></tr>
-<tr><td>bb (ancho bloque)</td><td>50 cm</td></tr>
-<tr><td>tc (capa de compresión)</td><td>5 cm</td></tr>
-<tr><td>I_total</td><td>24548 cm⁴</td></tr>
-<tr><td><b>h_eq</b></td><td><b>18.06 cm</b></td></tr>
+<tr><th>Parámetro</th><th>Valor</th></tr>
+<tr><td>Lv</td><td>6.00 m</td></tr>
+<tr><td>Lt</td><td>5.75 m</td></tr>
+<tr><td>b_trib</td><td>5.75 m</td></tr>
+<tr><td>b_col</td><td>0.38 m</td></tr>
+<tr><td>b_viga</td><td>0.30 m</td></tr>
+<tr><td>h_viga</td><td>0.45 m</td></tr>
+<tr><td>fc</td><td>210 kg/cm²</td></tr>
+<tr><td>fy</td><td>4200 kg/cm²</td></tr>
+<tr><td>Fm</td><td>1.35</td></tr>
+<tr><td>Cu (ejemplo)</td><td>1.064 t/m²</td></tr>
+<tr><td>W</td><td>6.118 t/m</td></tr>
+<tr><td>Mmax</td><td>27.531 t·m</td></tr>
+<tr><td><b>Md</b></td><td><b>18.016 t·m</b></td></tr>
 </table>
 <h3>📚 Referencias</h3>
 <ul>
-<li>Marcillo et al. (2026) — <i>Rigidez Energética aplicada a la Ingeniería Civil</i></li>
-<li>Hibbeler (2018) — <i>Análisis de Estructuras</i></li>
-<li>NEC-15 — Norma Ecuatoriana de la Construcción</li>
-<li>ACI 318-19</li>
+<li>NEC-15 (2015) — <i>Cargas No Sísmicas</i></li>
+<li>ACI 318-19 — <i>Building Code Requirements</i></li>
+<li>Marcillo et al. (2026) — <i>Rigidez Energética</i></li>
 </ul>
 <div style="text-align:center;margin-top:25px">
-<a href="M01_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
+<a href="M03_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
 </div>
 </div>
 </div>
@@ -216,31 +206,31 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <!-- TAB DESCARGAS -->
 <div id="tab-descargas" class="tab-content">
 <div class="descargas-section">
-<h2>📖 DESCARGAS — M01</h2>
+<h2>📖 DESCARGAS — M03</h2>
 <p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
 <div class="descarga-item">
 <div class="descarga-icon">📘</div>
-<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto ECT-UNESUM-2026</p></div>
+<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa</p></div>
 <a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📗</div>
-<div class="descarga-info"><h4>Guía de Estudio M01</h4><p>Material de consulta para estudiantes</p></div>
-<a href="M01_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
+<div class="descarga-info"><h4>Guía de Estudio M03</h4><p>Material de consulta</p></div>
+<a href="M03_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📙</div>
-<div class="descarga-info"><h4>Manual del Docente M01</h4><p>Rúbrica por criterios + evaluación</p></div>
-<a href="M01_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
+<div class="descarga-info"><h4>Manual del Docente M03</h4><p>Rúbrica por criterios</p></div>
+<a href="M03_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📄</div>
-<div class="descarga-info"><h4>Tabla NEC-15</h4><p>Cargas vivas y combinaciones</p></div>
+<div class="descarga-info"><h4>Tabla NEC-15</h4><p>Cargas vivas</p></div>
 <a href="tabla_nec15.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📄</div>
-<div class="descarga-info"><h4>Tabla ACI 318</h4><p>Factores de mayoración</p></div>
+<div class="descarga-info"><h4>Tabla ACI 318</h4><p>Factores</p></div>
 <a href="tabla_aci318.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 </div>
@@ -251,39 +241,39 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 
 <!-- PANTALLA 1: ACÁPITE -->
 <div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
-<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M01</h2>
+<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M03</h2>
 <p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.<br>Es <b>obligatorio</b> para garantizar que comprendes los criterios de evaluación.</p>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 ¿Qué aprenderás?</h3>
 <ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular la inercia centroidal de una sección</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Aplicar el Teorema de Steiner</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Determinar la altura equivalente h_eq</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Interpretar el impacto en la deflexión</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Analizar vigas simplemente apoyadas</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular reacciones, cortantes y momentos</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Interpretar el Diagrama Mariposa</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular el momento de diseño sísmico Md</li>
 </ul>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
 <h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">📐 Fórmulas clave</h3>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I₀ = b · h³ / 12</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I_total = Σ (I₀ + A · d²)</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">h_eq = ∛(12 · I_total / bb)</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">w = Cu · b_trib</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">Mmax = w · Lv² / 8</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">Md = Me · 0.65 · 0.85 · Fm</div>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
 <h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Ejemplo resuelto</h3>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> H = 25 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm</p>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> A_capa = 250 cm², A_nervio = 200 cm², y_cg = 16.94 cm</p>
-<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> I_total = 24548 cm⁴ → h_eq = 18.06 cm</p>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> Cu = 1.064 t/m², b_trib = 5.75 m, Lv = 6.00 m</p>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> w = 6.118 t/m, Mmax = 27.531 t·m</p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> Md = 18.016 t·m</p>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
-<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C? (Interpretación)</h3>
+<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C?</h3>
 <ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Menciona la relación inversa inercia-deflexión</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Justifica con números (ej: -7.5%)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Conecta con M06 (losa) o L/240</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Relación cortante-apoyos</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Diagrama Mariposa (cambio de signo)</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Md y su relación con el acero</li>
 </ul>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
-<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D? (Decisión)</h3>
+<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D?</h3>
 <ul style="list-style:none;padding-left:0">
 <li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> deflexión supera L/240</li>
 <li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Norma aplicable:</b> NEC-15</li>
@@ -298,7 +288,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 
 <!-- PANTALLA 2: CONDICIONES -->
 <div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
-<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M01</h2>
+<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M03</h2>
 <p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 CÓMO SE EVALÚA</h3>
@@ -339,11 +329,11 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">💡 EJEMPLO DE RESPUESTA VÁLIDA</h3>
-<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es la inercia centroidal?"</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es la resistencia a flexión de una figura cuando el eje pasa por su centro de gravedad."</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</p>
+<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es una viga simplemente apoyada?"</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es una viga cuyos extremos están articulados, por lo que no transmiten momento a los apoyos."</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Viga con apoyos articulados donde el momento en los extremos es cero."</p>
 <p style="color:#e74c3c;font-size:13px;margin-bottom:5px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
-<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es una viga importante." (sin explicar qué)</p>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
 <h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">🎯 RECUERDA</h3>
@@ -370,7 +360,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <div id="contenedor-pregunta"></div>
 <div id="pantalla-resultado" style="display:none">
 <div class="resultado">
-<h2>🏆 RESULTADO M01</h2>
+<h2>🏆 RESULTADO M03</h2>
 <div class="puntaje-grande" id="resultado-puntaje"></div>
 <div id="resultado-clasificacion"></div>
 </div>
@@ -394,7 +384,7 @@ document.getElementById('tab-'+tabId).classList.add('active');
 btn.classList.add('active');
 }
 
-var MODULO_ACAPITE = "M01";
+var MODULO_ACAPITE = "M03";
 var inicioTiempo = null;
 var intervalo = null;
 
@@ -450,151 +440,151 @@ function iniciarCronometro() {
 
 var PREGUNTAS = [
 {id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué es la inercia centroidal de una sección y por qué es importante en el diseño de una losa alivianada.",
+enunciado:"Explique con sus palabras qué es una viga simplemente apoyada y cómo se comporta en sus extremos.",
 ejercicio:null,
-condiciones:["Mencionar que es una propiedad geométrica de la sección","Relacionar con la resistencia a flexión","Mencionar el eje centroidal (o centro de gravedad)"],
-ejemplo_valido:"Es la resistencia a flexión que tiene una figura cuando el eje pasa por su centro de gravedad.",
+condiciones:["Mencionar que los extremos están articulados","Indicar que el momento en los extremos es cero (M=0)","Conectar con transmisión de cargas a los apoyos"],
+ejemplo_valido:"Es una viga cuyos extremos están articulados, por lo que no transmiten momento a los apoyos. Transmite las cargas mediante reacciones verticales.",
 criterios:[
-{peso:40,desc:"Resistencia a flexión",keywords:["flexión","flexion","flexionar","doblar","deformar","flex"]},
-{peso:30,desc:"Propiedad de la sección",keywords:["propiedad","sección","seccion","figura","área","area","geométrica","geometrica"]},
-{peso:30,desc:"Eje centroidal",keywords:["centroidal","centroide","centro de gravedad","eje","gravedad"]}
+{peso:40,desc:"Extremos articulados",keywords:["articulado","articulada","articulación","apoyo simple","apoyos"]},
+{peso:30,desc:"Momento cero en extremos",keywords:["m=0","momento cero","no transmite momento"]},
+{peso:30,desc:"Transmite cargas a apoyos",keywords:["reacción","reaccion","transmite","carga","apoyo"]}
 ]},
 {id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué dice el Teorema de Steiner y para qué sirve en el cálculo de losas alivianadas.",
+enunciado:"Explique con sus palabras qué es una viga empotrada y por qué resiste mejor el sismo que una simplemente apoyada.",
 ejercicio:null,
-condiciones:["Mencionar que la inercia se traslada entre ejes paralelos","Indicar la fórmula o su significado (I = I₀ + A·d²)","Conectar con el cálculo de losas alivianadas"],
-ejemplo_valido:"Dice que la inercia respecto a un eje cualquiera es igual a la inercia centroidal más el área por la distancia al cuadrado. Sirve para calcular la inercia de una losa alivianada que tiene nervios y capa.",
+condiciones:["Mencionar que los extremos están fijos","Indicar que el momento en los extremos no es cero (M≠0)","Explicar que resiste momentos sísmicos y disipa energía"],
+ejemplo_valido:"Es una viga con extremos fijos, por lo que transmite momento a los apoyos (M≠0). Resiste mejor el sismo porque disipa energía a través de la formación de rótulas plásticas.",
 criterios:[
-{peso:40,desc:"Traslado de inercia",keywords:["traslada","trasladar","paralelo","steiner","ejes"]},
-{peso:30,desc:"Fórmula o significado",keywords:["i0","inercia centroidal","área","area","distancia","cuadrado","fórmula","formula"]},
-{peso:30,desc:"Aplicación a losa alivianada",keywords:["losa","alivianada","nervio","capa","compresión","compresion"]}
+{peso:30,desc:"Extremos fijos",keywords:["fijo","fija","empotrado","empotrada","empotramiento"]},
+{peso:30,desc:"Momento no cero",keywords:["m≠0","momento no cero","transmite momento"]},
+{peso:40,desc:"Disipa energía sísmica",keywords:["disipa","disipación","energía","energia","sismo","rótula","rotula"]}
 ]},
 {id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique con sus palabras por qué se calcula la altura equivalente (h_eq) en una losa alivianada y qué pasaría si no se calculara.",
+enunciado:"Explique por qué se aplica el factor Fm = 1.35 en el diseño sísmico y qué representa.",
 ejercicio:null,
-condiciones:["Mencionar que permite modelar la losa como maciza","Indicar que mantiene la misma inercia","Explicar consecuencia si no se calcula"],
-ejemplo_valido:"Se calcula para poder modelar la losa alivianada como si fuera maciza en ETABS. Si no se calcula, la inercia sería incorrecta y la deflexión también.",
+condiciones:["Indicar que amplifica el momento estático","Mencionar sobrerresistencia","Mencionar incertidumbre sísmica"],
+ejemplo_valido:"Fm=1.35 amplifica el momento estático para considerar la sobrerresistencia del material y la incertidumbre del sismo. Garantiza que la viga no falle.",
 criterios:[
-{peso:40,desc:"Modelado como maciza",keywords:["maciza","modelar","etabs","sap","programa"]},
-{peso:30,desc:"Equivalencia de inercia",keywords:["inercia","equivalente","misma","rigidez"]},
-{peso:30,desc:"Consecuencia si no se calcula",keywords:["incorrecta","error","deflexión","deflexion","falla","problema"]}
+{peso:40,desc:"Amplifica el momento",keywords:["amplifica","mayor","aumenta","factor"]},
+{peso:30,desc:"Sobrerresistencia",keywords:["sobrerresistencia","resistencia","extra","adicional"]},
+{peso:30,desc:"Incertidumbre sísmica",keywords:["incertidumbre","sismo","sísmico","sismico","no se sabe"]}
 ]},
 {id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique la diferencia entre la altura real (H) y la altura equivalente (h_eq) de una losa alivianada. ¿Cuál es mayor y por qué?",
+enunciado:"Explique qué representa el Diagrama Mariposa en el análisis sísmico y por qué tiene esa forma.",
 ejercicio:null,
-condiciones:["Definir H como el espesor real","Definir h_eq como el espesor ficticio equivalente","Explicar por qué h_eq < H (los vacíos no aportan inercia)"],
-ejemplo_valido:"H es el espesor real de la losa, incluyendo los bloques huecos. h_eq es el espesor de una losa maciza que tendría la misma inercia. h_eq es menor porque los vacíos del aligeramiento no aportan inercia.",
+condiciones:["Mencionar cambio de signo en los momentos","Indicar negativo en apoyos, positivo en centro","Conectar con reversión sísmica"],
+ejemplo_valido:"El Diagrama Mariposa representa la envolvente de momentos que cambian de signo por la reversión sísmica. Es negativo en los apoyos y positivo en el centro.",
 criterios:[
-{peso:30,desc:"Define H",keywords:["real","verdadero","espesor real","total"]},
-{peso:30,desc:"Define h_eq",keywords:["equivalente","ficticio","ficticia","maciza","h_eq"]},
-{peso:40,desc:"Explica por qué h_eq < H",keywords:["vacíos","vacios","hueco","aligeramiento","no aporta","menor"]}
+{peso:40,desc:"Cambio de signo",keywords:["cambia","signo","reversión","reversion","opuesto"]},
+{peso:30,desc:"Negativo en apoyos, positivo en centro",keywords:["negativo","positivo","apoyo","centro","extremo"]},
+{peso:30,desc:"Reversión sísmica",keywords:["sismo","sísmico","sismico","reversión","reversion","terremoto"]}
 ]},
 {id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
-enunciado:"Calcule el área de la capa de compresión, del nervio y el área total para H=25 cm, bb=50 cm, bn=10 cm, tc=5 cm.",
-ejercicio:{instrucciones:"A_capa = bb · tc | A_nervio = bn · (H - tc) | A_total = A_capa + A_nervio",campos:[{label:"A_capa (cm²)",valor:250},{label:"A_nervio (cm²)",valor:200},{label:"A_total (cm²)",valor:450}]},
-condiciones:["Mostrar el procedimiento de cada área","Indicar unidades (cm²)","Dar el resultado numérico"],
-ejemplo_valido:"A_capa = 50·5 = 250 cm². A_nervio = 10·20 = 200 cm². A_total = 450 cm².",
+enunciado:"Calcule la carga lineal w para Cu=1.064 t/m² y b_trib=5.75 m.",
+ejercicio:{instrucciones:"w = Cu · b_trib",campos:[{label:"Cu (t/m²)",valor:1.064},{label:"b_trib (m)",valor:5.75},{label:"w (t/m)",valor:6.118}]},
+condiciones:["Aplicar la fórmula w = Cu · b_trib","Indicar unidades (t/m)","Dar el resultado numérico"],
+ejemplo_valido:"w = 1.064 · 5.75 = 6.118 t/m.",
 criterios:[
-{peso:33,desc:"A_capa correcta",keywords:["250"]},
-{peso:33,desc:"A_nervio correcta",keywords:["200"]},
-{peso:34,desc:"A_total correcta",keywords:["450"]}
+{peso:60,desc:"Calcula w correcto",keywords:["6.118","6,118"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["1.064","5.75"]},
+{peso:20,desc:"Unidades correctas",keywords:["t/m","tonelada"]}
 ]},
 {id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule el centroide global y_cg de la sección compuesta y explique por qué no está en el centro geométrico.",
-ejercicio:{instrucciones:"y_cg = Σ(Ai · yi) / Σ(Ai)",campos:[{label:"y_capa (cm)",valor:22.5},{label:"y_nervio (cm)",valor:10.0},{label:"y_cg (cm)",valor:16.94}]},
-condiciones:["Mostrar el procedimiento (suma de momentos / suma de áreas)","Indicar el resultado numérico","Explicar por qué no está en el centro geométrico"],
-ejemplo_valido:"y_cg = (250·22.5 + 200·10) / 450 = 16.94 cm. No está en el centro porque la capa de compresión está más arriba y su momento es mayor.",
+enunciado:"Calcule las reacciones R1 = R2 para Lv=6.00 m y w=6.118 t/m.",
+ejercicio:{instrucciones:"R1 = R2 = w·Lv/2",campos:[{label:"w (t/m)",valor:6.118},{label:"Lv (m)",valor:6.00},{label:"R1=R2 (t)",valor:18.354}]},
+condiciones:["Aplicar R1 = R2 = w·Lv/2","Indicar unidades (t)","Dar el resultado numérico"],
+ejemplo_valido:"R1 = R2 = 6.118 · 6.00 / 2 = 18.354 t.",
 criterios:[
-{peso:50,desc:"Calcula y_cg correcto",keywords:["16.94","16,94"]},
-{peso:50,desc:"Explica por qué no está en el centro",keywords:["capa","arriba","superior","distribución","distribucion","no simétrica","no simetrica","momento"]}
+{peso:60,desc:"Calcula R correcto",keywords:["18.354","18,354"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["6.118","6.00"]},
+{peso:20,desc:"Unidades correctas",keywords:["t","tonelada"]}
 ]},
 {id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,
-enunciado:"Calcule la inercia total I_total aplicando el Teorema de Steiner. Indique qué componente aporta más inercia.",
-ejercicio:{instrucciones:"I_total = Σ(I0 + A·d²)",campos:[{label:"I_capa (cm⁴)",valor:520.8},{label:"I_nervio (cm⁴)",valor:6666.7},{label:"I_total (cm⁴)",valor:24548}]},
-condiciones:["Mostrar el procedimiento con Steiner","Indicar el resultado numérico","Identificar qué componente aporta más inercia"],
-ejemplo_valido:"I_capa = 520.8 + 250·5.56² = 8256 cm⁴. I_nervio = 6666.7 + 200·(-6.94)² = 16300 cm⁴. I_total = 24548 cm⁴. El nervio aporta más por su mayor área.",
+enunciado:"Calcule el momento máximo Mmax para Lv=6.00 m y w=6.118 t/m.",
+ejercicio:{instrucciones:"Mmax = w·Lv²/8",campos:[{label:"w (t/m)",valor:6.118},{label:"Lv²",valor:36},{label:"Mmax (t·m)",valor:27.531}]},
+condiciones:["Aplicar Mmax = w·Lv²/8","Indicar unidades (t·m)","Dar el resultado numérico"],
+ejemplo_valido:"Mmax = 6.118 · 36 / 8 = 27.531 t·m.",
 criterios:[
-{peso:40,desc:"Calcula I_total correcto",keywords:["24548"]},
-{peso:30,desc:"Muestra procedimiento Steiner",keywords:["steiner","i0","a·d","área","area","distancia"]},
-{peso:30,desc:"Identifica componente mayor",keywords:["nervio","capa","aporta","mayor"]}
+{peso:60,desc:"Calcula Mmax correcto",keywords:["27.531","27,531"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["6.118","36","8"]},
+{peso:20,desc:"Unidades correctas",keywords:["t·m","t*m","tonelada metro"]}
 ]},
 {id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la altura equivalente h_eq y explique si es mayor o menor que H.",
-ejercicio:{instrucciones:"h_eq = ∛(12 · I_total / bb)",campos:[{label:"12 · I_total",valor:294576},{label:"12 · I_total / bb",valor:5891.5},{label:"h_eq (cm)",valor:18.06}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Explicar si es mayor o menor que H y por qué"],
-ejemplo_valido:"h_eq = ∛(294576/50) = ∛5891.5 = 18.06 cm. Es menor que H=25 cm porque los vacíos del aligeramiento no aportan inercia.",
+enunciado:"Calcule el momento estático Me para Cu=1.064, Lt=5.75, Lv=6.00, b_col=0.38.",
+ejercicio:{instrucciones:"Me = Cu·Lt·(Lv-bcol)²/8",campos:[{label:"Cu",valor:1.064},{label:"Lt (m)",valor:5.75},{label:"(Lv-bcol)²",valor:31.584},{label:"Me (t·m)",valor:24.154}]},
+condiciones:["Aplicar Me = Cu·Lt·(Lv-bcol)²/8","Indicar unidades (t·m)","Dar el resultado numérico"],
+ejemplo_valido:"Me = 1.064 · 5.75 · 31.584 / 8 = 24.154 t·m.",
 criterios:[
-{peso:50,desc:"Calcula h_eq correcto",keywords:["18.06","18,06"]},
-{peso:50,desc:"Explica h_eq < H",keywords:["menor","vacíos","vacios","aligeramiento","no aporta"]}
+{peso:60,desc:"Calcula Me correcto",keywords:["24.154","24,154"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["1.064","5.75","31.584"]},
+{peso:20,desc:"Unidades correctas",keywords:["t·m","t*m","tonelada metro"]}
 ]},
 {id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la deflexión máxima con w=0.544 t/m, L=6 m, E=2.19e6 t/m², I_eq=0.000245 m⁴. Verifique si cumple L/240.",
-ejercicio:{instrucciones:"δ_max = 5·w·L⁴ / (384·E·I) | δ_adm = L/240",campos:[{label:"EI (t·m²)",valor:536.5},{label:"δ_max (mm)",valor:1.71},{label:"δ_adm (mm)",valor:25.00}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Verificar si cumple con L/240"],
-ejemplo_valido:"EI = 2.19e6 · 0.000245 = 536.5 t·m². δ_max = 5·0.544·6⁴/(384·536.5) = 1.71 mm. δ_adm = 6000/240 = 25 mm. Cumple.",
+enunciado:"Calcule el momento de diseño Md para Me=24.154, f_viga=0.65, f_fisura=0.85, Fm=1.35.",
+ejercicio:{instrucciones:"Md = Me · 0.65 · 0.85 · 1.35",campos:[{label:"Me (t·m)",valor:24.154},{label:"f_viga",valor:0.65},{label:"f_fisura",valor:0.85},{label:"Fm",valor:1.35},{label:"Md (t·m)",valor:18.016}]},
+condiciones:["Aplicar Md = Me · 0.65 · 0.85 · 1.35","Indicar unidades (t·m)","Dar el resultado numérico"],
+ejemplo_valido:"Md = 24.154 · 0.65 · 0.85 · 1.35 = 18.016 t·m.",
 criterios:[
-{peso:40,desc:"Calcula δ_max correcto",keywords:["1.71","1,71"]},
-{peso:30,desc:"Calcula δ_adm correcto",keywords:["25","25.00","25,00"]},
-{peso:30,desc:"Verifica cumplimiento",keywords:["cumple","ok","verifica","satisface"]}
+{peso:60,desc:"Calcula Md correcto",keywords:["18.016","18,016"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["24.154","0.65","0.85","1.35"]},
+{peso:20,desc:"Unidades correctas",keywords:["t·m","t*m","tonelada metro"]}
 ]},
 {id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Compare dos losas: Losa A con bb=40 cm (2.5 nervios/m) y Losa B con bb=50 cm (2 nervios/m). ¿Cuál tiene mayor inercia y menor deflexión? Justifique técnicamente y cite la norma aplicable.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Menor bb → más nervios por metro → más inercia.",campos:[{label:"Losa A (bb=40 cm)",valor:"2.5 nervios/m"},{label:"Losa B (bb=50 cm)",valor:"2 nervios/m"},{label:"Mayor inercia",valor:"Losa A"}]},
-condiciones:["Identificar que la Losa A tiene más nervios por metro","Conectar con mayor inercia","Conectar con menor deflexión","Citar NEC-15 o L/240"],
-ejemplo_valido:"La Losa A tiene más nervios por metro (2.5 vs 2), por lo tanto tiene mayor inercia y menor deflexión. Esto se verifica con la NEC-15 que exige δ ≤ L/240.",
+enunciado:"Interprete el diagrama de cortante V(x). ¿Qué representa el valor máximo y dónde ocurre?",
+ejercicio:{instrucciones:"Vmax = w·Lv/2",campos:[{label:"w (t/m)",valor:6.118},{label:"Lv (m)",valor:6.00},{label:"Vmax (t)",valor:18.354}]},
+condiciones:["Indicar dónde ocurre el cortante máximo","Explicar qué representa","Conectar con el diseño de estribos"],
+ejemplo_valido:"El cortante máximo ocurre en los apoyos y vale 18.354 t. Representa la fuerza que debe resistir el hormigón y los estribos.",
 criterios:[
-{peso:30,desc:"Identifica más nervios en Losa A",keywords:["más nervios","mas nervios","2.5","40"]},
-{peso:30,desc:"Conecta con mayor inercia",keywords:["inercia","rigidez","mayor"]},
-{peso:20,desc:"Conecta con menor deflexión",keywords:["deflexión","deflexion","menor","deforma"]},
-{peso:20,desc:"Cita norma",keywords:["nec","l/240","240","norma"]}
+{peso:40,desc:"Ocurre en los apoyos",keywords:["apoyo","extremo","extremos","nudo"]},
+{peso:30,desc:"Explica qué representa",keywords:["fuerza","cortante","resistir"]},
+{peso:30,desc:"Conecta con estribos",keywords:["estribo","m04","acero","confinamiento"]}
 ]},
 {id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique físicamente por qué la altura equivalente (h_eq) es menor que la altura real (H). Dé un ejemplo con los datos del modelo.",
+enunciado:"Interprete el Diagrama Mariposa. ¿Por qué los momentos cambian de signo y qué implica para el diseño?",
 ejercicio:null,
-condiciones:["Mencionar los vacíos del aligeramiento","Indicar que solo aporta el nervio y la capa de compresión","Dar ejemplo con números"],
-ejemplo_valido:"h_eq es menor que H porque los bloques huecos no aportan inercia. Solo el nervio (200 cm²) y la capa (250 cm²) aportan. Por eso h_eq=18.06 cm < H=25 cm.",
+condiciones:["Explicar el cambio de signo","Mencionar reversión sísmica","Explicar implicación en el acero"],
+ejemplo_valido:"Los momentos cambian de signo por la reversión sísmica. Implica que el acero debe diseñarse para momentos positivos y negativos, y no se puede traslapar en los nudos.",
 criterios:[
-{peso:40,desc:"Menciona vacíos del aligeramiento",keywords:["vacíos","vacios","hueco","aligeramiento","bloque"]},
-{peso:30,desc:"Menciona nervio y capa",keywords:["nervio","capa","compresión","compresion"]},
-{peso:30,desc:"Da ejemplo con números",keywords:["18.06","25","24548","cm"]}
+{peso:30,desc:"Explica cambio de signo",keywords:["cambia","signo","positivo","negativo","reversión"]},
+{peso:40,desc:"Reversión sísmica",keywords:["sismo","sísmico","sismico","reversión","reversion","terremoto"]},
+{peso:30,desc:"Implicación en acero",keywords:["acero","refuerzo","traslapar","no traslapar","nudo"]}
 ]},
 {id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique cómo se usa h_eq en el M06 (Diseño de Losa) y qué pasaría si se usara H en lugar de h_eq.",
+enunciado:"Explique cómo se relaciona Md con el diseño de la armadura de la viga. ¿Qué pasaría si Md se subestima?",
 ejercicio:null,
-condiciones:["Mencionar que h_eq alimenta al M06","Explicar que sirve para verificar deflexión","Explicar consecuencia de usar H en lugar de h_eq"],
-ejemplo_valido:"h_eq se usa en el M06 para calcular la inercia equivalente de la losa. Si se usara H en lugar de h_eq, la inercia sería mayor y la deflexión calculada sería menor que la real, lo que sería un diseño no seguro.",
+condiciones:["Mencionar que Md determina el área de acero","Explicar que Md es el momento de diseño","Explicar consecuencia si se subestima"],
+ejemplo_valido:"Md determina el área de acero As requerida. Si se subestima, la viga tendría menos acero del necesario y podría fallar por flexión.",
 criterios:[
-{peso:30,desc:"h_eq alimenta al M06",keywords:["m06","losa","siguiente","módulo","modulo"]},
-{peso:30,desc:"Sirve para verificar deflexión",keywords:["deflexión","deflexion","verificar","inercia"]},
-{peso:40,desc:"Consecuencia de usar H",keywords:["sobreestima","subestima","no seguro","error","incorrecto"]}
+{peso:30,desc:"Md determina As",keywords:["as","área de acero","area de acero","acero","armadura"]},
+{peso:30,desc:"Md es momento de diseño",keywords:["diseño","diseno","momento","md"]},
+{peso:40,desc:"Consecuencia si se subestima",keywords:["falla","fallar","colapso","peligro","no seguro"]}
 ]},
 {id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
-enunciado:"Explique qué pasa con la inercia, la rigidez y la deflexión si la capa de compresión (tc) baja de 5 a 3 cm. Justifique con números.",
+enunciado:"Explique qué pasa si la deflexión δmax supera L/240. ¿Qué decisión tomaría? Justifique con la NEC-15.",
 ejercicio:null,
-condiciones:["Mencionar que baja la inercia","Mencionar que baja la rigidez","Mencionar que sube la deflexión","Justificar con números"],
-ejemplo_valido:"Si tc baja de 5 a 3 cm, el área de la capa de compresión baja de 250 a 150 cm². La inercia total baja, la rigidez baja y la deflexión sube. El impacto es significativo porque la capa está lejos del centroide.",
+condiciones:["Indicar que no cumple NEC-15","Mencionar decisión técnica","Conectar con consecuencias estructurales"],
+ejemplo_valido:"Si δmax supera L/240, no cumple con NEC-15. Se debe aumentar el peralte, la inercia o reducir la luz con una viga secundaria. La deflexión excesiva causa fisuras y daños.",
 criterios:[
-{peso:30,desc:"Baja la inercia",keywords:["inercia","baja","disminuye","menor"]},
-{peso:30,desc:"Baja la rigidez",keywords:["rigidez","baja","disminuye","menor"]},
-{peso:20,desc:"Sube la deflexión",keywords:["deflexión","deflexion","sube","aumenta","mayor"]},
-{peso:20,desc:"Justifica con números",keywords:["250","150","cm²","cm2"]}
+{peso:30,desc:"No cumple NEC-15",keywords:["no cumple","nec","l/240","240"]},
+{peso:40,desc:"Decisión técnica",keywords:["aumentar peralte","más peralte","viga secundaria","reducir luz","aumentar inercia"]},
+{peso:30,desc:"Consecuencia estructural",keywords:["fisura","daño","dano","deformación","deformacion","problema"]}
 ]},
 {id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
-enunciado:"El constructor propone AUMENTAR bb de 40 a 50 cm para 'ahorrar concreto en nervios'. ¿Aprueba el cambio? Justifique técnica y éticamente.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Mayor bb → menos nervios → menos inercia → más deflexión.",campos:[{label:"bb actual",valor:"40 cm (2.5 nervios/m)"},{label:"bb propuesto",valor:"50 cm (2 nervios/m)"},{label:"Impacto",valor:"-20% nervios"}]},
-condiciones:["Técnico: al subir bb, hay menos nervios, menos inercia, más deflexión","Normativo: citar NEC-15","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
-ejemplo_valido:"No apruebo. Al subir bb de 40 a 50 cm, se reduce el número de nervios por metro en 20%. Esto baja la inercia y aumenta la deflexión, pudiendo superar L/240 según NEC-15. Rechazar el cambio, documentar y notificar por escrito. Como ingeniero firmante, soy responsable civil y penal.",
+enunciado:"El constructor propone reducir el peralte de la viga de 45 a 35 cm para 'ahorrar concreto'. ¿Aprueba el cambio? Justifique técnica y éticamente.",
+ejercicio:{instrucciones:"Considere NEC-15, ética, trazabilidad",campos:[{label:"δmax con h=45",valor:"20.71 mm"},{label:"δmax con h=35",valor:"33.50 mm"},{label:"δadm = L/240",valor:"25.00 mm"}]},
+condiciones:["Técnico: la deflexión supera L/240","Normativo: citar NEC-15","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
+ejemplo_valido:"No apruebo. Con h=35 cm, la deflexión δmax=33.50 mm supera L/240=25 mm. Rechazo el cambio, documento y notifico. Como ingeniero firmante, soy responsable civil y penal.",
 criterios:[
-{peso:30,desc:"Técnico: menos nervios = menos inercia",keywords:["menos nervios","inercia","deflexión","deflexion","rigidez"]},
-{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","l/240","norma"]},
+{peso:30,desc:"Técnico: deflexión supera L/240",keywords:["33.50","33,50","supera","deflexión","l/240","25"]},
+{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","norma"]},
 {peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","firma","rechazo"]},
 {peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","notificar","registrar","informe"]}
 ]},
 {id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
-enunciado:"El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?",
-ejercicio:{instrucciones:"Considere NEC-15, ACI 318, NTE INEN, ética profesional",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},
+enunciado:"El constructor usa bloques de menor resistencia en la losa alivianada (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?",
+ejercicio:{instrucciones:"Considere NEC-15, ACI 318, NTE INEN, ética",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},
 condiciones:["Identificar el problema: resistencia especificada vs real","Aplicar normativa: NEC-15, ACI 318, NTE INEN","Acciones concretas: rechazar, notificar, suspender, documentar","Consecuencias legales: responsabilidad civil y penal"],
-ejemplo_valido:"El déficit del 20% viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito al constructor, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal por cualquier falla.",
+ejemplo_valido:"El déficit del 20% viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito al constructor, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal.",
 criterios:[
 {peso:25,desc:"Identifica el problema",keywords:["déficit","deficit","20","resistencia","menor","168","210"]},
 {peso:25,desc:"Aplica normativa",keywords:["nec","aci","nte","inen","norma"]},
@@ -604,7 +594,7 @@ criterios:[
 ];
 
 var respuestas={},preguntaActual=0;
-var MODULO="M01",TITULO="Inercia Equivalente";
+var MODULO="M03",TITULO="Viga + Sismo";
 document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
 
 function mostrar(){
@@ -613,44 +603,36 @@ document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)
 document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
 var h='<div class="pregunta-box">';
 h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
-
 if(p.ejercicio){
 h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
 p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
 h+='</div>';
 }
-
 if(p.condiciones){
 h+='<div class="condiciones-box"><h4>✅ CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
 p.condiciones.forEach(function(c){h+='<li>'+c+'</li>';});
 h+='</ul><p style="color:#7f8c8d;font-size:11px;margin-top:10px;font-style:italic">Puedes usar otras palabras, pero debes cubrir estos criterios.</p></div>';
 }
-
 if(p.ejemplo_valido){
 h+='<div class="ejemplo-valido-box"><h4>💡 EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"'+p.ejemplo_valido+'"</p></div>';
 }
-
 h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
 h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
-
 if(p.criterios){
 h+='<div class="criterios-box"><h4>🎯 CRITERIOS DE EVALUACIÓN</h4><ul>';
 p.criterios.forEach(function(c){h+='<li>✅ '+c.desc+' ('+c.peso+'%)</li>';});
 h+='</ul></div>';
 }
-
 h+='<div class="rubrica"><h4>🎯 RÚBRICA GENERAL</h4><ul>';
 h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
 h+='<li>🟧 Básico (40-60%): Responde sin cubrir todos los criterios</li>';
 h+='<li>🟨 Competente (60-80%): Cubre la mayoría de criterios</li>';
 h+='<li>🟩 Excelente (80-100%): Cubre todos los criterios con claridad</li>';
 h+='</ul></div></div>';
-
 h+='<div class="nav-buttons">';
 h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
 h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
 h+='</div>';
-
 document.getElementById('contenedor-pregunta').innerHTML=h;
 }
 
@@ -696,7 +678,6 @@ document.getElementById('pantalla-resultado').style.display='block';
 document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
 document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
 localStorage.setItem(MODULO+'_puntaje',pts);
-
 if(pts>=60){
 var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
 var fecha=new Date().toLocaleDateString('es-EC');
@@ -715,7 +696,7 @@ document.getElementById('contenedor-certificado').innerHTML=
 '<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
 '<hr style="margin:15px 0">'+
 '<h3>CERTIFICADO DE APROBACIÓN</h3>'+
-'<h3>Módulo M01 — Inercia Equivalente</h3>'+
+'<h3>Módulo M03 — Viga + Sismo</h3>'+
 '<p style="margin:15px 0">La Universidad certifica que:</p>'+
 '<h2 style="color:#2c3e50">'+nombre+'</h2>'+
 '<p>C.C. '+cedula+'</p>'+
@@ -724,21 +705,17 @@ document.getElementById('contenedor-certificado').innerHTML=
 '<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
 '<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
 '<p><b>Clasificación: '+cl.txt+'</b></p>'+
-'<div class="modalidad">'+
-'<h4>MODALIDAD DE APROBACIÓN:</h4>'+
-'<ul>'+
+'<div class="modalidad"><h4>MODALIDAD DE APROBACIÓN:</h4><ul>'+
 '<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
 '<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
 '</ul></div>'+
-'<div class="qr-section">'+
-'<img src="qr_m01.png" alt="QR" class="qr-img">'+
+'<div class="qr-section"><img src="qr_m03.png" alt="QR" class="qr-img">'+
 '<div class="qr-datos">'+
 '<p><b>Código:</b> '+cod+'</p>'+
 '<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
 '<p><b>Vigencia:</b> Permanente</p>'+
 '<p><b>Verificación:</b> Escanee el código QR</p>'+
-'</div>'+
-'</div>'+
+'</div></div>'+
 '<div class="firmas">'+
 '<div class="firma"><div class="linea-firma"></div>'+
 '<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+

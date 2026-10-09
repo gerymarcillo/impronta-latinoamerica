@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M04 - Viga Resiliente</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #e74c3c;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #e74c3c}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
+.formula-grande{font-size:18px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.tic-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:10px 0}
+.tic-box h4{color:#2ecc71;margin-bottom:10px;font-size:15px}
+.tic-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #34495e;font-size:13px}
+.tic-item:last-child{border-bottom:none}
+.tic-item .ok{color:#2ecc71;font-weight:bold}
+.tic-item .no{color:#e74c3c;font-weight:bold}
+.tic-item .rev{color:#f39c12;font-weight:bold}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.diagrama{background:#1e1e2e;border:2px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0;text-align:center;font-family:'Courier New',monospace;color:#5dade2;font-size:13px;line-height:1.8}
+.diagrama .titulo{color:#f39c12;font-weight:bold;font-size:15px;margin-bottom:10px;display:block}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold;margin:2px}
+.badge-ok{background:#2ecc71;color:white}
+.badge-no{background:#e74c3c;color:white}
+.badge-rev{background:#f39c12;color:white}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M04</h1>
+<h2>VIGA RESILIENTE — DISEÑO A FLEXIÓN Y CORTANTE</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#tic">Los 5 TIC de Viga Resiliente</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+<li><a href="#acapite">📖 Acápite de Estudio</a></li>
+<li><a href="#condiciones">✅ Condiciones de Respuesta Válida</a></li>
+<li><a href="#anexo">📐 Anexo Técnico</a></li>
+</ol>
+</div>
+
+<!-- 1. PRESENTACIÓN -->
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el <strong>diseño de vigas sismorresistentes</strong> aplicando la <strong>NEC-15</strong> y el <strong>ACI 318-19 Capítulo 18</strong> (Requisitos Sismorresistentes).</p>
+<p>La viga es el elemento que <strong>disipa energía sísmica</strong> mediante la formación de rótulas plásticas en los extremos. Por eso el diseño debe garantizar <strong>falla dúctil</strong>, no frágil.</p>
+<p>A diferencia de un software comercial (ETABS, SAP2000, Revit), este módulo integra:</p>
+<ul>
+<li><strong>Diseño determinista:</strong> flexión + cortante + armadura</li>
+<li><strong>Modelo estocástico:</strong> Monte Carlo + confiabilidad β</li>
+<li><strong>5 TIC de viga resiliente</strong> (criterios sismorresistentes)</li>
+<li><strong>Bloque "a" y viga T</strong> (concepto clave)</li>
+</ul>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
+</div>
+
+<!-- 2. OBJETIVOS -->
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Diseñar una viga de hormigón armado sometida a flexión y cortante, aplicando los criterios de la NEC-15 y el ACI 318-19 Cap. 18, y verificando su comportamiento mediante el diagrama mariposa y el diagrama de cortante.</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Comprender la diferencia entre falla dúctil y frágil</li>
+<li>Calcular As(-), As(+) y verificar cuantía</li>
+<li>Calcular el bloque de compresión "a" y la relación a/h</li>
+<li>Calcular Mpr, Vum, Vug, Vu</li>
+<li>Diseñar estribos en zona protegida y central</li>
+<li>Interpretar el diagrama mariposa y el diagrama de cortante</li>
+<li>Aplicar los 5 TIC de viga resiliente</li>
+</ul>
+</div>
+
+<!-- 3. FUNDAMENTO TEÓRICO -->
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+
+<h3>3.1 Diferencia entre flexión y cortante</h3>
+<table class="tabla">
+<thead><tr><th>Aspecto</th><th>Flexión</th><th>Cortante</th></tr></thead>
+<tbody>
+<tr><td>Solicitación</td><td>Momento flector</td><td>Fuerza cortante</td></tr>
+<tr><td>Acero</td><td>Longitudinal (As)</td><td>Transversal (estribos)</td></tr>
+<tr><td>Falla</td><td>Dúctil (si ρ ≤ 1%)</td><td>Frágil (si no se diseña)</td></tr>
+<tr><td>Diseño</td><td>As = 30·Md/d</td><td>s = d·φ²·2·fy/Vs</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 Flexión: As(-), As(+), cuantía</h3>
+<p><strong>As(-):</strong> Acero negativo (superior, en los apoyos). Toma el momento negativo.</p>
+<p><strong>As(+):</strong> Acero positivo (inferior, en el centro). Toma el momento positivo.</p>
+<p><strong>Cuantía:</strong> ρ = As / (b·h). <strong>NUNCA debe superar el 1%</strong> en vigas sismorresistentes.</p>
+
+<h3>3.3 Cortante: Mpr, Vum, Vug, Vu, Vc, Vs</h3>
+<p><strong>Mpr:</strong> Momento probable (con sobrerresistencia 1.25).</p>
+<p><strong>Vum:</strong> Cortante por giro sísmico. Se calcula: Vum = (Mpr1 + Mpr2) / (Lv - b_col).</p>
+<p><strong>Vug:</strong> Cortante por gravedad. Se calcula: Vug = (2·Lv - b_col)·w·Lv/4.</p>
+<p><strong>Vu:</strong> Cortante último = Vum + Vug. Es la suma del efecto sísmico más el gravitacional.</p>
+<p><strong>Vc:</strong> Cortante del hormigón. Se calcula: Vc = 0.53·√fc·b·d.</p>
+<p><strong>Vs:</strong> Cortante del estribo. Se calcula: Vs = (Vu - 0.75·Vc)/0.75.</p>
+
+<h3>3.4 Diagrama Mariposa (curva de segundo orden)</h3>
+<p>El diagrama de momentos de una viga sismorresistente tiene forma de <strong>mariposa</strong>:</p>
+<ul>
+<li><strong>Máximo momento en los extremos</strong> (Mpr1 y Mpr2)</li>
+<li><strong>Mínimo momento en el centro</strong> (M_min, NO es cero)</li>
+<li><strong>Curva de segundo orden</strong> (parabólica)</li>
+</ul>
+<p>Esto es diferente al diagrama de una viga simplemente apoyada bajo cargas gravitacionales:</p>
+<ul>
+<li>M(0) = 0, M(Lv/2) = máximo, M(Lv) = 0</li>
+<li>En el centro: V = 0 → M = máximo</li>
+</ul>
+<p>En el diagrama sísmico: V = 0 → M = mínimo (no máximo).</p>
+
+<h3>3.5 Diagrama de Cortante (T-U-V-W)</h3>
+<div class="diagrama">
+<span class="titulo">DIAGRAMA DE CORTANTE V(x)</span>
+V(x)<br>
+  ↑<br>
+  |  T__________U<br>
+  |  |          \<br>
+  |  |           \<br>
+  |  |            \<br>
+0 |--|-------------\----V----/------------/--> x<br>
+  |                 \       /<br>
+  |                  \     /<br>
+  |                   \   /<br>
+  |                    \_/<br>
+  |                     W<br><br>
+<span style="color:#e74c3c">T = +Vu (extremo izq)</span><br>
+<span style="color:#e74c3c">U = +Vu (zona protegida)</span><br>
+<span style="color:#2ecc71">V = 0 (centro)</span><br>
+<span style="color:#e74c3c">W = -Vu (extremo der)</span>
+</div>
+
+<h3>3.6 El bloque "a" y la viga T</h3>
+<p>El bloque de compresión <strong>"a"</strong> es la profundidad del bloque rectangular equivalente de Whitney:</p>
+<div class="formula">a = As · fy / (0.85 · fc · b)</div>
+<p><strong>Solo el bloque "a" trabaja a compresión.</strong> El resto del hormigón no trabaja.</p>
+<p>La relación a/h es aproximadamente <strong>20%</strong>:</p>
+<div class="formula">a / h ≈ 0.20</div>
+<p><strong>Esto se basa en el criterio de la viga T:</strong> como solo el 20% superior trabaja, se puede aligerar el resto del hormigón.</p>
+</div>
+
+<!-- 4. FÓRMULAS CLAVE -->
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Peralte efectivo</td><td>d = h - rec - φ_est - φ_var/2</td><td>cm</td></tr>
+<tr><td>Momento estático</td><td>Me = Cu·Lt·(Lv-b_col)²/8</td><td>t·m</td></tr>
+<tr><td>Momento de diseño</td><td>Md = Me·0.65·0.85·Fm</td><td>t·m</td></tr>
+<tr><td>As requerido</td><td>As_req = 30·Md/d</td><td>cm²</td></tr>
+<tr><td>As mínimo</td><td>As_min = 14·b·d/fy</td><td>cm²</td></tr>
+<tr><td>Bloque de compresión</td><td>a = As·fy/(0.85·fc·b)</td><td>cm</td></tr>
+<tr><td>Momento resistente</td><td>Mr = 0.9·As·fy·(d-a/2)</td><td>t·m</td></tr>
+<tr><td>Cuantía</td><td>ρ = As/(b·h)</td><td>%</td></tr>
+<tr><td>Cuantía balanceada</td><td>ρ_bal = 0.85·β1·(fc/fy)·(0.003/(0.003+ε_y))</td><td>%</td></tr>
+<tr><td>Momento probable</td><td>Mpr = 1.25·As·fy·(d-a/2)</td><td>t·m</td></tr>
+<tr><td>Cortante por giro</td><td>Vum = (Mpr1+Mpr2)/(Lv-b_col)</td><td>t</td></tr>
+<tr><td>Cortante por gravedad</td><td>Vug = (2·Lv-b_col)·w·Lv/4</td><td>t</td></tr>
+<tr><td>Cortante último</td><td>Vu = Vum + Vug</td><td>t</td></tr>
+<tr><td>Cortante del concreto</td><td>Vc = 0.53·√fc·b·d</td><td>t</td></tr>
+<tr><td>Cortante del estribo</td><td>Vs = (Vu-0.75·Vc)/0.75</td><td>t</td></tr>
+<tr><td>Separación por cortante</td><td>s = d·0.00785·φ_est²·2·fy/Vs</td><td>cm</td></tr>
+<tr><td>Separación zona protegida</td><td>s_prot = min(d/4, 6·φ_min/10, 10, s_est)</td><td>cm</td></tr>
+<tr><td>Separación zona central</td><td>s_cent = min(d/2, 8·φ_min/10, 15)</td><td>cm</td></tr>
+<tr><td>Zona protegida</td><td>Z_prot = 2·h_def</td><td>cm</td></tr>
+<tr><td>Zona central</td><td>Z_cent = Lv·100 - 2·Z_prot - b_col·100</td><td>cm</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 5. EJEMPLO RESUELTO -->
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema (del PPT)</h4>
+<ul>
+<li><b>Lv:</b> 6.20 m</li>
+<li><b>Lt:</b> 5.85 m</li>
+<li><b>b_col:</b> 0.54 m</li>
+<li><b>b_viga:</b> 30 cm</li>
+<li><b>h_viga:</b> 46 cm</li>
+<li><b>rec:</b> 2.50 cm</li>
+<li><b>fc:</b> 210 kg/cm²</li>
+<li><b>fy:</b> 4200 kg/cm²</li>
+<li><b>Fm:</b> 1.20</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Peralte efectivo<br>
+d = h - rec - φ_est - φ_var/2<br>
+d = 46 - 2.5 - 1.0 - 0.8 = <b>40.7 cm</b></div>
+
+<div class="paso"><strong>PASO 2:</strong> Momento estático (Me)<br>
+Me = Cu·Lt·(Lv-b_col)²/8<br>
+Me = 1.06·5.85·(6.20-0.54)²/8 = <b>24.93 t·m</b></div>
+
+<div class="paso"><strong>PASO 3:</strong> Momento de diseño (Md)<br>
+Md = Me·0.65·0.85·Fm<br>
+Md = 24.93·0.65·0.85·1.20 = <b>16.53 t·m</b></div>
+
+<div class="paso"><strong>PASO 4:</strong> As requerido<br>
+As_req = 30·Md/d = 30·16.53/40.7 = <b>12.18 cm²</b></div>
+
+<div class="paso"><strong>PASO 5:</strong> As mínimo<br>
+As_min = 14·b·d/fy = 14·30·40.7/4200 = <b>4.07 cm²</b></div>
+
+<div class="paso"><strong>PASO 6:</strong> Selección de varillas<br>
+As(-) = 6 φ16 = <b>12.06 cm²</b> (extremos)<br>
+As(-) = 2 φ16 = <b>4.02 cm²</b> (corridas)<br>
+As(+) = 3 φ16 = <b>6.03 cm²</b> (inferior)</div>
+
+<div class="paso"><strong>PASO 7:</strong> Bloque de compresión (a)<br>
+a = As·fy/(0.85·fc·b) = 12.06·4200/(0.85·210·30) = <b>9.46 cm</b><br>
+a/h = 9.46/46 = <b>20.6%</b> ≈ 20% ✅</div>
+
+<div class="paso"><strong>PASO 8:</strong> Momento resistente (Mr)<br>
+Mr = 0.9·As·fy·(d-a/2)/100000<br>
+Mr = 0.9·12.06·4200·(40.7-9.46/2)/100000 = <b>16.40 t·m</b></div>
+
+<div class="paso"><strong>PASO 9:</strong> Cuantía<br>
+ρ = As/(b·h) = 12.06/(30·46)·100 = <b>0.87%</b> ✅ (≤ 1%)</div>
+
+<div class="paso"><strong>PASO 10:</strong> Momento probable Mpr1 y Mpr2<br>
+Mpr1 = 1.25·As·fy·(d-a/2)/100000 = <b>22.02 t·m</b><br>
+Mpr2 = 1.25·As(+)·fy·(d-a/2)/100000 = <b>11.95 t·m</b></div>
+
+<div class="paso"><strong>PASO 11:</strong> Cortante por giro (Vum)<br>
+Vum = (Mpr1+Mpr2)/(Lv-b_col)<br>
+Vum = (22.02+11.95)/(6.20-0.54) = <b>6.00 t</b></div>
+
+<div class="paso"><strong>PASO 12:</strong> Cortante por gravedad (Vug)<br>
+Vug = (2·Lv-b_col)·w·Lv/4<br>
+Vug = (12.40-0.54)·6.20·6.20/4 = <b>10.19 t</b></div>
+
+<div class="paso"><strong>PASO 13:</strong> Cortante último (Vu)<br>
+Vu = Vum + Vug = 6.00 + 10.19 = <b>16.19 t</b></div>
+
+<div class="paso"><strong>PASO 14:</strong> Cortante del concreto (Vc)<br>
+Vc = 0.53·√210·30·40.7/1000 = <b>9.37 t</b></div>
+
+<div class="paso"><strong>PASO 15:</strong> Cortante del estribo (Vs)<br>
+Vs = (Vu-0.75·Vc)/0.75 = (16.19-0.75·9.37)/0.75 = <b>12.21 t</b></div>
+
+<div class="paso"><strong>PASO 16:</strong> Separación por cortante (s)<br>
+s = d·0.00785·φ_est²·2·fy/Vs/1000<br>
+s = 40.7·0.00785·100·2·4200/12.21/1000 = <b>22 cm</b></div>
+
+<div class="paso"><strong>PASO 17:</strong> Separación zona protegida<br>
+s_prot = min(d/4, 6·φ_min/10, 10, s)<br>
+s_prot = min(10.18, 7.2, 10, 22) = <b>7.2 ≈ 10 cm</b></div>
+
+<div class="paso"><strong>PASO 18:</strong> Separación zona central<br>
+s_cent = min(d/2, 8·φ_min/10, 15)<br>
+s_cent = min(20.35, 9.6, 15) = <b>9.6 ≈ 13 cm</b></div>
+
+<div class="paso"><strong>PASO 19:</strong> Zona protegida<br>
+Z_prot = 2·h_def = 2·46 = <b>92 cm</b></div>
+
+<div class="paso"><strong>PASO 20:</strong> Zona central<br>
+Z_cent = Lv·100 - 2·Z_prot - b_col·100<br>
+Z_cent = 620 - 184 - 54 = <b>386 cm</b></div>
+
+<div class="ejemplo">
+<h4>Resumen de resultados</h4>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>Md</td><td>16.53</td><td>t·m</td></tr>
+<tr><td>As(-) ext</td><td>6 φ16 = 12.06</td><td>cm²</td></tr>
+<tr><td>As(+)</td><td>3 φ16 = 6.03</td><td>cm²</td></tr>
+<tr><td>a</td><td>9.46</td><td>cm</td></tr>
+<tr><td>a/h</td><td>20.6</td><td>%</td></tr>
+<tr><td>Mr</td><td>16.40</td><td>t·m</td></tr>
+<tr><td>ρ</td><td>0.87</td><td>%</td></tr>
+<tr><td>Mpr1</td><td>22.02</td><td>t·m</td></tr>
+<tr><td>Mpr2</td><td>11.95</td><td>t·m</td></tr>
+<tr><td>Vum</td><td>6.00</td><td>t</td></tr>
+<tr><td>Vug</td><td>10.19</td><td>t</td></tr>
+<tr><td><b>Vu</b></td><td><b>16.19</b></td><td><b>t</b></td></tr>
+<tr><td>Vc</td><td>9.37</td><td>t</td></tr>
+<tr><td>Vs</td><td>12.21</td><td>t</td></tr>
+<tr><td>s_est</td><td>22</td><td>cm</td></tr>
+<tr><td>Z_prot</td><td>92</td><td>cm</td></tr>
+<tr><td>s_prot</td><td>10</td><td>cm</td></tr>
+<tr><td>Z_cent</td><td>386</td><td>cm</td></tr>
+<tr><td>s_cent</td><td>13</td><td>cm</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 6. TIC -->
+<div class="seccion" id="tic">
+<h2>6. LOS 5 TIC DE VIGA RESILIENTE</h2>
+<p>Una viga resiliente cumple 5 criterios sismorresistentes:</p>
+
+<div class="tic-box">
+<h4>TIC 1: Relación h/b</h4>
+<p style="font-size:13px;color:#bdc3c7">Controla la proporción de la sección. Ideal ≤ 1.1. Límite NEC-15 ≤ 1.5.</p>
+<div class="tic-item">
+<span>h/b = 46/30 = <b>1.53</b></span>
+<span class="rev">⚠️ REVISAR (> 1.5)</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 2: Cuantía ≤ 1%</h4>
+<p style="font-size:13px;color:#bdc3c7">Garantiza falla dúctil. NUNCA debe superar el 1%.</p>
+<div class="tic-item">
+<span>ρ = 0.87%</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 3: ρ < 0.75·ρ_bal</h4>
+<p style="font-size:13px;color:#bdc3c7">Garantiza que la falla sea dúctil por tracción.</p>
+<div class="tic-item">
+<span>ρ = 0.87% < 0.75·ρ_bal = 1.61%</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 4: As(+) ≥ 50%·As(-)</h4>
+<p style="font-size:13px;color:#bdc3c7">Exigido por ACI 318-19 Cap. 18.6.3.2 para reversión sísmica.</p>
+<div class="tic-item">
+<span>As(+) = 6.03 ≥ 50%·As(-) = 6.03</span>
+<span class="ok">✅ CUMPLE (al límite)</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 5: a/h ≈ 20%</h4>
+<p style="font-size:13px;color:#bdc3c7">Base del criterio de la viga T. Solo el 20% del hormigón trabaja.</p>
+<div class="tic-item">
+<span>a/h = 9.46/46 = 20.6%</span>
+<span class="ok">✅ CUMPLE (ideal viga T)</span>
+</div>
+</div>
+
+<div class="alerta">
+<h4>⚠️ Alerta</h4>
+<p>El TIC 1 (h/b = 1.53) está en el límite. Se recomienda aumentar b a 32 cm (h/b = 1.44) o reducir h a 45 cm (h/b = 1.50).</p>
+</div>
+</div>
+
+<!-- 7. EVALUACIÓN -->
+<div class="seccion" id="evaluacion">
+<h2>7. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318-19 Cap. 18</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<!-- 8. EJERCICIOS -->
+<div class="seccion" id="ejercicios">
+<h2>8. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1: Peralte efectivo</h4>
+<p>Calcular d para h=46 cm, rec=2.5 cm, φ_est=10 mm, φ_var=16 mm.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>d = 46 - 2.5 - 1.0 - 0.8 = 40.7 cm</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2: Bloque de compresión</h4>
+<p>Calcular "a" para As=12.06 cm², fy=4200, fc=210, b=30 cm.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>a = 12.06·4200/(0.85·210·30) = 9.46 cm</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3: Cuantía balanceada</h4>
+<p>Calcular ρ_bal para fc=210, fy=4200.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>ρ_bal = 0.85·0.85·(210/4200)·(0.003/(0.003+0.002)) = 2.14%</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4: Cortante último</h4>
+<p>Calcular Vu para Vum=6.00 t y Vug=10.19 t.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Vu = 6.00 + 10.19 = 16.19 t</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5: Reflexión final</h4>
+<ol style="padding-left:20px;font-size:14px">
+<li>¿Por qué ρ ≤ 1%?</li>
+<li>¿Por qué As(+) ≥ 50%·As(-)?</li>
+<li>¿Por qué el bloque "a" es ~20%?</li>
+</ol>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>1. Garantiza falla dúctil (acero fluye antes que hormigón se aplaste).<br>
+2. Por reversión sísmica: los momentos cambian de signo.<br>
+3. Solo el 20% del hormigón trabaja a compresión. Base de la viga T.</p>
+</div>
+</div>
+</div>
+
+<!-- 9. CONEXIÓN -->
+<div class="seccion" id="conexion">
+<h2>9. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M01</td><td>h_eq</td><td>Cálculo de carga muerta</td></tr>
+<tr><td>M02</td><td>Cu, W</td><td>Cargas</td></tr>
+<tr><td>M03</td><td>Md, Vu</td><td>Viga + Sismo</td></tr>
+<tr><td><b>M04</b></td><td><b>Md, Vu, ρ</b></td><td><b>Este módulo</b></td></tr>
+<tr><td>M05</td><td>Estribos viga</td><td>Columna</td></tr>
+<tr><td>M06</td><td>As, s_prot</td><td>Losa</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<!-- 10. ACÁPITE -->
+<div class="seccion" id="acapite" style="border-left-color:#f39c12">
+<h2>📖 10. ACÁPITE DE ESTUDIO</h2>
+<p><b>Revisa este resumen ejecutivo antes de responder el cuestionario.</b></p>
+
+<h3>🎯 ¿Qué aprenderás?</h3>
+<ul>
+<li>Calcular As(-), As(+) y cuantía</li>
+<li>Calcular el bloque "a" (viga T)</li>
+<li>Calcular Mpr, Vum, Vug, Vu</li>
+<li>Diseñar estribos</li>
+<li>Verificar los 5 TIC de viga resiliente</li>
+</ul>
+
+<h3>📐 Fórmulas clave</h3>
+<div class="formula">As_req = 30·Md/d</div>
+<div class="formula">a = As·fy/(0.85·fc·b)</div>
+<div class="formula formula-grande">Vu = Vum + Vug</div>
+<div class="formula">ρ = As/(b·h) ≤ 1%</div>
+
+<h3>💡 Ejemplo resuelto</h3>
+<p><b>Datos:</b> Lv=6.20 m, Lt=5.85 m, b=30 cm, h=46 cm, d=40.7 cm</p>
+<p><b>Cálculo:</b> Md=16.53 t·m, As(-)=12.06 cm², a=9.46 cm, Vu=16.19 t</p>
+<p style="color:#f39c12;font-weight:bold"><b>Resultado:</b> ρ=0.87%, s_prot=10 cm, s_cent=13 cm</p>
+
+<h3>🎯 ¿Qué se espera en el Bloque C?</h3>
+<ul>
+<li>Interpretar Vc vs Vs</li>
+<li>Explicar zona protegida</li>
+<li>Explicar Vum vs Vug</li>
+<li>Interpretar diagrama mariposa</li>
+</ul>
+
+<h3>🎯 ¿Qué se espera en el Bloque D?</h3>
+<ul>
+<li><b>Impacto técnico:</b> falla frágil si no cumple</li>
+<li><b>Norma aplicable:</b> NEC-15, ACI 318-19 Cap. 18</li>
+<li><b>Criterio ético:</b> reportar aunque sea desfavorable</li>
+<li><b>Trazabilidad:</b> documentar la decisión</li>
+</ul>
+</div>
+
+<!-- 11. CONDICIONES -->
+<div class="seccion" id="condiciones" style="border-left-color:#2ecc71">
+<h2>✅ 11. CONDICIONES DE RESPUESTA VÁLIDA</h2>
+<p>Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<h3>🎯 Cómo se evalúa</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts (criterios)</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts (número exacto)</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts (razonamiento)</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts (criterios + ética)</td></tr>
+</tbody>
+</table>
+
+<h3>✅ Qué espera el sistema</h3>
+<p><b>Bloque A — Concepto:</b></p>
+<ul>
+<li>Explica con tus palabras</li>
+<li>Cubre los criterios indicados</li>
+<li>Puedes usar sinónimos</li>
+</ul>
+<p><b>Bloque B — Cálculo:</b></p>
+<ul>
+<li>Muestra el procedimiento</li>
+<li>Indica unidades</li>
+<li>Da el resultado numérico</li>
+</ul>
+<p><b>Bloque C — Interpretación:</b></p>
+<ul>
+<li>Menciona el concepto técnico</li>
+<li>Justifica con números</li>
+<li>Conecta con otros módulos o normas</li>
+</ul>
+<p><b>Bloque D — Decisión:</b></p>
+<ul>
+<li>Identifica el problema técnico</li>
+<li>Cita la norma aplicable</li>
+<li>Aplica criterio ético</li>
+<li>Documenta tu decisión</li>
+</ul>
+
+<h3>💡 Ejemplo de respuesta válida</h3>
+<div class="ejemplo">
+<h4>Pregunta: "¿Por qué ρ ≤ 1%?"</h4>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Porque garantiza falla dúctil. El acero fluye antes que el hormigón se aplaste. Si se supera el 1%, la falla es frágil y colapsa sin aviso."</p>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Para asegurar ductilidad y disipación de energía. La NEC-15 y el ACI 318-19 Cap. 18 lo exigen."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "No sé."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+</div>
+
+<h3>🎯 Recuerda</h3>
+<ul>
+<li>No hay una sola respuesta correcta</li>
+<li>Se valora el razonamiento</li>
+<li>Puedes expresarte con tus propias palabras</li>
+<li>El error es parte del aprendizaje</li>
+</ul>
+</div>
+
+<!-- 12. ANEXO TÉCNICO -->
+<div class="seccion" id="anexo" style="border-left-color:#9b59b6">
+<h2>📐 12. ANEXO TÉCNICO — DEDUCCIONES</h2>
+
+<h3>12.1 Deducción de Mpr (Momento probable)</h3>
+<p>El momento probable incluye el factor de sobrerresistencia 1.25:</p>
+<div class="formula">Mpr = 1.25 · As · fy · (d - a/2)</div>
+<p><b>Justificación:</b> El acero real tiene una resistencia mayor que fy (fluencia). El factor 1.25 considera esa sobrerresistencia.</p>
+
+<h3>12.2 Deducción de Vum (Cortante por giro)</h3>
+<p>El giro de la viga durante un sismo genera momentos en los extremos (Mpr1, Mpr2). Estos producen cortante:</p>
+<div class="formula">Vum = (Mpr1 + Mpr2) / (Lv - b_col)</div>
+<p><b>Justificación:</b> El cortante es la suma de los momentos en los extremos dividido entre la luz libre.</p>
+
+<h3>12.3 Deducción de Vug (Cortante por gravedad)</h3>
+<p>La carga distribuida sobre la viga produce cortante:</p>
+<div class="formula">Vug = (2·Lv - b_col) · w · Lv / 4</div>
+<p><b>Justificación:</b> Es el cortante de una viga simplemente apoyada con carga distribuida.</p>
+
+<h3>12.4 Deducción del bloque "a"</h3>
+<p>El bloque de compresión "a" se deduce del equilibrio de fuerzas:</p>
+<div class="formula">C = T</div>
+<div class="formula">0.85 · fc · b · a = As · fy</div>
+<div class="formula">a = As · fy / (0.85 · fc · b)</div>
+<p><b>Significado:</b> Solo el bloque "a" trabaja a compresión. El resto del hormigón no trabaja. Esto es la base de la viga T.</p>
+
+<h3>12.5 Relación a/h ≈ 20%</h3>
+<p>Para vigas típicas:</p>
+<div class="formula">a/h ≈ 0.20</div>
+<p><b>Significado:</b> Solo el 20% superior del hormigón trabaja. El 80% restante no trabaja. Por eso se puede aligerar la sección (viga T o I).</p>
+
+<div class="cita">
+"La viga resiliente no es la que más resiste, sino la que mejor disipa energía y avisa antes de colapsar."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_04_acero_cortante.html" class="btn btn-orange">Ir al Cuestionario M04</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>

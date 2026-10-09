@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual del Docente M04 - Viga Resiliente</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #e74c3c;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+.badge-prof{display:inline-block;background:#e74c3c;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:20px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+.tabla tr:nth-child(even){background:#34495e}
+.rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #e74c3c}
+.rubrica-card h4{color:#e74c3c;margin-bottom:12px;font-size:16px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.criterio .peso{display:inline-block;background:#e74c3c;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
+.ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
+.ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
+.ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+.indice h3{color:#f39c12;margin-bottom:12px}
+.indice ol{padding-left:25px;margin:0}
+.indice li{padding:6px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
+.frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.botones{text-align:center;margin:30px 0}
+.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+.pie-pagina p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📙 MANUAL DEL DOCENTE — M04</h1>
+<h2>VIGA RESILIENTE — DISEÑO A FLEXIÓN Y CORTANTE</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
+</div>
+
+<div class="frase-destacada">
+"Los números son solo el vehículo.<br>
+El verdadero ingeniero interpreta, decide,<br>
+contextualiza, se responsabiliza."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ÍNDICE -->
+<div class="indice">
+<h3>📑 ÍNDICE DEL MANUAL DOCENTE</h3>
+<ol>
+<li><a href="#proposito">Propósito del manual</a></li>
+<li><a href="#modelo">Modelo base del proyecto</a></li>
+<li><a href="#bloques">Estructura de los 4 bloques</a></li>
+<li><a href="#rubrica">Rúbrica de evaluación detallada</a></li>
+<li><a href="#evaluacion">Cómo evaluar cada bloque</a></li>
+<li><a href="#reportes">Cómo interpretar reportes</a></li>
+<li><a href="#retroalimentacion">Cómo dar retroalimentación</a></li>
+<li><a href="#alertas">Alertas pedagógicas</a></li>
+<li><a href="#uso">Uso del módulo en clase</a></li>
+<li><a href="#respuestas">Respuestas esperadas</a></li>
+<li><a href="#anexo">Anexo técnico: deducciones</a></li>
+</ol>
+</div>
+
+<!-- 1. PROPÓSITO -->
+<div class="seccion" id="proposito">
+<h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M04 — Viga Resiliente.</p>
+<p>A diferencia de la evaluación tradicional, este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
+
+<div class="alerta">
+<h4>⚠️ IMPORTANTE</h4>
+<p>Este manual es <strong>confidencial</strong>. Contiene las respuestas esperadas y los criterios de evaluación. No debe ser distribuido a los estudiantes.</p>
+</div>
+</div>
+
+<!-- 2. MODELO BASE -->
+<div class="seccion" id="modelo">
+<h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
+<p>Todas las preguntas del M04 están ancladas al <strong>modelo base del Proyecto Multidisciplinario</strong>:</p>
+
+<table class="tabla">
+<thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>Lv (luz entre ejes)</td><td>6.00</td><td>m</td></tr>
+<tr><td>Lt (luz de trave)</td><td>5.75</td><td>m</td></tr>
+<tr><td>Cu (carga última)</td><td>1.088</td><td>t/m²</td></tr>
+<tr><td>b_col</td><td>0.38</td><td>m</td></tr>
+<tr><td>b (base viga)</td><td>0.30</td><td>m</td></tr>
+<tr><td>h (peralte viga)</td><td>0.45</td><td>m</td></tr>
+<tr><td>rec</td><td>2.5</td><td>cm</td></tr>
+<tr><td>φ_est</td><td>10</td><td>mm</td></tr>
+<tr><td>φ_var</td><td>16</td><td>mm</td></tr>
+<tr><td>fc</td><td>210</td><td>kg/cm²</td></tr>
+<tr><td>fy</td><td>4200</td><td>kg/cm²</td></tr>
+<tr><td>Md</td><td>17.32</td><td>t·m</td></tr>
+<tr><td>As(-)</td><td>16.08</td><td>cm²</td></tr>
+</tbody>
+</table>
+
+<h3>Resultados esperados:</h3>
+<table class="tabla">
+<thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>d (peralte efectivo)</td><td>40.70</td><td>cm</td></tr>
+<tr><td>Mpr (momento probable)</td><td>22.02</td><td>t·m</td></tr>
+<tr><td>Vum (cortante por giro)</td><td>7.84</td><td>t</td></tr>
+<tr><td>Vug (cortante por gravedad)</td><td>10.19</td><td>t</td></tr>
+<tr><td><strong>Vu (cortante último)</strong></td><td><strong>18.03</strong></td><td><strong>t</strong></td></tr>
+<tr><td>Vc (cortante del hormigón)</td><td>9.37</td><td>t</td></tr>
+<tr><td>Vs (cortante del estribo)</td><td>14.67</td><td>t</td></tr>
+<tr><td>s_est (separación calculada)</td><td>18.30</td><td>cm</td></tr>
+<tr><td>Z_prot (zona protegida)</td><td>90</td><td>cm</td></tr>
+<tr><td><strong>s_prot (zona confinada)</strong></td><td><strong>10</strong></td><td><strong>cm</strong></td></tr>
+<tr><td><strong>s_cent (zona central)</strong></td><td><strong>15</strong></td><td><strong>cm</strong></td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>💡 Trazabilidad con algoritmos Python</h4>
+<p>Los valores están alineados con los algoritmos:</p>
+<ul>
+<li><code>modulo04_acero_cortante.py</code> — Diseño de estribos</li>
+<li><code>modulo04_algoritmo1_viga_detallado.py</code> — Viga resiliente con detalles de armado</li>
+</ul>
+</div>
+</div>
+
+<!-- 3. ESTRUCTURA DE BLOQUES -->
+<div class="seccion" id="bloques">
+<h2>3. 🏗 ESTRUCTURA DE LOS 4 BLOQUES</h2>
+<table class="tabla">
+<thead>
+<tr><th>Bloque</th><th>Tipo</th><th>Preguntas</th><th>Puntaje</th><th>Método</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
+<tr><td><strong>D</strong></td><td>Decisión profesional</td><td>2</td><td>25 pts</td><td><strong>Rúbrica + ética</strong></td></tr>
+<tr><td colspan="3"><strong>TOTAL</strong></td><td><strong>100 pts</strong></td><td>—</td></tr>
+</tbody>
+</table>
+
+<h3>3.1 Nivel cognitivo por bloque (Bloom)</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Nivel de Bloom</th><th>Qué se evalúa</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Recordar / Entender</td><td>El estudiante comprende el concepto</td></tr>
+<tr><td>B</td><td>Aplicar</td><td>El estudiante usa las fórmulas</td></tr>
+<tr><td>C</td><td>Analizar / Evaluar</td><td>El estudiante interpreta los valores</td></tr>
+<tr><td>D</td><td>Crear / Decidir</td><td>El estudiante decide como profesional</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 4. RÚBRICA -->
+<div class="seccion" id="rubrica">
+<h2>4. 📏 RÚBRICA DE EVALUACIÓN DETALLADA</h2>
+<p>Esta sección define <strong>cómo evaluar cada pregunta</strong>, especialmente las de los bloques C y D.</p>
+
+<h3>4.1 Rúbrica para el Bloque A (Conceptos)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Respuesta completa y correcta</td><td>100%</td></tr>
+<tr><td>Respuesta parcialmente correcta</td><td>60%</td></tr>
+<tr><td>Respuesta incompleta o imprecisa</td><td>30%</td></tr>
+<tr><td>Sin respuesta o incorrecta</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>4.2 Rúbrica para el Bloque B (Cálculo)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Resultado exacto con procedimiento correcto</td><td>100%</td></tr>
+<tr><td>Resultado exacto sin procedimiento</td><td>80%</td></tr>
+<tr><td>Procedimiento correcto con error de cálculo</td><td>60%</td></tr>
+<tr><td>Procedimiento incompleto</td><td>30%</td></tr>
+<tr><td>Sin procedimiento o incorrecto</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>4.3 Rúbrica para el Bloque C (Interpretación) — Criterios ponderados</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta C1 — Contribución Vc vs Vs</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span><p>Menciona: Vc (aporte del hormigón), Vs (aporte del estribo), contribución.</p></div>
+<div class="criterio"><strong>Criterio 2 — Justifica con números</strong><span class="peso">30%</span><p>Menciona: Vc=9.37 t, Vs=14.67 t, Vu=18.03 t.</p></div>
+<div class="criterio"><strong>Criterio 3 — Conecta con otros módulos</strong><span class="peso">30%</span><p>Menciona: M05 (columna), NEC-15, consecuencias estructurales.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C2 — Zona protegida</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la zona</strong><span class="peso">40%</span><p>Menciona: 2h, extremos, confinamiento.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica por qué</strong><span class="peso">30%</span><p>Menciona: mayores cortantes sísmicos, nudos.</p></div>
+<div class="criterio"><strong>Criterio 3 — Diferencia con zona central</strong><span class="peso">30%</span><p>Menciona: s_prot=10 cm vs s_cent=15 cm.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C3 — Separación de estribos</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la conexión</strong><span class="peso">40%</span><p>Menciona: s_prot, s_cent, NEC-15.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span><p>Menciona: confinamiento, disipación de energía.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia si no se calcula bien</strong><span class="peso">30%</span><p>Menciona: falla por cortante, colapso frágil.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C4 — Vum vs Vug</h4>
+<div class="criterio"><strong>Criterio 1 — Impacto del sismo</strong><span class="peso">40%</span><p>Menciona: sismo genera cortantes en nudos.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explicación física</strong><span class="peso">30%</span><p>Menciona: Vum=7.84 t vs Vug=10.19 t.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia estructural</strong><span class="peso">30%</span><p>Menciona: Vu = Vum + Vug = 18.03 t.</p></div>
+</div>
+
+<h3>4.4 Rúbrica para el Bloque D (Decisión) — Criterios + Ética</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta D1 — Aumentar separación (12 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Técnico</strong><span class="peso">25%</span><p>Menciona: separación supera 10 cm en zona protegida, riesgo estructural.</p></div>
+<div class="criterio"><strong>Criterio 2 — Normativo</strong><span class="peso">25%</span><p>Menciona: NEC-15, ACI 318.</p></div>
+<div class="criterio"><strong>Criterio 3 — Ético</strong><span class="peso">25%</span><p>Menciona: responsabilidad profesional, firma, rechazo.</p></div>
+<div class="criterio"><strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span><p>Menciona: documentar, notificar, responsabilidad civil y penal.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta D2 — Estribos de menor diámetro (13 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica el problema</strong><span class="peso">25%</span><p>Menciona: φ especificado vs real, déficit del 20%.</p></div>
+<div class="criterio"><strong>Criterio 2 — Aplica normativa</strong><span class="peso">25%</span><p>Menciona: NEC-15, ACI 318, NTE INEN.</p></div>
+<div class="criterio"><strong>Criterio 3 — Acciones concretas</strong><span class="peso">25%</span><p>Menciona: rechazar, notificar, suspender obra, documentar.</p></div>
+<div class="criterio"><strong>Criterio 4 — Consecuencias legales</strong><span class="peso">25%</span><p>Menciona: responsabilidad civil y penal, denuncia.</p></div>
+</div>
+</div>
+
+<!-- 5. CÓMO EVALUAR -->
+<div class="seccion" id="evaluacion">
+<h2>5. ✍️ CÓMO EVALUAR CADA BLOQUE</h2>
+
+<h3>5.1 Evaluación del Bloque A</h3>
+<p><strong>Método:</strong> Comparación por palabras clave con la respuesta esperada.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> ¿Qué es el momento probable (Mpr)?
+<div class="respuesta">Respuesta esperada: "Es el momento que incluye el factor de sobrerresistencia 1.25 del acero. Es mayor que Md porque garantiza que la viga falle por flexión (dúctil) y no por cortante (frágil)."</div>
+<div class="resultado">Palabras clave: momento, sobrerresistencia, 1.25, acero, flexión, dúctil, cortante, frágil</div>
+</div>
+
+<h3>5.2 Evaluación del Bloque B</h3>
+<p><strong>Método:</strong> Comparación numérica exacta con tolerancia del 5%.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> Calcule Vu.
+<div class="respuesta">Respuesta esperada: 18.03 t</div>
+<div class="resultado">Tolerancia: ±0.90 t (5%)</div>
+</div>
+
+<h3>5.3 Evaluación del Bloque C</h3>
+<p><strong>Método:</strong> Rúbrica por criterios ponderados.</p>
+<ol style="padding-left:25px;font-size:14px">
+<li>Verifique cada criterio individualmente</li>
+<li>Asigne puntos por criterio cumplido</li>
+<li>Sume los puntos de todos los criterios</li>
+<li>Multiplique por el puntaje de la pregunta</li>
+</ol>
+
+<div class="ejemplo">
+<strong>Ejemplo de evaluación C1:</strong>
+<div class="respuesta">Respuesta: "El hormigón aporta 9.37 t y el estribo 14.67 t. El estribo es crítico porque el sismo incrementa el cortante. Esto se conecta con el M05."</div>
+<div class="resultado">
+✅ Criterio 1 (40%): "Vc", "Vs", "contribución" → 40%<br>
+✅ Criterio 2 (30%): "9.37 t", "14.67 t" → 30%<br>
+✅ Criterio 3 (30%): "M05", "sismo" → 30%<br>
+<strong>Total: 100% × 6 pts = 6/6 pts</strong>
+</div>
+</div>
+
+<h3>5.4 Evaluación del Bloque D</h3>
+<p><strong>Método:</strong> Rúbrica por criterios + bonificación por ética.</p>
+<p>Se evalúan los 4 criterios con pesos iguales (25% cada uno).</p>
+</div>
+
+<!-- 6. REPORTES -->
+<div class="seccion" id="reportes">
+<h2>6. 📊 CÓMO INTERPRETAR LOS REPORTES</h2>
+<p>Al finalizar cada módulo, el sistema genera un <strong>Reporte de Desempeño</strong> con:</p>
+<ul>
+<li>Puntaje por pregunta</li>
+<li>Preguntas correctas vs total</li>
+<li>Resumen por bloque</li>
+<li>Comparación con la respuesta esperada</li>
+</ul>
+
+<h3>6.1 Lectura del reporte</h3>
+<table class="tabla">
+<thead><tr><th>Indicador</th><th>Interpretación</th></tr></thead>
+<tbody>
+<tr><td>Bloque A alto, D bajo</td><td>El estudiante memoriza pero no decide</td></tr>
+<tr><td>Bloque B alto, C bajo</td><td>Calcula pero no interpreta</td></tr>
+<tr><td>Bloques C y D altos</td><td>Excelente criterio profesional</td></tr>
+<tr><td>Todos los bloques bajos</td><td>Requiere refuerzo general</td></tr>
+</tbody>
+</table>
+
+<h3>6.2 Alertas pedagógicas</h3>
+<div class="alerta"><h4>🚨 Alerta 1: Bloque D bajo</h4><p>Si el promedio de la clase en el Bloque D es menor a 50%, el docente debe reforzar el criterio ético profesional con casos reales.</p></div>
+<div class="alerta"><h4>🚨 Alerta 2: Bloque C bajo</h4><p>Si el promedio del Bloque C es menor a 50%, el estudiante no está interpretando correctamente los valores. Reforzar con ejercicios de interpretación.</p></div>
+<div class="alerta"><h4>🚨 Alerta 3: Bloque B bajo</h4><p>Si el promedio del Bloque B es menor a 50%, hay vacíos en el manejo de fórmulas. Reforzar con práctica guiada.</p></div>
+</div>
+
+<!-- 7. RETROALIMENTACIÓN -->
+<div class="seccion" id="retroalimentacion">
+<h2>7. 💬 CÓMO DAR RETROALIMENTACIÓN</h2>
+<p>La retroalimentación debe ser <strong>formativa</strong>, no punitiva. El objetivo es que el estudiante mejore su criterio profesional.</p>
+
+<h3>7.1 Estructura de la retroalimentación</h3>
+<ol style="padding-left:25px;font-size:14px">
+<li><strong>Lo que estuvo bien:</strong> Reconocer los aciertos específicos</li>
+<li><strong>Lo que falta:</strong> Señalar los criterios no cumplidos</li>
+<li><strong>Cómo mejorar:</strong> Dar una recomendación concreta</li>
+</ol>
+
+<h3>7.2 Ejemplos de retroalimentación</h3>
+<div class="ejemplo">
+<strong>Caso:</strong> Estudiante con puntaje 60 en Bloque D1.
+<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (la separación supera 10 cm en zona protegida), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
+</div>
+</div>
+
+<!-- 8. ALERTAS -->
+<div class="seccion" id="alertas">
+<h2>8. 🚨 ALERTAS PEDAGÓGICAS DEL M04</h2>
+
+<div class="alerta"><h4>Alerta 1: Confusión entre Mpr y Md</h4><p>Los estudiantes suelen confundir el momento probable (Mpr) con el momento de diseño (Md). Reforzar que Mpr incluye el factor de sobrerresistencia 1.25.</p></div>
+<div class="alerta"><h4>Alerta 2: Error en el cálculo de Vug</h4><p>El error más común es usar Lv en lugar de (2Lv-bcol) en la fórmula de Vug. Reforzar el uso correcto de la luz libre.</p></div>
+<div class="alerta"><h4>Alerta 3: No verificar la zona protegida</h4><p>Muchos estudiantes calculan s_prot pero no verifican que sea ≤ 10 cm. Reforzar la verificación normativa.</p></div>
+<div class="alerta"><h4>Alerta 4: Bloque D vacío</h4><p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales.</p></div>
+</div>
+
+<!-- 9. USO EN CLASE -->
+<div class="seccion" id="uso">
+<h2>9. 🎓 USO DEL MÓDULO EN CLASE</h2>
+
+<h3>9.1 Antes del módulo</h3>
+<ul>
+<li>Revisar la Guía de Estudio M04 con los estudiantes</li>
+<li>Reforzar los conceptos clave (Mpr, Vum, Vug, Vu, Vc, Vs)</li>
+<li>Discutir la diferencia entre zona protegida y central</li>
+</ul>
+
+<h3>9.2 Durante el módulo</h3>
+<ul>
+<li>Los estudiantes acceden al módulo por computadora o celular</li>
+<li>60 minutos para responder las 15 preguntas</li>
+<li>El docente acompaña pero no da respuestas</li>
+</ul>
+
+<h3>9.3 Después del módulo</h3>
+<ul>
+<li>Generar reportes individuales</li>
+<li>Identificar las preguntas más falladas</li>
+<li>Dar retroalimentación formativa</li>
+<li>Reforzar los conceptos débiles</li>
+</ul>
+
+<h3>9.4 Tiempo estimado</h3>
+<table class="tabla">
+<thead><tr><th>Actividad</th><th>Tiempo</th></tr></thead>
+<tbody>
+<tr><td>Revisión de la guía de estudio</td><td>45 min</td></tr>
+<tr><td>Cuestionario</td><td>60 min</td></tr>
+<tr><td>Retroalimentación</td><td>30 min</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>2.5 horas</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 10. RESPUESTAS ESPERADAS -->
+<div class="seccion" id="respuestas">
+<h2>10. 📝 RESPUESTAS ESPERADAS DE LAS 15 PREGUNTAS</h2>
+<p>Esta sección es <strong>confidencial</strong>. Contiene las respuestas esperadas para cada pregunta del cuestionario M04.</p>
+
+<h3>Bloque A — Conceptos (10 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>A1</td><td>¿Qué es Mpr y por qué es mayor que Md?</td><td>Incluye el factor de sobrerresistencia 1.25. Garantiza falla dúctil por flexión.</td><td>2</td></tr>
+<tr><td>A2</td><td>¿Qué es Vum?</td><td>Cortante sísmico por giro en los nudos.</td><td>2</td></tr>
+<tr><td>A3</td><td>¿Por qué el sismo genera cortantes brutales en nudos?</td><td>Porque el sismo genera momentos de signo opuesto (Diagrama Mariposa).</td><td>3</td></tr>
+<tr><td>A4</td><td>¿Qué es la zona protegida (Zprot)?</td><td>Zona de confinamiento en extremos igual a 2h.</td><td>3</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque B — Cálculo (40 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>B1</td><td>Calcule d</td><td>40.70 cm</td><td>6</td></tr>
+<tr><td>B2</td><td>Calcule Mpr</td><td>22.02 t·m</td><td>8</td></tr>
+<tr><td>B3</td><td>Calcule Vum</td><td>7.84 t</td><td>10</td></tr>
+<tr><td>B4</td><td>Calcule Vug</td><td>10.19 t</td><td>8</td></tr>
+<tr><td>B5</td><td>Calcule Vu y Vs</td><td>Vu = 18.03 t | Vs = 14.67 t</td><td>8</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque C — Interpretación (25 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>C1</td><td>Contribución Vc vs Vs</td><td>Vc = 9.37 t (52%), Vs = 14.67 t (81%). El estribo es crítico.</td><td>6</td></tr>
+<tr><td>C2</td><td>s_prot en extremos y s_cent en centro</td><td>En extremos hay mayores cortantes sísmicos y se necesita mayor confinamiento.</td><td>6</td></tr>
+<tr><td>C3</td><td>Separación supera admisible</td><td>No cumple NEC-15. Reducir separación o aumentar diámetro.</td><td>6</td></tr>
+<tr><td>C4</td><td>Vum vs Vug</td><td>Vum = 7.84 t, Vug = 10.19 t, Vu = 18.03 t. Ambos se suman.</td><td>7</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque D — Decisión (25 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>D1</td><td>Aumentar separación a 15 cm</td><td>No aprobar. Supera 10 cm en zona protegida. Rechazar, documentar, notificar.</td><td>12</td></tr>
+<tr><td>D2</td><td>Estribos de 8 mm en lugar de 10 mm</td><td>Rechazar material, notificar por escrito, suspender obra, documentar.</td><td>13</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 11. ANEXO TÉCNICO -->
+<div class="seccion" id="anexo">
+<h2>11. 📐 ANEXO TÉCNICO — DEDUCCIONES</h2>
+<p>Este anexo documenta las <strong>deducciones analíticas</strong> de las fórmulas utilizadas en el M04, para que el estudiante comprenda su origen y no solo las memorice.</p>
+
+<div class="alerta">
+<h4>📌 Propósito del anexo</h4>
+<p>Que el estudiante comprenda <strong>de dónde vienen las fórmulas</strong> de Mpr, Vum, Vug, s_prot y s_cent, deduciéndolas paso a paso.</p>
+</div>
+
+<h3>11.1 Deducción de Mpr (Momento probable)</h3>
+<p>El momento probable incluye el factor de sobrerresistencia 1.25:</p>
+<div class="ejemplo">
+<div class="resultado">Mpr = 1.25 · As · fy · (d - a/2)</div>
+</div>
+<p><b>Justificación:</b> El acero real tiene una resistencia mayor que fy (fluencia). El factor 1.25 considera esa sobrerresistencia.</p>
+
+<h3>11.2 Deducción de Vum (Cortante por giro)</h3>
+<p>El giro de la viga durante un sismo genera momentos en los extremos (Mpr1, Mpr2). Estos producen cortante:</p>
+<div class="ejemplo">
+<div class="resultado">Vum = (Mpr1 + Mpr2) / (Lv - b_col)</div>
+</div>
+<p><b>Justificación:</b> El cortante es la suma de los momentos en los extremos dividido entre la luz libre.</p>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">Vum = (22.02 + 22.02) / (6.00 - 0.38) = 44.04 / 5.62 = 7.84 t</div>
+</div>
+
+<h3>11.3 Deducción de Vug (Cortante por gravedad)</h3>
+<p>La carga distribuida sobre la viga produce cortante:</p>
+<div class="ejemplo">
+<div class="resultado">Vug = (2·Lv - b_col) · w · Lv / 4</div>
+</div>
+<p><b>Justificación:</b> Es el cortante de una viga simplemente apoyada con carga distribuida.</p>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">Vug = (12.00 - 0.38) · 6.256 · 6.00 / 4 = 10.19 t</div>
+</div>
+
+<h3>11.4 Deducción del cortante último Vu</h3>
+<p>El cortante último es la suma del efecto sísmico y el gravitacional:</p>
+<div class="ejemplo">
+<div class="resultado">Vu = Vum + Vug = 7.84 + 10.19 = 18.03 t</div>
+</div>
+
+<h3>11.5 Deducción del cortante del hormigón Vc</h3>
+<p>El hormigón aporta una resistencia al cortante según ACI 318:</p>
+<div class="ejemplo">
+<div class="resultado">Vc = 0.53 · √fc · b · d</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">Vc = 0.53 · √210 · 30 · 40.70 / 1000 = 9.37 t</div>
+</div>
+
+<h3>11.6 Deducción del cortante del estribo Vs</h3>
+<p>El estribo debe cubrir lo que el hormigón no resiste:</p>
+<div class="ejemplo">
+<div class="resultado">Vs = (Vu - 0.75·Vc) / 0.75</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">Vs = (18.03 - 0.75·9.37) / 0.75 = 14.67 t</div>
+</div>
+
+<h3>11.7 Criterios de s_prot y s_cent (ACI 318-19 Cap. 18)</h3>
+<p><b>Zona protegida (extremos, 2h):</b></p>
+<div class="ejemplo">
+<div class="resultado">s_prot = min(d/4, 6·φ_min, 10 cm)</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">s_prot = min(40.70/4, 6·1.6, 10) = min(10.18, 9.6, 10) = 9.6 ≈ 10 cm</div>
+</div>
+
+<p><b>Zona central:</b></p>
+<div class="ejemplo">
+<div class="resultado">s_cent = min(d/2, 8·φ_min, 15 cm)</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">s_cent = min(40.70/2, 8·1.6, 15) = min(20.35, 12.8, 15) = 12.8 ≈ 15 cm</div>
+</div>
+
+<h3>11.8 Zona protegida Z_prot</h3>
+<div class="ejemplo">
+<div class="resultado">Z_prot = 2 · h_viga = 2 · 45 = 90 cm</div>
+</div>
+
+<h3>11.9 Resumen de resultados</h3>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>d</td><td>40.70</td><td>cm</td></tr>
+<tr><td>Mpr</td><td>22.02</td><td>t·m</td></tr>
+<tr><td>Vum</td><td>7.84</td><td>t</td></tr>
+<tr><td>Vug</td><td>10.19</td><td>t</td></tr>
+<tr><td><b>Vu</b></td><td><b>18.03</b></td><td><b>t</b></td></tr>
+<tr><td>Vc</td><td>9.37</td><td>t</td></tr>
+<tr><td>Vs</td><td>14.67</td><td>t</td></tr>
+<tr><td>Z_prot</td><td>90</td><td>cm</td></tr>
+<tr><td><b>s_prot</b></td><td><b>10</b></td><td><b>cm</b></td></tr>
+<tr><td><b>s_cent</b></td><td><b>15</b></td><td><b>cm</b></td></tr>
+</tbody>
+</table>
+
+<h3>11.10 Próximo paso (M05)</h3>
+<p>Con los estribos diseñados, ahora podemos pasar al <strong>Módulo 05 (Diseño de Columna)</strong> usando:</p>
+<ul>
+<li><b>Pu</b> = 90.44 t</li>
+<li><b>Sección</b> = 38 × 38 cm</li>
+<li><b>fc'</b> = 210 kg/cm²</li>
+<li><b>fy</b> = 4200 kg/cm²</li>
+</ul>
+
+<div class="cita">
+"La viga resiliente no es la que más resiste, sino la que mejor disipa energía y avisa antes de colapsar."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="M04_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
+<a href="modulo_04_acero_cortante.html" class="btn">📝 Ir al Cuestionario</a>
+<a href="manual_programa.html" class="btn">📖 Manual del Programa</a>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+<button class="btn" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>
+</div>
+
+</div>
+</body>
+</html>

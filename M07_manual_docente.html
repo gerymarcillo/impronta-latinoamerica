@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual del Docente M07 - Análisis Dinámico Modal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #16a085;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+.badge-prof{display:inline-block;background:#16a085;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #16a085}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:20px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+.tabla tr:nth-child(even){background:#34495e}
+.rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #16a085}
+.rubrica-card h4{color:#16a085;margin-bottom:12px;font-size:16px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.criterio .peso{display:inline-block;background:#16a085;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
+.ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
+.ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
+.ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.destacado{background:linear-gradient(135deg,#16a085,#1abc9c);border-radius:10px;padding:20px;margin:15px 0;border:2px solid #f39c12}
+.destacado h4{color:white;font-size:16px;margin-bottom:12px;text-align:center;letter-spacing:1px}
+.destacado-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:15px}
+.destacado-item{background:rgba(255,255,255,0.15);border-radius:8px;padding:15px;text-align:center}
+.destacado-item .label{color:#ecf0f1;font-size:11px;letter-spacing:1px;margin-bottom:6px}
+.destacado-item .valor{color:white;font-size:22px;font-weight:bold}
+.destacado-item .unidad{color:#bdc3c7;font-size:11px;margin-top:3px}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+.indice h3{color:#f39c12;margin-bottom:12px}
+.indice ol{padding-left:25px;margin:0}
+.indice li{padding:6px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
+.frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.botones{text-align:center;margin:30px 0}
+.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+.pie-pagina p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📙 MANUAL DEL DOCENTE — M07</h1>
+<h2>ANÁLISIS DINÁMICO MODAL — PÓRTICO 2 PISOS</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
+</div>
+
+<div class="frase-destacada">
+"La incertidumbre no se elimina: se cuantifica.<br>
+La estructura habla a través de sus modos de vibrar."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ÍNDICE -->
+<div class="indice">
+<h3>📑 ÍNDICE DEL MANUAL DOCENTE</h3>
+<ol>
+<li><a href="#proposito">Propósito del manual</a></li>
+<li><a href="#modelo">Modelo base del proyecto</a></li>
+<li><a href="#valores">Valores de masa y rigidez</a></li>
+<li><a href="#bloques">Estructura de los 4 bloques</a></li>
+<li><a href="#rubrica">Rúbrica de evaluación detallada</a></li>
+<li><a href="#evaluacion">Cómo evaluar cada bloque</a></li>
+<li><a href="#reportes">Cómo interpretar reportes</a></li>
+<li><a href="#retroalimentacion">Cómo dar retroalimentación</a></li>
+<li><a href="#alertas">Alertas pedagógicas</a></li>
+<li><a href="#uso">Uso del módulo en clase</a></li>
+<li><a href="#respuestas">Respuestas esperadas</a></li>
+<li><a href="#anexo">Anexo técnico: deducciones</a></li>
+</ol>
+</div>
+
+<!-- 1. PROPÓSITO -->
+<div class="seccion" id="proposito">
+<h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M07 — Análisis Dinámico Modal.</p>
+<p>A diferencia de la evaluación tradicional, este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
+
+<div class="alerta">
+<h4>⚠️ IMPORTANTE</h4>
+<p>Este manual es <strong>confidencial</strong>. Contiene las respuestas esperadas y los criterios de evaluación. No debe ser distribuido a los estudiantes.</p>
+</div>
+</div>
+
+<!-- 2. MODELO BASE -->
+<div class="seccion" id="modelo">
+<h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
+<p>Todas las preguntas del M07 están ancladas al <strong>modelo base del Proyecto Multidisciplinario</strong> (pórtico de 2 pisos):</p>
+
+<table class="tabla">
+<thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>n_pisos</td><td>2</td><td>—</td></tr>
+<tr><td>He (altura entrepiso)</td><td>3.0</td><td>m</td></tr>
+<tr><td>H_total</td><td>6.0</td><td>m</td></tr>
+<tr><td>L1, L2, L3, L4</td><td>5.5, 6.0, 5.5, 6.0</td><td>m</td></tr>
+<tr><td>b_col × h_col</td><td>0.38 × 0.38</td><td>m</td></tr>
+<tr><td>b_viga × h_viga</td><td>0.30 × 0.45</td><td>m</td></tr>
+<tr><td>fc</td><td>210</td><td>kg/cm²</td></tr>
+<tr><td>fy</td><td>4200</td><td>kg/cm²</td></tr>
+<tr><td>Cu</td><td>1.088</td><td>t/m²</td></tr>
+<tr><td>At</td><td>33.06</td><td>m²</td></tr>
+</tbody>
+</table>
+
+<h3>Resultados esperados:</h3>
+<table class="tabla">
+<thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>E (módulo elasticidad)</td><td>2,188,190</td><td>t/m²</td></tr>
+<tr><td>I_col</td><td>0.000217</td><td>m⁴</td></tr>
+<tr><td>I_viga</td><td>0.002278</td><td>m⁴</td></tr>
+<tr><td>masa_piso</td><td>3.667</td><td>t·s²/m</td></tr>
+<tr><td>k_entrepiso</td><td>22,171</td><td>t/m</td></tr>
+<tr><td><strong>T₁</strong></td><td><strong>0.280</strong></td><td><strong>s</strong></td></tr>
+<tr><td><strong>T₂</strong></td><td><strong>0.091</strong></td><td><strong>s</strong></td></tr>
+<tr><td>f₁</td><td>3.571</td><td>Hz</td></tr>
+<tr><td>f₂</td><td>10.99</td><td>Hz</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>💡 Trazabilidad con algoritmos Python</h4>
+<p>Los valores están alineados con los 5 algoritmos:</p>
+<ul>
+<li><code>modulo07_analisis_dinamico.py</code> — Análisis modal</li>
+<li><code>modulo07_matrices_analiticas.py</code> — Matrices K y M</li>
+<li><code>modulo07_matrices_paso_a_paso.py</code> — Coeficientes de rigidez</li>
+<li><code>modulo07_resumen_phyphox.py</code> — Validación experimental (Kalman + FFT)</li>
+<li><code>modulo07_estocastico.py</code> — Monte Carlo N=1000 (β y P_falla)</li>
+</ul>
+</div>
+</div>
+
+<!-- 3. VALORES DE MASA Y RIGIDEZ -->
+<div class="seccion" id="valores">
+<h2>3. 📊 VALORES DE MASA Y RIGIDEZ</h2>
+<p>Estos son los <strong>valores clave</strong> que determinan el comportamiento dinámico del pórtico del proyecto. El docente debe conocerlos para evaluar correctamente las respuestas del estudiante.</p>
+
+<!-- MASA -->
+<div class="destacado">
+<h4>🔵 MASA POR PISO (m)</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">MASA</div>
+<div class="valor">3.667</div>
+<div class="unidad">t·s²/m</div>
+</div>
+<div class="destacado-item">
+<div class="label">FÓRMULA</div>
+<div class="valor" style="font-size:14px">m = Cu·At/g</div>
+<div class="unidad">1.088 · 33.06 / 9.81</div>
+</div>
+<div class="destacado-item">
+<div class="label">MATRIZ M</div>
+<div class="valor" style="font-size:14px">diag(3.667)</div>
+<div class="unidad">2×2 diagonal</div>
+</div>
+</div>
+</div>
+
+<!-- RIGIDEZ -->
+<div class="destacado" style="background:linear-gradient(135deg,#27ae60,#2ecc71)">
+<h4>🟢 RIGIDEZ DE ENTREPISO (k)</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">RIGIDEZ</div>
+<div class="valor">22,171</div>
+<div class="unidad">t/m</div>
+</div>
+<div class="destacado-item">
+<div class="label">FÓRMULA</div>
+<div class="valor" style="font-size:14px">k = 4·12·E·I/He³</div>
+<div class="unidad">4 columnas</div>
+</div>
+<div class="destacado-item">
+<div class="label">MATRIZ K</div>
+<div class="valor" style="font-size:14px">[[44,342, -22,171],<br>[-22,171, 22,171]]</div>
+<div class="unidad">t/m</div>
+</div>
+</div>
+</div>
+
+<!-- PERÍODOS -->
+<div class="destacado" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+<h4>🔴 PERÍODOS Y FRECUENCIAS MODALES</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">MODO 1</div>
+<div class="valor">T₁ = 0.280 s</div>
+<div class="unidad">f₁ = 3.571 Hz</div>
+</div>
+<div class="destacado-item">
+<div class="label">MODO 2</div>
+<div class="valor">T₂ = 0.091 s</div>
+<div class="unidad">f₂ = 10.99 Hz</div>
+</div>
+<div class="destacado-item">
+<div class="label">RELACIÓN</div>
+<div class="valor">T₁/T₂ = 3.08</div>
+<div class="unidad">√2 · (2+√2)/(2-√2)</div>
+</div>
+</div>
+</div>
+
+<h3>Resumen de matrices:</h3>
+<div class="ejemplo">
+<strong>MATRIZ DE RIGIDEZ K (t/m):</strong>
+<div class="resultado">K = ⎡  44,342   -22,171 ⎤
+    ⎣ -22,171    22,171 ⎦</div>
+</div>
+<div class="ejemplo">
+<strong>MATRIZ DE MASA M (t·s²/m):</strong>
+<div class="resultado">M = ⎡  3.667    0     ⎤
+    ⎣  0       3.667  ⎦</div>
+</div>
+
+<div class="alerta">
+<h4>⚠️ Valores que el estudiante debe memorizar</h4>
+<ul>
+<li><strong>m</strong> = 3.667 t·s²/m</li>
+<li><strong>k</strong> = 22,171 t/m</li>
+<li><strong>T₁</strong> = 0.280 s (modo fundamental)</li>
+<li><strong>T₂</strong> = 0.091 s (segundo modo)</li>
+<li><strong>f₁</strong> = 3.571 Hz</li>
+<li><strong>f₂</strong> = 10.99 Hz</li>
+</ul>
+</div>
+</div>
+
+<!-- 4. ESTRUCTURA DE BLOQUES -->
+<div class="seccion" id="bloques">
+<h2>4. 🏗 ESTRUCTURA DE LOS 4 BLOQUES</h2>
+<table class="tabla">
+<thead>
+<tr><th>Bloque</th><th>Tipo</th><th>Preguntas</th><th>Puntaje</th><th>Método</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
+<tr><td><strong>D</strong></td><td>Decisión profesional</td><td>2</td><td>25 pts</td><td><strong>Rúbrica + ética</strong></td></tr>
+<tr><td colspan="3"><strong>TOTAL</strong></td><td><strong>100 pts</strong></td><td>—</td></tr>
+</tbody>
+</table>
+
+<h3>4.1 Nivel cognitivo por bloque (Bloom)</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Nivel de Bloom</th><th>Qué se evalúa</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Recordar / Entender</td><td>El estudiante comprende el concepto</td></tr>
+<tr><td>B</td><td>Aplicar</td><td>El estudiante usa las fórmulas</td></tr>
+<tr><td>C</td><td>Analizar / Evaluar</td><td>El estudiante interpreta los valores</td></tr>
+<tr><td>D</td><td>Crear / Decidir</td><td>El estudiante decide como profesional</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 5. RÚBRICA -->
+<div class="seccion" id="rubrica">
+<h2>5. 📏 RÚBRICA DE EVALUACIÓN DETALLADA</h2>
+<p>Esta sección define <strong>cómo evaluar cada pregunta</strong>, especialmente las de los bloques C y D.</p>
+
+<h3>5.1 Rúbrica para el Bloque A (Conceptos)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Respuesta completa y correcta</td><td>100%</td></tr>
+<tr><td>Respuesta parcialmente correcta</td><td>60%</td></tr>
+<tr><td>Respuesta incompleta o imprecisa</td><td>30%</td></tr>
+<tr><td>Sin respuesta o incorrecta</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>5.2 Rúbrica para el Bloque B (Cálculo)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Resultado exacto con procedimiento correcto</td><td>100%</td></tr>
+<tr><td>Resultado exacto sin procedimiento</td><td>80%</td></tr>
+<tr><td>Procedimiento correcto con error de cálculo</td><td>60%</td></tr>
+<tr><td>Procedimiento incompleto</td><td>30%</td></tr>
+<tr><td>Sin procedimiento o incorrecto</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>5.3 Rúbrica para el Bloque C (Interpretación) — Criterios ponderados</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta C1 — Modos de vibrar</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span><p>Menciona: modo 1 (fundamental), modo 2, formas modales.</p></div>
+<div class="criterio"><strong>Criterio 2 — Justifica con números</strong><span class="peso">30%</span><p>Menciona: T₁ = 0.280 s, T₂ = 0.091 s, relación T₁/T₂ ≈ 3.</p></div>
+<div class="criterio"><strong>Criterio 3 — Conecta con otros módulos</strong><span class="peso">30%</span><p>Menciona: M05 (columna), NEC-15, análisis modal.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C2 — Masa y rigidez</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la masa</strong><span class="peso">40%</span><p>Menciona: m = Cu·At/g = 3.667 t·s²/m.</p></div>
+<div class="criterio"><strong>Criterio 2 — Identifica la rigidez</strong><span class="peso">30%</span><p>Menciona: k = 4·12·E·I/He³ = 22,171 t/m.</p></div>
+<div class="criterio"><strong>Criterio 3 — Relación masa-rigidez</strong><span class="peso">30%</span><p>Menciona: T ∝ √(m/k), a mayor rigidez menor período.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C3 — Análisis modal vs experimental</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la diferencia</strong><span class="peso">40%</span><p>Menciona: teórico (matrices K, M) vs experimental (Phyphox).</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica la validación</strong><span class="peso">30%</span><p>Menciona: la frecuencia experimental debe coincidir con T₁ (error ±10%).</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia si no coincide</strong><span class="peso">30%</span><p>Menciona: modelo teórico mal calibrado, revisar E o masa.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C4 — Filtro de Kalman</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la función</strong><span class="peso">40%</span><p>Menciona: reducir el ruido de la señal del acelerómetro.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica por qué</strong><span class="peso">30%</span><p>Menciona: el ruido contamina la FFT y la frecuencia dominante.</p></div>
+<div class="criterio"><strong>Criterio 3 — Diferencia con filtro simple</strong><span class="peso">30%</span><p>Menciona: Kalman preserva la señal, el promedio la aplana.</p></div>
+</div>
+
+<h3>5.4 Rúbrica para el Bloque D (Decisión) — Criterios + Ética</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta D1 — T experimental no coincide (12 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Técnico</strong><span class="peso">25%</span><p>Menciona: revisar E, masa o modelo.</p></div>
+<div class="criterio"><strong>Criterio 2 — Normativo</strong><span class="peso">25%</span><p>Menciona: NEC-15, análisis dinámico obligatorio en zona sísmica.</p></div>
+<div class="criterio"><strong>Criterio 3 — Ético</strong><span class="peso">25%</span><p>Menciona: reportar aunque sea desfavorable.</p></div>
+<div class="criterio"><strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span><p>Menciona: documentar, repetir ensayo, análisis estocástico.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta D2 — Período fuera del rango NEC-15 (13 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Técnico</strong><span class="peso">25%</span><p>Menciona: T > 1.4·T_suelo o similar, riesgo de resonancia.</p></div>
+<div class="criterio"><strong>Criterio 2 — Normativo</strong><span class="peso">25%</span><p>Menciona: NEC-15 (período mínimo/máximo).</p></div>
+<div class="criterio"><strong>Criterio 3 — Acciones</strong><span class="peso">25%</span><p>Menciona: rigidizar, aumentar secciones, agregar arriostramiento.</p></div>
+<div class="criterio"><strong>Criterio 4 — Consecuencias</strong><span class="peso">25%</span><p>Menciona: resonancia, amplificación dinámica, colapso.</p></div>
+</div>
+</div>
+
+<!-- 6. CÓMO EVALUAR -->
+<div class="seccion" id="evaluacion">
+<h2>6. ✍️ CÓMO EVALUAR CADA BLOQUE</h2>
+
+<h3>6.1 Evaluación del Bloque A</h3>
+<p><strong>Método:</strong> Comparación por palabras clave con la respuesta esperada.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> ¿Qué es el análisis modal?
+<div class="respuesta">Respuesta esperada: "Es el proceso de obtener las frecuencias naturales, períodos y formas modales de una estructura."</div>
+<div class="resultado">Palabras clave: frecuencias, naturales, períodos, formas modales, estructura</div>
+</div>
+
+<h3>6.2 Evaluación del Bloque B</h3>
+<p><strong>Método:</strong> Comparación numérica exacta con tolerancia del 5%.</p>
+<div class="ejemplo">
+<strong>Pregunta:</strong> Calcule T₁.
+<div class="respuesta">Respuesta esperada: 0.280 s</div>
+<div class="resultado">Tolerancia: ±0.014 s (5%)</div>
+</div>
+
+<h3>6.3 Evaluación del Bloque C</h3>
+<p><strong>Método:</strong> Rúbrica por criterios ponderados.</p>
+<ol style="padding-left:25px;font-size:14px">
+<li>Verifique cada criterio individualmente</li>
+<li>Asigne puntos por criterio cumplido</li>
+<li>Sume los puntos de todos los criterios</li>
+<li>Multiplique por el puntaje de la pregunta</li>
+</ol>
+
+<div class="ejemplo">
+<strong>Ejemplo de evaluación C2:</strong>
+<div class="respuesta">Respuesta: "La masa es 3.667 t·s²/m y la rigidez es 22,171 t/m. Como T ∝ √(m/k), al aumentar la rigidez el período disminuye."</div>
+<div class="resultado">
+✅ Criterio 1 (40%): "3.667 t·s²/m" → 40%<br>
+✅ Criterio 2 (30%): "22,171 t/m" → 30%<br>
+✅ Criterio 3 (30%): "T ∝ √(m/k)", "disminuye" → 30%<br>
+<strong>Total: 100% × 6 pts = 6/6 pts</strong>
+</div>
+</div>
+
+<h3>6.4 Evaluación del Bloque D</h3>
+<p><strong>Método:</strong> Rúbrica por criterios + bonificación por ética.</p>
+<p>Se evalúan los 4 criterios con pesos iguales (25% cada uno).</p>
+</div>
+
+<!-- 7. REPORTES -->
+<div class="seccion" id="reportes">
+<h2>7. 📊 CÓMO INTERPRETAR LOS REPORTES</h2>
+<p>Al finalizar cada módulo, el sistema genera un <strong>Reporte de Desempeño</strong> con:</p>
+<ul>
+<li>Puntaje por pregunta</li>
+<li>Preguntas correctas vs total</li>
+<li>Resumen por bloque</li>
+<li>Comparación con la respuesta esperada</li>
+</ul>
+
+<h3>7.1 Lectura del reporte</h3>
+<table class="tabla">
+<thead><tr><th>Indicador</th><th>Interpretación</th></tr></thead>
+<tbody>
+<tr><td>Bloque A alto, D bajo</td><td>El estudiante memoriza pero no decide</td></tr>
+<tr><td>Bloque B alto, C bajo</td><td>Calcula pero no interpreta</td></tr>
+<tr><td>Bloques C y D altos</td><td>Excelente criterio profesional</td></tr>
+<tr><td>Todos los bloques bajos</td><td>Requiere refuerzo general</td></tr>
+</tbody>
+</table>
+
+<h3>7.2 Alertas pedagógicas</h3>
+<div class="alerta"><h4>🚨 Alerta 1: Bloque D bajo</h4><p>Si el promedio de la clase en el Bloque D es menor a 50%, el docente debe reforzar el criterio ético profesional con casos reales.</p></div>
+<div class="alerta"><h4>🚨 Alerta 2: Bloque C bajo</h4><p>Si el promedio del Bloque C es menor a 50%, el estudiante no está interpretando correctamente los valores. Reforzar con ejercicios de interpretación.</p></div>
+<div class="alerta"><h4>🚨 Alerta 3: Bloque B bajo</h4><p>Si el promedio del Bloque B es menor a 50%, hay vacíos en el manejo de fórmulas. Reforzar con práctica guiada.</p></div>
+</div>
+
+<!-- 8. RETROALIMENTACIÓN -->
+<div class="seccion" id="retroalimentacion">
+<h2>8. 💬 CÓMO DAR RETROALIMENTACIÓN</h2>
+<p>La retroalimentación debe ser <strong>formativa</strong>, no punitiva. El objetivo es que el estudiante mejore su criterio profesional.</p>
+
+<h3>8.1 Estructura de la retroalimentación</h3>
+<ol style="padding-left:25px;font-size:14px">
+<li><strong>Lo que estuvo bien:</strong> Reconocer los aciertos específicos</li>
+<li><strong>Lo que falta:</strong> Señalar los criterios no cumplidos</li>
+<li><strong>Cómo mejorar:</strong> Dar una recomendación concreta</li>
+</ol>
+
+<h3>8.2 Ejemplos de retroalimentación</h3>
+<div class="ejemplo">
+<strong>Caso:</strong> Estudiante con puntaje 60 en Bloque D1.
+<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (revisar E o masa), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
+</div>
+</div>
+
+<!-- 9. ALERTAS -->
+<div class="seccion" id="alertas">
+<h2>9. 🚨 ALERTAS PEDAGÓGICAS DEL M07</h2>
+
+<div class="alerta"><h4>Alerta 1: Confusión entre modos y frecuencias</h4><p>Los estudiantes suelen confundir el modo 1 con el modo 2. Reforzar que T₁ (período fundamental) es el más largo y el más importante para el diseño sísmico.</p></div>
+<div class="alerta"><h4>Alerta 2: Error al calcular k_entrepiso</h4><p>El error más común es olvidar el factor 12 o el número de columnas. Reforzar: k = n_col · 12 · E · I / He³.</p></div>
+<div class="alerta"><h4>Alerta 3: No verificar la coincidencia teórico-experimental</h4><p>Muchos estudiantes calculan T₁ pero no lo comparan con la frecuencia experimental del Phyphox. Reforzar la validación.</p></div>
+<div class="alerta"><h4>Alerta 4: Bloque D vacío</h4><p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales (resonancia, colapso).</p></div>
+</div>
+
+<!-- 10. USO EN CLASE -->
+<div class="seccion" id="uso">
+<h2>10. 🎓 USO DEL MÓDULO EN CLASE</h2>
+
+<h3>10.1 Antes del módulo</h3>
+<ul>
+<li>Revisar la Guía de Estudio M07 con los estudiantes</li>
+<li>Reforzar los conceptos clave (T₁, T₂, modos, Kalman, Phyphox)</li>
+<li>Discutir la validación teórico-experimental</li>
+</ul>
+
+<h3>10.2 Durante el módulo</h3>
+<ul>
+<li>Los estudiantes acceden al módulo por computadora o celular</li>
+<li>60 minutos para responder las 15 preguntas</li>
+<li>El docente acompaña pero no da respuestas</li>
+</ul>
+
+<h3>10.3 Después del módulo</h3>
+<ul>
+<li>Generar reportes individuales</li>
+<li>Identificar las preguntas más falladas</li>
+<li>Dar retroalimentación formativa</li>
+<li>Reforzar los conceptos débiles</li>
+</ul>
+
+<h3>10.4 Tiempo estimado</h3>
+<table class="tabla">
+<thead><tr><th>Actividad</th><th>Tiempo</th></tr></thead>
+<tbody>
+<tr><td>Revisión de la guía de estudio</td><td>45 min</td></tr>
+<tr><td>Cuestionario</td><td>60 min</td></tr>
+<tr><td>Retroalimentación</td><td>30 min</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>2.5 horas</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 11. RESPUESTAS ESPERADAS -->
+<div class="seccion" id="respuestas">
+<h2>11. 📝 RESPUESTAS ESPERADAS DE LAS 15 PREGUNTAS</h2>
+<p>Esta sección es <strong>confidencial</strong>. Contiene las respuestas esperadas para cada pregunta del cuestionario M07.</p>
+
+<h3>Bloque A — Conceptos (10 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>A1</td><td>¿Qué es el análisis modal?</td><td>Proceso de obtener frecuencias naturales, períodos y formas modales de una estructura.</td><td>2</td></tr>
+<tr><td>A2</td><td>¿Qué es la matriz de rigidez K?</td><td>Matriz que relaciona desplazamientos con fuerzas. Para shear building 2×2: [[2k,-k],[-k,k]].</td><td>2</td></tr>
+<tr><td>A3</td><td>¿Qué es la matriz de masa M?</td><td>Matriz diagonal con las masas concentradas en cada piso.</td><td>3</td></tr>
+<tr><td>A4</td><td>¿Qué es el filtro de Kalman?</td><td>Algoritmo que reduce el ruido de una señal preservando su información útil.</td><td>3</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque B — Cálculo (40 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>B1</td><td>Calcule m (masa por piso)</td><td>3.667 t·s²/m</td><td>6</td></tr>
+<tr><td>B2</td><td>Calcule k (rigidez de entrepiso)</td><td>22,171 t/m</td><td>8</td></tr>
+<tr><td>B3</td><td>Calcule T₁ (período fundamental)</td><td>0.280 s</td><td>10</td></tr>
+<tr><td>B4</td><td>Calcule T₂ (segundo modo)</td><td>0.091 s</td><td>8</td></tr>
+<tr><td>B5</td><td>Calcule f₁ (frecuencia fundamental)</td><td>3.571 Hz</td><td>8</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque C — Interpretación (25 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>C1</td><td>Modos de vibrar</td><td>Modo 1 (T₁=0.280s) es fundamental; modo 2 (T₂=0.091s) es secundario.</td><td>6</td></tr>
+<tr><td>C2</td><td>Masa y rigidez</td><td>m = 3.667 t·s²/m, k = 22,171 t/m. T ∝ √(m/k).</td><td>6</td></tr>
+<tr><td>C3</td><td>Análisis modal vs experimental</td><td>Teórico (K, M) vs experimental (Phyphox). Error ±10%.</td><td>6</td></tr>
+<tr><td>C4</td><td>Filtro de Kalman</td><td>Reduce ruido, preserva señal sísmica. Mejora la FFT.</td><td>7</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque D — Decisión (25 pts)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>D1</td><td>T experimental no coincide</td><td>Revisar E o masa. Reportar aunque sea desfavorable. Documentar.</td><td>12</td></tr>
+<tr><td>D2</td><td>Período fuera del rango NEC-15</td><td>Riesgo de resonancia. Rigidizar, aumentar secciones. Documentar.</td><td>13</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 12. ANEXO TÉCNICO -->
+<div class="seccion" id="anexo">
+<h2>12. 📐 ANEXO TÉCNICO — DEDUCCIONES</h2>
+<p>Este anexo documenta las <strong>deducciones analíticas</strong> de las fórmulas utilizadas en el M07, para que el estudiante comprenda su origen y no solo las memorice.</p>
+
+<div class="alerta">
+<h4>📌 Propósito del anexo</h4>
+<p>Que el estudiante comprenda <strong>de dónde vienen las fórmulas</strong> de K, M, ω, T y Kalman, deduciéndolas paso a paso.</p>
+</div>
+
+<h3>12.1 Deducción de la matriz de rigidez K</h3>
+<p>Para un pórtico de cortante (shear building) de 2 pisos, cada piso tiene una rigidez k:</p>
+<div class="ejemplo">
+<div class="resultado">k = n_col · 12 · E · I_col / He³</div>
+</div>
+<p>La matriz de rigidez acopla los desplazamientos de los pisos:</p>
+<div class="ejemplo">
+<div class="resultado">K = ⎡  2k   -k ⎤
+    ⎣ -k     k ⎦</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">k = 4 · 12 · 2,188,190 · 0.000217 / 3³ = 22,171 t/m
+K = ⎡  44,342   -22,171 ⎤
+    ⎣ -22,171    22,171 ⎦</div>
+</div>
+
+<h3>12.2 Deducción de la matriz de masa M</h3>
+<p>Modelo de masa concentrada (lumped mass):</p>
+<div class="ejemplo">
+<div class="resultado">m = Cu · At / g</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">m = 1.088 · 33.06 / 9.81 = 3.667 t·s²/m
+M = ⎡  3.667    0     ⎤
+    ⎣  0       3.667  ⎦</div>
+</div>
+
+<h3>12.3 Deducción del período T₁ y T₂</h3>
+<p>La ecuación de autovalores:</p>
+<div class="ejemplo">
+<div class="resultado">K · φ = ω² · M · φ
+M⁻¹ · K · φ = ω² · φ</div>
+</div>
+<p>Para el shear building de 2 pisos, los autovalores analíticos son:</p>
+<div class="ejemplo">
+<div class="resultado">ω₁² = (k/m) · (2 - √2) ≈ 0.586 · k/m
+ω₂² = (k/m) · (2 + √2) ≈ 3.414 · k/m</div>
+</div>
+<div class="ejemplo">
+<strong>Cálculo:</strong>
+<div class="resultado">k/m = 22,171 / 3.667 = 6,046
+ω₁ = √(0.586 · 6,046) = 22.43 rad/s → T₁ = 0.280 s
+ω₂ = √(3.414 · 6,046) = 69.05 rad/s → T₂ = 0.091 s</div>
+</div>
+
+<h3>12.4 Deducción de las frecuencias f₁ y f₂</h3>
+<div class="ejemplo">
+<div class="resultado">f₁ = ω₁ / (2π) = 22.43 / 6.283 = 3.571 Hz
+f₂ = ω₂ / (2π) = 69.05 / 6.283 = 10.99 Hz</div>
+</div>
+
+<h3>12.5 Filtro de Kalman (1D)</h3>
+<p>El filtro de Kalman se basa en dos pasos:</p>
+<div class="ejemplo">
+<strong>Predicción:</strong>
+<div class="resultado">x_pred = x[k-1]
+P_pred = P[k-1] + Q</div>
+</div>
+<div class="ejemplo">
+<strong>Actualización:</strong>
+<div class="resultado">K = P_pred / (P_pred + R)
+x[k] = x_pred + K · (z[k] - x_pred)
+P[k] = (1 - K) · P_pred</div>
+</div>
+<p><b>Q</b> = varianza del proceso (modelo), <b>R</b> = varianza de la medición (ruido).</p>
+
+<h3>12.6 Integración numérica (trapezoidal)</h3>
+<p>Para pasar de aceleración a velocidad y de velocidad a desplazamiento:</p>
+<div class="ejemplo">
+<div class="resultado">v[k] = v[k-1] + (a[k-1] + a[k]) · dt / 2
+d[k] = d[k-1] + (v[k-1] + v[k]) · dt / 2</div>
+</div>
+
+<h3>12.7 FFT (Transformada Rápida de Fourier)</h3>
+<p>La FFT convierte la señal del dominio del tiempo al dominio de la frecuencia:</p>
+<div class="ejemplo">
+<div class="resultado">X(f) = Σ x(t) · e^(-j·2π·f·t)</div>
+</div>
+<p>El pico de la FFT indica la frecuencia dominante = frecuencia natural del pórtico.</p>
+
+<h3>12.8 Modelo estocástico (Monte Carlo)</h3>
+<p>El Algoritmo 5 ejecuta N = 1000 simulaciones con 5 variables aleatorias:</p>
+<table class="tabla">
+<thead><tr><th>Variable</th><th>Distribución</th><th>COV</th></tr></thead>
+<tbody>
+<tr><td>E (módulo elasticidad)</td><td>Lognormal</td><td>15%</td></tr>
+<tr><td>m (masa)</td><td>Normal</td><td>10%</td></tr>
+<tr><td>I_col (inercia columna)</td><td>Normal</td><td>5%</td></tr>
+<tr><td>He (altura entrepiso)</td><td>Normal</td><td>3%</td></tr>
+<tr><td>Cu (carga última)</td><td>Normal</td><td>10%</td></tr>
+</tbody>
+</table>
+<p><b>Resultados esperados:</b></p>
+<ul>
+<li>T₁ medio ≈ 0.280 s (COV ≈ 7%)</li>
+<li>P_falla ≈ 0.00000 (muy baja)</li>
+<li>β > 3.5 (confiabilidad alta)</li>
+<li>Sensibilidad: E y m son las variables más influyentes</li>
+</ul>
+
+<h3>12.9 Resumen de valores clave</h3>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td><b>m (masa por piso)</b></td><td><b>3.667</b></td><td><b>t·s²/m</b></td></tr>
+<tr><td><b>k (rigidez entrepiso)</b></td><td><b>22,171</b></td><td><b>t/m</b></td></tr>
+<tr><td>E</td><td>2,188,190</td><td>t/m²</td></tr>
+<tr><td>I_col</td><td>0.000217</td><td>m⁴</td></tr>
+<tr><td><b>T₁ (fundamental)</b></td><td><b>0.280</b></td><td><b>s</b></td></tr>
+<tr><td><b>T₂</b></td><td><b>0.091</b></td><td><b>s</b></td></tr>
+<tr><td>f₁</td><td>3.571</td><td>Hz</td></tr>
+<tr><td>f₂</td><td>10.99</td><td>Hz</td></tr>
+<tr><td>ω₁</td><td>22.43</td><td>rad/s</td></tr>
+<tr><td>ω₂</td><td>69.05</td><td>rad/s</td></tr>
+</tbody>
+</table>
+
+<h3>12.10 Próximo paso (M08)</h3>
+<p>Con el análisis dinámico validado, el siguiente paso natural podría ser:</p>
+<ul>
+<li><b>M08 — Filtro de Kalman Avanzado</b> (aplicación al acelerograma real)</li>
+<li><b>M08 — Análisis Espectral</b> (respuesta en el dominio de la frecuencia)</li>
+<li><b>M08 — Espectros de Respuesta</b> (NEC-15 §3.3)</li>
+</ul>
+
+<div class="cita">
+"La incertidumbre no se elimina: se cuantifica.<br>
+La estructura habla a través de sus modos de vibrar."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="M07_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
+<a href="modulo_07_analisis_dinamico.html" class="btn">📝 Ir al Cuestionario</a>
+<a href="manual_programa.html" class="btn">📖 Manual del Programa</a>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+<button class="btn" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"La incertidumbre no se elimina: se cuantifica."</p>
+</div>
+
+</div>
+</body>
+</html>

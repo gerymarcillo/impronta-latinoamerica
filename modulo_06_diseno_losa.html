@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>M06 - Diseño de Losa</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-imagen{height:70px;border-radius:8px;border:2px solid #f39c12}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
+.header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
+.tab.active{background:linear-gradient(135deg,#f39c12,#e67e22);border-color:#f39c12;color:white}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
+.progreso-bar{background:linear-gradient(90deg,#2ecc71,#f39c12);height:100%;transition:width 0.4s}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
+.seccion ul{list-style:none;padding-left:0;margin:10px 0}
+.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px;line-height:1.6}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula-box{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:10px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
+.formula-box.grande{font-size:18px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #f39c12}
+.badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.badge.orange{background:#f39c12}
+.badge.red{background:#e74c3c}
+.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
+.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
+.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
+.ejercicio-previo .campo strong{color:#2ecc71}
+.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #3498db}
+textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
+.rubrica{background:#34495e;border-radius:8px;padding:15px;margin-top:15px;font-size:12px}
+.rubrica h4{color:#f39c12;margin-bottom:10px}
+.rubrica ul{list-style:none}
+.rubrica li{padding:4px 0}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
+.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
+.puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
+.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
+.c-insuf{background:#7f8c8d;color:white}
+.c-basico{background:#16a085;color:white}
+.c-comp{background:#f39c12;color:white}
+.c-dest{background:#e67e22;color:white}
+.c-excel{background:#c0392b;color:white}
+.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
+.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
+.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
+.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
+.firma{text-align:center;min-width:220px}
+.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
+.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
+.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
+.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
+.modalidad ul{list-style:none}
+.modalidad li{padding:4px 0;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>🧱 M06 — DISEÑO DE LOSA</h1>
+<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<p>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+<img src="portada_estructural.png" alt="Portada" class="header-imagen">
+</div>
+
+<!-- PESTAÑAS -->
+<div class="tabs">
+<button class="tab active" onclick="cambiarTab('clases', this)">🎥 Clases</button>
+<button class="tab" onclick="cambiarTab('consulta', this)">📚 Consulta</button>
+<button class="tab" onclick="cambiarTab('descargas', this)">📖 Descargas</button>
+<button class="tab" onclick="cambiarTab('cuestionario', this)">✏️ Cuestionario</button>
+</div>
+
+<!-- TAB CLASES -->
+<div id="tab-clases" class="tab-content active">
+<div class="seccion">
+<h2>🎥 CLASES GRABADAS — M06</h2>
+<p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 1 — Predimensionamiento de Losa</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 05/11/2026 | ⏱ 18 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 2 — Inercia Equivalente (Steiner)</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 07/11/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 3 — Momentos y Acero de Refuerzo</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 09/11/2026 | ⏱ 22 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 4 — Modelo Estocástico (100 sim)</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 11/11/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
+</div>
+</div>
+</div>
+
+<!-- TAB CONSULTA -->
+<div id="tab-consulta" class="tab-content">
+<div class="seccion">
+<h2>📚 CONSULTA — M06 DISEÑO DE LOSA</h2>
+<h3>🎯 ¿Qué es el diseño de losa?</h3>
+<p>Es el proceso de dimensionar una losa alivianada con nervios tipo T, aplicando la NEC-15 y el ACI 318, y verificando su comportamiento mediante el diagrama de momentos y un modelo estocástico.</p>
+<h3>📐 Fórmulas clave</h3>
+<div class="formula-box">Carga lineal: w = Cu · paso_nervios</div>
+<div class="formula-box">Momento positivo: M_pos = w · Lx² / 8</div>
+<div class="formula-box">Momento negativo: M_neg = M_pos · 0.8</div>
+<div class="formula-box">Peralte efectivo: d = H - rec - φ/2</div>
+<div class="formula-box grande">Acero positivo: As_pos = M_pos / (φ · fy · (d - a/2))</div>
+<div class="formula-box">Acero mínimo: As_min = 0.0018 · b · H</div>
+<div class="formula-box">Deflexión: δ_max = 5 · w · L⁴ / (384 · E · I)</div>
+<div class="formula-box">Deflexión admisible: δ_adm = L / 240</div>
+<h3>🔑 Los 4 Análisis del M06</h3>
+<ul>
+<li><b>Análisis 1:</b> Predimensionamiento (h_eq, H_losa)</li>
+<li><b>Análisis 2:</b> Cálculo de momentos (M_pos, M_neg)</li>
+<li><b>Análisis 3:</b> Diseño de acero (As_pos, As_neg, As_min)</li>
+<li><b>Análisis 4:</b> Modelo estocástico (100 simulaciones)</li>
+</ul>
+<h3>📊 Datos del modelo base (2 pisos)</h3>
+<table class="tabla">
+<tr><th>Parámetro</th><th>Valor</th></tr>
+<tr><td>h_eq</td><td>18.06 cm</td></tr>
+<tr><td>H_losa</td><td>25.0 cm</td></tr>
+<tr><td>bn</td><td>10.0 cm</td></tr>
+<tr><td>bb</td><td>50.0 cm</td></tr>
+<tr><td>tc</td><td>5.0 cm</td></tr>
+<tr><td>Cu</td><td>1.088 t/m²</td></tr>
+<tr><td>Lx</td><td>6.00 m</td></tr>
+<tr><td>fc</td><td>210 kg/cm²</td></tr>
+<tr><td>fy</td><td>4200 kg/cm²</td></tr>
+<tr><td><b>M_pos</b></td><td><b>2.448 t·m</b></td></tr>
+<tr><td><b>M_neg</b></td><td><b>1.958 t·m/m</b></td></tr>
+<tr><td><b>As_pos</b></td><td><b>2.96 cm²</b></td></tr>
+<tr><td><b>As_neg</b></td><td><b>4.50 cm²/m</b></td></tr>
+<tr><td><b>Arm. negativa</b></td><td><b>φ 10 mm</b></td></tr>
+<tr><td><b>Arm. temperatura</b></td><td><b>φ 8 mm</b></td></tr>
+<tr><td><b>δ_max</b></td><td><b>0.44 mm</b></td></tr>
+<tr><td><b>δ_adm</b></td><td><b>25.00 mm</b></td></tr>
+</table>
+<div style="text-align:center;margin-top:25px">
+<a href="M06_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
+</div>
+</div>
+</div>
+
+<!-- TAB DESCARGAS -->
+<div id="tab-descargas" class="tab-content">
+<div class="seccion">
+<h2>📖 DESCARGAS — M06</h2>
+<p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
+<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📘 Manual del Programa</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Visión completa del proyecto ECT-UNESUM-2026</p></div>
+<a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
+<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📗 Guía de Estudio M06</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Material de consulta para estudiantes</p></div>
+<a href="M06_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
+<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📙 Manual del Docente M06</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Rúbrica por criterios + evaluación</p></div>
+<a href="M06_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
+<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📄 Tabla NEC-15</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Cargas vivas y combinaciones</p></div>
+<a href="tabla_nec15.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
+<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📄 Tabla ACI 318</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Factores de mayoración</p></div>
+<a href="tabla_aci318.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+</div>
+</div>
+
+<!-- TAB CUESTIONARIO -->
+<div id="tab-cuestionario" class="tab-content">
+<div class="info-bar">
+<span>👤 <b id="info-estudiante">Estudiante</b></span>
+<span>⏱ <b id="info-tiempo">00:00</b></span>
+<span>📊 <b id="info-progreso">0/15</b></span>
+</div>
+<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
+<div id="contenedor-pregunta"></div>
+<div id="pantalla-resultado" style="display:none">
+<div class="resultado">
+<h2>🏆 RESULTADO M06</h2>
+<div class="puntaje-grande" id="resultado-puntaje"></div>
+<div id="resultado-clasificacion"></div>
+</div>
+<div id="contenedor-certificado"></div>
+<div style="text-align:center;margin-top:20px">
+<a href="index.html" class="btn">← Volver al menú</a>
+<button class="btn btn-orange" onclick="window.print()">🖨 Imprimir certificado</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function cambiarTab(tabId, btn){
+document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+document.getElementById('tab-'+tabId).classList.add('active');
+btn.classList.add('active');
+}
+
+var PREGUNTAS = [
+// BLOQUE A: CONCEPTOS (4 preguntas, 10 pts)
+{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,enunciado:"¿Qué es una losa alivianada con nervios tipo T?",ejercicio:null,respuesta_esperada:"Es una losa compuesta por una capa de compresión superior, nervios que resisten la flexión y bloques aligerantes que reducen el peso propio."},
+{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,enunciado:"¿Qué es la inercia equivalente (h_eq) y por qué se calcula?",ejercicio:null,respuesta_esperada:"Es el espesor de una losa maciza ficticia que tendría la misma inercia que la losa alivianada real. Se calcula con el Teorema de Steiner."},
+{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,enunciado:"¿Por qué ETABS modela los nervios como vigas simplemente apoyadas?",ejercicio:null,respuesta_esperada:"Porque en ETABS los nervios se consideran articulados en los extremos, no absorben momento negativo. Solo se diseña acero positivo al centro."},
+{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,enunciado:"¿Qué es el acero mínimo por temperatura y por qué se coloca?",ejercicio:null,respuesta_esperada:"Es el acero mínimo (0.0018·b·H) que se coloca en la capa superior para controlar fisuración por temperatura y retracción."},
+
+// BLOQUE B: CÁLCULO (5 preguntas, 40 pts)
+{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,enunciado:"Calcule la carga lineal por nervio w para Cu=1.088 t/m² y paso_nervios=0.50 m.",ejercicio:{instrucciones:"w = Cu · paso_nervios",campos:[{label:"Cu (t/m²)",valor:1.088},{label:"paso_nervios (m)",valor:0.50},{label:"w (t/m)",valor:0.544}]},respuesta_esperada:"La carga lineal es 0.544 t/m."},
+{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,enunciado:"Calcule el momento positivo M_pos para w=0.544 t/m y Lx=6.00 m.",ejercicio:{instrucciones:"M_pos = w · Lx² / 8",campos:[{label:"w (t/m)",valor:0.544},{label:"Lx²",valor:36},{label:"M_pos (t·m)",valor:2.448}]},respuesta_esperada:"El momento positivo es 2.448 t·m."},
+{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,enunciado:"Calcule el momento negativo M_neg para M_pos=2.448 t·m.",ejercicio:{instrucciones:"M_neg = M_pos · 0.8",campos:[{label:"M_pos (t·m)",valor:2.448},{label:"M_neg (t·m/m)",valor:1.958}]},respuesta_esperada:"El momento negativo es 1.958 t·m/m."},
+{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,enunciado:"Calcule el acero positivo As_pos para M_pos=2.448 t·m, d=22.6 cm, fy=4200, φ=0.9.",ejercicio:{instrucciones:"As_pos = M_pos · 100000 / (0.9 · fy · d)",campos:[{label:"M_pos · 100000",valor:244800},{label:"0.9 · 4200 · 22.6",valor:85428},{label:"As_pos (cm²)",valor:2.96}]},respuesta_esperada:"El acero positivo es 2.96 cm²."},
+{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,enunciado:"Calcule el acero mínimo As_min para b=100 cm y H=25 cm.",ejercicio:{instrucciones:"As_min = 0.0018 · b · H",campos:[{label:"b (cm)",valor:100},{label:"H (cm)",valor:25},{label:"As_min (cm²/m)",valor:4.50}]},respuesta_esperada:"El acero mínimo es 4.50 cm²/m."},
+
+// BLOQUE C: INTERPRETACIÓN (4 preguntas, 25 pts)
+{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,enunciado:"Interprete el diagrama de momentos de la losa. ¿Dónde está el momento máximo?",ejercicio:{instrucciones:"M_pos = w · Lx² / 8",campos:[{label:"w (t/m)",valor:0.544},{label:"Lx (m)",valor:6.00},{label:"M_pos (t·m)",valor:2.448}]},respuesta_esperada:"El momento máximo está en el centro del tramo (x = Lx/2) y vale 2.448 t·m. Los extremos están articulados (M=0)."},
+{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,enunciado:"¿Por qué la losa es el diafragma que une todo el pórtico?",ejercicio:null,respuesta_esperada:"Porque distribuye las fuerzas laterales a las vigas y columnas, garantizando que el pórtico trabaje como un sistema integrado."},
+{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,enunciado:"¿Cómo se relaciona la inercia equivalente con el diseño de la losa?",ejercicio:null,respuesta_esperada:"La inercia equivalente (h_eq) permite modelar la losa alivianada como maciza en ETABS, manteniendo la misma rigidez y calculando la deflexión correctamente."},
+{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,enunciado:"¿Qué pasa si la deflexión δ_max supera L/240? ¿Qué decisión tomaría?",ejercicio:null,respuesta_esperada:"No cumple con NEC-15. Se debe aumentar el peralte de la losa, aumentar la inercia, o reducir la luz con una viga secundaria."},
+
+// BLOQUE D: DECISIÓN (2 preguntas, 25 pts)
+{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,enunciado:"El constructor propone reducir el espesor de la losa de 25 a 20 cm para ahorrar concreto. ¿Aprueba el cambio? Justifique técnica y éticamente.",ejercicio:{instrucciones:"Considere NEC-15, ética, trazabilidad",campos:[{label:"H actual",valor:"25 cm"},{label:"H propuesto",valor:"20 cm"},{label:"Relación L/H actual",valor:"24 ≤ 28"},{label:"Relación L/H propuesto",valor:"30 > 28"}]},respuesta_esperada:"No apruebo. La relación L/H = 30 supera el límite de 28 de NEC-15. Rechazar el cambio, documentar y notificar. Responsabilidad civil y penal."},
+{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,enunciado:"El constructor usa bloques de menor resistencia en la losa alivianada. ¿Qué hace usted como ingeniero responsable?",ejercicio:{instrucciones:"Considere NEC-15, ACI 318, ética",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},respuesta_esperada:"Rechazar el material, notificar por escrito, suspender la obra, documentar todo. El ingeniero firmante es responsable civil y penal."}
+];
+
+var respuestas={},preguntaActual=0,inicioTiempo=null,intervalo=null;
+var MODULO="M06",TITULO="Diseño de Losa";
+document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
+inicioTiempo=new Date();
+intervalo=setInterval(function(){var s=Math.floor((new Date()-inicioTiempo)/1000);var m=Math.floor(s/60).toString().padStart(2,'0');var ss=(s%60).toString().padStart(2,'0');document.getElementById('info-tiempo').textContent=m+':'+ss;},1000);
+
+function mostrar(){
+var p=PREGUNTAS[preguntaActual],total=PREGUNTAS.length;
+document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)+'%';
+document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
+var h='<div class="pregunta-box">';
+h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
+if(p.ejercicio){
+h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
+p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
+h+='</div>';
+}
+h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
+h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
+h+='<div class="rubrica"><h4>🎯 RÚBRICA DE EVALUACIÓN</h4><ul>';
+h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
+h+='<li>🟧 Básico (40-60%): Responde sin números</li>';
+h+='<li>🟨 Competente (60-80%): Responde más justifica más números</li>';
+h+='<li>🟩 Excelente (80-100%): Todo lo anterior más ética</li>';
+h+='</ul></div></div>';
+h+='<div class="nav-buttons">';
+h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
+h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
+h+='</div>';
+document.getElementById('contenedor-pregunta').innerHTML=h;
+}
+function guardar(){var p=PREGUNTAS[preguntaActual];var t=document.getElementById('resp_'+p.id);if(t)respuestas[p.id]=t.value;}
+function ant(){guardar();preguntaActual--;mostrar();}
+function sig(){guardar();preguntaActual++;mostrar();}
+function calcPts(){
+var t=0,m=0;
+PREGUNTAS.forEach(function(p){
+var r=(respuestas[p.id]||'').toLowerCase();
+var e=p.respuesta_esperada.toLowerCase().split(/\s+/);
+var u=r.split(/\s+/);
+var c=0;
+e.forEach(function(x){if(x.length>4&&u.indexOf(x)!==-1)c++;});
+var pt=0;
+if(c>=6)pt=100;else if(c>=4)pt=75;else if(c>=2)pt=50;else if(r.length>15)pt=25;
+t+=pt*p.puntaje/100;m+=p.puntaje;
+});
+return (t/m)*100;
+}
+function clasificar(p){
+if(p<40)return{txt:'INSUFICIENTE',css:'c-insuf'};
+if(p<60)return{txt:'BÁSICO',css:'c-basico'};
+if(p<80)return{txt:'COMPETENTE',css:'c-comp'};
+if(p<95)return{txt:'DESTACADO',css:'c-dest'};
+return{txt:'EXCELENTE',css:'c-excel'};
+}
+function fin(){
+guardar();clearInterval(intervalo);
+var pts=calcPts();var cl=clasificar(pts);
+document.getElementById('contenedor-pregunta').innerHTML='';
+document.getElementById('pantalla-resultado').style.display='block';
+document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
+document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
+localStorage.setItem(MODULO+'_puntaje',pts);
+if(pts>=60){
+var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
+var fecha=new Date().toLocaleDateString('es-EC');
+var nombre=localStorage.getItem('estudiante_nombre')||'';
+var cedula=localStorage.getItem('estudiante_cedula')||'';
+var lugar=localStorage.getItem('estudiante_lugar')||'';
+var rol=localStorage.getItem('usuario_rol')||'estudiante';
+var rolTexto=(rol==='docente')?'DOCENTE EXPOSITOR':'ESTUDIANTE';
+document.getElementById('contenedor-certificado').innerHTML=
+'<div class="certificado">'+
+'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">'+
+'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>'+
+'<h3>FACULTAD DE CIENCIAS TÉCNICAS</h3>'+
+'<h3>CARRERA DE INGENIERÍA CIVIL</h3>'+
+'<hr style="margin:15px 0">'+
+'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
+'<hr style="margin:15px 0">'+
+'<h3>CERTIFICADO DE APROBACIÓN</h3>'+
+'<h3>Módulo M06 — Diseño de Losa</h3>'+
+'<p style="margin:15px 0">La Universidad certifica que:</p>'+
+'<h2 style="color:#2c3e50">'+nombre+'</h2>'+
+'<p>C.C. '+cedula+'</p>'+
+'<p style="margin:10px 0"><b>Rol: '+rolTexto+'</b></p>'+
+'<p style="margin:10px 0"><b>Lugar de intervención:</b> '+lugar+'</p>'+
+'<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
+'<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
+'<p><b>Clasificación: '+cl.txt+'</b></p>'+
+'<div class="modalidad">'+
+'<h4>MODALIDAD DE APROBACIÓN:</h4>'+
+'<ul>'+
+'<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
+'<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
+'</ul></div>'+
+'<div style="margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;text-align:left;font-family:Arial;font-size:12px;color:#2c3e50">'+
+'<p><b>Código:</b> '+cod+'</p>'+
+'<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
+'<p><b>Vigencia:</b> Permanente</p>'+
+'</div>'+
+'<div class="firmas">'+
+'<div class="firma"><div class="linea-firma"></div>'+
+'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+
+'<p>DOCENTE — ESTRUCTURA I / II</p>'+
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
+'<div class="firma"><div class="linea-firma"></div>'+
+'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>'+
+'<p>COORDINADORA DE CARRERA</p>'+
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
+'</div>'+
+'<hr style="margin:20px 0">'+
+'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>'+
+'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>'+
+'</div>';
+}
+}
+mostrar();
+</script>
+</body>
+</html>

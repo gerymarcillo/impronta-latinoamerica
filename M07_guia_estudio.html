@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M07 - Análisis Dinámico Modal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #16a085;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #16a085}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.destacado{background:linear-gradient(135deg,#16a085,#1abc9c);border-radius:10px;padding:20px;margin:15px 0;border:2px solid #f39c12}
+.destacado h4{color:white;font-size:16px;margin-bottom:12px;text-align:center;letter-spacing:1px}
+.destacado-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:15px}
+.destacado-item{background:rgba(255,255,255,0.15);border-radius:8px;padding:15px;text-align:center}
+.destacado-item .label{color:#ecf0f1;font-size:11px;letter-spacing:1px;margin-bottom:6px}
+.destacado-item .valor{color:white;font-size:20px;font-weight:bold}
+.destacado-item .unidad{color:#bdc3c7;font-size:11px;margin-top:3px}
+.tic-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:10px 0}
+.tic-box h4{color:#2ecc71;margin-bottom:10px;font-size:15px}
+.tic-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #34495e;font-size:13px}
+.tic-item:last-child{border-bottom:none}
+.tic-item .ok{color:#2ecc71;font-weight:bold}
+.tic-item .no{color:#e74c3c;font-weight:bold}
+.tic-item .rev{color:#f39c12;font-weight:bold}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M07</h1>
+<h2>ANÁLISIS DINÁMICO MODAL — PÓRTICO 2 PISOS</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#valores">Valores de masa y rigidez</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#tic">Los 5 TIC de Análisis Dinámico</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+<li><a href="#acapite">📖 Acápite de Estudio</a></li>
+<li><a href="#condiciones">✅ Condiciones de Respuesta Válida</a></li>
+</ol>
+</div>
+
+<!-- 1. PRESENTACIÓN -->
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el <strong>análisis dinámico modal</strong> aplicado al pórtico de 2 pisos del proyecto, utilizando la <strong>NEC-15</strong> y el <strong>ACI 318-19</strong>.</p>
+<p>El análisis modal permite determinar las <strong>frecuencias naturales</strong>, <strong>períodos</strong> y <strong>formas modales</strong> de la estructura, que son esenciales para el diseño sismorresistente.</p>
+<p>A diferencia de un software comercial (ETABS, SAP2000, Revit), este módulo integra:</p>
+<ul>
+<li><strong>Análisis analítico:</strong> matrices de rigidez K y masa M</li>
+<li><strong>Análisis estocástico:</strong> Monte Carlo (N=1000) con confiabilidad β</li>
+<li><strong>Validación experimental:</strong> Phyphox + filtro de Kalman</li>
+<li><strong>Hardware:</strong> ADXL345 + ESP32 (sismógrafo de bajo costo)</li>
+<li><strong>5 TIC de Análisis Dinámico</strong> (criterios de diseño)</li>
+</ul>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
+</div>
+
+<!-- 2. OBJETIVOS -->
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Analizar el comportamiento dinámico del pórtico de 2 pisos mediante el método modal, calculando sus frecuencias naturales, períodos y formas modales, y validando los resultados con datos experimentales del acelerómetro.</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Construir la matriz de rigidez K y la matriz de masa M</li>
+<li>Calcular las frecuencias naturales ω₁ y ω₂</li>
+<li>Determinar los períodos T₁ y T₂</li>
+<li>Identificar las formas modales φ₁ y φ₂</li>
+<li>Aplicar el filtro de Kalman para reducción de ruido</li>
+<li>Comparar el período teórico con el experimental (Phyphox)</li>
+<li>Aplicar los 5 TIC de Análisis Dinámico</li>
+</ul>
+</div>
+
+<!-- 3. FUNDAMENTO TEÓRICO -->
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+
+<h3>3.1 ¿Qué es el análisis modal?</h3>
+<p>Es el proceso de obtener las <strong>frecuencias naturales</strong>, <strong>períodos</strong> y <strong>formas modales</strong> de una estructura. Se basa en resolver el problema de autovalores:</p>
+<div class="formula formula-grande">K · φ = ω² · M · φ</div>
+
+<h3>3.2 Matriz de rigidez K (shear building)</h3>
+<p>Para un pórtico de cortante de 2 pisos, cada piso tiene una rigidez <strong>k</strong>:</p>
+<div class="formula">k = n_col · 12 · E · I_col / He³</div>
+<p>La matriz de rigidez acopla los desplazamientos de los pisos:</p>
+<div class="formula">K = ⎡  2k   -k ⎤
+    ⎣ -k     k ⎦</div>
+
+<h3>3.3 Matriz de masa M</h3>
+<p>Modelo de masa concentrada (lumped mass):</p>
+<div class="formula">m = Cu · At / g</div>
+<div class="formula">M = ⎡  m   0 ⎤
+    ⎣  0   m ⎦</div>
+
+<h3>3.4 Frecuencias naturales (analíticas)</h3>
+<p>Para el shear building de 2 pisos:</p>
+<div class="formula">ω₁² = (k/m) · (2 - √2) ≈ 0.586 · k/m</div>
+<div class="formula">ω₂² = (k/m) · (2 + √2) ≈ 3.414 · k/m</div>
+
+<h3>3.5 Períodos y frecuencias</h3>
+<div class="formula">T₁ = 2π / ω₁   |   f₁ = ω₁ / (2π)</div>
+<div class="formula">T₂ = 2π / ω₂   |   f₂ = ω₂ / (2π)</div>
+
+<h3>3.6 Filtro de Kalman</h3>
+<p>Algoritmo que reduce el ruido de una señal preservando su información útil:</p>
+<div class="formula">Predicción: x_pred = x[k-1] ; P_pred = P[k-1] + Q</div>
+<div class="formula">Actualización: K = P_pred / (P_pred + R)</div>
+<div class="formula">x[k] = x_pred + K · (z[k] - x_pred)</div>
+
+<h3>3.7 Validación experimental (Phyphox)</h3>
+<p>La frecuencia experimental se obtiene del pico de la FFT:</p>
+<div class="formula">f_exp = argmax(FFT(señal_filtrada))</div>
+<p>Se compara con la frecuencia teórica f₁ (error aceptable ± 10%).</p>
+</div>
+
+<!-- 4. VALORES DE MASA Y RIGIDEZ -->
+<div class="seccion" id="valores">
+<h2>4. 📊 VALORES DE MASA Y RIGIDEZ</h2>
+<p>Estos son los <strong>valores clave</strong> del pórtico del proyecto. Memorízalos porque aparecerán en el cuestionario.</p>
+
+<!-- MASA -->
+<div class="destacado">
+<h4>🔵 MASA POR PISO (m)</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">MASA</div>
+<div class="valor">3.667</div>
+<div class="unidad">t·s²/m</div>
+</div>
+<div class="destacado-item">
+<div class="label">FÓRMULA</div>
+<div class="valor" style="font-size:13px">m = Cu·At/g</div>
+<div class="unidad">1.088 · 33.06 / 9.81</div>
+</div>
+</div>
+</div>
+
+<!-- RIGIDEZ -->
+<div class="destacado" style="background:linear-gradient(135deg,#27ae60,#2ecc71)">
+<h4>🟢 RIGIDEZ DE ENTREPISO (k)</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">RIGIDEZ</div>
+<div class="valor">22,171</div>
+<div class="unidad">t/m</div>
+</div>
+<div class="destacado-item">
+<div class="label">FÓRMULA</div>
+<div class="valor" style="font-size:13px">k = 4·12·E·I/He³</div>
+<div class="unidad">4 columnas</div>
+</div>
+</div>
+</div>
+
+<!-- PERÍODOS -->
+<div class="destacado" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+<h4>🔴 PERÍODOS Y FRECUENCIAS MODALES</h4>
+<div class="destacado-grid">
+<div class="destacado-item">
+<div class="label">MODO 1</div>
+<div class="valor">T₁ = 0.280 s</div>
+<div class="unidad">f₁ = 3.571 Hz</div>
+</div>
+<div class="destacado-item">
+<div class="label">MODO 2</div>
+<div class="valor">T₂ = 0.091 s</div>
+<div class="unidad">f₂ = 10.99 Hz</div>
+</div>
+</div>
+</div>
+
+<h3>Matrices del proyecto:</h3>
+<div class="ejemplo">
+<strong>MATRIZ DE RIGIDEZ K (t/m):</strong>
+<div class="formula">K = ⎡  44,342   -22,171 ⎤
+    ⎣ -22,171    22,171 ⎦</div>
+</div>
+<div class="ejemplo">
+<strong>MATRIZ DE MASA M (t·s²/m):</strong>
+<div class="formula">M = ⎡  3.667    0     ⎤
+    ⎣  0       3.667  ⎦</div>
+</div>
+</div>
+
+<!-- 5. FÓRMULAS CLAVE -->
+<div class="seccion" id="formulas">
+<h2>5. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Módulo de elasticidad</td><td>E = 15100 · √fc</td><td>kg/cm²</td></tr>
+<tr><td>Inercia de columna</td><td>I_col = b·h³/12</td><td>m⁴</td></tr>
+<tr><td>Área tributaria</td><td>At = (L1/2+L2/2)·(L3/2+L4/2)</td><td>m²</td></tr>
+<tr><td>Masa por piso</td><td>m = Cu·At/g</td><td>t·s²/m</td></tr>
+<tr><td>Rigidez entrepiso</td><td>k = n_col·12·E·I_col/He³</td><td>t/m</td></tr>
+<tr><td>Matriz de rigidez</td><td>K = [[2k, -k],[-k, k]]</td><td>t/m</td></tr>
+<tr><td>Matriz de masa</td><td>M = diag(m, m)</td><td>t·s²/m</td></tr>
+<tr><td>Autovalores (modo 1)</td><td>ω₁² = 0.586 · k/m</td><td>(rad/s)²</td></tr>
+<tr><td>Autovalores (modo 2)</td><td>ω₂² = 3.414 · k/m</td><td>(rad/s)²</td></tr>
+<tr><td>Período modo 1</td><td>T₁ = 2π/ω₁</td><td>s</td></tr>
+<tr><td>Período modo 2</td><td>T₂ = 2π/ω₂</td><td>s</td></tr>
+<tr><td>Frecuencia</td><td>f = ω/(2π)</td><td>Hz</td></tr>
+<tr><td>Integración trapezoidal</td><td>v[k] = v[k-1] + (a[k-1]+a[k])·dt/2</td><td>m/s</td></tr>
+<tr><td>Magnitud absoluta</td><td>|a| = √(ax²+ay²+az²)</td><td>m/s²</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 6. EJEMPLO RESUELTO -->
+<div class="seccion" id="ejemplo">
+<h2>6. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema (Pórtico del proyecto)</h4>
+<ul>
+<li><b>L1, L2, L3, L4</b> = 5.5, 6.0, 5.5, 6.0 m</li>
+<li><b>He</b> = 3.0 m</li>
+<li><b>b_col × h_col</b> = 0.38 × 0.38 m</li>
+<li><b>fc</b> = 210 kg/cm²</li>
+<li><b>Cu</b> = 1.088 t/m²</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Módulo de elasticidad<br>
+E = 15100·√210 = 218,819 kg/cm² = <b>2,188,190 t/m²</b></div>
+
+<div class="paso"><strong>PASO 2:</strong> Inercia de columna<br>
+I_col = 0.38 · 0.38³ / 12 = <b>0.000217 m⁴</b></div>
+
+<div class="paso"><strong>PASO 3:</strong> Área tributaria<br>
+At = (5.5/2 + 6.0/2) · (5.5/2 + 6.0/2) = 5.75 · 5.75 = <b>33.06 m²</b></div>
+
+<div class="paso"><strong>PASO 4:</strong> Masa por piso<br>
+m = Cu · At / g = 1.088 · 33.06 / 9.81 = <b>3.667 t·s²/m</b></div>
+
+<div class="paso"><strong>PASO 5:</strong> Rigidez de entrepiso<br>
+k = 4 · 12 · 2,188,190 · 0.000217 / 3³ = <b>22,171 t/m</b></div>
+
+<div class="paso"><strong>PASO 6:</strong> Matriz de rigidez K<br>
+K = ⎡ 2k  -k ⎤ = ⎡  44,342  -22,171 ⎤<br>
+    ⎣ -k   k ⎦   ⎣ -22,171   22,171 ⎦</div>
+
+<div class="paso"><strong>PASO 7:</strong> Matriz de masa M<br>
+M = ⎡ 3.667   0     ⎤<br>
+    ⎣ 0      3.667  ⎦</div>
+
+<div class="paso"><strong>PASO 8:</strong> Autovalores<br>
+k/m = 22,171 / 3.667 = 6,046<br>
+ω₁² = 0.586 · 6,046 = 3,543 → ω₁ = <b>22.43 rad/s</b><br>
+ω₂² = 3.414 · 6,046 = 20,641 → ω₂ = <b>69.05 rad/s</b></div>
+
+<div class="paso"><strong>PASO 9:</strong> Períodos<br>
+T₁ = 2π/22.43 = <b>0.280 s</b><br>
+T₂ = 2π/69.05 = <b>0.091 s</b></div>
+
+<div class="paso"><strong>PASO 10:</strong> Frecuencias<br>
+f₁ = 22.43/(2π) = <b>3.571 Hz</b><br>
+f₂ = 69.05/(2π) = <b>10.99 Hz</b></div>
+
+<div class="ejemplo">
+<h4>Resumen de resultados</h4>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>E</td><td>2,188,190</td><td>t/m²</td></tr>
+<tr><td>I_col</td><td>0.000217</td><td>m⁴</td></tr>
+<tr><td>At</td><td>33.06</td><td>m²</td></tr>
+<tr><td><b>m</b></td><td><b>3.667</b></td><td><b>t·s²/m</b></td></tr>
+<tr><td><b>k</b></td><td><b>22,171</b></td><td><b>t/m</b></td></tr>
+<tr><td>ω₁</td><td>22.43</td><td>rad/s</td></tr>
+<tr><td>ω₂</td><td>69.05</td><td>rad/s</td></tr>
+<tr><td><b>T₁</b></td><td><b>0.280</b></td><td><b>s</b></td></tr>
+<tr><td><b>T₂</b></td><td><b>0.091</b></td><td><b>s</b></td></tr>
+<tr><td>f₁</td><td>3.571</td><td>Hz</td></tr>
+<tr><td>f₂</td><td>10.99</td><td>Hz</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 7. TIC -->
+<div class="seccion" id="tic">
+<h2>7. LOS 5 TIC DE ANÁLISIS DINÁMICO</h2>
+<p>Un análisis dinámico bien ejecutado cumple 5 criterios:</p>
+
+<div class="tic-box">
+<h4>TIC 1: T experimental ≈ T teórico (± 10%)</h4>
+<p style="font-size:13px;color:#bdc3c7">Valida el modelo teórico con datos reales.</p>
+<div class="tic-item">
+<span>T_exp = 0.285 s vs T₁_teórico = 0.280 s</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 2: f₁ en rango esperado (0.5–20 Hz)</h4>
+<p style="font-size:13px;color:#bdc3c7">Verifica que la frecuencia es físicamente razonable.</p>
+<div class="tic-item">
+<span>f₁ = 3.571 Hz</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 3: Amortiguamiento estimado (< 10%)</h4>
+<p style="font-size:13px;color:#bdc3c7">Controla la disipación de energía.</p>
+<div class="tic-item">
+<span>ζ ≈ 5%</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 4: Relación T₁/T₂ ≈ 3</h4>
+<p style="font-size:13px;color:#bdc3c7">Verifica la coherencia modal del shear building.</p>
+<div class="tic-item">
+<span>T₁/T₂ = 0.280/0.091 = 3.08</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 5: Confiabilidad β > 3.5</h4>
+<p style="font-size:13px;color:#bdc3c7">Verifica que la incertidumbre es baja (Monte Carlo).</p>
+<div class="tic-item">
+<span>β = 4.2 (del análisis estocástico)</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+</div>
+
+<!-- 8. EVALUACIÓN -->
+<div class="seccion" id="evaluacion">
+<h2>8. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318-19</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<!-- 9. EJERCICIOS -->
+<div class="seccion" id="ejercicios">
+<h2>9. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1: Masa por piso</h4>
+<p>Calcular m para Cu = 1.20 t/m², At = 30 m².</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>m = 1.20 · 30 / 9.81 = 3.670 t·s²/m</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2: Rigidez de entrepiso</h4>
+<p>Calcular k para E = 2.0e6 t/m², I = 0.0002 m⁴, He = 3.0 m, 4 columnas.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>k = 4 · 12 · 2.0e6 · 0.0002 / 27 = 21,333 t/m</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3: Período fundamental</h4>
+<p>Calcular T₁ para k/m = 6,046.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>ω₁ = √(0.586 · 6,046) = 22.43 rad/s<br>T₁ = 2π/22.43 = 0.280 s</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4: Frecuencia</h4>
+<p>Convertir T₁ = 0.280 s a f₁ (Hz).</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>f₁ = 1/0.280 = 3.571 Hz</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5: Reflexión final</h4>
+<ol style="padding-left:20px;font-size:14px">
+<li>¿Por qué el período T₁ es mayor que T₂?</li>
+<li>¿Qué pasaría si T₁ coincide con el período del suelo?</li>
+<li>¿Por qué es importante validar con Phyphox?</li>
+</ol>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>1. Porque el modo 1 es el fundamental (menor frecuencia, mayor período).<br>
+2. Habría resonancia y amplificación dinámica (riesgo de colapso).<br>
+3. Porque confirma que el modelo teórico representa la realidad.</p>
+</div>
+</div>
+</div>
+
+<!-- 10. CONEXIÓN -->
+<div class="seccion" id="conexion">
+<h2>10. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M01</td><td>h_eq</td><td>Cálculo de inercia equivalente</td></tr>
+<tr><td>M02</td><td>Cu</td><td>Cargas</td></tr>
+<tr><td>M03</td><td>Md</td><td>Momento de diseño</td></tr>
+<tr><td>M04</td><td>Viga</td><td>Acero a cortante</td></tr>
+<tr><td>M05</td><td>Columna</td><td>Diseño de columna</td></tr>
+<tr><td>M06</td><td>Losa</td><td>Diseño de losa</td></tr>
+<tr><td><b>M07</b></td><td><b>Análisis modal</b></td><td><b>Este módulo</b></td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"La incertidumbre no se elimina: se cuantifica.<br>
+La estructura habla a través de sus modos de vibrar."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<!-- 11. ACÁPITE -->
+<div class="seccion" id="acapite" style="border-left-color:#f39c12">
+<h2>📖 11. ACÁPITE DE ESTUDIO</h2>
+<p><b>Revisa este resumen ejecutivo antes de responder el cuestionario.</b></p>
+
+<h3>🎯 ¿Qué aprenderás?</h3>
+<ul>
+<li>Construir matrices K y M</li>
+<li>Calcular T₁ y T₂</li>
+<li>Interpretar modos de vibrar</li>
+<li>Aplicar filtro de Kalman</li>
+<li>Validar con Phyphox</li>
+</ul>
+
+<h3>📐 Fórmulas clave</h3>
+<div class="formula">k = n_col · 12 · E · I / He³</div>
+<div class="formula">m = Cu · At / g</div>
+<div class="formula">ω₁² = 0.586 · k/m</div>
+<div class="formula formula-grande">T₁ = 2π / ω₁</div>
+
+<h3>💡 Valores clave del proyecto</h3>
+<p><b>m = 3.667 t·s²/m</b></p>
+<p><b>k = 22,171 t/m</b></p>
+<p style="color:#f39c12;font-weight:bold"><b>T₁ = 0.280 s | T₂ = 0.091 s</b></p>
+
+<h3>🎯 ¿Qué se espera en el Bloque C?</h3>
+<ul>
+<li>Interpretar modos de vibrar</li>
+<li>Explicar la relación masa-rigidez</li>
+<li>Conectar con M05 (columna)</li>
+</ul>
+
+<h3>🎯 ¿Qué se espera en el Bloque D?</h3>
+<ul>
+<li><b>Impacto técnico:</b> resonancia si T₁ ≈ T_suelo</li>
+<li><b>Norma aplicable:</b> NEC-15</li>
+<li><b>Criterio ético:</b> reportar aunque sea desfavorable</li>
+<li><b>Trazabilidad:</b> documentar la decisión</li>
+</ul>
+</div>
+
+<!-- 12. CONDICIONES -->
+<div class="seccion" id="condiciones" style="border-left-color:#2ecc71">
+<h2>✅ 12. CONDICIONES DE RESPUESTA VÁLIDA</h2>
+<p>Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<h3>🎯 Cómo se evalúa</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts (criterios)</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts (número exacto)</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts (razonamiento)</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts (criterios + ética)</td></tr>
+</tbody>
+</table>
+
+<h3>✅ Qué espera el sistema</h3>
+<p><b>Bloque A — Concepto:</b></p>
+<ul>
+<li>Explica con tus palabras</li>
+<li>Cubre los criterios indicados</li>
+<li>Puedes usar sinónimos</li>
+</ul>
+<p><b>Bloque B — Cálculo:</b></p>
+<ul>
+<li>Muestra el procedimiento</li>
+<li>Indica unidades</li>
+<li>Da el resultado numérico</li>
+</ul>
+<p><b>Bloque C — Interpretación:</b></p>
+<ul>
+<li>Menciona el concepto técnico</li>
+<li>Justifica con números</li>
+<li>Conecta con otros módulos o normas</li>
+</ul>
+<p><b>Bloque D — Decisión:</b></p>
+<ul>
+<li>Identifica el problema técnico</li>
+<li>Cita la norma aplicable</li>
+<li>Aplica criterio ético</li>
+<li>Documenta tu decisión</li>
+</ul>
+
+<h3>💡 Ejemplo de respuesta válida</h3>
+<div class="ejemplo">
+<h4>Pregunta: "¿Por qué T₁ > T₂?"</h4>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Porque el modo 1 es el fundamental. La relación entre T₁ y T₂ es 3.08, lo que confirma el comportamiento del shear building de 2 pisos."</p>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "T₁ es el período fundamental del pórtico. Es mayor porque corresponde a la menor frecuencia natural del sistema."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "No sé."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+</div>
+
+<h3>🎯 Recuerda</h3>
+<ul>
+<li>No hay una sola respuesta correcta</li>
+<li>Se valora el razonamiento</li>
+<li>Puedes expresarte con tus propias palabras</li>
+<li>El error es parte del aprendizaje</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_07_analisis_dinamico.html" class="btn btn-orange">Ir al Cuestionario M07</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>

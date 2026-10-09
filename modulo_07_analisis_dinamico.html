@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>M01 - Inercia Equivalente</title>
+<title>M07 - Análisis Dinámico Modal</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
 .container{max-width:1100px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #3498db;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #16a085;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
 .header-logo{height:70px}
-.header-imagen{height:70px;border-radius:8px;border:2px solid #3498db}
+.header-imagen{height:70px;border-radius:8px;border:2px solid #16a085}
 .header-texto{text-align:center;flex:1;min-width:300px}
 .header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
 .header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
@@ -17,18 +17,17 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
 .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
 .tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
-.tab.active{background:linear-gradient(135deg,#3498db,#2980b9);border-color:#3498db;color:white}
+.tab.active{background:linear-gradient(135deg,#16a085,#1abc9c);border-color:#16a085;color:white}
 .tab-content{display:none}
 .tab-content.active{display:block}
 .info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
 .progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
-.progreso-bar{background:linear-gradient(90deg,#2ecc71,#3498db);height:100%;width:0%;transition:width 0.4s}
+.progreso-bar{background:linear-gradient(90deg,#2ecc71,#16a085);height:100%;width:0%;transition:width 0.4s}
 .btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
 .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
 .btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
 .btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
-.btn-desactivado:hover{transform:none !important;box-shadow:none !important}
-.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #16a085}
 .seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
 .seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
 .seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
@@ -41,12 +40,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
 .tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
 .tabla tr:nth-child(even){background:#34495e}
-.videos-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #e74c3c}
-.videos-section h2{color:#e74c3c;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
-.video-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.video-info h4{color:#5dade2;font-size:15px;margin-bottom:6px}
-.video-info p{color:#bdc3c7;font-size:12px;margin:0}
-.video-botones{display:flex;gap:8px;flex-wrap:wrap}
 .descargas-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #2ecc71}
 .descargas-section h2{color:#2ecc71;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
 .descarga-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
@@ -55,7 +48,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .descarga-info h4{color:#5dade2;font-size:15px;margin-bottom:4px}
 .descarga-info p{color:#bdc3c7;font-size:12px;margin:0}
 .pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
-.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #3498db}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #16a085}
 .badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
 .badge.orange{background:#f39c12}
 .badge.red{background:#e74c3c}
@@ -70,7 +63,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 .rubrica ul{list-style:none}
 .rubrica li{padding:4px 0}
 .nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
-.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
+.resultado{background:#2c3e50;border:3px solid #16a085;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
 .puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
 .clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
 .c-insuf{background:#7f8c8d;color:white}
@@ -78,15 +71,14 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 .c-comp{background:#f39c12;color:white}
 .c-dest{background:#e67e22;color:white}
 .c-excel{background:#c0392b;color:white}
-.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
+.certificado{background:white;color:#2c3e50;border:4px solid #16a085;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
 .certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
 .certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
-.certificado code{background:#ecf0f1;padding:6px 12px;border-radius:6px;font-size:14px}
 .firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
 .firma{text-align:center;min-width:220px}
 .linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
 .firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
-.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
+.modalidad{background:#f8f9fa;border:2px dashed #16a085;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
 .modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
 .modalidad ul{list-style:none}
 .modalidad li{padding:4px 0;font-size:13px}
@@ -94,8 +86,6 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 .qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
 .qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
 .qr-datos p{margin:5px 0}
-.verificacion-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:12px;padding:25px;margin:20px 0;text-align:center}
-.verificacion-box h3{color:#2ecc71;font-size:20px;margin-bottom:15px}
 .condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
 .condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
 .condiciones-box ul{list-style:none;padding-left:0}
@@ -116,7 +106,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <div class="header">
 <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
 <div class="header-texto">
-<h1>🎯 M01 — INERCIA EQUIVALENTE</h1>
+<h1>📈 M07 — ANÁLISIS DINÁMICO MODAL</h1>
 <h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
 <h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
 <p>PI 2026 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
@@ -133,41 +123,28 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 
 <!-- TAB VIDEOS -->
 <div id="tab-videos" class="tab-content active">
-<div class="videos-section">
-<h2>🎥 CLASES GRABADAS — M01</h2>
+<div class="seccion">
+<h2>🎥 CLASES GRABADAS — M07</h2>
 <p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 1 — Fundamento Teórico</h4>
-<p>📅 10/10/2026 | ⏱ 10 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 1 — Análisis Modal (K, M, ω, T)</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 10/11/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
 </div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 2 — Formas Modales y Frecuencias</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 12/11/2026 | ⏱ 18 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
 </div>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 3 — Filtro de Kalman y Phyphox</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 14/11/2026 | ⏱ 22 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
 </div>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 2 — Ejemplo Resuelto</h4>
-<p>📅 12/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 3 — Caso Real: Laboratorio Vivo Agua Dulce</h4>
-<p>📅 15/10/2026 | ⏱ 8 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div style="background:#1e1e2e;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin-top:20px;text-align:center">
-<p style="color:#f39c12;font-size:13px;margin:0">💡 <b>Nota:</b> Las clases se activarán después de cada grabación con Google Meet.</p>
+<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
+<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 4 — Modelo Estocástico (N=1000)</h4>
+<p style="color:#bdc3c7;font-size:12px;margin:0">📅 16/11/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p>
+<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
 </div>
 </div>
 </div>
@@ -175,40 +152,37 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <!-- TAB CONSULTA -->
 <div id="tab-consulta" class="tab-content">
 <div class="seccion">
-<h2>📚 CONSULTA — M01 INERCIA EQUIVALENTE</h2>
-<h3>🎯 ¿Qué es la inercia equivalente?</h3>
-<p>La <b>inercia equivalente</b> es la propiedad geométrica que permite modelar una losa alivianada como una losa maciza ficticia en programas como ETABS o SAP2000, manteniendo la misma rigidez a flexión.</p>
+<h2>📚 CONSULTA — M07 ANÁLISIS DINÁMICO MODAL</h2>
+<h3>🎯 ¿Qué es el análisis dinámico modal?</h3>
+<p>Es el proceso de obtener las <b>frecuencias naturales</b>, <b>períodos</b> y <b>formas modales</b> de una estructura, resolviendo el problema de autovalores.</p>
 <h3>📐 Fórmulas clave</h3>
-<div class="formula-box">Inercia propia:  I₀ = b · h³ / 12</div>
-<div class="formula-box">Teorema de Steiner:  I = I₀ + A · d²</div>
-<div class="formula-box">Inercia total:  I_total = Σ (I₀ + A · d²)</div>
-<div class="formula-box grande">Altura equivalente:  h_eq = ∛ (12 · I_total / bb)</div>
+<div class="formula-box">Rigidez entrepiso: k = n_col · 12 · E · I_col / He³</div>
+<div class="formula-box">Masa por piso: m = Cu · At / g</div>
+<div class="formula-box">Matriz K: [[2k, -k],[-k, k]]</div>
+<div class="formula-box">Matriz M: diag(m, m)</div>
+<div class="formula-box grande">ω₁² = 0.586 · k/m | ω₂² = 3.414 · k/m</div>
+<div class="formula-box">T = 2π / ω</div>
+<div class="formula-box">f = ω / (2π)</div>
 <h3>🔑 Conceptos clave</h3>
 <ul>
-<li><b>Inercia centroidal:</b> resistencia a flexión respecto al eje centroidal</li>
-<li><b>Teorema de Steiner:</b> traslado de inercia de ejes paralelos</li>
-<li><b>Altura equivalente:</b> espesor ficticio de losa maciza equivalente</li>
-<li><b>Diferencia H vs h_eq:</b> H es el espesor real, h_eq es el equivalente</li>
+<li><b>Modo 1:</b> fundamental (período mayor)</li>
+<li><b>Modo 2:</b> secundario (período menor)</li>
+<li><b>Filtro de Kalman:</b> reduce ruido preservando señal</li>
+<li><b>Phyphox:</b> app del celular para capturar aceleración</li>
+<li><b>FFT:</b> frecuencia dominante = frecuencia natural</li>
 </ul>
-<h3>📊 Datos del modelo base</h3>
+<h3>📊 Valores clave del proyecto</h3>
 <table class="tabla">
-<tr><th>Dato</th><th>Valor</th></tr>
-<tr><td>H (altura total)</td><td>25 cm</td></tr>
-<tr><td>bn (ancho nervio)</td><td>10 cm</td></tr>
-<tr><td>bb (ancho bloque)</td><td>50 cm</td></tr>
-<tr><td>tc (capa de compresión)</td><td>5 cm</td></tr>
-<tr><td>I_total</td><td>24548 cm⁴</td></tr>
-<tr><td><b>h_eq</b></td><td><b>18.06 cm</b></td></tr>
+<tr><th>Parámetro</th><th>Valor</th></tr>
+<tr><td><b>m (masa por piso)</b></td><td><b>3.667 t·s²/m</b></td></tr>
+<tr><td><b>k (rigidez entrepiso)</b></td><td><b>22,171 t/m</b></td></tr>
+<tr><td><b>T₁ (modo 1)</b></td><td><b>0.280 s</b></td></tr>
+<tr><td><b>T₂ (modo 2)</b></td><td><b>0.091 s</b></td></tr>
+<tr><td><b>f₁</b></td><td><b>3.571 Hz</b></td></tr>
+<tr><td><b>f₂</b></td><td><b>10.99 Hz</b></td></tr>
 </table>
-<h3>📚 Referencias</h3>
-<ul>
-<li>Marcillo et al. (2026) — <i>Rigidez Energética aplicada a la Ingeniería Civil</i></li>
-<li>Hibbeler (2018) — <i>Análisis de Estructuras</i></li>
-<li>NEC-15 — Norma Ecuatoriana de la Construcción</li>
-<li>ACI 318-19</li>
-</ul>
 <div style="text-align:center;margin-top:25px">
-<a href="M01_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
+<a href="M07_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
 </div>
 </div>
 </div>
@@ -216,22 +190,22 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <!-- TAB DESCARGAS -->
 <div id="tab-descargas" class="tab-content">
 <div class="descargas-section">
-<h2>📖 DESCARGAS — M01</h2>
+<h2>📖 DESCARGAS — M07</h2>
 <p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
 <div class="descarga-item">
 <div class="descarga-icon">📘</div>
-<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto ECT-UNESUM-2026</p></div>
+<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto</p></div>
 <a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📗</div>
-<div class="descarga-info"><h4>Guía de Estudio M01</h4><p>Material de consulta para estudiantes</p></div>
-<a href="M01_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
+<div class="descarga-info"><h4>Guía de Estudio M07</h4><p>Material de consulta</p></div>
+<a href="M07_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📙</div>
-<div class="descarga-info"><h4>Manual del Docente M01</h4><p>Rúbrica por criterios + evaluación</p></div>
-<a href="M01_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
+<div class="descarga-info"><h4>Manual del Docente M07</h4><p>Rúbrica por criterios</p></div>
+<a href="M07_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
 </div>
 <div class="descarga-item">
 <div class="descarga-icon">📄</div>
@@ -250,55 +224,57 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <div id="tab-cuestionario" class="tab-content">
 
 <!-- PANTALLA 1: ACÁPITE -->
-<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
-<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M01</h2>
+<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #16a085">
+<h2 style="color:#16a085;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M07</h2>
 <p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.<br>Es <b>obligatorio</b> para garantizar que comprendes los criterios de evaluación.</p>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 ¿Qué aprenderás?</h3>
 <ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular la inercia centroidal de una sección</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Aplicar el Teorema de Steiner</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Determinar la altura equivalente h_eq</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Interpretar el impacto en la deflexión</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#16a085">▸</span> Construir matrices K y M</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#16a085">▸</span> Calcular T₁ y T₂</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#16a085">▸</span> Interpretar modos de vibrar</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#16a085">▸</span> Aplicar filtro de Kalman</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#16a085">▸</span> Validar con Phyphox</li>
 </ul>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
 <h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">📐 Fórmulas clave</h3>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I₀ = b · h³ / 12</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I_total = Σ (I₀ + A · d²)</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">h_eq = ∛(12 · I_total / bb)</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">k = 4 · 12 · E · I_col / He³</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">m = Cu · At / g</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">T₁ = 2π / ω₁ = 0.280 s</div>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
-<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Ejemplo resuelto</h3>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> H = 25 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm</p>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> A_capa = 250 cm², A_nervio = 200 cm², y_cg = 16.94 cm</p>
-<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> I_total = 24548 cm⁴ → h_eq = 18.06 cm</p>
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Valores clave del proyecto</h3>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>m (masa por piso)</b> = 3.667 t·s²/m</p>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>k (rigidez entrepiso)</b> = 22,171 t/m</p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>T₁ = 0.280 s | T₂ = 0.091 s</b></p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>f₁ = 3.571 Hz | f₂ = 10.99 Hz</b></p>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
-<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C? (Interpretación)</h3>
+<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C?</h3>
 <ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Menciona la relación inversa inercia-deflexión</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Justifica con números (ej: -7.5%)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Conecta con M06 (losa) o L/240</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Interpretar modos de vibrar</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Explicar la relación masa-rigidez</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Conectar con M05 (columna)</li>
 </ul>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
-<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D? (Decisión)</h3>
+<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D?</h3>
 <ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> deflexión supera L/240</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> resonancia si T₁ ≈ T_suelo</li>
 <li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Norma aplicable:</b> NEC-15</li>
 <li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Criterio ético:</b> reportar aunque sea desfavorable</li>
 <li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Trazabilidad:</b> documentar la decisión</li>
 </ul>
 </div>
 <div style="text-align:center;margin-top:25px">
-<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
+<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#16a085,#1abc9c);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
 </div>
 </div>
 
 <!-- PANTALLA 2: CONDICIONES -->
 <div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
-<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M01</h2>
+<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M07</h2>
 <p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 CÓMO SE EVALÚA</h3>
@@ -315,44 +291,29 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <ul style="list-style:none;padding-left:0">
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Explica con tus palabras</li>
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cubre los criterios indicados</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Puedes usar sinónimos</li>
 </ul>
 <p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b></p>
 <ul style="list-style:none;padding-left:0">
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Muestra el procedimiento</li>
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Indica unidades</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Da el resultado numérico</li>
 </ul>
 <p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b></p>
 <ul style="list-style:none;padding-left:0">
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Menciona el concepto técnico</li>
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Justifica con números</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Conecta con otros módulos o normas</li>
 </ul>
 <p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b></p>
 <ul style="list-style:none;padding-left:0">
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Identifica el problema técnico</li>
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cita la norma aplicable</li>
 <li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Aplica criterio ético</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Documenta tu decisión</li>
 </ul>
 </div>
 <div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
 <h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">💡 EJEMPLO DE RESPUESTA VÁLIDA</h3>
-<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es la inercia centroidal?"</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es la resistencia a flexión de una figura cuando el eje pasa por su centro de gravedad."</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</p>
-<p style="color:#e74c3c;font-size:13px;margin-bottom:5px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
-<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
-<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">🎯 RECUERDA</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> No hay una sola respuesta correcta</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Se valora el razonamiento</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Puedes expresarte con tus propias palabras</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> El error es parte del aprendizaje</li>
-</ul>
+<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Por qué T₁ > T₂?"</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Porque el modo 1 es el fundamental. La relación T₁/T₂ = 3.08 confirma el shear building."</p>
+<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
 </div>
 <div style="text-align:center;margin-top:25px">
 <button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ ENTENDIDO, COMENZAR PREGUNTAS</button>
@@ -370,7 +331,7 @@ textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;borde
 <div id="contenedor-pregunta"></div>
 <div id="pantalla-resultado" style="display:none">
 <div class="resultado">
-<h2>🏆 RESULTADO M01</h2>
+<h2>🏆 RESULTADO M07</h2>
 <div class="puntaje-grande" id="resultado-puntaje"></div>
 <div id="resultado-clasificacion"></div>
 </div>
@@ -394,7 +355,7 @@ document.getElementById('tab-'+tabId).classList.add('active');
 btn.classList.add('active');
 }
 
-var MODULO_ACAPITE = "M01";
+var MODULO_ACAPITE = "M07";
 var inicioTiempo = null;
 var intervalo = null;
 
@@ -449,162 +410,169 @@ function iniciarCronometro() {
 }
 
 var PREGUNTAS = [
+// BLOQUE A: CONCEPTOS (4 preguntas, 10 pts)
 {id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué es la inercia centroidal de una sección y por qué es importante en el diseño de una losa alivianada.",
+enunciado:"Explique con sus palabras qué es el análisis dinámico modal y para qué sirve en el diseño sismorresistente.",
 ejercicio:null,
-condiciones:["Mencionar que es una propiedad geométrica de la sección","Relacionar con la resistencia a flexión","Mencionar el eje centroidal (o centro de gravedad)"],
-ejemplo_valido:"Es la resistencia a flexión que tiene una figura cuando el eje pasa por su centro de gravedad.",
+condiciones:["Mencionar frecuencias naturales","Mencionar períodos y formas modales","Conectar con diseño sísmico"],
+ejemplo_valido:"Es el proceso de obtener las frecuencias naturales, períodos y formas modales de una estructura. Sirve para diseñar sismorresistentemente, evitando la resonancia.",
 criterios:[
-{peso:40,desc:"Resistencia a flexión",keywords:["flexión","flexion","flexionar","doblar","deformar","flex"]},
-{peso:30,desc:"Propiedad de la sección",keywords:["propiedad","sección","seccion","figura","área","area","geométrica","geometrica"]},
-{peso:30,desc:"Eje centroidal",keywords:["centroidal","centroide","centro de gravedad","eje","gravedad"]}
+{peso:40,desc:"Menciona frecuencias naturales",keywords:["frecuencia","natural","frecuencias"]},
+{peso:30,desc:"Menciona períodos y modos",keywords:["período","periodo","modo","forma modal"]},
+{peso:30,desc:"Conecta con diseño sísmico",keywords:["sismo","sísmico","sismico","resonancia","diseño"]}
 ]},
 {id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué dice el Teorema de Steiner y para qué sirve en el cálculo de losas alivianadas.",
+enunciado:"Explique qué es la matriz de rigidez K y cómo se construye para un pórtico de 2 pisos.",
 ejercicio:null,
-condiciones:["Mencionar que la inercia se traslada entre ejes paralelos","Indicar la fórmula o su significado (I = I₀ + A·d²)","Conectar con el cálculo de losas alivianadas"],
-ejemplo_valido:"Dice que la inercia respecto a un eje cualquiera es igual a la inercia centroidal más el área por la distancia al cuadrado. Sirve para calcular la inercia de una losa alivianada que tiene nervios y capa.",
+condiciones:["Definir la matriz K","Indicar K = [[2k, -k],[-k, k]]","Conectar con la rigidez de entrepiso"],
+ejemplo_valido:"Es la matriz que relaciona los desplazamientos con las fuerzas. Para un pórtico de 2 pisos: K = [[2k, -k],[-k, k]], donde k es la rigidez de entrepiso.",
 criterios:[
-{peso:40,desc:"Traslado de inercia",keywords:["traslada","trasladar","paralelo","steiner","ejes"]},
-{peso:30,desc:"Fórmula o significado",keywords:["i0","inercia centroidal","área","area","distancia","cuadrado","fórmula","formula"]},
-{peso:30,desc:"Aplicación a losa alivianada",keywords:["losa","alivianada","nervio","capa","compresión","compresion"]}
+{peso:30,desc:"Define la matriz K",keywords:["matriz","rigidez","desplazamiento","fuerza"]},
+{peso:40,desc:"Indica la fórmula",keywords:["2k","-k","[[2k","k]]"]},
+{peso:30,desc:"Conecta con rigidez entrepiso",keywords:["entrepiso","k","columnas","12ei"]}
 ]},
 {id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique con sus palabras por qué se calcula la altura equivalente (h_eq) en una losa alivianada y qué pasaría si no se calculara.",
+enunciado:"Explique qué es la matriz de masa M y cómo se calcula la masa por piso.",
 ejercicio:null,
-condiciones:["Mencionar que permite modelar la losa como maciza","Indicar que mantiene la misma inercia","Explicar consecuencia si no se calcula"],
-ejemplo_valido:"Se calcula para poder modelar la losa alivianada como si fuera maciza en ETABS. Si no se calcula, la inercia sería incorrecta y la deflexión también.",
+condiciones:["Definir M = diag(m, m)","Indicar m = Cu·At/g","Conectar con el modelo de masa concentrada"],
+ejemplo_valido:"Es una matriz diagonal con la masa concentrada en cada piso. m = Cu·At/g. Para 2 pisos: M = diag(m, m).",
 criterios:[
-{peso:40,desc:"Modelado como maciza",keywords:["maciza","modelar","etabs","sap","programa"]},
-{peso:30,desc:"Equivalencia de inercia",keywords:["inercia","equivalente","misma","rigidez"]},
-{peso:30,desc:"Consecuencia si no se calcula",keywords:["incorrecta","error","deflexión","deflexion","falla","problema"]}
+{peso:30,desc:"Define M = diag(m,m)",keywords:["diagonal","masa","concentrada"]},
+{peso:40,desc:"Indica m = Cu·At/g",keywords:["cu","at","g","gravedad"]},
+{peso:30,desc:"Conecta con masa concentrada",keywords:["lumped","concentrada","piso"]}
 ]},
 {id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique la diferencia entre la altura real (H) y la altura equivalente (h_eq) de una losa alivianada. ¿Cuál es mayor y por qué?",
+enunciado:"Explique qué es el filtro de Kalman y por qué es útil en la validación experimental con Phyphox.",
 ejercicio:null,
-condiciones:["Definir H como el espesor real","Definir h_eq como el espesor ficticio equivalente","Explicar por qué h_eq < H (los vacíos no aportan inercia)"],
-ejemplo_valido:"H es el espesor real de la losa, incluyendo los bloques huecos. h_eq es el espesor de una losa maciza que tendría la misma inercia. h_eq es menor porque los vacíos del aligeramiento no aportan inercia.",
+condiciones:["Mencionar reducción de ruido","Indicar preservación de la señal","Conectar con FFT y frecuencia dominante"],
+ejemplo_valido:"Es un algoritmo que reduce el ruido de una señal preservando su información útil. En Phyphox, mejora la FFT y permite identificar la frecuencia dominante con precisión.",
 criterios:[
-{peso:30,desc:"Define H",keywords:["real","verdadero","espesor real","total"]},
-{peso:30,desc:"Define h_eq",keywords:["equivalente","ficticio","ficticia","maciza","h_eq"]},
-{peso:40,desc:"Explica por qué h_eq < H",keywords:["vacíos","vacios","hueco","aligeramiento","no aporta","menor"]}
+{peso:40,desc:"Reduce ruido",keywords:["ruido","filtro","reducir","limpiar"]},
+{peso:30,desc:"Preserva la señal",keywords:["señal","senal","preserva","información"]},
+{peso:30,desc:"Conecta con FFT",keywords:["fft","frecuencia","dominante","phyphox"]}
 ]},
+
+// BLOQUE B: CÁLCULO (5 preguntas, 40 pts)
 {id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
-enunciado:"Calcule el área de la capa de compresión, del nervio y el área total para H=25 cm, bb=50 cm, bn=10 cm, tc=5 cm.",
-ejercicio:{instrucciones:"A_capa = bb · tc | A_nervio = bn · (H - tc) | A_total = A_capa + A_nervio",campos:[{label:"A_capa (cm²)",valor:250},{label:"A_nervio (cm²)",valor:200},{label:"A_total (cm²)",valor:450}]},
-condiciones:["Mostrar el procedimiento de cada área","Indicar unidades (cm²)","Dar el resultado numérico"],
-ejemplo_valido:"A_capa = 50·5 = 250 cm². A_nervio = 10·20 = 200 cm². A_total = 450 cm².",
+enunciado:"Calcule la masa por piso m para Cu = 1.088 t/m², At = 33.06 m², g = 9.81 m/s².",
+ejercicio:{instrucciones:"m = Cu · At / g",campos:[{label:"Cu (t/m²)",valor:1.088},{label:"At (m²)",valor:33.06},{label:"g (m/s²)",valor:9.81},{label:"m (t·s²/m)",valor:3.667}]},
+condiciones:["Aplicar m = Cu·At/g","Indicar unidades (t·s²/m)","Dar el resultado numérico"],
+ejemplo_valido:"m = 1.088 · 33.06 / 9.81 = 3.667 t·s²/m.",
 criterios:[
-{peso:33,desc:"A_capa correcta",keywords:["250"]},
-{peso:33,desc:"A_nervio correcta",keywords:["200"]},
-{peso:34,desc:"A_total correcta",keywords:["450"]}
+{peso:60,desc:"Calcula m correcto",keywords:["3.667","3,667"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["1.088","33.06","9.81"]},
+{peso:20,desc:"Unidades correctas",keywords:["t·s²/m","t.s2/m"]}
 ]},
 {id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule el centroide global y_cg de la sección compuesta y explique por qué no está en el centro geométrico.",
-ejercicio:{instrucciones:"y_cg = Σ(Ai · yi) / Σ(Ai)",campos:[{label:"y_capa (cm)",valor:22.5},{label:"y_nervio (cm)",valor:10.0},{label:"y_cg (cm)",valor:16.94}]},
-condiciones:["Mostrar el procedimiento (suma de momentos / suma de áreas)","Indicar el resultado numérico","Explicar por qué no está en el centro geométrico"],
-ejemplo_valido:"y_cg = (250·22.5 + 200·10) / 450 = 16.94 cm. No está en el centro porque la capa de compresión está más arriba y su momento es mayor.",
+enunciado:"Calcule la rigidez de entrepiso k para n_col = 4, E = 2,188,190 t/m², I_col = 0.000217 m⁴, He = 3.0 m.",
+ejercicio:{instrucciones:"k = n_col · 12 · E · I_col / He³",campos:[{label:"n_col",valor:4},{label:"E (t/m²)",valor:2188190},{label:"I_col (m⁴)",valor:0.000217},{label:"He³ (m³)",valor:27},{label:"k (t/m)",valor:22171}]},
+condiciones:["Aplicar k = 4·12·E·I/He³","Indicar unidades (t/m)","Dar el resultado numérico"],
+ejemplo_valido:"k = 4 · 12 · 2,188,190 · 0.000217 / 27 = 22,171 t/m.",
 criterios:[
-{peso:50,desc:"Calcula y_cg correcto",keywords:["16.94","16,94"]},
-{peso:50,desc:"Explica por qué no está en el centro",keywords:["capa","arriba","superior","distribución","distribucion","no simétrica","no simetrica","momento"]}
+{peso:60,desc:"Calcula k correcto",keywords:["22171","22,171","22.171"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["4","12","2188190","0.000217","27"]},
+{peso:20,desc:"Unidades correctas",keywords:["t/m","tonelada/metro"]}
 ]},
 {id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,
-enunciado:"Calcule la inercia total I_total aplicando el Teorema de Steiner. Indique qué componente aporta más inercia.",
-ejercicio:{instrucciones:"I_total = Σ(I0 + A·d²)",campos:[{label:"I_capa (cm⁴)",valor:520.8},{label:"I_nervio (cm⁴)",valor:6666.7},{label:"I_total (cm⁴)",valor:24548}]},
-condiciones:["Mostrar el procedimiento con Steiner","Indicar el resultado numérico","Identificar qué componente aporta más inercia"],
-ejemplo_valido:"I_capa = 520.8 + 250·5.56² = 8256 cm⁴. I_nervio = 6666.7 + 200·(-6.94)² = 16300 cm⁴. I_total = 24548 cm⁴. El nervio aporta más por su mayor área.",
+enunciado:"Calcule el período fundamental T₁ para k/m = 6,046 (con ω₁² = 0.586·k/m).",
+ejercicio:{instrucciones:"ω₁² = 0.586 · k/m ; T₁ = 2π/ω₁",campos:[{label:"k/m",valor:6046},{label:"ω₁² (rad²/s²)",valor:3543},{label:"ω₁ (rad/s)",valor:22.43},{label:"T₁ (s)",valor:0.280}]},
+condiciones:["Aplicar ω₁² = 0.586·k/m","Aplicar T₁ = 2π/ω₁","Indicar unidades (s)"],
+ejemplo_valido:"ω₁² = 0.586 · 6,046 = 3,543 → ω₁ = 22.43 rad/s → T₁ = 2π/22.43 = 0.280 s.",
 criterios:[
-{peso:40,desc:"Calcula I_total correcto",keywords:["24548"]},
-{peso:30,desc:"Muestra procedimiento Steiner",keywords:["steiner","i0","a·d","área","area","distancia"]},
-{peso:30,desc:"Identifica componente mayor",keywords:["nervio","capa","aporta","mayor"]}
+{peso:60,desc:"Calcula T₁ correcto",keywords:["0.280","0,280","0.28"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["0.586","6046","22.43"]},
+{peso:20,desc:"Unidades correctas",keywords:["s","segundo"]}
 ]},
 {id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la altura equivalente h_eq y explique si es mayor o menor que H.",
-ejercicio:{instrucciones:"h_eq = ∛(12 · I_total / bb)",campos:[{label:"12 · I_total",valor:294576},{label:"12 · I_total / bb",valor:5891.5},{label:"h_eq (cm)",valor:18.06}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Explicar si es mayor o menor que H y por qué"],
-ejemplo_valido:"h_eq = ∛(294576/50) = ∛5891.5 = 18.06 cm. Es menor que H=25 cm porque los vacíos del aligeramiento no aportan inercia.",
+enunciado:"Calcule el segundo período T₂ (con ω₂² = 3.414·k/m).",
+ejercicio:{instrucciones:"ω₂² = 3.414 · k/m ; T₂ = 2π/ω₂",campos:[{label:"k/m",valor:6046},{label:"ω₂² (rad²/s²)",valor:20641},{label:"ω₂ (rad/s)",valor:69.05},{label:"T₂ (s)",valor:0.091}]},
+condiciones:["Aplicar ω₂² = 3.414·k/m","Aplicar T₂ = 2π/ω₂","Indicar unidades (s)"],
+ejemplo_valido:"ω₂² = 3.414 · 6,046 = 20,641 → ω₂ = 69.05 rad/s → T₂ = 2π/69.05 = 0.091 s.",
 criterios:[
-{peso:50,desc:"Calcula h_eq correcto",keywords:["18.06","18,06"]},
-{peso:50,desc:"Explica h_eq < H",keywords:["menor","vacíos","vacios","aligeramiento","no aporta"]}
+{peso:60,desc:"Calcula T₂ correcto",keywords:["0.091","0,091"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["3.414","6046","69.05"]},
+{peso:20,desc:"Unidades correctas",keywords:["s","segundo"]}
 ]},
 {id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la deflexión máxima con w=0.544 t/m, L=6 m, E=2.19e6 t/m², I_eq=0.000245 m⁴. Verifique si cumple L/240.",
-ejercicio:{instrucciones:"δ_max = 5·w·L⁴ / (384·E·I) | δ_adm = L/240",campos:[{label:"EI (t·m²)",valor:536.5},{label:"δ_max (mm)",valor:1.71},{label:"δ_adm (mm)",valor:25.00}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Verificar si cumple con L/240"],
-ejemplo_valido:"EI = 2.19e6 · 0.000245 = 536.5 t·m². δ_max = 5·0.544·6⁴/(384·536.5) = 1.71 mm. δ_adm = 6000/240 = 25 mm. Cumple.",
+enunciado:"Calcule la frecuencia fundamental f₁ a partir de T₁ = 0.280 s. Verifique la relación T₁/T₂.",
+ejercicio:{instrucciones:"f₁ = 1/T₁ ; T₁/T₂ = ?",campos:[{label:"T₁ (s)",valor:0.280},{label:"f₁ (Hz)",valor:3.571},{label:"T₁/T₂",valor:3.08}]},
+condiciones:["Aplicar f = 1/T","Indicar unidades (Hz)","Verificar T₁/T₂ ≈ 3"],
+ejemplo_valido:"f₁ = 1/0.280 = 3.571 Hz. T₁/T₂ = 0.280/0.091 = 3.08 (≈ 3, coherente con shear building).",
 criterios:[
-{peso:40,desc:"Calcula δ_max correcto",keywords:["1.71","1,71"]},
-{peso:30,desc:"Calcula δ_adm correcto",keywords:["25","25.00","25,00"]},
-{peso:30,desc:"Verifica cumplimiento",keywords:["cumple","ok","verifica","satisface"]}
+{peso:40,desc:"Calcula f₁ correcto",keywords:["3.571","3,571"]},
+{peso:30,desc:"Calcula T₁/T₂ correcto",keywords:["3.08","3,08","3"]},
+{peso:30,desc:"Unidades correctas",keywords:["hz","s"]}
 ]},
+
+// BLOQUE C: INTERPRETACIÓN (4 preguntas, 25 pts)
 {id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Compare dos losas: Losa A con bb=40 cm (2.5 nervios/m) y Losa B con bb=50 cm (2 nervios/m). ¿Cuál tiene mayor inercia y menor deflexión? Justifique técnicamente y cite la norma aplicable.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Menor bb → más nervios por metro → más inercia.",campos:[{label:"Losa A (bb=40 cm)",valor:"2.5 nervios/m"},{label:"Losa B (bb=50 cm)",valor:"2 nervios/m"},{label:"Mayor inercia",valor:"Losa A"}]},
-condiciones:["Identificar que la Losa A tiene más nervios por metro","Conectar con mayor inercia","Conectar con menor deflexión","Citar NEC-15 o L/240"],
-ejemplo_valido:"La Losa A tiene más nervios por metro (2.5 vs 2), por lo tanto tiene mayor inercia y menor deflexión. Esto se verifica con la NEC-15 que exige δ ≤ L/240.",
+enunciado:"Interprete los modos de vibrar del pórtico. ¿Por qué T₁ > T₂? ¿Qué significa físicamente?",
+ejercicio:null,
+condiciones:["Modo 1 es fundamental","T₁/T₂ ≈ 3 (coherencia)","Conectar con diseño sísmico"],
+ejemplo_valido:"El modo 1 (T₁ = 0.280 s) es el fundamental, el más lento. El modo 2 (T₂ = 0.091 s) es más rápido. La relación T₁/T₂ = 3.08 confirma el shear building. El modo 1 domina el diseño sísmico.",
 criterios:[
-{peso:30,desc:"Identifica más nervios en Losa A",keywords:["más nervios","mas nervios","2.5","40"]},
-{peso:30,desc:"Conecta con mayor inercia",keywords:["inercia","rigidez","mayor"]},
-{peso:20,desc:"Conecta con menor deflexión",keywords:["deflexión","deflexion","menor","deforma"]},
-{peso:20,desc:"Cita norma",keywords:["nec","l/240","240","norma"]}
+{peso:40,desc:"Modo 1 fundamental",keywords:["fundamental","modo 1","t₁","mayor"]},
+{peso:30,desc:"Relación T₁/T₂ ≈ 3",keywords:["3.08","3,08","3","relación"]},
+{peso:30,desc:"Conecta con sismo",keywords:["sismo","sísmico","resonancia","diseño"]}
 ]},
 {id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique físicamente por qué la altura equivalente (h_eq) es menor que la altura real (H). Dé un ejemplo con los datos del modelo.",
+enunciado:"Explique la relación entre masa, rigidez y período. ¿Qué pasa con T si aumenta la rigidez?",
 ejercicio:null,
-condiciones:["Mencionar los vacíos del aligeramiento","Indicar que solo aporta el nervio y la capa de compresión","Dar ejemplo con números"],
-ejemplo_valido:"h_eq es menor que H porque los bloques huecos no aportan inercia. Solo el nervio (200 cm²) y la capa (250 cm²) aportan. Por eso h_eq=18.06 cm < H=25 cm.",
+condiciones:["T ∝ √(m/k)","A mayor k, menor T","Conectar con los valores del proyecto"],
+ejemplo_valido:"T ∝ √(m/k). Si k aumenta, T disminuye. En el proyecto m = 3.667 t·s²/m y k = 22,171 t/m, dando T₁ = 0.280 s.",
 criterios:[
-{peso:40,desc:"Menciona vacíos del aligeramiento",keywords:["vacíos","vacios","hueco","aligeramiento","bloque"]},
-{peso:30,desc:"Menciona nervio y capa",keywords:["nervio","capa","compresión","compresion"]},
-{peso:30,desc:"Da ejemplo con números",keywords:["18.06","25","24548","cm"]}
+{peso:40,desc:"T ∝ √(m/k)",keywords:["raíz","√","proporcional","m/k"]},
+{peso:30,desc:"A mayor k, menor T",keywords:["mayor","menor","disminuye","aumenta"]},
+{peso:30,desc:"Conecta con valores",keywords:["3.667","22171","0.280"]}
 ]},
 {id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique cómo se usa h_eq en el M06 (Diseño de Losa) y qué pasaría si se usara H en lugar de h_eq.",
+enunciado:"Compare el análisis modal teórico (matrices K, M) con el experimental (Phyphox). ¿Qué se espera que coincida?",
 ejercicio:null,
-condiciones:["Mencionar que h_eq alimenta al M06","Explicar que sirve para verificar deflexión","Explicar consecuencia de usar H en lugar de h_eq"],
-ejemplo_valido:"h_eq se usa en el M06 para calcular la inercia equivalente de la losa. Si se usara H en lugar de h_eq, la inercia sería mayor y la deflexión calculada sería menor que la real, lo que sería un diseño no seguro.",
+condiciones:["Teórico usa K, M","Experimental usa Phyphox","Coincidencia: frecuencia dominante = f₁"],
+ejemplo_valido:"El teórico calcula T₁ con K y M. El experimental mide la aceleración con Phyphox y obtiene la frecuencia dominante por FFT. Se espera que la frecuencia experimental coincida con f₁ = 3.571 Hz (error ± 10%).",
 criterios:[
-{peso:30,desc:"h_eq alimenta al M06",keywords:["m06","losa","siguiente","módulo","modulo"]},
-{peso:30,desc:"Sirve para verificar deflexión",keywords:["deflexión","deflexion","verificar","inercia"]},
-{peso:40,desc:"Consecuencia de usar H",keywords:["sobreestima","subestima","no seguro","error","incorrecto"]}
+{peso:30,desc:"Teórico usa K, M",keywords:["matriz","k","m","teórico","teorico"]},
+{peso:30,desc:"Experimental usa Phyphox",keywords:["phyphox","celular","experimental","aceleración"]},
+{peso:40,desc:"Coincidencia f_exp ≈ f₁",keywords:["coincidir","3.571","frecuencia","dominante"]}
 ]},
 {id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
-enunciado:"Explique qué pasa con la inercia, la rigidez y la deflexión si la capa de compresión (tc) baja de 5 a 3 cm. Justifique con números.",
+enunciado:"Explique cómo el filtro de Kalman mejora la validación experimental con Phyphox. ¿Qué pasaría sin él?",
 ejercicio:null,
-condiciones:["Mencionar que baja la inercia","Mencionar que baja la rigidez","Mencionar que sube la deflexión","Justificar con números"],
-ejemplo_valido:"Si tc baja de 5 a 3 cm, el área de la capa de compresión baja de 250 a 150 cm². La inercia total baja, la rigidez baja y la deflexión sube. El impacto es significativo porque la capa está lejos del centroide.",
+condiciones:["Reduce el ruido","Mejora la FFT","Sin Kalman: FFT con picos falsos"],
+ejemplo_valido:"El filtro de Kalman reduce el ruido y preserva la señal. Sin él, la FFT tendría picos falsos y sería difícil identificar la frecuencia dominante. Con Kalman, la frecuencia dominante se ve claramente.",
 criterios:[
-{peso:30,desc:"Baja la inercia",keywords:["inercia","baja","disminuye","menor"]},
-{peso:30,desc:"Baja la rigidez",keywords:["rigidez","baja","disminuye","menor"]},
-{peso:20,desc:"Sube la deflexión",keywords:["deflexión","deflexion","sube","aumenta","mayor"]},
-{peso:20,desc:"Justifica con números",keywords:["250","150","cm²","cm2"]}
+{peso:40,desc:"Reduce ruido",keywords:["ruido","filtro","kalman","reducir"]},
+{peso:30,desc:"Mejora la FFT",keywords:["fft","frecuencia","pico","identifica"]},
+{peso:30,desc:"Sin Kalman problema",keywords:["sin","picos","falsos","difícil"]}
 ]},
+
+// BLOQUE D: DECISIÓN (2 preguntas, 25 pts)
 {id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
-enunciado:"El constructor propone AUMENTAR bb de 40 a 50 cm para 'ahorrar concreto en nervios'. ¿Aprueba el cambio? Justifique técnica y éticamente.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Mayor bb → menos nervios → menos inercia → más deflexión.",campos:[{label:"bb actual",valor:"40 cm (2.5 nervios/m)"},{label:"bb propuesto",valor:"50 cm (2 nervios/m)"},{label:"Impacto",valor:"-20% nervios"}]},
-condiciones:["Técnico: al subir bb, hay menos nervios, menos inercia, más deflexión","Normativo: citar NEC-15","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
-ejemplo_valido:"No apruebo. Al subir bb de 40 a 50 cm, se reduce el número de nervios por metro en 20%. Esto baja la inercia y aumenta la deflexión, pudiendo superar L/240 según NEC-15. Rechazar el cambio, documentar y notificar por escrito. Como ingeniero firmante, soy responsable civil y penal.",
+enunciado:"La frecuencia experimental del Phyphox no coincide con T₁ teórico (error 25%). ¿Qué hace usted como ingeniero responsable? Justifique técnica y éticamente.",
+ejercicio:{instrucciones:"Considere NEC-15, ética, trazabilidad",campos:[{label:"T_exp",valor:"0.350 s"},{label:"T₁_teórico",valor:"0.280 s"},{label:"Error",valor:"25%"}]},
+condiciones:["Técnico: revisar E, masa o modelo","Normativo: NEC-15, análisis dinámico","Ético: reportar aunque sea desfavorable","Trazabilidad: documentar, repetir ensayo"],
+ejemplo_valido:"No apruebo el modelo. Reviso el E de la madera/hormigón, la masa del prototipo y el modelo de rigidez. Reporto el error del 25%, documento la discrepancia, repito el ensayo y aplico análisis estocástico. La norma NEC-15 exige coherencia dinámica.",
 criterios:[
-{peso:30,desc:"Técnico: menos nervios = menos inercia",keywords:["menos nervios","inercia","deflexión","deflexion","rigidez"]},
-{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","l/240","norma"]},
-{peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","firma","rechazo"]},
-{peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","notificar","registrar","informe"]}
+{peso:30,desc:"Técnico: revisar E o masa",keywords:["e","masa","modelo","revisar","calibrar"]},
+{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","norma","análisis dinámico"]},
+{peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","reportar"]},
+{peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","repetir","informe","registrar"]}
 ]},
 {id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
-enunciado:"El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?",
-ejercicio:{instrucciones:"Considere NEC-15, ACI 318, NTE INEN, ética profesional",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},
-condiciones:["Identificar el problema: resistencia especificada vs real","Aplicar normativa: NEC-15, ACI 318, NTE INEN","Acciones concretas: rechazar, notificar, suspender, documentar","Consecuencias legales: responsabilidad civil y penal"],
-ejemplo_valido:"El déficit del 20% viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito al constructor, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal por cualquier falla.",
+enunciado:"El período T₁ = 0.280 s está muy cerca del período del suelo (T_suelo = 0.30 s). ¿Qué decisión toma? Justifique técnica, normativa y éticamente.",
+ejercicio:{instrucciones:"Considere NEC-15, resonancia, ética",campos:[{label:"T₁ estructura",valor:"0.280 s"},{label:"T_suelo",valor:"0.30 s"},{label:"Relación T₁/T_s",valor:"0.93 (peligro)"}]},
+condiciones:["Técnico: riesgo de resonancia","Normativo: NEC-15 (T min/max)","Acciones: rigidizar o cambiar sección","Ético: documentar y notificar"],
+ejemplo_valido:"T₁/T_suelo = 0.93 (muy cerca de 1) → riesgo de resonancia. Aplico NEC-15: rigidizo el pórtico aumentando secciones o agrego arriostramiento. Documento la decisión, notifico al constructor y justifico técnicamente. La resonancia puede causar colapso.",
 criterios:[
-{peso:25,desc:"Identifica el problema",keywords:["déficit","deficit","20","resistencia","menor","168","210"]},
-{peso:25,desc:"Aplica normativa",keywords:["nec","aci","nte","inen","norma"]},
-{peso:25,desc:"Acciones concretas",keywords:["rechazar","notificar","suspender","documentar","paralizar"]},
-{peso:25,desc:"Consecuencias legales",keywords:["responsabilidad","civil","penal","denuncia","legal"]}
+{peso:30,desc:"Técnico: resonancia",keywords:["resonancia","0.93","cerca","amplificación"]},
+{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","norma","período"]},
+{peso:25,desc:"Acciones concretas",keywords:["rigidizar","aumentar","arriostramiento","sección"]},
+{peso:25,desc:"Ético: documentar y notificar",keywords:["documentar","notificar","informe","ético"]}
 ]}
 ];
 
 var respuestas={},preguntaActual=0;
-var MODULO="M01",TITULO="Inercia Equivalente";
+var MODULO="M07",TITULO="Análisis Dinámico Modal";
 document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
 
 function mostrar(){
@@ -613,44 +581,36 @@ document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)
 document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
 var h='<div class="pregunta-box">';
 h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
-
 if(p.ejercicio){
 h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
 p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
 h+='</div>';
 }
-
 if(p.condiciones){
 h+='<div class="condiciones-box"><h4>✅ CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
 p.condiciones.forEach(function(c){h+='<li>'+c+'</li>';});
-h+='</ul><p style="color:#7f8c8d;font-size:11px;margin-top:10px;font-style:italic">Puedes usar otras palabras, pero debes cubrir estos criterios.</p></div>';
+h+='</ul></div>';
 }
-
 if(p.ejemplo_valido){
 h+='<div class="ejemplo-valido-box"><h4>💡 EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"'+p.ejemplo_valido+'"</p></div>';
 }
-
 h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
 h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
-
 if(p.criterios){
 h+='<div class="criterios-box"><h4>🎯 CRITERIOS DE EVALUACIÓN</h4><ul>';
 p.criterios.forEach(function(c){h+='<li>✅ '+c.desc+' ('+c.peso+'%)</li>';});
 h+='</ul></div>';
 }
-
 h+='<div class="rubrica"><h4>🎯 RÚBRICA GENERAL</h4><ul>';
 h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
 h+='<li>🟧 Básico (40-60%): Responde sin cubrir todos los criterios</li>';
 h+='<li>🟨 Competente (60-80%): Cubre la mayoría de criterios</li>';
 h+='<li>🟩 Excelente (80-100%): Cubre todos los criterios con claridad</li>';
 h+='</ul></div></div>';
-
 h+='<div class="nav-buttons">';
 h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
 h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
 h+='</div>';
-
 document.getElementById('contenedor-pregunta').innerHTML=h;
 }
 
@@ -671,8 +631,6 @@ if(r.indexOf(k.toLowerCase())!==-1) encontrado=true;
 });
 if(encontrado) puntosPregunta += c.peso;
 });
-} else {
-puntosPregunta = r.length > 15 ? 50 : 0;
 }
 total += puntosPregunta * p.puntaje / 100;
 maxTotal += p.puntaje;
@@ -696,7 +654,6 @@ document.getElementById('pantalla-resultado').style.display='block';
 document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
 document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
 localStorage.setItem(MODULO+'_puntaje',pts);
-
 if(pts>=60){
 var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
 var fecha=new Date().toLocaleDateString('es-EC');
@@ -715,7 +672,7 @@ document.getElementById('contenedor-certificado').innerHTML=
 '<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
 '<hr style="margin:15px 0">'+
 '<h3>CERTIFICADO DE APROBACIÓN</h3>'+
-'<h3>Módulo M01 — Inercia Equivalente</h3>'+
+'<h3>Módulo M07 — Análisis Dinámico Modal</h3>'+
 '<p style="margin:15px 0">La Universidad certifica que:</p>'+
 '<h2 style="color:#2c3e50">'+nombre+'</h2>'+
 '<p>C.C. '+cedula+'</p>'+
@@ -724,21 +681,17 @@ document.getElementById('contenedor-certificado').innerHTML=
 '<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
 '<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
 '<p><b>Clasificación: '+cl.txt+'</b></p>'+
-'<div class="modalidad">'+
-'<h4>MODALIDAD DE APROBACIÓN:</h4>'+
-'<ul>'+
+'<div class="modalidad"><h4>MODALIDAD DE APROBACIÓN:</h4><ul>'+
 '<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
 '<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
 '</ul></div>'+
-'<div class="qr-section">'+
-'<img src="qr_m01.png" alt="QR" class="qr-img">'+
+'<div class="qr-section"><img src="qr_m07.png" alt="QR" class="qr-img">'+
 '<div class="qr-datos">'+
 '<p><b>Código:</b> '+cod+'</p>'+
 '<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
 '<p><b>Vigencia:</b> Permanente</p>'+
 '<p><b>Verificación:</b> Escanee el código QR</p>'+
-'</div>'+
-'</div>'+
+'</div></div>'+
 '<div class="firmas">'+
 '<div class="firma"><div class="linea-firma"></div>'+
 '<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+
@@ -750,7 +703,7 @@ document.getElementById('contenedor-certificado').innerHTML=
 '<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
 '</div>'+
 '<hr style="margin:20px 0">'+
-'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>'+
+'<p style="font-style:italic;font-size:13px">"La incertidumbre no se elimina: se cuantifica.<br>La estructura habla a través de sus modos de vibrar."</p>'+
 '<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>'+
 '</div>';
 }

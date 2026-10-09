@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Manual del Docente M01 - Inercia Equivalente</title>
+<title>Manual del Docente M02 - Análisis de Cargas</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
@@ -13,7 +13,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
 .header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
 .badge-prof{display:inline-block;background:#e74c3c;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
-.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #3498db}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #f39c12}
 .seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
 .seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
 .seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
@@ -56,8 +56,8 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <!-- HEADER -->
 <div class="header">
 <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
-<h1>📙 MANUAL DEL DOCENTE — M01</h1>
-<h2>INERCIA EQUIVALENTE Y ALTURA EQUIVALENTE</h2>
+<h1>📙 MANUAL DEL DOCENTE — M02</h1>
+<h2>ANÁLISIS DE CARGAS SEGÚN USO Y NORMATIVA NEC-15</h2>
 <h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
 <h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
 <span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
@@ -90,7 +90,7 @@ contextualiza, se responsabiliza."
 <!-- 1. PROPÓSITO -->
 <div class="seccion" id="proposito">
 <h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
-<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M01 — Inercia Equivalente.</p>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M02 — Análisis de Cargas.</p>
 <p>A diferencia de la evaluación tradicional (que compara palabras clave), este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
 
 <div class="alerta">
@@ -102,35 +102,41 @@ contextualiza, se responsabiliza."
 <!-- 2. MODELO BASE -->
 <div class="seccion" id="modelo">
 <h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
-<p>Todas las preguntas del M01 están ancladas al <strong>modelo base del Colegio Alejo Lascano</strong>:</p>
+<p>Todas las preguntas del M02 están ancladas al <strong>modelo base del Proyecto Multidisciplinario</strong>:</p>
 
 <table class="tabla">
 <thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
 <tbody>
-<tr><td>H (altura total losa)</td><td>25.0</td><td>cm</td></tr>
-<tr><td>bn (ancho nervio)</td><td>10.0</td><td>cm</td></tr>
-<tr><td>bb (ancho bloque)</td><td>50.0</td><td>cm</td></tr>
-<tr><td>tc (capa de compresión)</td><td>5.0</td><td>cm</td></tr>
-<tr><td>hn (altura del nervio)</td><td>20.0</td><td>cm</td></tr>
+<tr><td>Lv1 (luz entre ejes)</td><td>6.00</td><td>m</td></tr>
+<tr><td>Lv2</td><td>5.50</td><td>m</td></tr>
+<tr><td>Lv3</td><td>6.30</td><td>m</td></tr>
+<tr><td>Lt1 (luz de trave)</td><td>4.80</td><td>m</td></tr>
+<tr><td>Lt2</td><td>5.50</td><td>m</td></tr>
+<tr><td>Lt3</td><td>5.00</td><td>m</td></tr>
+<tr><td>Lt4</td><td>6.10</td><td>m</td></tr>
+<tr><td>Pisos</td><td>2</td><td>—</td></tr>
+<tr><td>fc</td><td>210</td><td>kg/cm²</td></tr>
+<tr><td>fy</td><td>4200</td><td>kg/cm²</td></tr>
+<tr><td>Fm</td><td>1.20</td><td>—</td></tr>
 </tbody>
 </table>
 
-<h3>Resultados esperados:</h3>
+<h3>Resultados esperados (Ejemplo Vivienda + Mampostería Pesada):</h3>
 <table class="tabla">
 <thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
 <tbody>
-<tr><td>A_capa</td><td>250</td><td>cm²</td></tr>
-<tr><td>A_nervio</td><td>200</td><td>cm²</td></tr>
-<tr><td>A_total</td><td>450</td><td>cm²</td></tr>
-<tr><td>y_cg (centroide)</td><td>16.94</td><td>cm</td></tr>
-<tr><td>I_total</td><td>24548</td><td>cm⁴</td></tr>
-<tr><td><strong>h_eq (altura equivalente)</strong></td><td><strong>18.06</strong></td><td><strong>cm</strong></td></tr>
+<tr><td>Cm (carga muerta)</td><td>0.640</td><td>t/m²</td></tr>
+<tr><td>Cv (carga viva)</td><td>0.200</td><td>t/m²</td></tr>
+<tr><td><strong>Cu (carga última)</strong></td><td><strong>1.088</strong></td><td><strong>t/m²</strong></td></tr>
+<tr><td>W (carga por metro lineal)</td><td>5.984</td><td>t/m</td></tr>
+<tr><td>At (área tributaria)</td><td>29.613</td><td>m²</td></tr>
+<tr><td>Pu (carga axial)</td><td>38.66</td><td>t</td></tr>
 </tbody>
 </table>
 
 <div class="alerta">
-<h4>💡 Valores de referencia del libro</h4>
-<p>El valor h_eq = 18.06 cm coincide con la tabla del libro de Marcelo Guerra para una losa alivianada de 25 cm. Esto valida el cálculo.</p>
+<h4>💡 Valores de referencia</h4>
+<p>El valor Cu = 1.088 t/m² es el <strong>ejemplo oficial del proyecto</strong>. Si el estudiante elige otro uso (Oficinas, Aulas, Bodega, etc.), debe calcular con la Guía M02 y verificar sus resultados.</p>
 </div>
 </div>
 
@@ -194,66 +200,66 @@ contextualiza, se responsabiliza."
 <p>Cada pregunta del Bloque C tiene <strong>3 criterios</strong> con pesos específicos:</p>
 
 <div class="rubrica-card">
-<h4>Pregunta C1 — Deflexión al reducir bb</h4>
+<h4>Pregunta C1 — Diferencia Cm y Cv</h4>
 <div class="criterio">
 <strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span>
-<p>Menciona: inercia, deflexión, relación inversa, o impacto estructural.</p>
+<p>Menciona: carga muerta (permanente), carga viva (variable por uso).</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Justifica con números</strong><span class="peso">30%</span>
-<p>Menciona: -7.5%, cambio porcentual, o compara I_total antes/después.</p>
+<p>Menciona: Cm = 0.640 t/m², Cv = 0.200 t/m², o factores 1.2 y 1.6.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Conecta con otros módulos</strong><span class="peso">30%</span>
-<p>Menciona: M06 (losa), L/240, NEC-15, o consecuencias estructurales.</p>
+<p>Menciona: M03 (viga), NEC-15 Tabla 9, o consecuencias estructurales.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta C2 — ¿Por qué h_eq < H?</h4>
+<h4>Pregunta C2 — Impacto del uso en Cu</h4>
 <div class="criterio">
-<strong>Criterio 1 — Identifica los vacíos</strong><span class="peso">40%</span>
-<p>Menciona: vacíos, aligeramiento, bloques huecos.</p>
+<strong>Criterio 1 — Identifica la relación</strong><span class="peso">40%</span>
+<p>Menciona: mayor Cv → mayor Cu, uso determina Cv.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 2 — Reconoce el aporte del nervio y capa</strong><span class="peso">30%</span>
-<p>Menciona: nervio, capa de compresión, aportan inercia.</p>
+<strong>Criterio 2 — Reconoce los valores</strong><span class="peso">30%</span>
+<p>Menciona: Vivienda 0.20, Oficina 0.24, Aulas 0.29, Bodega 1.20.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 3 — Explica el concepto de equivalencia</strong><span class="peso">30%</span>
-<p>Menciona: misma inercia, modelado ETABS, losa maciza equivalente.</p>
+<strong>Criterio 3 — Conecta con NEC-15</strong><span class="peso">30%</span>
+<p>Menciona: NEC-15 Tabla 9, o consecuencia de subestimar.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta C3 — Relación con M06</h4>
+<h4>Pregunta C3 — Relación Cu con M03</h4>
 <div class="criterio">
 <strong>Criterio 1 — Identifica la conexión</strong><span class="peso">40%</span>
-<p>Menciona: h_eq alimenta a M06, I_eq para verificar deflexión.</p>
+<p>Menciona: Cu alimenta a M03, W = Cu · b_trib.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span>
-<p>Menciona: cálculo de deflexión, verificación L/240.</p>
+<p>Menciona: Cu determina W, Mmax y el acero de la viga.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Consecuencia si no se calcula bien</strong><span class="peso">30%</span>
-<p>Menciona: sobreestima rigidez, subestima deflexión, diseño no seguro.</p>
+<p>Menciona: subestima W, viga falla; sobreestima, sobredimensiona.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta C4 — Reducción de tc</h4>
+<h4>Pregunta C4 — Cambio de uso y su impacto</h4>
 <div class="criterio">
-<strong>Criterio 1 — Impacto en la inercia</strong><span class="peso">40%</span>
-<p>Menciona: I_total baja, h_eq baja.</p>
+<strong>Criterio 1 — Impacto en Cu</strong><span class="peso">40%</span>
+<p>Menciona: Cv sube, Cu sube, W sube.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Explicación física</strong><span class="peso">30%</span>
-<p>Menciona: menor área alejada del centroide, menor aporte.</p>
+<p>Menciona: mayor carga viva → mayor momento → más acero.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Consecuencia estructural</strong><span class="peso">30%</span>
-<p>Menciona: mayor deflexión, riesgo de no cumplir L/240.</p>
+<p>Menciona: rediseñar viga o verificar deflexión L/240.</p>
 </div>
 </div>
 
@@ -261,30 +267,30 @@ contextualiza, se responsabiliza."
 <p>Cada pregunta del Bloque D tiene <strong>4 criterios</strong> con pesos específicos:</p>
 
 <div class="rubrica-card">
-<h4>Pregunta D1 — Reducción de bb (12 pts)</h4>
+<h4>Pregunta D1 — Cambio de uso no declarado (12 pts)</h4>
 <div class="criterio">
 <strong>Criterio 1 — Técnico</strong><span class="peso">25%</span>
-<p>Menciona: impacto en inercia, deflexión, L/240, rigidez.</p>
+<p>Menciona: Cu aumenta, W aumenta, viga se sobrecarga.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Normativo</strong><span class="peso">25%</span>
-<p>Menciona: NEC-15, ACI 318, normativa aplicable.</p>
+<p>Menciona: NEC-15 Tabla 9, ACI 318.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Ético</strong><span class="peso">25%</span>
-<p>Menciona: responsabilidad profesional, firma, rechazo justificado.</p>
+<p>Menciona: responsabilidad profesional, firma, rechazo.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span>
-<p>Menciona: documentar, análisis estocástico, P95, memoria.</p>
+<p>Menciona: documentar, notificar, responsabilidad civil y penal.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta D2 — Bloques de menor resistencia (13 pts)</h4>
+<h4>Pregunta D2 — Mampostería pesada por liviana (13 pts)</h4>
 <div class="criterio">
 <strong>Criterio 1 — Identifica el problema</strong><span class="peso">25%</span>
-<p>Menciona: resistencia especificada vs real, déficit del 20%.</p>
+<p>Menciona: mampostería pesada 0.18 vs liviana 0.09.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Aplica normativa</strong><span class="peso">25%</span>
@@ -308,22 +314,22 @@ contextualiza, se responsabiliza."
 <h3>5.1 Evaluación del Bloque A</h3>
 <p><strong>Método:</strong> Comparación por palabras clave con la respuesta esperada.</p>
 <div class="ejemplo">
-<strong>Pregunta:</strong> ¿Qué es la inercia centroidal?
-<div class="respuesta">Respuesta esperada: "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</div>
-<div class="resultado">Palabras clave: propiedad, geométrica, resistencia, flexión, eje, centroidal</div>
+<strong>Pregunta:</strong> ¿Qué es la carga muerta (Cm)?
+<div class="respuesta">Respuesta esperada: "Peso permanente de la estructura: losa, acabados, instalaciones y mampostería."</div>
+<div class="resultado">Palabras clave: peso, permanente, losa, acabados, instalaciones, mampostería</div>
 </div>
 
 <h3>5.2 Evaluación del Bloque B</h3>
 <p><strong>Método:</strong> Comparación numérica exacta con tolerancia del 5%.</p>
 <div class="ejemplo">
-<strong>Pregunta:</strong> Calcule I_total.
-<div class="respuesta">Respuesta esperada: 24548 cm⁴</div>
-<div class="resultado">Tolerancia: ±1227 cm⁴ (5%)</div>
+<strong>Pregunta:</strong> Calcule Cu.
+<div class="respuesta">Respuesta esperada: 1.088 t/m²</div>
+<div class="resultado">Tolerancia: ±0.054 t/m² (5%)</div>
 </div>
 
 <h3>5.3 Evaluación del Bloque C</h3>
 <p><strong>Método:</strong> Rúbrica por criterios ponderados.</p>
-<ol>
+<ol style="padding-left:25px;font-size:14px">
 <li>Verifique cada criterio individualmente</li>
 <li>Asigne puntos por criterio cumplido</li>
 <li>Sume los puntos de todos los criterios</li>
@@ -332,11 +338,11 @@ contextualiza, se responsabiliza."
 
 <div class="ejemplo">
 <strong>Ejemplo de evaluación C1:</strong>
-<div class="respuesta">Respuesta del estudiante: "La inercia baja 7.5% y la deflexión sube aproximadamente lo mismo. Esto afecta la verificación con L/240 en el M06."</div>
+<div class="respuesta">Respuesta: "La carga muerta es permanente y vale 0.640 t/m², mientras la carga viva es variable y vale 0.200 t/m². La Cu se obtiene con 1.2·Cm + 1.6·Cv = 1.088 t/m²."</div>
 <div class="resultado">
-✅ Criterio 1 (40%): "inercia", "deflexión" → 40%<br>
-✅ Criterio 2 (30%): "-7.5%", "mismo" → 30%<br>
-✅ Criterio 3 (30%): "L/240", "M06" → 30%<br>
+✅ Criterio 1 (40%): "permanente", "variable" → 40%<br>
+✅ Criterio 2 (30%): "0.640", "0.200", "1.088" → 30%<br>
+✅ Criterio 3 (30%): "NEC-15", "M03" → 30%<br>
 <strong>Total: 100% × 6 pts = 6/6 pts</strong>
 </div>
 </div>
@@ -389,7 +395,7 @@ contextualiza, se responsabiliza."
 <p>La retroalimentación debe ser <strong>formativa</strong>, no punitiva. El objetivo es que el estudiante mejore su criterio profesional.</p>
 
 <h3>7.1 Estructura de la retroalimentación</h3>
-<ol>
+<ol style="padding-left:25px;font-size:14px">
 <li><strong>Lo que estuvo bien:</strong> Reconocer los aciertos específicos</li>
 <li><strong>Lo que falta:</strong> Señalar los criterios no cumplidos</li>
 <li><strong>Cómo mejorar:</strong> Dar una recomendación concreta</li>
@@ -398,32 +404,32 @@ contextualiza, se responsabiliza."
 <h3>7.2 Ejemplos de retroalimentación</h3>
 <div class="ejemplo">
 <strong>Caso:</strong> Estudiante con puntaje 60 en Bloque D1.
-<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (inercia baja 7.5%), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
+<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (la Cu aumenta al cambiar el uso), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
 </div>
 </div>
 
 <!-- 8. ALERTAS -->
 <div class="seccion" id="alertas">
-<h2>8. 🚨 ALERTAS PEDAGÓGICAS DEL M01</h2>
+<h2>8. 🚨 ALERTAS PEDAGÓGICAS DEL M02</h2>
 
 <div class="alerta">
-<h4>Alerta 1: Confusión entre H y h_eq</h4>
-<p>Los estudiantes suelen confundir la altura real con la altura equivalente. Reforzar la diferencia conceptual.</p>
+<h4>Alerta 1: Confusión entre Cm y Cv</h4>
+<p>Los estudiantes suelen confundir la carga muerta (permanente) con la carga viva (variable por uso). Reforzar la diferencia conceptual con ejemplos del territorio.</p>
 </div>
 
 <div class="alerta">
-<h4>Alerta 2: Error en Steiner</h4>
-<p>El error más común es usar la inercia propia sin sumar el término A·d². Reforzar la aplicación del teorema.</p>
+<h4>Alerta 2: Error en la combinación de carga</h4>
+<p>El error más común es usar Cu = 1.4·Cm + 1.7·Cv (norma antigua) en lugar de Cu = 1.2·Cm + 1.6·Cv (NEC-15 actual). Reforzar la norma vigente.</p>
 </div>
 
 <div class="alerta">
 <h4>Alerta 3: No interpretar el resultado</h4>
-<p>Muchos estudiantes obtienen h_eq = 18.06 pero no saben qué significa. Reforzar la interpretación física.</p>
+<p>Muchos estudiantes obtienen Cu = 1.088 t/m² pero no saben qué significa. Reforzar la interpretación física: la estructura debe resistir esa carga mayorada.</p>
 </div>
 
 <div class="alerta">
 <h4>Alerta 4: Bloque D vacío</h4>
-<p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales.</p>
+<p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales (Colegio Alejo Lascano, Agua Dulce).</p>
 </div>
 </div>
 
@@ -433,9 +439,9 @@ contextualiza, se responsabiliza."
 
 <h3>9.1 Antes del módulo</h3>
 <ul>
-<li>Revisar la Guía de Estudio M01 con los estudiantes</li>
-<li>Reforzar los conceptos clave (Steiner, h_eq, deflexión)</li>
-<li>Discutir el caso real del Colegio Alejo Lascano</li>
+<li>Revisar la Guía de Estudio M02 con los estudiantes</li>
+<li>Reforzar los conceptos clave (Cm, Cv, Cu, W, Pu)</li>
+<li>Discutir el caso real del Proyecto Multidisciplinario</li>
 </ul>
 
 <h3>9.2 Durante el módulo</h3>
@@ -468,16 +474,16 @@ contextualiza, se responsabiliza."
 <!-- 10. RESPUESTAS ESPERADAS -->
 <div class="seccion" id="respuestas">
 <h2>10. 📝 RESPUESTAS ESPERADAS DE LAS 15 PREGUNTAS</h2>
-<p>Esta sección es <strong>confidencial</strong>. Contiene las respuestas esperadas para cada pregunta del cuestionario M01.</p>
+<p>Esta sección es <strong>confidencial</strong>. Contiene las respuestas esperadas para cada pregunta del cuestionario M02.</p>
 
 <h3>Bloque A — Conceptos (10 pts)</h3>
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>A1</td><td>¿Qué es la inercia centroidal?</td><td>Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal.</td><td>2</td></tr>
-<tr><td>A2</td><td>¿Qué dice el Teorema de Steiner?</td><td>La inercia respecto a un eje paralelo es igual a la inercia centroidal más el área por la distancia al cuadrado.</td><td>2</td></tr>
-<tr><td>A3</td><td>¿Por qué se calcula h_eq?</td><td>Para modelar la losa alivianada como maciza en ETABS manteniendo la misma inercia.</td><td>3</td></tr>
-<tr><td>A4</td><td>Diferencia entre H y h_eq</td><td>H es el espesor real; h_eq es el espesor ficticio equivalente. h_eq &lt; H por los vacíos.</td><td>3</td></tr>
+<tr><td>A1</td><td>¿Qué es la carga muerta?</td><td>Peso permanente: losa, acabados, instalaciones, mampostería.</td><td>2</td></tr>
+<tr><td>A2</td><td>¿Qué es la carga viva?</td><td>Peso variable por uso: personas, muebles, equipos. NEC-15, Tabla 9.</td><td>2</td></tr>
+<tr><td>A3</td><td>¿Por qué Cu = 1.2·Cm + 1.6·Cv?</td><td>Porque las cargas reales pueden ser mayores. Los factores garantizan que no falle.</td><td>3</td></tr>
+<tr><td>A4</td><td>¿Qué es el área tributaria?</td><td>Área que contribuye a la carga de un elemento estructural (viga o columna).</td><td>3</td></tr>
 </tbody>
 </table>
 
@@ -485,11 +491,11 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>B1</td><td>Calcule A_capa, A_nervio, A_total</td><td>A_capa = 250 cm²; A_nervio = 200 cm²; A_total = 450 cm²</td><td>6</td></tr>
-<tr><td>B2</td><td>Calcule y_cg</td><td>y_cg = 16.94 cm</td><td>8</td></tr>
-<tr><td>B3</td><td>Calcule I_total con Steiner</td><td>I_total = 24548 cm⁴</td><td>10</td></tr>
-<tr><td>B4</td><td>Calcule h_eq</td><td>h_eq = 18.06 cm</td><td>8</td></tr>
-<tr><td>B5</td><td>Calcule δmax y verifique L/240</td><td>δmax = 1.71 mm ≤ 25 mm ✅ CUMPLE</td><td>8</td></tr>
+<tr><td>B1</td><td>Calcule Cm (losa 25 cm, mamp. pesada)</td><td>0.640 t/m²</td><td>6</td></tr>
+<tr><td>B2</td><td>Calcule Cu (vivienda)</td><td>1.088 t/m²</td><td>8</td></tr>
+<tr><td>B3</td><td>Calcule W (b_trib=5.50 m)</td><td>5.984 t/m</td><td>10</td></tr>
+<tr><td>B4</td><td>Calcule At (Lv1+Lv2 / Lt1+Lt2)</td><td>29.613 m²</td><td>8</td></tr>
+<tr><td>B5</td><td>Calcule Pu (Fm=1.2)</td><td>38.66 t</td><td>8</td></tr>
 </tbody>
 </table>
 
@@ -497,10 +503,10 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>C1</td><td>Deflexión al reducir bb</td><td>La inercia baja 7.5% y la deflexión sube aproximadamente lo mismo.</td><td>6</td></tr>
-<tr><td>C2</td><td>¿Por qué h_eq &lt; H?</td><td>Porque los vacíos del aligeramiento no aportan inercia.</td><td>6</td></tr>
-<tr><td>C3</td><td>Relación con M06</td><td>h_eq alimenta al M06 para verificar deflexión con L/240.</td><td>6</td></tr>
-<tr><td>C4</td><td>Reducción de tc</td><td>I_total baja, h_eq baja, deflexión sube.</td><td>7</td></tr>
+<tr><td>C1</td><td>Diferencia Cm y Cv</td><td>Cm es permanente (0.640), Cv es variable por uso (0.200). Factores 1.2 y 1.6.</td><td>6</td></tr>
+<tr><td>C2</td><td>Impacto del uso en Cu</td><td>Mayor Cv → mayor Cu. Vivienda 1.088, Aulas 1.232, Bodega pesada 2.688.</td><td>6</td></tr>
+<tr><td>C3</td><td>Relación Cu con M03</td><td>Cu alimenta a M03 para calcular W y el momento de la viga.</td><td>6</td></tr>
+<tr><td>C4</td><td>Cambio de uso</td><td>Cv sube, Cu sube, W sube, viga necesita más acero.</td><td>7</td></tr>
 </tbody>
 </table>
 
@@ -508,16 +514,16 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>D1</td><td>Reducción de bb</td><td>No aprobar. Inercia baja, deflexión sube. Rechazar y documentar.</td><td>12</td></tr>
-<tr><td>D2</td><td>Bloques de menor resistencia</td><td>Rechazar material, notificar, suspender obra, documentar.</td><td>13</td></tr>
+<tr><td>D1</td><td>Cambio de uso no declarado</td><td>No aprobar. Cu aumenta, viga se sobrecarga. Rechazar, documentar, notificar.</td><td>12</td></tr>
+<tr><td>D2</td><td>Mampostería pesada por liviana</td><td>Rechazar cambio sin análisis. Notificar, suspender, documentar. Responsabilidad civil y penal.</td><td>13</td></tr>
 </tbody>
 </table>
 </div>
 
 <!-- BOTONES -->
 <div class="botones">
-<a href="M01_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
-<a href="modulo_01_inercia_equivalente.html" class="btn">📝 Ir al Cuestionario</a>
+<a href="M02_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
+<a href="modulo_02_calculo_cargas.html" class="btn">📝 Ir al Cuestionario</a>
 <a href="manual_programa.html" class="btn">📖 Manual del Programa</a>
 <a href="index.html" class="btn">🏠 Volver al Inicio</a>
 <button class="btn" onclick="window.print()">🖨 Descargar PDF</button>

@@ -41,6 +41,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
 .btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
 .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
 .pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
 .pie-pagina p{margin:5px 0}
 .cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
@@ -77,6 +78,8 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <li><a href="#evaluacion">Sistema de evaluación</a></li>
 <li><a href="#ejercicios">Ejercicios de práctica</a></li>
 <li><a href="#conexion">Conexión con otros módulos</a></li>
+<li><a href="#acapite">📖 Acápite de Estudio</a></li>
+<li><a href="#condiciones">✅ Condiciones de Respuesta Válida</a></li>
 </ol>
 </div>
 
@@ -226,10 +229,114 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <tr><td>M06</td><td>h_eq, I_total</td><td>Diseño de losa</td></tr>
 </tbody>
 </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 9: ACÁPITE DE ESTUDIO -->
+<!-- ============================================================ -->
+<div class="seccion" id="acapite" style="border-left-color:#f39c12">
+<h2>📖 9. ACÁPITE DE ESTUDIO</h2>
+<p><b>Revisa este resumen ejecutivo antes de responder el cuestionario.</b></p>
+
+<h3>🎯 ¿Qué aprenderás?</h3>
+<ul>
+<li>Calcular la inercia centroidal de una sección</li>
+<li>Aplicar el Teorema de Steiner</li>
+<li>Determinar la altura equivalente h_eq</li>
+<li>Interpretar el impacto en la deflexión</li>
+</ul>
+
+<h3>📐 Fórmulas clave</h3>
+<div class="formula">I₀ = b · h³ / 12</div>
+<div class="formula">I_total = Σ (I₀ + A · d²)</div>
+<div class="formula formula-grande">h_eq = ∛(12 · I_total / bb)</div>
+
+<h3>💡 Ejemplo resuelto</h3>
+<p><b>Datos:</b> H = 25 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm</p>
+<p><b>Cálculo:</b> A_capa = 250 cm², A_nervio = 200 cm², y_cg = 16.94 cm</p>
+<p style="color:#f39c12;font-weight:bold"><b>Resultado:</b> I_total = 24548 cm⁴ → h_eq = 18.06 cm</p>
+
+<h3>🎯 ¿Qué se espera en el Bloque C? (Interpretación)</h3>
+<ul>
+<li>Menciona la relación inversa inercia-deflexión</li>
+<li>Justifica con números (ej: -7.5%)</li>
+<li>Conecta con M06 (losa) o L/240</li>
+</ul>
+
+<h3>🎯 ¿Qué se espera en el Bloque D? (Decisión)</h3>
+<ul>
+<li><b>Impacto técnico:</b> deflexión supera L/240</li>
+<li><b>Norma aplicable:</b> NEC-15</li>
+<li><b>Criterio ético:</b> reportar aunque sea desfavorable</li>
+<li><b>Trazabilidad:</b> documentar la decisión</li>
+</ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECCIÓN 10: CONDICIONES DE RESPUESTA VÁLIDA -->
+<!-- ============================================================ -->
+<div class="seccion" id="condiciones" style="border-left-color:#2ecc71">
+<h2>✅ 10. CONDICIONES DE RESPUESTA VÁLIDA</h2>
+<p>Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<h3>🎯 Cómo se evalúa</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts (criterios)</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts (número exacto)</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts (razonamiento)</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts (criterios + ética)</td></tr>
+</tbody>
+</table>
+
+<h3>✅ Qué espera el sistema</h3>
+<p><b>Bloque A — Concepto:</b></p>
+<ul>
+<li>Explica con tus palabras</li>
+<li>Cubre los criterios indicados</li>
+<li>Puedes usar sinónimos</li>
+</ul>
+<p><b>Bloque B — Cálculo:</b></p>
+<ul>
+<li>Muestra el procedimiento</li>
+<li>Indica unidades</li>
+<li>Da el resultado numérico</li>
+</ul>
+<p><b>Bloque C — Interpretación:</b></p>
+<ul>
+<li>Menciona el concepto técnico</li>
+<li>Justifica con números</li>
+<li>Conecta con otros módulos o normas</li>
+</ul>
+<p><b>Bloque D — Decisión:</b></p>
+<ul>
+<li>Identifica el problema técnico</li>
+<li>Cita la norma aplicable</li>
+<li>Aplica criterio ético</li>
+<li>Documenta tu decisión</li>
+</ul>
+
+<h3>💡 Ejemplo de respuesta válida</h3>
+<div class="ejemplo">
+<h4>Pregunta: "¿Qué es la inercia centroidal?"</h4>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Es la resistencia a flexión de una figura cuando el eje pasa por su centro de gravedad."</p>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "No sé."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+</div>
+
+<h3>🎯 Recuerda</h3>
+<ul>
+<li>No hay una sola respuesta correcta</li>
+<li>Se valora el razonamiento</li>
+<li>Puedes expresarte con tus propias palabras</li>
+<li>El error es parte del aprendizaje</li>
+</ul>
 
 <div class="cita">
-"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
-<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+"Muchos estudiantes son subvalorados frente a un sistema global deprimente."<br>
+Este proyecto es para ellos.
 </div>
 </div>
 

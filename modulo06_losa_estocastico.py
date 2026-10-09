@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 """
 ================================================================================
-📐 MÓDULO 06 — ALGORITMO 2: MODELO ESTOCÁSTICO DE LOSA ALIVIANADA (CORREGIDO)
+MODULO 06 - ALGORITMO 2: DEFORMADA 3D POR CARGA VIVA
 ================================================================================
-👤 AUTOR: Ing. Gery Lorenzo Marcillo Merino, Msc.
-🏛️ PROYECTO: Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001
-📖 CASO: Estructuras Especiales
-🎯 OBJETIVO: Modelo estocástico Monte Carlo (100 simulaciones)
-            CORREGIDO: As real calculado + Armadura negativa φ10 mm
+AUTOR: Ing. Gery Lorenzo Marcillo Merino, Msc.
+PROYECTO: Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001
+NORMA: ACI 318-19 §24.2 + NEC-15
+OBJETIVO: Deformada 3D de la losa alivianada POR CARGA VIVA
+          - Deflexion por Cv = 0.20 t/m2
+          - Limite L/360 = 15.28 mm
+          - Significado fisico
+          DASHBOARD MEJOR QUE REVIT
 ================================================================================
 """
 
@@ -20,205 +23,125 @@ try:
     import matplotlib.pyplot as plt
     import numpy as np
     from matplotlib.gridspec import GridSpec
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
     MATPLOTLIB_OK = True
 except ImportError:
     MATPLOTLIB_OK = False
-    print("⚠️ matplotlib no está instalado. Ejecute: pip install matplotlib")
+    print("matplotlib no esta instalado. Ejecute: pip install matplotlib")
     sys.exit(1)
 
 # ============================================================================
-# 1. IDENTIDAD DEL PROYECTO
+# 1. IDENTIDAD
 # ============================================================================
 
 PROYECTO = "Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001"
-CASO = "Estructuras Especiales"
-TITULO = "MODELO ESTOCÁSTICO DE LOSA ALIVIANADA"
+CASO = "Losa del Colegio Alejo Lascano"
+TITULO = "DEFORMADA 3D POR CARGA VIVA"
 DOCENTE = "Ing. Gery Lorenzo Marcillo Merino, Msc."
-FRASE = "Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+NORMA = "ACI 318-19 §24.2 + NEC-15"
+FRASE = "La deformada no es un error. Es la estructura hablando, diciendonos como trabaja."
 
 # ============================================================================
-# 2. DATOS DE ENTRADA (del M02 - Cu correcto)
+# 2. DATOS DE ENTRADA (de la GUIA OFICIAL M06)
 # ============================================================================
 
-h_eq = 18.06
+L1, L2 = 5.5, 6.0
+L3, L4 = 5.5, 6.0
+
+Cm = 0.62
+Cv = 0.20         # CARGA VIVA (para deflexion)
+Pisos = 2
+
 H_losa = 25.0
+h_eq = 18.06
 bn = 10.0
 bb = 50.0
 tc = 5.0
 hn = H_losa - tc
 
-Cu = 1.088          # t/m² (CORRECTO - del M02)
-L1, L2 = 5.5, 6.0
-L3, L4 = 5.5, 6.0
-fc, fy = 210, 4200
-rec_losa = 2.0
-
-# Armaduras
-phi_pos = 8         # mm - Positiva en nervio
-phi_neg = 10        # mm - Negativa en capa superior (CORREGIDO: 10 mm)
-phi_temp = 8        # mm - Temperatura
+fc = 210
+fy = 4200
+rec_losa = 2.5
+phi_pos = 8
 
 # ============================================================================
-# 3. CÁLCULOS NOMINALES
+# 3. CALCULOS
 # ============================================================================
 
 Lx = max(L1, L2, L3, L4)
 Ly = Lx
 
-paso_nervios = bb / 100
-w_nervio = Cu * paso_nervios
-d_nervio = H_losa - rec_losa - phi_pos/20
-b_ef = min(bb, Lx*100/4)
+# Inercia equivalente
+I_eq = bb * h_eq**3 / 12
+I_eq_m4 = I_eq / 1e8
 
-M_pos_nervio = w_nervio * Lx**2 / 8
-M_pos_metro = M_pos_nervio / paso_nervios
-M_neg_metro = M_pos_metro * 0.8
+E_kgcm2 = 15100 * np.sqrt(fc)
+E_tm2 = E_kgcm2 * 10
+EI = E_tm2 * I_eq_m4
 
-# As mínimo por nervio y por metro
-As_min_nervio = 0.0018 * bn * H_losa      # 0.45 cm²
-As_min_metro = 0.0018 * 100 * H_losa       # 4.50 cm²/m
+# DEFLEXION POR CARGA VIVA (Cv)
+delta_max = 5 * Cv * Lx**4 / (384 * EI)
+delta_adm = Lx * 1000 / 360  # L/360 segun ACI 318 §24.2.2
 
-As_1phi8 = np.pi * (8/10)**2 / 4           # 0.503 cm²
-As_1phi10 = np.pi * (10/10)**2 / 4         # 0.785 cm²
-
-# As negativo por metro
-As_neg_metro = max(M_neg_metro * 100000 / (0.9 * fy * (d_nervio - 2)) / 100, As_min_metro)
-
-# As temperatura
-As_temp = 0.0018 * 100 * H_losa  # 4.50 cm²/m
+# Factor de amplificacion visual
+factor_amp = 10
 
 # ============================================================================
-# 4. AS REAL (nominal calculado con bucle de 1500 iteraciones)
-# ============================================================================
-
-As_real_nervio = As_min_nervio
-for j in range(1500):
-    a_real = (As_real_nervio * fy) / (0.85 * fc * b_ef)
-    Mn_real = As_real_nervio * fy * (d_nervio - a_real/2) / 100000
-    Mr_real = 0.9 * Mn_real
-    if Mr_real >= M_pos_nervio:
-        break
-    As_real_nervio += 0.01
-As_real_nervio = max(As_real_nervio, As_min_nervio)
-
-# ============================================================================
-# 5. MODELO ESTOCÁSTICO
-# ============================================================================
-
-np.random.seed(42)
-n_sim = 100
-
-# Variables aleatorias
-Cu_sim = np.random.normal(Cu, 0.10 * Cu, n_sim)
-fc_sim = np.random.lognormal(
-    np.log(fc) - 0.5 * np.log(1 + 0.15**2),
-    np.sqrt(np.log(1 + 0.15**2)),
-    n_sim
-)
-fy_sim = np.random.normal(fy, 0.05 * fy, n_sim)
-H_losa_sim = np.random.normal(H_losa, 0.03 * H_losa, n_sim)
-
-Cu_sim = np.clip(Cu_sim, 0.87 * Cu, 1.31 * Cu)
-fc_sim = np.clip(fc_sim, 150, 280)
-fy_sim = np.clip(fy_sim, 3800, 4600)
-H_losa_sim = np.clip(H_losa_sim, 0.95 * H_losa, 1.05 * H_losa)
-
-# Cálculo vectorizado de As (bucle ampliado a 1500 iteraciones)
-M_pos_sim = np.zeros(n_sim)
-As_pos_sim = np.zeros(n_sim)
-
-for i in range(n_sim):
-    w_i = Cu_sim[i] * paso_nervios
-    M_pos_sim[i] = w_i * Lx**2 / 8
-    d_i = H_losa_sim[i] - rec_losa - phi_pos/20
-    As_i = As_min_nervio
-    for j in range(1500):
-        a_i = (As_i * fy_sim[i]) / (0.85 * fc_sim[i] * b_ef)
-        Mn_i = As_i * fy_sim[i] * (d_i - a_i/2) / 100000
-        Mr_i = 0.9 * Mn_i
-        if Mr_i >= M_pos_sim[i]:
-            break
-        As_i += 0.01
-    As_pos_sim[i] = max(As_i, As_min_nervio)
-
-# Estadísticos
-As_media = np.mean(As_pos_sim)
-As_std = np.std(As_pos_sim)
-As_p5 = np.percentile(As_pos_sim, 5)
-As_p95 = np.percentile(As_pos_sim, 95)
-
-# ============================================================================
-# 6. IMPRESIÓN EN CONSOLA
+# 4. IMPRESION EN CONSOLA
 # ============================================================================
 
 print("=" * 80)
-print(f"[M06 - ALGORITMO 2] {TITULO}")
+print(f"[M06 - A2] {TITULO}")
 print(f"[PROYECTO] {PROYECTO}")
-print(f"[CASO] {CASO}")
+print(f"[NORMA] {NORMA}")
 print(f"[DOCENTE] {DOCENTE}")
 print("=" * 80)
 
-print(f"\n📐 VALORES NOMINALES:")
-print(f"  h_eq = {h_eq:.2f} cm")
-print(f"  H_losa = {H_losa:.2f} cm")
-print(f"  Cu = {Cu:.4f} t/m²")
-print(f"  Lx = {Lx:.2f} m")
-print(f"  w_nervio = {w_nervio:.4f} t/m")
-print(f"  M_pos = {M_pos_nervio:.4f} t·m")
-print(f"  M_neg = {M_neg_metro:.4f} t·m/m")
+print(f"\n--- DATOS ---")
+print(f"  Lx = {Lx:.2f} m | Ly = {Ly:.2f} m")
+print(f"  Cv = {Cv:.3f} t/m2 (CARGA VIVA)")
+print(f"  h_eq = {h_eq:.2f} cm | H_losa = {H_losa:.2f} cm")
+print(f"  I_eq = {I_eq_m4:.6f} m4")
+print(f"  EI = {EI:.2f} t.m2")
 
-print(f"\n📐 AS REAL (calculado):")
-print(f"  As_real (nervio) = {As_real_nervio:.2f} cm²")
-print(f"  Armadura negativa = φ {phi_neg} mm")
-print(f"  Armadura temperatura = φ {phi_temp} mm")
-print(f"  As_min (metro) = {As_min_metro:.2f} cm²/m")
+print(f"\n--- DEFLEXION POR CARGA VIVA ---")
+print(f"  delta_max = {delta_max*1000:.3f} mm")
+print(f"  delta_adm = {delta_adm:.3f} mm (L/360)")
+print(f"  {'CUMPLE' if delta_max*1000 < delta_adm else 'NO CUMPLE'}")
 
-print(f"\n🎲 MODELO ESTOCÁSTICO — {n_sim} SIMULACIONES:")
-print(f"  As medio = {As_media:.2f} cm²")
-print(f"  As std   = {As_std:.2f} cm²")
-print(f"  As P5    = {As_p5:.2f} cm²")
-print(f"  As P95   = {As_p95:.2f} cm²")
-
-print(f"\n📌 VERIFICACIÓN:")
-print(f"  As_real = {As_real_nervio:.2f} cm²")
-print(f"  As_P95  = {As_p95:.2f} cm²")
-print(f"  Estado  = {'✅ CUMPLE' if As_real_nervio >= As_p95 else '⚠️ REVISAR'}")
+print(f"\n--- SIGNIFICADO FISICO ---")
+print(f"  1. CENTRO: deflexion maxima (punto critico)")
+print(f"  2. BORDES: deflexion cero (apoyos)")
+print(f"  3. NERVIOS: direccion del flujo de cargas")
+print(f"  4. COLUMNAS: concentracion de esfuerzos")
+print(f"  5. COLORES: magnitud de deflexion")
 
 print("\n" + "=" * 80)
 print(f"Frase: {FRASE}")
 print("=" * 80)
 
 # ============================================================================
-# 7. GUARDAR REPORTE
+# 5. GUARDAR REPORTE
 # ============================================================================
 
 carpeta = "Resultados_M06"
 if not os.path.exists(carpeta):
     os.makedirs(carpeta)
 
-nombre_reporte = f"reporte_M06_estocastico_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+nombre_reporte = f"reporte_M06_deformada_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
 ruta_reporte = os.path.join(carpeta, nombre_reporte)
 
 with open(ruta_reporte, 'w', encoding='utf-8') as f:
     f.write("=" * 80 + "\n")
-    f.write(f"[M06 - ALGORITMO 2] {TITULO}\n")
+    f.write(f"[M06 - A2] {TITULO}\n")
     f.write(f"[PROYECTO] {PROYECTO}\n")
-    f.write(f"[CASO] {CASO}\n")
-    f.write(f"[DOCENTE] {DOCENTE}\n")
     f.write(f"Fecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     f.write("=" * 80 + "\n\n")
-    f.write(f"VALORES NOMINALES:\n")
-    f.write(f"  Cu = {Cu:.3f} t/m²\n")
-    f.write(f"  M_pos = {M_pos_nervio:.4f} t·m\n")
-    f.write(f"  M_neg = {M_neg_metro:.4f} t·m/m\n\n")
-    f.write(f"AS REAL:\n")
-    f.write(f"  As_real = {As_real_nervio:.3f} cm²\n")
-    f.write(f"  Arm. negativa = φ {phi_neg} mm\n")
-    f.write(f"  Arm. temperatura = φ {phi_temp} mm\n\n")
-    f.write(f"MODELO ESTOCÁSTICO ({n_sim} SIMULACIONES):\n")
-    f.write(f"  As medio = {As_media:.2f} cm²\n")
-    f.write(f"  As P95   = {As_p95:.2f} cm²\n")
-    f.write(f"  Estado = {'CUMPLE' if As_real_nervio >= As_p95 else 'REVISAR'}\n\n")
+    f.write(f"Cv = {Cv:.3f} t/m2\n")
+    f.write(f"I_eq = {I_eq_m4:.6f} m4\n")
+    f.write(f"delta_max = {delta_max*1000:.3f} mm\n")
+    f.write(f"delta_adm = {delta_adm:.3f} mm (L/360)\n")
+    f.write(f"Estado = {'CUMPLE' if delta_max*1000 < delta_adm else 'NO CUMPLE'}\n\n")
     f.write("=" * 80 + "\n")
     f.write(f"Frase: {FRASE}\n")
     f.write("=" * 80 + "\n")
@@ -226,139 +149,253 @@ with open(ruta_reporte, 'w', encoding='utf-8') as f:
 print(f"\nReporte guardado: {ruta_reporte}")
 
 # ============================================================================
-# 8. DASHBOARD GRÁFICO
+# 6. DASHBOARD 3D
 # ============================================================================
 
-fig = plt.figure(figsize=(16, 10))
+fig = plt.figure(figsize=(22, 14), facecolor='#1e1e2e')
+
+# ------------------------------------------------------------------
+# SUBPLOT IZQUIERDO: MODELO DE LA ESTRUCTURA (2 PISOS)
+# ------------------------------------------------------------------
+ax_izq = fig.add_subplot(1, 2, 1, projection='3d')
+ax_izq.set_facecolor('#1e1e2e')
+
+n_pisos_m = 2
+n_ejes = 2
+Lv_m = 3.0
+He_m = 1.5
+
+# Columnas
+for i in range(n_ejes + 1):
+    for j in range(n_ejes + 1):
+        x_col = i * Lv_m
+        y_col = j * Lv_m
+        ax_izq.plot([x_col, x_col], [y_col, y_col],
+                    [0, n_pisos_m * He_m],
+                    color='#5dade2', linewidth=4, alpha=0.9)
+        ax_izq.scatter(x_col, y_col, 0, color='cyan', s=80, marker='^', zorder=10)
+
+# Vigas en X
+for piso in range(1, n_pisos_m + 1):
+    z_piso = piso * He_m
+    for j in range(n_ejes + 1):
+        y_viga = j * Lv_m
+        ax_izq.plot([0, n_ejes * Lv_m], [y_viga, y_viga],
+                    [z_piso, z_piso], color='#f39c12', linewidth=3.5, alpha=0.9)
+
+# Vigas en Y
+for piso in range(1, n_pisos_m + 1):
+    z_piso = piso * He_m
+    for i in range(n_ejes + 1):
+        x_viga = i * Lv_m
+        ax_izq.plot([x_viga, x_viga], [0, n_ejes * Lv_m],
+                    [z_piso, z_piso], color='#f39c12', linewidth=3.5, alpha=0.9)
+
+# Losa del segundo piso (amarillo)
+z_losa = n_pisos_m * He_m
+x_losa = np.linspace(0, n_ejes * Lv_m, 20)
+y_losa = np.linspace(0, n_ejes * Lv_m, 20)
+X_losa, Y_losa = np.meshgrid(x_losa, y_losa)
+Z_losa = np.full_like(X_losa, z_losa)
+
+ax_izq.plot_surface(X_losa, Y_losa, Z_losa,
+                     color='yellow', alpha=0.3, edgecolor='yellow',
+                     linewidth=0.5)
+
+# Pano desarrollado (rojo)
+x_pano = np.linspace(0, Lv_m, 15)
+y_pano = np.linspace(0, Lv_m, 15)
+X_pano, Y_pano = np.meshgrid(x_pano, y_pano)
+Z_pano = np.full_like(X_pano, z_losa + 0.02)
+
+ax_izq.plot_surface(X_pano, Y_pano, Z_pano,
+                     color='red', alpha=0.6, edgecolor='darkred',
+                     linewidth=1)
+
+ax_izq.text(Lv_m/2, Lv_m/2, z_losa + 0.5,
+            'PANO DESARROLLADO\n(M06 - Losa alivianada)',
+            color='red', fontsize=10, fontweight='bold', ha='center',
+            bbox=dict(boxstyle='round,pad=0.4',
+                      facecolor='lightyellow',
+                      edgecolor='red',
+                      linewidth=2))
+
+ax_izq.plot([Lv_m/2, Lv_m/2], [Lv_m/2, Lv_m/2],
+            [z_losa + 0.4, z_losa + 0.05],
+            color='red', linewidth=3)
+ax_izq.scatter(Lv_m/2, Lv_m/2, z_losa + 0.05, color='red',
+               s=150, marker='v', zorder=20)
+
+ax_izq.text(-0.5, -0.5, He_m, 'PISO 1',
+            color='#5dade2', fontsize=9, fontweight='bold')
+ax_izq.text(-0.5, -0.5, 2 * He_m, 'PISO 2',
+            color='#5dade2', fontsize=9, fontweight='bold')
+
+ax_izq.set_xlabel('X (m)', color='white', fontsize=10)
+ax_izq.set_ylabel('Y (m)', color='white', fontsize=10)
+ax_izq.set_zlabel('Z (m)', color='white', fontsize=10)
+ax_izq.tick_params(axis='x', colors='white')
+ax_izq.tick_params(axis='y', colors='white')
+ax_izq.tick_params(axis='z', colors='white')
+ax_izq.set_title('MODELO DE LA ESTRUCTURA (2 PISOS)\nPano desarrollado senalado en rojo',
+                 color='#5dade2', fontsize=13, fontweight='bold', pad=15)
+ax_izq.view_init(elev=20, azim=-55)
+
+# ------------------------------------------------------------------
+# SUBPLOT DERECHO: DEFORMADA 3D POR CARGA VIVA
+# ------------------------------------------------------------------
+ax_der = fig.add_subplot(1, 2, 2, projection='3d')
+ax_der.set_facecolor('#1e1e2e')
+
+nx, ny = 50, 50
+x = np.linspace(0, Lx, nx)
+y = np.linspace(0, Ly, ny)
+X, Y = np.meshgrid(x, y)
+
+# Deformada por carga viva
+delta = delta_max * np.sin(np.pi * X / Lx) * np.sin(np.pi * Y / Ly)
+Z_plot = -delta * factor_amp
+
+surf = ax_der.plot_surface(X, Y, Z_plot,
+                            cmap='jet',
+                            edgecolor='none',
+                            alpha=0.95,
+                            rstride=1, cstride=1,
+                            linewidth=0)
+
+cbar = fig.colorbar(surf, ax=ax_der, shrink=0.5, aspect=10, pad=0.08)
+cbar.set_label(f'Deflexion por Cv (mm x {factor_amp})', color='white', fontsize=10)
+cbar.ax.yaxis.set_tick_params(color='white')
+plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='white')
+
+# Nervios
+for i in range(0, nx, 5):
+    ax_der.plot(X[i, :], Y[i, :], Z_plot[i, :],
+                color='white', alpha=0.25, linewidth=0.6)
+for j in range(0, ny, 5):
+    ax_der.plot(X[:, j], Y[:, j], Z_plot[:, j],
+                color='white', alpha=0.25, linewidth=0.6)
+
+# Bordes
+ax_der.plot([0, Lx], [0, 0], [0, 0], color='cyan', linewidth=4)
+ax_der.plot([0, Lx], [Ly, Ly], [0, 0], color='cyan', linewidth=4)
+ax_der.plot([0, 0], [0, Ly], [0, 0], color='cyan', linewidth=4)
+ax_der.plot([Lx, Lx], [0, Ly], [0, 0], color='cyan', linewidth=4)
+
+# Columnas
+for cx, cy in [(0, 0), (Lx, 0), (0, Ly), (Lx, Ly)]:
+    ax_der.plot([cx, cx], [cy, cy], [0, -0.6], color='red',
+                linewidth=6, alpha=0.9)
+    ax_der.scatter(cx, cy, 0, color='red', s=100, zorder=20)
+
+# Punto critico
+cx_centro = Lx / 2
+cy_centro = Ly / 2
+z_centro = -delta_max * factor_amp
+
+ax_der.scatter(cx_centro, cy_centro, z_centro, color='yellow', s=300,
+               edgecolor='red', linewidth=3, zorder=30)
+ax_der.plot([cx_centro, cx_centro], [cy_centro, cy_centro],
+            [0, z_centro], color='yellow', linewidth=2,
+            linestyle='--', alpha=0.8)
+
+ax_der.text(cx_centro + 0.3, cy_centro + 0.3, z_centro - 0.3,
+            f'PUNTO CRITICO\nDelta_max = {delta_max*1000:.2f} mm',
+            color='yellow', fontsize=10, fontweight='bold',
+            bbox=dict(boxstyle='round,pad=0.4',
+                      facecolor='#1e1e2e',
+                      edgecolor='yellow',
+                      linewidth=2))
+
+ax_der.text(0, -0.5, 0, 'APOYO\n(Delta = 0)',
+            color='cyan', fontsize=9, fontweight='bold',
+            bbox=dict(boxstyle='round,pad=0.3',
+                      facecolor='#1e1e2e',
+                      edgecolor='cyan',
+                      linewidth=1.5))
+
+ax_der.text(Lx/2, -0.7, 0.5, 'NERVIOS\n(flujo de cargas)',
+            color='white', fontsize=9, fontweight='bold',
+            bbox=dict(boxstyle='round,pad=0.3',
+                      facecolor='#1e1e2e',
+                      edgecolor='white',
+                      linewidth=1.5))
+
+ax_der.set_xlabel('X (m)', color='white', fontsize=10)
+ax_der.set_ylabel('Y (m)', color='white', fontsize=10)
+ax_der.set_zlabel(f'Z (mm x {factor_amp})', color='white', fontsize=10)
+ax_der.tick_params(axis='x', colors='white')
+ax_der.tick_params(axis='y', colors='white')
+ax_der.tick_params(axis='z', colors='white')
+ax_der.set_title(f'DEFORMADA 3D POR CARGA VIVA (Cv = {Cv} t/m2)\n'
+                 f'Delta_max = {delta_max*1000:.2f} mm | L/360 = {delta_adm:.2f} mm | '
+                 f'{"CUMPLE" if delta_max*1000 < delta_adm else "NO CUMPLE"}',
+                 color='#5dade2', fontsize=12, fontweight='bold', pad=15)
+ax_der.view_init(elev=25, azim=-50)
+
+# ------------------------------------------------------------------
+# PANEL DE SIGNIFICADO FISICO
+# ------------------------------------------------------------------
+fig.text(0.02, 0.02,
+    "SIGNIFICADO FISICO:\n"
+    "1. CENTRO: deflexion maxima (punto critico)\n"
+    "2. BORDES: deflexion cero (apoyos)\n"
+    "3. NERVIOS: direccion del flujo de cargas\n"
+    "4. COLUMNAS: concentracion de esfuerzos\n"
+    "5. COLORES: magnitud de deflexion",
+    ha='left', va='bottom',
+    fontsize=9, color='#f39c12', fontweight='bold',
+    bbox=dict(boxstyle='round,pad=0.5',
+              facecolor='#1e1e2e',
+              edgecolor='#f39c12',
+              linewidth=2,
+              alpha=0.95))
+
+# ------------------------------------------------------------------
+# TIC
+# ------------------------------------------------------------------
+tic_box = (
+    f"VERIFICACION NEC-15 / ACI 318:\n"
+    f"  Cv = {Cv:.3f} t/m2 (carga viva)\n"
+    f"  Delta_max = {delta_max*1000:.2f} mm\n"
+    f"  L/360 = {delta_adm:.2f} mm\n"
+    f"  L/H = {Lx*100/H_losa:.2f} <= 28\n"
+    f"  {'CUMPLE' if delta_max*1000 < delta_adm else 'NO CUMPLE'}"
+)
+fig.text(0.98, 0.85,
+    tic_box,
+    ha='right', va='top',
+    fontsize=9, color='darkgreen', fontweight='bold',
+    bbox=dict(boxstyle='round,pad=0.5',
+              facecolor='lightyellow',
+              edgecolor='green',
+              linewidth=2,
+              alpha=0.95))
+
+# ------------------------------------------------------------------
+# FRASE
+# ------------------------------------------------------------------
+fig.text(0.98, 0.02,
+    f'"{FRASE}"\n- Proyecto UNESUM-REZ-2026-JIPIJAPA-001',
+    ha='right', va='bottom',
+    fontsize=8, style='italic', color='#f39c12',
+    bbox=dict(boxstyle='round,pad=0.5',
+              facecolor='#1e1e2e',
+              edgecolor='#f39c12',
+              linewidth=1.5,
+              alpha=0.95))
+
 fig.suptitle(
-    f'DASHBOARD M06 — MODELO ESTOCÁSTICO DE LOSA ALIVIANADA\n'
-    f'{PROYECTO} | {CASO}',
-    fontsize=15, fontweight='bold', color='#2c3e50'
+    f"M06 - ALGORITMO 2: DEFORMADA 3D POR CARGA VIVA\n"
+    f"{PROYECTO} | {NORMA}",
+    fontsize=14, fontweight='bold', color='#5dade2', y=0.98
 )
 
-gs = GridSpec(2, 2, figure=fig, width_ratios=[1, 1],
-              height_ratios=[1, 1], hspace=0.35, wspace=0.30)
+plt.tight_layout(rect=[0, 0.04, 1, 0.95])
 
-# ============================================================
-# PANEL 1: Histograma de As
-# ============================================================
-ax1 = fig.add_subplot(gs[0, 0])
-ax1.hist(As_pos_sim, bins=20, color='#3498db', edgecolor='black', alpha=0.7)
-ax1.axvline(x=As_media, color='red', linestyle='--', linewidth=2,
-            label=f'Media = {As_media:.2f} cm2')
-ax1.axvline(x=As_p95, color='orange', linestyle='--', linewidth=2,
-            label=f'P95 = {As_p95:.2f} cm2')
-ax1.axvline(x=As_real_nervio, color='green', linestyle='--', linewidth=2,
-            label=f'As real = {As_real_nervio:.2f} cm2')
-ax1.set_xlabel('As (cm2)', fontsize=10)
-ax1.set_ylabel('Frecuencia', fontsize=10)
-ax1.set_title(f'(a) Distribucion de As - {n_sim} simulaciones', fontsize=11, fontweight='bold')
-ax1.legend(fontsize=8)
-ax1.grid(True, alpha=0.3)
-
-# ============================================================
-# PANEL 2: Sensibilidad
-# ============================================================
-ax2 = fig.add_subplot(gs[0, 1])
-
-sensibilidad = {
-    'Cu': np.corrcoef(Cu_sim, As_pos_sim)[0, 1],
-    'fc': np.corrcoef(fc_sim, As_pos_sim)[0, 1],
-    'fy': np.corrcoef(fy_sim, As_pos_sim)[0, 1],
-    'H_losa': np.corrcoef(H_losa_sim, As_pos_sim)[0, 1]
-}
-
-variables = list(sensibilidad.keys())
-valores = list(sensibilidad.values())
-colores = ['#e74c3c' if v > 0 else '#3498db' for v in valores]
-
-bars = ax2.barh(variables, valores, color=colores, edgecolor='black')
-for bar, val in zip(bars, valores):
-    ax2.text(val + 0.02 if val > 0 else val - 0.02,
-             bar.get_y() + bar.get_height()/2,
-             f'{val:.3f}', va='center',
-             ha='left' if val > 0 else 'right', fontsize=9)
-
-ax2.axvline(x=0, color='black', linewidth=1)
-ax2.set_xlabel('Coeficiente de correlacion', fontsize=10)
-ax2.set_title('(b) Sensibilidad de As', fontsize=11, fontweight='bold')
-ax2.grid(True, alpha=0.3)
-
-# ============================================================
-# PANEL 3: Curva As vs Cu
-# ============================================================
-ax3 = fig.add_subplot(gs[1, 0])
-
-Cu_range = np.linspace(0.87 * Cu, 1.31 * Cu, 50)
-As_range = []
-for cu in Cu_range:
-    M_i = cu * paso_nervios * Lx**2 / 8
-    As_i = As_min_nervio
-    for j in range(1500):
-        a_i = (As_i * fy) / (0.85 * fc * b_ef)
-        Mn_i = As_i * fy * (d_nervio - a_i/2) / 100000
-        Mr_i = 0.9 * Mn_i
-        if Mr_i >= M_i:
-            break
-        As_i += 0.01
-    As_range.append(max(As_i, As_min_nervio))
-
-ax3.plot(Cu_range, As_range, 'b-', linewidth=2.5, label='As requerido')
-ax3.axvline(x=Cu, color='red', linestyle='--', linewidth=2,
-            label=f'Cu nominal = {Cu:.3f}')
-ax3.axhline(y=As_real_nervio, color='green', linestyle='--', linewidth=1.5,
-            label=f'As real = {As_real_nervio:.2f} cm2')
-ax3.set_xlabel('Cu (t/m2)', fontsize=10)
-ax3.set_ylabel('As (cm2)', fontsize=10)
-ax3.set_title('(c) Sensibilidad As vs Cu', fontsize=11, fontweight='bold')
-ax3.legend(fontsize=8)
-ax3.grid(True, alpha=0.3)
-
-# ============================================================
-# PANEL 4: Ficha técnica
-# ============================================================
-ax4 = fig.add_subplot(gs[1, 1])
-ax4.axis('off')
-
-ficha = (
-    f"FICHA TECNICA ESTOCASTICA\n"
-    f"{'-' * 35}\n"
-    f"Proyecto:\n"
-    f"  UNESUM-REZ-2026\n"
-    f"Caso: {CASO}\n"
-    f"{'-' * 35}\n"
-    f"SIMULACIONES: {n_sim}\n"
-    f"{'-' * 35}\n"
-    f"VARIABLES ALEATORIAS:\n"
-    f"  Cu     ~ Normal(mu={Cu:.3f}, CV=10%)\n"
-    f"  fc     ~ Lognormal(mu={fc}, CV=15%)\n"
-    f"  fy     ~ Normal(mu={fy}, CV=5%)\n"
-    f"  H_losa ~ Normal(mu={H_losa}, CV=3%)\n"
-    f"{'-' * 35}\n"
-    f"ARMADURAS:\n"
-    f"  As_pos (nervio) = {As_real_nervio:.2f} cm2\n"
-    f"  As_neg (metro)  = {As_neg_metro:.2f} cm2\n"
-    f"  Arm. negativa   = phi {phi_neg} mm\n"
-    f"  Arm. temp       = phi {phi_temp} mm\n"
-    f"{'-' * 35}\n"
-    f"RESULTADOS:\n"
-    f"  As medio = {As_media:.2f} cm2\n"
-    f"  As P5    = {As_p5:.2f} cm2\n"
-    f"  As P95   = {As_p95:.2f} cm2\n"
-    f"  As real  = {As_real_nervio:.2f} cm2\n"
-    f"{'-' * 35}\n"
-    f"{'CUMPLE' if As_real_nervio >= As_p95 else 'REVISAR'}"
-)
-
-ax4.text(0.02, 0.98, ficha, transform=ax4.transAxes,
-         fontsize=8, verticalalignment='top', fontfamily='monospace',
-         bbox=dict(boxstyle='round', facecolor='#f8f9fa', edgecolor='#2c3e50', linewidth=2))
-
-plt.tight_layout()
-
-nombre_img = f"dashboard_M06_estocastico_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+nombre_img = f"M06_A2_deformada_3d_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
 ruta_img = os.path.join(carpeta, nombre_img)
-plt.savefig(ruta_img, dpi=120)
+plt.savefig(ruta_img, dpi=150, facecolor='#1e1e2e', bbox_inches='tight')
 print(f"\nDashboard guardado: {ruta_img}")
 
 print("\nMostrando grafica en pantalla...")

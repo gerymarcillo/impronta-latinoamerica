@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M06 - Losa Alivianada</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #2ecc71;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #2ecc71}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
+.formula-grande{font-size:18px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.tic-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:10px 0}
+.tic-box h4{color:#2ecc71;margin-bottom:10px;font-size:15px}
+.tic-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #34495e;font-size:13px}
+.tic-item:last-child{border-bottom:none}
+.tic-item .ok{color:#2ecc71;font-weight:bold}
+.tic-item .no{color:#e74c3c;font-weight:bold}
+.tic-item .rev{color:#f39c12;font-weight:bold}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.diagrama{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0;text-align:center;font-family:'Courier New',monospace;color:#5dade2;font-size:13px;line-height:1.8}
+.diagrama .titulo{color:#f39c12;font-weight:bold;font-size:15px;margin-bottom:10px;display:block}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M06</h1>
+<h2>DISEÑO DE LOSA ALIVIANADA — INERCIA EQUIVALENTE, BLOQUE "a" Y DEFLEXIÓN</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#tic">Los 5 TIC de Losa Alivianada</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+<li><a href="#acapite">📖 Acápite de Estudio</a></li>
+<li><a href="#condiciones">✅ Condiciones de Respuesta Válida</a></li>
+<li><a href="#anexo">📐 Anexo Técnico</a></li>
+</ol>
+</div>
+
+<!-- 1. PRESENTACIÓN -->
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el <strong>diseño de losas alivianadas</strong> aplicando la <strong>NEC-15</strong> y el <strong>ACI 318-19</strong>.</p>
+<p>La losa alivianada es el <strong>diafragma que une todo</strong>. Sin ella, no hay pórtico. Sin pórtico, no hay resiliencia. Está compuesta por:</p>
+<ul>
+<li><strong>Capa de compresión</strong> superior (tc = 5 cm)</li>
+<li><strong>Nervios</strong> que resisten la flexión (bn = 10 cm)</li>
+<li><strong>Bloques aligerantes</strong> que reducen el peso propio</li>
+</ul>
+<p>A diferencia de un software comercial (ETABS, SAP2000, Revit), este módulo integra:</p>
+<ul>
+<li><strong>Diseño analítico:</strong> inercia equivalente + bloque "a" + As(+) + As(−) + deflexión</li>
+<li><strong>Deformada 3D por carga viva:</strong> Cv = 0.20 t/m² con límite L/360</li>
+<li><strong>Modelo 2 pisos:</strong> ubicación del paño en la estructura real</li>
+<li><strong>5 TIC de losa alivianada</strong> (criterios de diseño)</li>
+</ul>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
+</div>
+
+<!-- 2. OBJETIVOS -->
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Diseñar una losa alivianada de hormigón armado aplicando la inercia equivalente por Steiner, el bloque de compresión "a", el cálculo de acero positivo/negativo y la verificación de deflexión L/240 (NEC-15) y L/360 (ACI 318-19 §24.2.2).</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Comprender la diferencia entre losa alivianada y losa maciza equivalente</li>
+<li>Aplicar el Teorema de Steiner para obtener la inercia equivalente</li>
+<li>Calcular el bloque de compresión "a" y verificar a/h ≈ 20%</li>
+<li>Calcular As(+), As(−), As_min y As_temp</li>
+<li>Verificar la deflexión por carga viva (L/360) y por carga total (L/240)</li>
+<li>Interpretar la deformada 3D y el punto crítico en el centro del paño</li>
+<li>Aplicar los 5 TIC de losa alivianada</li>
+</ul>
+</div>
+
+<!-- 3. FUNDAMENTO TEÓRICO -->
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+
+<h3>3.1 Losa alivianada vs losa maciza</h3>
+<table class="tabla">
+<thead><tr><th>Aspecto</th><th>Losa alivianada</th><th>Losa maciza equivalente</th></tr></thead>
+<tbody>
+<tr><td>Peso propio</td><td>Menor (vacíos)</td><td>Mayor (hormigón lleno)</td></tr>
+<tr><td>Inercia</td><td>Menor que maciza de igual H</td><td>Mayor</td></tr>
+<tr><td>Modelado</td><td>Requiere h_eq</td><td>Directo</td></tr>
+<tr><td>Uso</td><td>Luces grandes</td><td>Luces cortas</td></tr>
+<tr><td>Deflexión</td><td>Mayor</td><td>Menor</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 Inercia equivalente (Steiner) — enlace con M01</h3>
+<p>La losa alivianada <strong>no se comporta</strong> como losa maciza de igual espesor. Por eso calculamos una <strong>altura equivalente</strong>:</p>
+<div class="formula">I_total = Σ (I₀ + A · d²)</div>
+<div class="formula formula-grande">h_eq = ∛(12 · I_total / bb)</div>
+<p><strong>Significado:</strong> h_eq es el espesor de una losa maciza ficticia de ancho bb que tendría la misma inercia que la losa alivianada real.</p>
+
+<h3>3.3 Bloque de compresión "a" — enlace con M04</h3>
+<p>El bloque rectangular equivalente de Whitney se calcula por equilibrio:</p>
+<div class="formula">C = T → 0.85 · fc · b_ef · a = As · fy</div>
+<div class="formula">a = As · fy / (0.85 · fc · b_ef)</div>
+<p><strong>Solo el bloque "a" trabaja a compresión.</strong> El resto del hormigón no trabaja. La relación a/H ≈ 20% es la base del criterio de viga T.</p>
+
+<h3>3.4 Momento positivo y negativo</h3>
+<p>En una losa alivianada continua, los momentos se distribuyen así:</p>
+<div class="formula">M_pos = w · Lx² / 8 (centro del paño)</div>
+<div class="formula">M_neg = 0.8 · M_pos (apoyos)</div>
+<p><strong>M_pos:</strong> máximo en el centro. <strong>M_neg:</strong> máximo en los apoyos (aproximadamente 80% del positivo).</p>
+
+<h3>3.5 Acero de refuerzo</h3>
+<table class="tabla">
+<thead><tr><th>Tipo</th><th>Fórmula</th><th>Función</th></tr></thead>
+<tbody>
+<tr><td>As_pos</td><td>Por tanteo iterativo (viga T)</td><td>Resiste M_pos</td></tr>
+<tr><td>As_neg</td><td>Por tanteo iterativo</td><td>Resiste M_neg</td></tr>
+<tr><td>As_min</td><td>0.0018 · 100 · H_losa</td><td>Controla fisuración</td></tr>
+<tr><td>As_temp</td><td>0.0018 · 100 · tc</td><td>Por temperatura</td></tr>
+</tbody>
+</table>
+
+<h3>3.6 Verificación de deflexión</h3>
+<p><strong>NEC-15 (carga total):</strong></p>
+<div class="formula">δmax = 5 · Cu · Lx⁴ / (384 · EI) ≤ L/240</div>
+<p><strong>ACI 318-19 §24.2.2 (carga viva):</strong></p>
+<div class="formula">δmax = 5 · Cv · Lx⁴ / (384 · EI) ≤ L/360</div>
+<p><strong>Diferencia clave:</strong> L/240 es más permisivo (carga total), L/360 es más estricto (carga viva, porque afecta la comodidad y los acabados).</p>
+
+<h3>3.7 Deflexión 3D del paño</h3>
+<p>La deformada de una losa simplemente apoyada se modela como:</p>
+<div class="formula">δ(x,y) = δmax · sin(πx/Lx) · sin(πy/Ly)</div>
+<p><strong>Punto crítico:</strong> centro del paño (x = Lx/2, y = Ly/2). <strong>Bordes:</strong> δ = 0 (apoyos).</p>
+</div>
+
+<!-- 4. FÓRMULAS CLAVE -->
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Área capa de compresión</td><td>A1 = bb · tc</td><td>cm²</td></tr>
+<tr><td>Área del nervio</td><td>A2 = bn · (H - tc)</td><td>cm²</td></tr>
+<tr><td>Centroide global</td><td>y_cg = Σ(Ai · yi) / Σ(Ai)</td><td>cm</td></tr>
+<tr><td>Inercia por Steiner</td><td>I_total = Σ(I₀ + A · d²)</td><td>cm⁴</td></tr>
+<tr><td>Altura equivalente</td><td>h_eq = ∛(12 · I_total / bb)</td><td>cm</td></tr>
+<tr><td>Inercia equivalente</td><td>I_eq = bb · h_eq³ / 12</td><td>cm⁴</td></tr>
+<tr><td>Módulo de elasticidad</td><td>E = 15100 · √fc</td><td>kg/cm²</td></tr>
+<tr><td>Momento positivo</td><td>M_pos = w · Lx² / 8</td><td>t·m</td></tr>
+<tr><td>Momento negativo</td><td>M_neg = 0.8 · M_pos</td><td>t·m</td></tr>
+<tr><td>Bloque de compresión</td><td>a = As · fy / (0.85 · fc · b_ef)</td><td>cm</td></tr>
+<tr><td>Acero mínimo</td><td>As_min = 0.0018 · 100 · H</td><td>cm²/m</td></tr>
+<tr><td>Deflexión total</td><td>δmax = 5 · Cu · Lx⁴ / (384 · EI)</td><td>m</td></tr>
+<tr><td>Deflexión carga viva</td><td>δmax = 5 · Cv · Lx⁴ / (384 · EI)</td><td>m</td></tr>
+<tr><td>Deflexión admisible</td><td>δadm = Lx / 240 (NEC-15)</td><td>mm</td></tr>
+<tr><td>Deflexión admisible</td><td>δadm = Lx / 360 (ACI 318)</td><td>mm</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 5. EJEMPLO RESUELTO -->
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema (Proyecto UNESUM-REZ-2026-JIPIJAPA-001)</h4>
+<ul>
+<li><b>L1 = 5.5 m, L2 = 6.0 m, L3 = 5.5 m, L4 = 6.0 m</b></li>
+<li><b>Cm = 0.62 t/m², Cv = 0.20 t/m², Pisos = 2</b></li>
+<li><b>H_losa = 25 cm, h_eq = 18.06 cm</b></li>
+<li><b>bn = 10 cm, bb = 50 cm, tc = 5 cm, hn = 20 cm</b></li>
+<li><b>fc = 210 kg/cm², fy = 4200 kg/cm²</b></li>
+<li><b>rec = 2.5 cm, φ_pos = 8 mm, φ_neg = 10 mm, φ_temp = 8 mm</b></li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Área tributaria (At)<br>
+At = (L1/2 + L2/2) × (L3/2 + L4/2)<br>
+At = (5.5/2 + 6.0/2) × (5.5/2 + 6.0/2)<br>
+At = 5.75 × 5.75 = <b>33.06 m²</b></div>
+
+<div class="paso"><strong>PASO 2:</strong> Carga última (Cu)<br>
+Cu = 1.2·(Cm·Pisos) + 1.6·(Cv·Pisos)<br>
+Cu = 1.2·(0.62·2) + 1.6·(0.20·2)<br>
+Cu = 1.488 + 0.640 = <b>2.128 t/m²</b> (para columna)<br>
+<b>Nota:</b> Para losa se usa Cu = 1.088 t/m² (1 piso)</div>
+
+<div class="paso"><strong>PASO 3:</strong> Luz crítica (Lx)<br>
+Lx = max(L1, L2, L3, L4) = <b>6.00 m</b></div>
+
+<div class="paso"><strong>PASO 4:</strong> Inercia equivalente (Steiner)<br>
+A1 = bb·tc = 50·5 = <b>250 cm²</b><br>
+A2 = bn·hn = 10·20 = <b>200 cm²</b><br>
+y1 = H - tc/2 = 25 - 2.5 = <b>22.5 cm</b><br>
+y2 = hn/2 = <b>10.0 cm</b><br>
+y_cg = (250·22.5 + 200·10) / 450 = <b>16.94 cm</b><br>
+I_total = 24,548 cm⁴<br>
+h_eq = ∛(12·24548/50) = <b>18.06 cm</b> ✅</div>
+
+<div class="paso"><strong>PASO 5:</strong> Carga por metro de nervio<br>
+w_nervio = Cu · (bb/100) = 1.088 · 0.50 = <b>0.544 t/m</b></div>
+
+<div class="paso"><strong>PASO 6:</strong> Momentos positivo y negativo<br>
+M_pos = w_nervio · Lx² / 8 = 0.544 · 36 / 8 = <b>2.448 t·m</b><br>
+M_pos_metro = M_pos / (bb/100) = 2.448 / 0.50 = <b>4.896 t·m/m</b><br>
+M_neg = 0.8 · M_pos = <b>1.958 t·m</b></div>
+
+<div class="paso"><strong>PASO 7:</strong> Peralte efectivo y ancho efectivo<br>
+d = H_losa - rec - φ_pos/20 = 25 - 2.5 - 0.4 = <b>22.1 cm</b><br>
+b_ef = min(bb, Lx·100/4) = min(50, 150) = <b>50 cm</b></div>
+
+<div class="paso"><strong>PASO 8:</strong> Acero positivo (por tanteo)<br>
+Iterando: As_pos ≈ <b>1.42 cm²</b> por nervio<br>
+As_pos_metro = 1.42 / 0.50 = <b>2.84 cm²/m</b></div>
+
+<div class="paso"><strong>PASO 9:</strong> Acero mínimo<br>
+As_min = 0.0018 · 100 · H_losa = 0.0018 · 100 · 25 = <b>4.50 cm²/m</b><br>
+<b>Controla As_min</b> (4.50 > 2.84)</div>
+
+<div class="paso"><strong>PASO 10:</strong> Bloque de compresión "a"<br>
+a = As · fy / (0.85 · fc · b_ef)<br>
+a = 1.42 · 4200 / (0.85 · 210 · 50) = <b>0.67 cm</b><br>
+a/H = 0.67/25 = <b>2.7%</b> (bajo, revisar)</div>
+
+<div class="paso"><strong>PASO 11:</strong> Verificación de deflexión (carga total L/240)<br>
+I_eq = bb · h_eq³ / 12 = 50 · 18.06³ / 12 = <b>24,548 cm⁴</b><br>
+I_eq_m4 = 24,548 / 1e8 = <b>2.4548e-4 m⁴</b><br>
+E = 15100·√210 = 218,819 kg/cm² = <b>2,188,190 t/m²</b><br>
+EI = 2,188,190 · 2.4548e-4 = <b>537.15 t·m²</b><br>
+δmax = 5·1.088·6⁴ / (384·537.15) = <b>0.00682 m = 6.82 mm</b><br>
+δadm = 6000/240 = <b>25.00 mm</b><br>
+✅ <b>CUMPLE L/240</b></div>
+
+<div class="paso"><strong>PASO 12:</strong> Verificación de deflexión (carga viva L/360)<br>
+δmax = 5·0.20·6⁴ / (384·537.15) = <b>0.00125 m = 1.25 mm</b><br>
+δadm = 6000/360 = <b>16.67 mm</b><br>
+✅ <b>CUMPLE L/360</b></div>
+
+<div class="ejemplo">
+<h4>Resumen de resultados</h4>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>At</td><td>33.06</td><td>m²</td></tr>
+<tr><td>Cu (losa)</td><td>1.088</td><td>t/m²</td></tr>
+<tr><td>h_eq</td><td>18.06</td><td>cm</td></tr>
+<tr><td>I_total</td><td>24,548</td><td>cm⁴</td></tr>
+<tr><td>I_eq</td><td>2.4548e-4</td><td>m⁴</td></tr>
+<tr><td>M_pos</td><td>4.896</td><td>t·m/m</td></tr>
+<tr><td>M_neg</td><td>1.958</td><td>t·m/m</td></tr>
+<tr><td>As_pos</td><td>2.84</td><td>cm²/m</td></tr>
+<tr><td>As_min</td><td>4.50</td><td>cm²/m</td></tr>
+<tr><td>a</td><td>0.67</td><td>cm</td></tr>
+<tr><td>a/H</td><td>2.7</td><td>%</td></tr>
+<tr><td>δmax (Cu)</td><td>6.82</td><td>mm</td></tr>
+<tr><td>δadm (L/240)</td><td>25.00</td><td>mm</td></tr>
+<tr><td>δmax (Cv)</td><td>1.25</td><td>mm</td></tr>
+<tr><td>δadm (L/360)</td><td>16.67</td><td>mm</td></tr>
+<tr><td><b>Estado</b></td><td><b>✅ CUMPLE</b></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 6. TIC -->
+<div class="seccion" id="tic">
+<h2>6. LOS 5 TIC DE LOSA ALIVIANADA</h2>
+<p>Una losa alivianada bien diseñada cumple 5 criterios:</p>
+
+<div class="tic-box">
+<h4>TIC 1: Relación h_eq / H_losa</h4>
+<p style="font-size:13px;color:#bdc3c7">Mide el grado de aligeramiento. Ideal ≈ 0.72.</p>
+<div class="tic-item">
+<span>h_eq / H = 18.06 / 25 = <b>0.72</b></span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 2: Deflexión L/240 (NEC-15)</h4>
+<p style="font-size:13px;color:#bdc3c7">Verifica la deflexión por carga total.</p>
+<div class="tic-item">
+<span>δmax = 6.82 mm ≤ 25.00 mm</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 3: Deflexión L/360 (ACI 318 §24.2.2)</h4>
+<p style="font-size:13px;color:#bdc3c7">Verifica la deflexión por carga viva (comodidad).</p>
+<div class="tic-item">
+<span>δmax = 1.25 mm ≤ 16.67 mm</span>
+<span class="ok">✅ CUMPLE</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 4: As_pos ≥ As_min</h4>
+<p style="font-size:13px;color:#bdc3c7">Controla fisuración por retracción y temperatura.</p>
+<div class="tic-item">
+<span>As_pos = 2.84 cm²/m < As_min = 4.50 cm²/m</span>
+<span class="rev">⚠️ CONTROLADO POR As_min</span>
+</div>
+</div>
+
+<div class="tic-box">
+<h4>TIC 5: a/H ≈ 20%</h4>
+<p style="font-size:13px;color:#bdc3c7">Base del criterio de viga T. Solo el 20% del hormigón trabaja.</p>
+<div class="tic-item">
+<span>a/H = 0.67/25 = <b>2.7%</b></span>
+<span class="rev">⚠️ REVISAR (muy bajo)</span>
+</div>
+</div>
+
+<div class="alerta">
+<h4>⚠️ Alerta</h4>
+<p>El TIC 5 (a/H = 2.7%) está muy por debajo del 20% ideal. Esto indica que el acero positivo es insuficiente para movilizar el bloque de compresión. <strong>Acción:</strong> aumentar As_pos o verificar el modelo de viga T.</p>
+</div>
+</div>
+
+<!-- 7. EVALUACIÓN -->
+<div class="seccion" id="evaluacion">
+<h2>7. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318-19</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<!-- 8. EJERCICIOS -->
+<div class="seccion" id="ejercicios">
+<h2>8. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1: h_eq para H = 20 cm</h4>
+<p>Calcular h_eq para H = 20 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>h_eq = 14.50 cm</strong> (menor que para H = 25 cm, como era de esperar)</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2: Efecto de tc en h_eq</h4>
+<p>¿Qué pasa con h_eq si tc baja de 5 a 3 cm?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>h_eq disminuye</strong> porque la capa de compresión aporta menos inercia. La losa se vuelve más flexible.</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3: Impacto en la deflexión</h4>
+<p>Si I_total baja 7.5%, ¿cuánto sube δ?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p>La deflexión sube aproximadamente <strong>7.5%</strong> (de 1.25 a 1.34 mm) porque δ ∝ 1/I.</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4: Comparación con el libro</h4>
+<p>Comparar h_eq = 18.06 cm con la tabla del libro de Marcelo Guerra.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Coincide exactamente</strong> con la tabla del libro para losa alivianada de 25 cm. ✅</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5: Reflexión final</h4>
+<ol style="padding-left:20px;font-size:14px">
+<li>¿Por qué h_eq es menor que H_losa?</li>
+<li>¿Por qué se verifica L/360 con carga viva y L/240 con carga total?</li>
+<li>¿Cómo se relaciona a/H con el diseño de viga T?</li>
+</ol>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>1. Porque los vacíos del aligeramiento reducen la inercia respecto a una losa maciza de igual espesor.<br>
+2. L/360 es más estricto porque la carga viva afecta la comodidad y los acabados; L/240 es para carga total.<br>
+3. a/H ≈ 20% confirma que solo el bloque superior trabaja a compresión. Es la base de la viga T.</p>
+</div>
+</div>
+</div>
+
+<!-- 9. CONEXIÓN -->
+<div class="seccion" id="conexion">
+<h2>9. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M01</td><td>h_eq, I_total</td><td>Inercia equivalente (base del M06)</td></tr>
+<tr><td>M02</td><td>Cu</td><td>Cargas (Cm, Cv, Pisos)</td></tr>
+<tr><td>M03</td><td>L/240</td><td>Verificación de deflexión</td></tr>
+<tr><td>M04</td><td>Bloque "a"</td><td>Viga T (mismo concepto)</td></tr>
+<tr><td>M05</td><td>As, estribos</td><td>Diseño de columna</td></tr>
+<tr><td><b>M06</b></td><td><b>h_eq, As_pos, a</b></td><td><b>Este módulo</b></td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"La losa es el diafragma que une todo. Sin ella, no hay pórtico. Sin pórtico, no hay resiliencia."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<!-- 10. ACÁPITE -->
+<div class="seccion" id="acapite" style="border-left-color:#f39c12">
+<h2>📖 10. ACÁPITE DE ESTUDIO</h2>
+<p><b>Revisa este resumen ejecutivo antes de responder el cuestionario.</b></p>
+
+<h3>🎯 ¿Qué aprenderás?</h3>
+<ul>
+<li>Calcular la inercia equivalente por Steiner</li>
+<li>Determinar h_eq de la losa alivianada</li>
+<li>Calcular el bloque "a" y la relación a/H</li>
+<li>Diseñar As(+), As(−), As_min</li>
+<li>Verificar deflexión L/240 y L/360</li>
+</ul>
+
+<h3>📐 Fórmulas clave</h3>
+<div class="formula">I_total = Σ (I₀ + A · d²)</div>
+<div class="formula formula-grande">h_eq = ∛(12 · I_total / bb)</div>
+<div class="formula">a = As · fy / (0.85 · fc · b_ef)</div>
+<div class="formula">δmax = 5 · Cu · Lx⁴ / (384 · EI)</div>
+
+<h3>💡 Ejemplo resuelto</h3>
+<p><b>Datos:</b> H = 25 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm</p>
+<p><b>Cálculo:</b> I_total = 24,548 cm⁴ → h_eq = 18.06 cm</p>
+<p style="color:#f39c12;font-weight:bold"><b>Resultado:</b> δmax = 6.82 mm < L/240 = 25 mm ✅</p>
+
+<h3>🎯 ¿Qué se espera en el Bloque C?</h3>
+<ul>
+<li>Interpretar h_eq vs H_losa</li>
+<li>Explicar por qué L/360 es más estricto que L/240</li>
+<li>Conectar con M01 (Steiner) y M04 (bloque a)</li>
+</ul>
+
+<h3>🎯 ¿Qué se espera en el Bloque D?</h3>
+<ul>
+<li><b>Impacto técnico:</b> deflexión excesiva → fisuras en acabados</li>
+<li><b>Norma aplicable:</b> NEC-15, ACI 318-19 §24.2.2</li>
+<li><b>Criterio ético:</b> reportar aunque el resultado sea desfavorable</li>
+<li><b>Trazabilidad:</b> documentar la decisión de diseño</li>
+</ul>
+</div>
+
+<!-- 11. CONDICIONES -->
+<div class="seccion" id="condiciones" style="border-left-color:#2ecc71">
+<h2>✅ 11. CONDICIONES DE RESPUESTA VÁLIDA</h2>
+<p>Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<h3>🎯 Cómo se evalúa</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts (criterios)</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts (número exacto)</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts (razonamiento)</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts (criterios + ética)</td></tr>
+</tbody>
+</table>
+
+<h3>✅ Qué espera el sistema</h3>
+<p><b>Bloque A — Concepto:</b></p>
+<ul>
+<li>Explica con tus palabras</li>
+<li>Cubre los criterios indicados</li>
+<li>Puedes usar sinónimos</li>
+</ul>
+<p><b>Bloque B — Cálculo:</b></p>
+<ul>
+<li>Muestra el procedimiento</li>
+<li>Indica unidades</li>
+<li>Da el resultado numérico</li>
+</ul>
+<p><b>Bloque C — Interpretación:</b></p>
+<ul>
+<li>Menciona el concepto técnico</li>
+<li>Justifica con números</li>
+<li>Conecta con otros módulos o normas</li>
+</ul>
+<p><b>Bloque D — Decisión:</b></p>
+<ul>
+<li>Identifica el problema técnico</li>
+<li>Cita la norma aplicable</li>
+<li>Aplica criterio ético</li>
+<li>Documenta tu decisión</li>
+</ul>
+
+<h3>💡 Ejemplo de respuesta válida</h3>
+<div class="ejemplo">
+<h4>Pregunta: "¿Por qué h_eq < H_losa?"</h4>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "Porque los vacíos del aligeramiento reducen la inercia. h_eq es el espesor de una losa maciza ficticia que tendría la misma inercia que la alivianada real."</p>
+<p style="color:#2ecc71">✅ <b>VÁLIDA:</b> "La losa alivianada tiene menos hormigón, por lo tanto menos inercia. Para modelarla como maciza, usamos un espesor equivalente menor."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "No sé."</p>
+<p style="color:#e74c3c">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+</div>
+
+<h3>🎯 Recuerda</h3>
+<ul>
+<li>No hay una sola respuesta correcta</li>
+<li>Se valora el razonamiento</li>
+<li>Puedes expresarte con tus propias palabras</li>
+<li>El error es parte del aprendizaje</li>
+</ul>
+</div>
+
+<!-- 12. ANEXO -->
+<div class="seccion" id="anexo" style="border-left-color:#9b59b6">
+<h2>📐 12. ANEXO TÉCNICO — DEDUCCIONES</h2>
+
+<h3>12.1 Deducción de h_eq (Steiner)</h3>
+<p>La inercia total de la sección compuesta es:</p>
+<div class="formula">I_total = I1 + A1·d1² + I2 + A2·d2²</div>
+<p>Para una losa maciza ficticia de ancho bb y altura h_eq:</p>
+<div class="formula">I_maciza = bb · h_eq³ / 12</div>
+<p>Igualando I_total = I_maciza:</p>
+<div class="formula formula-grande">h_eq = ∛(12 · I_total / bb)</div>
+
+<h3>12.2 Deducción del bloque "a"</h3>
+<p>Por equilibrio de fuerzas (compresión = tracción):</p>
+<div class="formula">C = T</div>
+<div class="formula">0.85 · fc · b_ef · a = As · fy</div>
+<div class="formula">a = As · fy / (0.85 · fc · b_ef)</div>
+<p><b>Significado:</b> Solo el bloque "a" trabaja a compresión. El resto del hormigón no trabaja. Base de la viga T.</p>
+
+<h3>12.3 Deducción de la deflexión</h3>
+<p>Para una viga simplemente apoyada con carga distribuida:</p>
+<div class="formula">δmax = 5 · w · L⁴ / (384 · EI)</div>
+<p>Para losa, w = Cu (t/m²) y EI se calcula con I_eq.</p>
+
+<h3>12.4 Relación L/240 vs L/360</h3>
+<table class="tabla">
+<thead><tr><th>Límite</th><th>Norma</th><th>Carga</th><th>Razón</th></tr></thead>
+<tbody>
+<tr><td>L/240</td><td>NEC-15</td><td>Total (Cu)</td><td>Evita fisuras en elementos no estructurales</td></tr>
+<tr><td>L/360</td><td>ACI 318-19 §24.2.2</td><td>Viva (Cv)</td><td>Comodidad y acabados</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"La losa no es un elemento pasivo. Es el diafragma que distribuye las fuerzas y garantiza la resiliencia del pórtico."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_06_losa_alivianada.html" class="btn btn-orange">Ir al Cuestionario M06</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>

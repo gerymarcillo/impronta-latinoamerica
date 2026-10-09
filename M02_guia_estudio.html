@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M02 - Análisis de Cargas</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M02</h1>
+<h2>ANÁLISIS DE CARGAS SEGÚN USO Y NORMATIVA NEC-15</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+</ol>
+</div>
+
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el concepto de <strong>análisis de cargas</strong> en estructuras de hormigón armado, aplicando la <strong>NEC-15</strong> (Norma Ecuatoriana de la Construcción) y el <strong>ACI 318</strong>.</p>
+<p>El análisis de cargas es el punto de partida de todo diseño estructural: sin conocer las fuerzas que actúan sobre la estructura, no es posible dimensionar vigas, columnas ni losas.</p>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 90 minutos (guía)</p>
+</div>
+
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Calcular las cargas muertas (Cm) y vivas (Cv) de una estructura real, aplicando la NEC-15 y el ACI 318, para obtener la carga última de diseño (Cu).</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Comprender que toda estructura soporta cargas (peso propio, muros, losa, uso)</li>
+<li>Aplicar la combinación de carga Cu = 1.2·Cm + 1.6·Cv</li>
+<li>Clasificar el uso de la estructura según la NEC-15, Tabla 9</li>
+<li>Conectar el cálculo teórico con un caso real: Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</li>
+<li>Calcular W (carga por metro lineal) y Pu (carga axial)</li>
+</ul>
+</div>
+
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+<h3>3.1 ¿Qué son las cargas?</h3>
+<p>Las <strong>cargas</strong> son las fuerzas que actúan sobre una estructura. Se clasifican en:</p>
+<table class="tabla">
+<thead><tr><th>Tipo</th><th>Símbolo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td><b>Carga muerta</b></td><td>D</td><td>Peso permanente de la estructura</td><td>Losa, muros, acabados</td></tr>
+<tr><td><b>Carga viva</b></td><td>L</td><td>Peso variable por uso</td><td>Personas, muebles, equipos</td></tr>
+<tr><td><b>Carga de viento</b></td><td>W</td><td>Presión del viento</td><td>—</td></tr>
+<tr><td><b>Carga sísmica</b></td><td>E</td><td>Movimiento del terreno</td><td>—</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 Combinaciones de carga (NEC-15, Capítulo 3)</h3>
+<p>Para el <strong>estado límite de resistencia</strong>, la NEC-15 establece:</p>
+<div class="formula">U = 1.2 D + 1.6 L</div>
+<p><b>Interpretación:</b></p>
+<ul>
+<li><b>1.2</b> = factor de mayoración para carga muerta</li>
+<li><b>1.6</b> = factor de mayoración para carga viva</li>
+</ul>
+<p><b>¿Por qué se mayoran?</b> Porque las cargas reales pueden ser <strong>mayores</strong> que las estimadas. El factor de seguridad garantiza que la estructura no falle.</p>
+
+<h3>3.3 Componentes de la carga muerta (D)</h3>
+<table class="tabla">
+<thead><tr><th>Componente</th><th>Peso (t/m²)</th><th>Fuente</th></tr></thead>
+<tbody>
+<tr><td>Losa alivianada 15 cm</td><td>0.25</td><td>NEC-15, Tabla 2</td></tr>
+<tr><td>Losa alivianada 20 cm</td><td>0.30</td><td>NEC-15, Tabla 2</td></tr>
+<tr><td>Losa alivianada 25 cm</td><td>0.36</td><td>NEC-15, Tabla 2</td></tr>
+<tr><td>Acabado superior (cerámica + mortero)</td><td>0.04</td><td>NEC-15</td></tr>
+<tr><td>Acabado inferior (enlucido)</td><td>0.04</td><td>NEC-15</td></tr>
+<tr><td>Instalaciones (sanitarias, eléctricas)</td><td>0.02</td><td>NEC-15</td></tr>
+<tr><td>Mampostería pesada (bloque/ladrillo)</td><td>0.18</td><td>NEC-15</td></tr>
+<tr><td>Mampostería liviana (gypsum/steel)</td><td>0.09</td><td>NEC-15</td></tr>
+</tbody>
+</table>
+
+<h3>3.4 Cargas vivas según uso (NEC-15, Tabla 9)</h3>
+<table class="tabla">
+<thead><tr><th>Uso</th><th>Cv (t/m²)</th><th>Aplicación</th></tr></thead>
+<tbody>
+<tr><td>Vivienda</td><td>0.20</td><td>Casas, departamentos</td></tr>
+<tr><td>Oficinas</td><td>0.24</td><td>Edificios administrativos</td></tr>
+<tr><td>Aulas / Salas de lectura</td><td>0.29</td><td>Colegios, universidades</td></tr>
+<tr><td>Bodega liviana</td><td>0.60</td><td>Almacenes ligeros</td></tr>
+<tr><td>Bodega pesada</td><td>1.20</td><td>Almacenes industriales</td></tr>
+<tr><td>Pasillos y escaleras</td><td>0.48</td><td>Circulación</td></tr>
+<tr><td>Cubierta inaccesible</td><td>0.07</td><td>Techos sin acceso</td></tr>
+<tr><td>Cubierta accesible (terraza)</td><td>0.30</td><td>Terrazas</td></tr>
+<tr><td>Áreas de reunión</td><td>0.29</td><td>Salas con asientos</td></tr>
+<tr><td>Comedores y restaurantes</td><td>0.48</td><td>Restaurantes</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Carga muerta total</td><td>Cm = losa + acabado sup + acabado inf + instalaciones + mampostería</td><td>t/m²</td></tr>
+<tr><td>Carga viva</td><td>Cv (NEC-15, Tabla 9)</td><td>t/m²</td></tr>
+<tr><td>Carga última</td><td>Cu = 1.2·Cm + 1.6·Cv</td><td>t/m²</td></tr>
+<tr><td>Carga por metro lineal</td><td>W = Cu · b_trib</td><td>t/m</td></tr>
+<tr><td>Área tributaria</td><td>At = (L1/2 + L2/2) · (L3/2 + L4/2)</td><td>m²</td></tr>
+<tr><td>Carga axial</td><td>Pu = At · Cu · Fm</td><td>t</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema</h4>
+<ul>
+<li><b>Uso:</b> Vivienda (Cv = 0.20 t/m²)</li>
+<li><b>Mampostería:</b> Pesada (0.18 t/m²)</li>
+<li><b>Espesor de losa:</b> 25 cm (0.36 t/m²)</li>
+<li><b>Proyecto:</b> Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</li>
+<li><b>Caso:</b> Estructuras Especiales</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Calcular la carga muerta (Cm)<br>
+Cm = losa + acabado sup + acabado inf + instalaciones + mampostería<br>
+Cm = 0.36 + 0.04 + 0.04 + 0.02 + 0.18 = <b>0.640 t/m²</b></div>
+
+<div class="paso"><strong>PASO 2:</strong> Identificar la carga viva (Cv)<br>
+Según NEC-15, Tabla 9, para vivienda: <b>Cv = 0.20 t/m²</b></div>
+
+<div class="paso"><strong>PASO 3:</strong> Aplicar la combinación de carga<br>
+Cu = 1.2·Cm + 1.6·Cv<br>
+Cu = 1.2 × 0.640 + 1.6 × 0.200<br>
+Cu = 0.768 + 0.320 = <b>1.088 t/m²</b></div>
+
+<div class="paso"><strong>PASO 4:</strong> Calcular la carga por metro lineal (W)<br>
+b_trib = Lt2 = 5.50 m<br>
+W = Cu · b_trib = 1.088 × 5.50 = <b>5.984 t/m</b></div>
+
+<div class="paso"><strong>PASO 5:</strong> Calcular el área tributaria (At)<br>
+At = (Lv1/2 + Lv2/2) · (Lt1/2 + Lt2/2)<br>
+At = (6.00/2 + 5.50/2) · (4.80/2 + 5.50/2)<br>
+At = 5.75 · 5.15 = <b>29.613 m²</b></div>
+
+<div class="paso"><strong>PASO 6:</strong> Calcular la carga axial (Pu)<br>
+Fm = 1.2<br>
+Pu = At · Cu · Fm = 29.613 × 1.088 × 1.2 = <b>38.66 t</b></div>
+
+<div class="ejemplo">
+<h4>Verificación</h4>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>Cm</td><td>0.640</td><td>t/m²</td></tr>
+<tr><td>Cv</td><td>0.200</td><td>t/m²</td></tr>
+<tr><td><b>Cu</b></td><td><b>1.088</b></td><td><b>t/m²</b></td></tr>
+<tr><td>W</td><td>5.984</td><td>t/m</td></tr>
+<tr><td>At</td><td>29.613</td><td>m²</td></tr>
+<tr><td>Pu</td><td>38.66</td><td>t</td></tr>
+</tbody>
+</table>
+<p><b>✅ Resultado:</b> La carga última de diseño es <b>1.088 t/m²</b>.</p>
+</div>
+</div>
+
+<div class="seccion" id="evaluacion">
+<h2>6. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<div class="seccion" id="ejercicios">
+<h2>7. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1: Vivienda en Jipijapa</h4>
+<p>Calcular la carga última para una vivienda de 2 pisos con:</p>
+<ul>
+<li>Losa: 20 cm</li>
+<li>Mampostería: Pesada</li>
+<li>Uso: Vivienda (Cv = 0.20 t/m²)</li>
+</ul>
+<p><b>Verificar:</b> ¿Cuánto vale Cu?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Cm = 0.30 + 0.04 + 0.04 + 0.02 + 0.18 = 0.58 t/m²</strong><br>
+Cu = 1.2·0.58 + 1.6·0.20 = 0.696 + 0.32 = <strong>1.016 t/m²</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2: Aulas del Colegio Alejo Lascano</h4>
+<p>Calcular la carga última para las aulas del colegio con:</p>
+<ul>
+<li>Losa: 25 cm</li>
+<li>Mampostería: Pesada</li>
+<li>Uso: Aulas (Cv = 0.29 t/m²)</li>
+</ul>
+<p><b>Pregunta:</b> ¿Es mayor o menor que la vivienda? ¿Por qué?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Cm = 0.36 + 0.04 + 0.04 + 0.02 + 0.18 = 0.64 t/m²</strong><br>
+Cu = 1.2·0.64 + 1.6·0.29 = 0.768 + 0.464 = <strong>1.232 t/m²</strong><br>
+Es mayor que vivienda porque las aulas tienen mayor carga viva (0.29 vs 0.20).</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3: Bodega</h4>
+<p>Calcular la carga última para una bodega pesada con:</p>
+<ul>
+<li>Losa: 25 cm</li>
+<li>Mampostería: Pesada</li>
+<li>Uso: Bodega pesada (Cv = 1.20 t/m²)</li>
+</ul>
+<p><b>Reflexión:</b> ¿Por qué la bodega tiene una carga viva tan alta?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Cm = 0.36 + 0.04 + 0.04 + 0.02 + 0.18 = 0.64 t/m²</strong><br>
+Cu = 1.2·0.64 + 1.6·1.20 = 0.768 + 1.92 = <strong>2.688 t/m²</strong><br>
+La carga viva es alta porque almacena materiales pesados y equipos industriales.</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4: Comparación</h4>
+<p>Completar la siguiente tabla:</p>
+<table class="tabla">
+<thead><tr><th>Uso</th><th>Cm (t/m²)</th><th>Cv (t/m²)</th><th>Cu (t/m²)</th></tr></thead>
+<tbody>
+<tr><td>Vivienda</td><td>0.64</td><td>0.20</td><td>?</td></tr>
+<tr><td>Oficina</td><td>0.64</td><td>0.24</td><td>?</td></tr>
+<tr><td>Aulas</td><td>0.64</td><td>0.29</td><td>?</td></tr>
+<tr><td>Bodega liviana</td><td>0.64</td><td>0.60</td><td>?</td></tr>
+<tr><td>Bodega pesada</td><td>0.64</td><td>1.20</td><td>?</td></tr>
+</tbody>
+</table>
+<p><b>Conclusión:</b> ¿Cuál uso requiere mayor carga de diseño?</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>Vivienda: 1.088 t/m²<br>
+Oficina: 1.152 t/m²<br>
+Aulas: 1.232 t/m²<br>
+Bodega liviana: 1.728 t/m²<br>
+<strong>Bodega pesada: 2.688 t/m² (la mayor)</strong></p>
+</div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5: Reflexión final</h4>
+<ol style="padding-left:20px;font-size:14px">
+<li>¿Por qué la NEC-15 exige mayorar las cargas?</li>
+<li>¿Qué pasaría si no se mayoraran?</li>
+<li>¿Cómo se relaciona la carga última con el diseño del acero?</li>
+</ol>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>1. Porque las cargas reales pueden ser mayores que las estimadas.<br>
+2. La estructura podría fallar por flexión, cortante o deflexión excesiva.<br>
+3. La carga última Cu determina el momento Mmax, que a su vez determina el acero As requerido.</p>
+</div>
+</div>
+</div>
+
+<div class="seccion" id="conexion">
+<h2>8. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M01</td><td>h_eq</td><td>Cálculo de carga muerta</td></tr>
+<tr><td><b>M02</b></td><td><b>h_eq</b></td><td><b>Este módulo</b></td></tr>
+<tr><td>M03</td><td>Cu, W, Pu</td><td>Análisis de viga</td></tr>
+<tr><td>M04</td><td>Md, Vu</td><td>Diseño de cortante</td></tr>
+<tr><td>M05</td><td>Pu, Md</td><td>Diseño de columna</td></tr>
+<tr><td>M06</td><td>Cu, h_eq</td><td>Diseño de losa</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_02_calculo_cargas.html" class="btn btn-orange">Ir al Cuestionario M02</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>

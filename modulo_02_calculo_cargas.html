@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>M02 - Cálculo de Cargas</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-imagen{height:70px;border-radius:8px;border:2px solid #f39c12}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
+.header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
+.tab.active{background:linear-gradient(135deg,#f39c12,#e67e22);border-color:#f39c12;color:white}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
+.progreso-bar{background:linear-gradient(90deg,#2ecc71,#f39c12);height:100%;width:0%;transition:width 0.4s}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
+.btn-desactivado:hover{transform:none !important;box-shadow:none !important}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
+.seccion ul{list-style:none;padding-left:0;margin:10px 0}
+.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px;line-height:1.6}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula-box{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:10px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
+.formula-box.grande{font-size:18px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.videos-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #e74c3c}
+.videos-section h2{color:#e74c3c;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.video-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.video-info h4{color:#5dade2;font-size:15px;margin-bottom:6px}
+.video-info p{color:#bdc3c7;font-size:12px;margin:0}
+.video-botones{display:flex;gap:8px;flex-wrap:wrap}
+.descargas-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #2ecc71}
+.descargas-section h2{color:#2ecc71;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.descarga-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.descarga-icon{font-size:36px;flex-shrink:0}
+.descarga-info{flex:1;min-width:200px}
+.descarga-info h4{color:#5dade2;font-size:15px;margin-bottom:4px}
+.descarga-info p{color:#bdc3c7;font-size:12px;margin:0}
+.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #f39c12}
+.badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.badge.orange{background:#f39c12}
+.badge.red{background:#e74c3c}
+.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
+.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
+.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
+.ejercicio-previo .campo strong{color:#2ecc71}
+.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #3498db}
+textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
+.rubrica{background:#34495e;border-radius:8px;padding:15px;margin-top:15px;font-size:12px}
+.rubrica h4{color:#f39c12;margin-bottom:10px}
+.rubrica ul{list-style:none}
+.rubrica li{padding:4px 0}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
+.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
+.puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
+.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
+.c-insuf{background:#7f8c8d;color:white}
+.c-basico{background:#16a085;color:white}
+.c-comp{background:#f39c12;color:white}
+.c-dest{background:#e67e22;color:white}
+.c-excel{background:#c0392b;color:white}
+.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
+.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
+.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
+.certificado code{background:#ecf0f1;padding:6px 12px;border-radius:6px;font-size:14px}
+.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
+.firma{text-align:center;min-width:220px}
+.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
+.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
+.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
+.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
+.modalidad ul{list-style:none}
+.modalidad li{padding:4px 0;font-size:13px}
+.qr-section{display:flex;justify-content:space-between;align-items:center;margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;gap:20px;flex-wrap:wrap}
+.qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
+.qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
+.qr-datos p{margin:5px 0}
+.condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
+.condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
+.condiciones-box ul{list-style:none;padding-left:0}
+.condiciones-box li{padding:5px 0 5px 25px;position:relative;font-size:13px;color:#ecf0f1}
+.condiciones-box li:before{content:"☐";position:absolute;left:0;color:#2ecc71;font-weight:bold}
+.ejemplo-valido-box{background:#1e1e2e;border-left:4px solid #3498db;border-radius:8px;padding:15px;margin:15px 0}
+.ejemplo-valido-box h4{color:#5dade2;font-size:13px;margin-bottom:8px}
+.ejemplo-valido-box p{color:#bdc3c7;font-size:13px;font-style:italic;margin:0}
+.criterios-box{background:#34495e;border-radius:8px;padding:15px;margin-top:15px}
+.criterios-box h4{color:#f39c12;font-size:13px;margin-bottom:10px}
+.criterios-box ul{list-style:none;padding-left:0}
+.criterios-box li{padding:4px 0;font-size:12px;color:#ecf0f1}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>⚖️ M02 — CÁLCULO DE CARGAS</h1>
+<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<p>PI 2026 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+<img src="portada_estructural.png" alt="Portada" class="header-imagen">
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="cambiarTab('videos', this)">🎥 Clases</button>
+<button class="tab" onclick="cambiarTab('consulta', this)">📚 Consulta</button>
+<button class="tab" onclick="cambiarTab('descargas', this)">📖 Descargas</button>
+<button class="tab" onclick="cambiarTab('cuestionario', this)">✏️ Cuestionario</button>
+</div>
+
+<!-- TAB VIDEOS -->
+<div id="tab-videos" class="tab-content active">
+<div class="videos-section">
+<h2>🎥 CLASES GRABADAS — M02</h2>
+<p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
+<div class="video-item">
+<div class="video-info"><h4>🎬 Clase 1 — Cálculo de Cargas (Cm, Cv, Cu)</h4><p>📅 10/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
+</div>
+<div class="video-item">
+<div class="video-info"><h4>🎬 Clase 2 — Viga Simplemente Apoyada (V, M)</h4><p>📅 12/10/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
+</div>
+<div class="video-item">
+<div class="video-info"><h4>🎬 Clase 3 — Caso Real: Colegio Alejo Lascano</h4><p>📅 14/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p></div>
+<div class="video-botones"><button class="btn-desactivado" disabled>🎥 Próximamente</button><button class="btn-desactivado" disabled>⬇️ Próximamente</button></div>
+</div>
+<div style="background:#1e1e2e;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin-top:20px;text-align:center">
+<p style="color:#f39c12;font-size:13px;margin:0">💡 <b>Nota:</b> Las clases se activarán después de cada grabación con Google Meet.</p>
+</div>
+</div>
+</div>
+
+<!-- TAB CONSULTA -->
+<div id="tab-consulta" class="tab-content">
+<div class="seccion">
+<h2>📚 CONSULTA — M02 CÁLCULO DE CARGAS</h2>
+<h3>🎯 ¿Qué es el análisis de cargas?</h3>
+<p>Es el proceso de determinar las fuerzas que actúan sobre una estructura, aplicando la NEC-15 y el ACI 318 para obtener la <b>carga última de diseño (Cu)</b>.</p>
+<h3>📐 Fórmulas clave</h3>
+<div class="formula-box">Carga muerta: Cm = Σ componentes</div>
+<div class="formula-box">Carga viva: Cv (NEC-15, Tabla 9)</div>
+<div class="formula-box grande">Carga última: Cu = 1.2·Cm + 1.6·Cv</div>
+<div class="formula-box">Carga por metro lineal: W = Cu · b_trib</div>
+<div class="formula-box">Carga axial: Pu = At · Cu · Fm</div>
+<h3>🔑 Conceptos clave</h3>
+<ul>
+<li><b>Carga muerta (Cm):</b> peso permanente de la estructura</li>
+<li><b>Carga viva (Cv):</b> peso variable por uso (personas, muebles, equipos)</li>
+<li><b>Carga última (Cu):</b> combinación mayorada de cargas</li>
+<li><b>Área tributaria (At):</b> área que contribuye a la carga de un elemento</li>
+</ul>
+<h3>📊 Datos del modelo base</h3>
+<table class="tabla">
+<tr><th>Dato</th><th>Valor</th></tr>
+<tr><td>Lv1, Lv2</td><td>6.00, 5.50 m</td></tr>
+<tr><td>Lt1, Lt2</td><td>4.80, 5.50 m</td></tr>
+<tr><td>Cm</td><td>0.640 t/m²</td></tr>
+<tr><td>Cv</td><td>0.200 t/m²</td></tr>
+<tr><td><b>Cu</b></td><td><b>1.088 t/m²</b></td></tr>
+<tr><td><b>W</b></td><td><b>5.984 t/m</b></td></tr>
+</table>
+<h3>📚 Referencias</h3>
+<ul>
+<li>NEC-15 (2015) — <i>Cargas No Sísmicas</i></li>
+<li>ACI 318-19 — <i>Building Code Requirements</i></li>
+<li>Marcillo et al. (2026) — <i>Rigidez Energética</i></li>
+</ul>
+<div style="text-align:center;margin-top:25px">
+<a href="M02_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
+</div>
+</div>
+</div>
+
+<!-- TAB DESCARGAS -->
+<div id="tab-descargas" class="tab-content">
+<div class="descargas-section">
+<h2>📖 DESCARGAS — M02</h2>
+<p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
+<div class="descarga-item">
+<div class="descarga-icon">📘</div>
+<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto</p></div>
+<a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div class="descarga-item">
+<div class="descarga-icon">📗</div>
+<div class="descarga-info"><h4>Guía de Estudio M02</h4><p>Material de consulta</p></div>
+<a href="M02_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div class="descarga-item">
+<div class="descarga-icon">📙</div>
+<div class="descarga-info"><h4>Manual del Docente M02</h4><p>Rúbrica por criterios</p></div>
+<a href="M02_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div class="descarga-item">
+<div class="descarga-icon">📄</div>
+<div class="descarga-info"><h4>Tabla NEC-15</h4><p>Cargas vivas y combinaciones</p></div>
+<a href="tabla_nec15.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+<div class="descarga-item">
+<div class="descarga-icon">📄</div>
+<div class="descarga-info"><h4>Tabla ACI 318</h4><p>Factores de mayoración</p></div>
+<a href="tabla_aci318.html" target="_blank" class="btn">📄 Abrir</a>
+</div>
+</div>
+</div>
+
+<!-- TAB CUESTIONARIO -->
+<div id="tab-cuestionario" class="tab-content">
+
+<!-- PANTALLA 1: ACÁPITE -->
+<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
+<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M02</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.<br>Es <b>obligatorio</b> para garantizar que comprendes los criterios de evaluación.</p>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 ¿Qué aprenderás?</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Identificar cargas muertas y vivas</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Aplicar la combinación Cu = 1.2·Cm + 1.6·Cv</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular W y Pu</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Clasificar el uso según NEC-15</li>
+</ul>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
+<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">📐 Fórmulas clave</h3>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">Cm = losa + acabados + instalaciones + mampostería</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">Cu = 1.2·Cm + 1.6·Cv</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">W = Cu · b_trib</div>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Ejemplo resuelto</h3>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> Cm = 0.64 t/m², Cv = 0.20 t/m², b_trib = 5.50 m</p>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> Cu = 1.2·0.64 + 1.6·0.20 = 1.088 t/m²</p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> W = 1.088 · 5.50 = 5.984 t/m</p>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
+<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C?</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Diferencia entre Cm y Cv</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Impacto del uso en la carga</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Consecuencia de subestimar cargas</li>
+</ul>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
+<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D?</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> la carga supera lo estimado</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Norma aplicable:</b> NEC-15, ACI 318</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Criterio ético:</b> reportar aunque sea desfavorable</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Trazabilidad:</b> documentar la decisión</li>
+</ul>
+</div>
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
+</div>
+</div>
+
+<!-- PANTALLA 2: CONDICIONES -->
+<div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
+<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M02</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 CÓMO SE EVALÚA</h3>
+<table style="width:100%;border-collapse:collapse">
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque A:</b> Conceptos</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">10 pts (criterios)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque B:</b> Cálculo</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">40 pts (número exacto)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque C:</b> Interpretación</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (razonamiento)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque D:</b> Decisión</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (criterios + ética)</td></tr>
+</table>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">✅ QUÉ ESPERA EL SISTEMA</h3>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque A — Concepto:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Explica con tus palabras</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cubre los criterios indicados</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Puedes usar sinónimos</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Muestra el procedimiento</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Indica unidades</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Da el resultado numérico</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Menciona el concepto técnico</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Justifica con números</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Conecta con otros módulos o normas</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Identifica el problema técnico</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cita la norma aplicable</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Aplica criterio ético</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Documenta tu decisión</li>
+</ul>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">💡 EJEMPLO DE RESPUESTA VÁLIDA</h3>
+<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es la carga muerta?"</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es el peso permanente de la estructura: losa, acabados, mampostería."</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es todo lo que no cambia con el uso: el peso propio de la losa y los muros."</p>
+<p style="color:#e74c3c;font-size:13px;margin-bottom:5px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
+<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
+</div>
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
+<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">🎯 RECUERDA</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> No hay una sola respuesta correcta</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Se valora el razonamiento</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Puedes expresarte con tus propias palabras</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> El error es parte del aprendizaje</li>
+</ul>
+</div>
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ ENTENDIDO, COMENZAR PREGUNTAS</button>
+</div>
+</div>
+
+<!-- PANTALLA 3: CUESTIONARIO -->
+<div id="cuestionario-preguntas" style="display:none">
+<div class="info-bar">
+<span>👤 <b id="info-estudiante">Estudiante</b></span>
+<span>⏱ <b id="info-tiempo">00:00</b></span>
+<span>📊 <b id="info-progreso">0/15</b></span>
+</div>
+<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
+<div id="contenedor-pregunta"></div>
+<div id="pantalla-resultado" style="display:none">
+<div class="resultado">
+<h2>🏆 RESULTADO M02</h2>
+<div class="puntaje-grande" id="resultado-puntaje"></div>
+<div id="resultado-clasificacion"></div>
+</div>
+<div id="contenedor-certificado"></div>
+<div style="text-align:center;margin-top:20px">
+<a href="index.html" class="btn">← Volver al menú</a>
+<button class="btn btn-orange" onclick="window.print()">🖨 Imprimir certificado</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function cambiarTab(tabId, btn){
+document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+document.getElementById('tab-'+tabId).classList.add('active');
+btn.classList.add('active');
+}
+
+var MODULO_ACAPITE = "M02";
+var inicioTiempo = null;
+var intervalo = null;
+
+function verificarAcapite() {
+  var leido = localStorage.getItem("acapite_" + MODULO_ACAPITE + "_leido");
+  if (leido === "true") {
+    document.getElementById("pantalla-acapite").style.display = "none";
+    verificarCondiciones();
+  } else {
+    document.getElementById("pantalla-acapite").style.display = "block";
+    document.getElementById("pantalla-condiciones").style.display = "none";
+    document.getElementById("cuestionario-preguntas").style.display = "none";
+  }
+}
+
+function marcarAcapiteLeido() {
+  localStorage.setItem("acapite_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-acapite").style.display = "none";
+  verificarCondiciones();
+}
+
+function verificarCondiciones() {
+  var leido = localStorage.getItem("condiciones_" + MODULO_ACAPITE + "_leido");
+  if (leido === "true") {
+    document.getElementById("pantalla-condiciones").style.display = "none";
+    document.getElementById("cuestionario-preguntas").style.display = "block";
+    mostrar();
+    iniciarCronometro();
+  } else {
+    document.getElementById("pantalla-condiciones").style.display = "block";
+    document.getElementById("cuestionario-preguntas").style.display = "none";
+  }
+}
+
+function marcarCondicionesLeidas() {
+  localStorage.setItem("condiciones_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-condiciones").style.display = "none";
+  document.getElementById("cuestionario-preguntas").style.display = "block";
+  mostrar();
+  iniciarCronometro();
+}
+
+function iniciarCronometro() {
+  if (intervalo) return;
+  inicioTiempo = new Date();
+  intervalo = setInterval(function(){
+    var s = Math.floor((new Date() - inicioTiempo) / 1000);
+    var m = Math.floor(s / 60).toString().padStart(2, '0');
+    var ss = (s % 60).toString().padStart(2, '0');
+    document.getElementById('info-tiempo').textContent = m + ':' + ss;
+  }, 1000);
+}
+
+var PREGUNTAS = [
+{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras qué es la carga muerta (Cm) en una estructura y dé un ejemplo de sus componentes.",
+ejercicio:null,
+condiciones:["Mencionar que es el peso permanente de la estructura","Nombrar al menos 2 componentes (losa, acabados, mampostería)","Indicar que no varía en el tiempo"],
+ejemplo_valido:"Es el peso permanente de la estructura: la losa, los acabados, las instalaciones y la mampostería. No cambia con el uso.",
+criterios:[
+{peso:40,desc:"Peso permanente",keywords:["permanente","permanentes","fijo","fija","peso propio","no varía","no varia"]},
+{peso:30,desc:"Nombrar componentes",keywords:["losa","acabado","mampostería","mamposteria","instalaciones","peso propio"]},
+{peso:30,desc:"No varía en el tiempo",keywords:["no varía","no varia","constante","permanente","siempre"]}
+]},
+{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras qué es la carga viva (Cv) en una estructura y de dónde se obtiene su valor.",
+ejercicio:null,
+condiciones:["Mencionar que es el peso variable por uso","Indicar que depende de la ocupación (personas, muebles, equipos)","Indicar que se obtiene de la NEC-15, Tabla 9"],
+ejemplo_valido:"Es el peso variable por uso: personas, muebles, equipos. Se obtiene de la tabla 9 de la NEC-15 según la ocupación.",
+criterios:[
+{peso:40,desc:"Peso variable por uso",keywords:["variable","varía","varia","uso","ocupación","ocupacion"]},
+{peso:30,desc:"Depende de la ocupación",keywords:["personas","muebles","equipos","gente","ocupación"]},
+{peso:30,desc:"Se obtiene de NEC-15",keywords:["nec","tabla 9","tabla9","norma"]}
+]},
+{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique por qué se aplica la combinación Cu = 1.2·Cm + 1.6·Cv y qué pasaría si no se mayoraran las cargas.",
+ejercicio:null,
+condiciones:["Explicar que las cargas reales pueden ser mayores","Indicar que los factores garantizan seguridad","Explicar consecuencia si no se mayoran"],
+ejemplo_valido:"Porque las cargas reales pueden ser mayores que las estimadas. Los factores garantizan que la estructura no falle. Si no se mayoran, la estructura podría colapsar.",
+criterios:[
+{peso:40,desc:"Cargas reales mayores",keywords:["mayor","mayores","real","reales","estimada","estimadas"]},
+{peso:30,desc:"Garantizan seguridad",keywords:["seguridad","seguro","garantía","garantiza","no falle","falla"]},
+{peso:30,desc:"Consecuencia si no se mayoran",keywords:["colapso","colapsa","falla","fallar","peligro","riesgo"]}
+]},
+{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique la diferencia entre carga muerta y carga viva. Dé un ejemplo de cada una.",
+ejercicio:null,
+condiciones:["Definir carga muerta como permanente","Definir carga viva como variable","Dar un ejemplo de cada una"],
+ejemplo_valido:"La carga muerta es permanente (losa, muros) y la carga viva es variable (personas, muebles). La muerta no cambia, la viva depende del uso.",
+criterios:[
+{peso:30,desc:"Define carga muerta",keywords:["muerta","permanente","fijo","fija","peso propio"]},
+{peso:30,desc:"Define carga viva",keywords:["viva","variable","varía","varia","uso"]},
+{peso:40,desc:"Da ejemplo de cada una",keywords:["losa","muro","mampostería","personas","muebles","equipos","gente"]}
+]},
+{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
+enunciado:"Calcule la carga muerta total (Cm) para una losa alivianada de 25 cm con mampostería pesada.",
+ejercicio:{instrucciones:"Cm = losa + acabado superior + acabado inferior + instalaciones + mampostería",campos:[{label:"Losa 25 cm",valor:0.36},{label:"Acabado superior",valor:0.04},{label:"Acabado inferior",valor:0.04},{label:"Instalaciones",valor:0.02},{label:"Mampostería pesada",valor:0.18},{label:"Cm TOTAL (t/m²)",valor:0.64}]},
+condiciones:["Sumar los 5 componentes","Indicar unidades (t/m²)","Dar el resultado numérico"],
+ejemplo_valido:"Cm = 0.36 + 0.04 + 0.04 + 0.02 + 0.18 = 0.64 t/m².",
+criterios:[
+{peso:60,desc:"Suma correcta de componentes",keywords:["0.64","0,64"]},
+{peso:20,desc:"Muestra componentes",keywords:["0.36","0.04","0.02","0.18","losa","acabado","mampostería"]},
+{peso:20,desc:"Unidades correctas",keywords:["t/m²","t/m2","tonelada"]}
+]},
+{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Calcule la carga última Cu para vivienda (Cv=0.20 t/m²) con Cm=0.64 t/m².",
+ejercicio:{instrucciones:"Cu = 1.2·Cm + 1.6·Cv",campos:[{label:"1.2·Cm",valor:0.768},{label:"1.6·Cv",valor:0.32},{label:"Cu (t/m²)",valor:1.088}]},
+condiciones:["Aplicar la fórmula Cu = 1.2·Cm + 1.6·Cv","Indicar unidades (t/m²)","Dar el resultado numérico"],
+ejemplo_valido:"Cu = 1.2·0.64 + 1.6·0.20 = 0.768 + 0.32 = 1.088 t/m².",
+criterios:[
+{peso:50,desc:"Calcula Cu correcto",keywords:["1.088","1,088"]},
+{peso:30,desc:"Muestra procedimiento",keywords:["1.2","1.6","0.768","0.32"]},
+{peso:20,desc:"Unidades correctas",keywords:["t/m²","t/m2","tonelada"]}
+]},
+{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,
+enunciado:"Calcule la carga por metro lineal (W) para b_trib=5.50 m y Cu=1.088 t/m².",
+ejercicio:{instrucciones:"W = Cu · b_trib",campos:[{label:"Cu (t/m²)",valor:1.088},{label:"b_trib (m)",valor:5.50},{label:"W (t/m)",valor:5.984}]},
+condiciones:["Aplicar la fórmula W = Cu · b_trib","Indicar unidades (t/m)","Dar el resultado numérico"],
+ejemplo_valido:"W = 1.088 · 5.50 = 5.984 t/m.",
+criterios:[
+{peso:60,desc:"Calcula W correcto",keywords:["5.984","5,984"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["1.088","5.50","5.5"]},
+{peso:20,desc:"Unidades correctas",keywords:["t/m","tonelada"]}
+]},
+{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Calcule el área tributaria (At) para Lv1=6.00, Lv2=5.50, Lt1=4.80, Lt2=5.50 m.",
+ejercicio:{instrucciones:"At = (Lv1/2 + Lv2/2) · (Lt1/2 + Lt2/2)",campos:[{label:"Lv1/2 + Lv2/2",valor:5.75},{label:"Lt1/2 + Lt2/2",valor:5.15},{label:"At (m²)",valor:29.613}]},
+condiciones:["Aplicar la fórmula del área tributaria","Indicar unidades (m²)","Dar el resultado numérico"],
+ejemplo_valido:"At = (3.00 + 2.75) · (2.40 + 2.75) = 5.75 · 5.15 = 29.613 m².",
+criterios:[
+{peso:60,desc:"Calcula At correcto",keywords:["29.613","29,613"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["5.75","5.15","3.00","2.75","2.40"]},
+{peso:20,desc:"Unidades correctas",keywords:["m²","m2"]}
+]},
+{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Calcule la carga axial (Pu) para At=29.613 m², Cu=1.088 t/m², Fm=1.2.",
+ejercicio:{instrucciones:"Pu = At · Cu · Fm",campos:[{label:"At (m²)",valor:29.613},{label:"Cu (t/m²)",valor:1.088},{label:"Fm",valor:1.2},{label:"Pu (t)",valor:38.66}]},
+condiciones:["Aplicar la fórmula Pu = At · Cu · Fm","Indicar unidades (t)","Dar el resultado numérico"],
+ejemplo_valido:"Pu = 29.613 · 1.088 · 1.2 = 38.66 t.",
+criterios:[
+{peso:60,desc:"Calcula Pu correcto",keywords:["38.66","38,66"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["29.613","1.088","1.2"]},
+{peso:20,desc:"Unidades correctas",keywords:["t","tonelada"]}
+]},
+{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique la diferencia entre Cm y Cv y por qué se mayoran con factores distintos (1.2 y 1.6).",
+ejercicio:null,
+condiciones:["Explicar qué es cada carga","Explicar por qué la Cv tiene mayor factor","Conectar con incertidumbre del uso"],
+ejemplo_valido:"La Cm es permanente y predecible, por eso tiene factor 1.2. La Cv es variable e incierta, por eso tiene factor 1.6. Se mayoran distinto porque la Cv tiene más incertidumbre.",
+criterios:[
+{peso:30,desc:"Explica qué es cada carga",keywords:["muerta","viva","permanente","variable","peso propio","uso"]},
+{peso:40,desc:"Explica por qué factores distintos",keywords:["incertidumbre","variable","mayor","1.2","1.6","riesgo"]},
+{peso:30,desc:"Conecta con uso",keywords:["uso","ocupación","ocupacion","personas","muebles"]}
+]},
+{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"¿Qué pasaría si se subestima la carga viva en el diseño de una estructura? Justifique con un ejemplo.",
+ejercicio:null,
+condiciones:["Mencionar consecuencia estructural","Conectar con seguridad","Dar ejemplo con números o situación"],
+ejemplo_valido:"Si se subestima la Cv, la estructura se diseñaría para menos carga de la real. Podría fallar o deformarse excesivamente. Por ejemplo, si diseño para 0.20 y en realidad es 0.30, la viga se sobrecarga.",
+criterios:[
+{peso:40,desc:"Consecuencia estructural",keywords:["falla","colapso","colapsa","deforma","deformación","sobrecarga"]},
+{peso:30,desc:"Conectar con seguridad",keywords:["seguridad","peligro","riesgo","no seguro","inseguro"]},
+{peso:30,desc:"Da ejemplo",keywords:["0.20","0.30","ejemplo","vivienda","oficina","aula"]}
+]},
+{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique cómo se relaciona la carga última Cu con el diseño de la viga (M03). ¿Qué pasaría si se usa una Cu incorrecta?",
+ejercicio:null,
+condiciones:["Mencionar que Cu alimenta al M03","Explicar que Cu determina W y Mmax","Explicar consecuencia de usar Cu incorrecta"],
+ejemplo_valido:"Cu se usa en M03 para calcular W y el momento máximo. Si Cu es incorrecta, la viga se diseñaría mal: si es menor, la viga fallaría; si es mayor, se sobredimensionaría.",
+criterios:[
+{peso:30,desc:"Cu alimenta al M03",keywords:["m03","viga","siguiente","módulo","modulo"]},
+{peso:30,desc:"Cu determina W y M",keywords:["w","momento","mmax","carga lineal"]},
+{peso:40,desc:"Consecuencia de Cu incorrecta",keywords:["falla","sobredimensiona","error","incorrecto","no seguro"]}
+]},
+{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
+enunciado:"Explique qué pasa con la carga última Cu si el uso cambia de vivienda (Cv=0.20) a aulas (Cv=0.29). Justifique con números.",
+ejercicio:null,
+condiciones:["Identificar que Cv sube","Calcular nueva Cu","Explicar consecuencia estructural"],
+ejemplo_valido:"Si Cv sube de 0.20 a 0.29, la Cu sube de 1.088 a 1.232 t/m². Esto incrementa W y el momento, por lo que la viga necesita más acero.",
+criterios:[
+{peso:30,desc:"Identifica que Cv sube",keywords:["sube","aumenta","mayor","0.29","aulas"]},
+{peso:40,desc:"Calcula nueva Cu",keywords:["1.232","1,232"]},
+{peso:30,desc:"Consecuencia estructural",keywords:["más acero","mas acero","mayor momento","sobredimensiona"]}
+]},
+{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
+enunciado:"El constructor propone reducir la losa de 25 a 20 cm para 'ahorrar concreto'. ¿Aprueba el cambio? Justifique técnica y éticamente.",
+ejercicio:{instrucciones:"Considere NEC-15, ética, trazabilidad",campos:[{label:"H actual",valor:"25 cm"},{label:"H propuesto",valor:"20 cm"},{label:"Relación L/H propuesto",valor:"30 > 28"}]},
+condiciones:["Técnico: la relación L/H = 30 supera el límite de 28","Normativo: citar NEC-15","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
+ejemplo_valido:"No apruebo. La relación L/H = 30 supera el límite de 28 de la NEC-15. Esto afecta la deflexión. Rechazar el cambio, documentar y notificar. Como ingeniero firmante, soy responsable.",
+criterios:[
+{peso:30,desc:"Técnico: L/H supera límite",keywords:["30","28","relación","relacion","deflexión","deflexion"]},
+{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","norma"]},
+{peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","firma","rechazo"]},
+{peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","notificar","registrar","informe"]}
+]},
+{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
+enunciado:"El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?",
+ejercicio:{instrucciones:"Considere NEC-15, ACI 318, NTE INEN, ética",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},
+condiciones:["Identificar el problema: resistencia especificada vs real","Aplicar normativa: NEC-15, ACI 318, NTE INEN","Acciones concretas: rechazar, notificar, suspender, documentar","Consecuencias legales: responsabilidad civil y penal"],
+ejemplo_valido:"El déficit del 20% viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal.",
+criterios:[
+{peso:25,desc:"Identifica el problema",keywords:["déficit","deficit","20","resistencia","menor","168","210"]},
+{peso:25,desc:"Aplica normativa",keywords:["nec","aci","nte","inen","norma"]},
+{peso:25,desc:"Acciones concretas",keywords:["rechazar","notificar","suspender","documentar","paralizar"]},
+{peso:25,desc:"Consecuencias legales",keywords:["responsabilidad","civil","penal","denuncia","legal"]}
+]}
+];
+
+var respuestas={},preguntaActual=0;
+var MODULO="M02",TITULO="Cálculo de Cargas";
+document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
+
+function mostrar(){
+var p=PREGUNTAS[preguntaActual],total=PREGUNTAS.length;
+document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)+'%';
+document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
+var h='<div class="pregunta-box">';
+h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
+if(p.ejercicio){
+h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
+p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
+h+='</div>';
+}
+if(p.condiciones){
+h+='<div class="condiciones-box"><h4>✅ CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
+p.condiciones.forEach(function(c){h+='<li>'+c+'</li>';});
+h+='</ul><p style="color:#7f8c8d;font-size:11px;margin-top:10px;font-style:italic">Puedes usar otras palabras, pero debes cubrir estos criterios.</p></div>';
+}
+if(p.ejemplo_valido){
+h+='<div class="ejemplo-valido-box"><h4>💡 EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"'+p.ejemplo_valido+'"</p></div>';
+}
+h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
+h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
+if(p.criterios){
+h+='<div class="criterios-box"><h4>🎯 CRITERIOS DE EVALUACIÓN</h4><ul>';
+p.criterios.forEach(function(c){h+='<li>✅ '+c.desc+' ('+c.peso+'%)</li>';});
+h+='</ul></div>';
+}
+h+='<div class="rubrica"><h4>🎯 RÚBRICA GENERAL</h4><ul>';
+h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
+h+='<li>🟧 Básico (40-60%): Responde sin cubrir todos los criterios</li>';
+h+='<li>🟨 Competente (60-80%): Cubre la mayoría de criterios</li>';
+h+='<li>🟩 Excelente (80-100%): Cubre todos los criterios con claridad</li>';
+h+='</ul></div></div>';
+h+='<div class="nav-buttons">';
+h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
+h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
+h+='</div>';
+document.getElementById('contenedor-pregunta').innerHTML=h;
+}
+
+function guardar(){var p=PREGUNTAS[preguntaActual];var t=document.getElementById('resp_'+p.id);if(t)respuestas[p.id]=t.value;}
+function ant(){guardar();preguntaActual--;mostrar();}
+function sig(){guardar();preguntaActual++;mostrar();}
+
+function calcPts(){
+var total=0,maxTotal=0;
+PREGUNTAS.forEach(function(p){
+var r=(respuestas[p.id]||'').toLowerCase();
+var puntosPregunta=0;
+if(p.criterios){
+p.criterios.forEach(function(c){
+var encontrado=false;
+c.keywords.forEach(function(k){
+if(r.indexOf(k.toLowerCase())!==-1) encontrado=true;
+});
+if(encontrado) puntosPregunta += c.peso;
+});
+} else {
+puntosPregunta = r.length > 15 ? 50 : 0;
+}
+total += puntosPregunta * p.puntaje / 100;
+maxTotal += p.puntaje;
+});
+return (total/maxTotal)*100;
+}
+
+function clasificar(p){
+if(p<40)return{txt:'INSUFICIENTE',css:'c-insuf'};
+if(p<60)return{txt:'BÁSICO',css:'c-basico'};
+if(p<80)return{txt:'COMPETENTE',css:'c-comp'};
+if(p<95)return{txt:'DESTACADO',css:'c-dest'};
+return{txt:'EXCELENTE',css:'c-excel'};
+}
+
+function fin(){
+guardar();clearInterval(intervalo);intervalo=null;
+var pts=calcPts();var cl=clasificar(pts);
+document.getElementById('contenedor-pregunta').innerHTML='';
+document.getElementById('pantalla-resultado').style.display='block';
+document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
+document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
+localStorage.setItem(MODULO+'_puntaje',pts);
+if(pts>=60){
+var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
+var fecha=new Date().toLocaleDateString('es-EC');
+var nombre=localStorage.getItem('estudiante_nombre')||'';
+var cedula=localStorage.getItem('estudiante_cedula')||'';
+var lugar=localStorage.getItem('estudiante_lugar')||'';
+var rol=localStorage.getItem('usuario_rol')||'estudiante';
+var rolTexto=(rol==='docente')?'DOCENTE EXPOSITOR':'ESTUDIANTE';
+document.getElementById('contenedor-certificado').innerHTML=
+'<div class="certificado">'+
+'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">'+
+'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>'+
+'<h3>FACULTAD DE CIENCIAS TÉCNICAS</h3>'+
+'<h3>CARRERA DE INGENIERÍA CIVIL</h3>'+
+'<hr style="margin:15px 0">'+
+'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
+'<hr style="margin:15px 0">'+
+'<h3>CERTIFICADO DE APROBACIÓN</h3>'+
+'<h3>Módulo M02 — Cálculo de Cargas</h3>'+
+'<p style="margin:15px 0">La Universidad certifica que:</p>'+
+'<h2 style="color:#2c3e50">'+nombre+'</h2>'+
+'<p>C.C. '+cedula+'</p>'+
+'<p style="margin:10px 0"><b>Rol: '+rolTexto+'</b></p>'+
+'<p style="margin:10px 0"><b>Lugar de intervención:</b> '+lugar+'</p>'+
+'<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
+'<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
+'<p><b>Clasificación: '+cl.txt+'</b></p>'+
+'<div class="modalidad"><h4>MODALIDAD DE APROBACIÓN:</h4><ul>'+
+'<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
+'<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
+'</ul></div>'+
+'<div class="qr-section"><img src="qr_m02.png" alt="QR" class="qr-img">'+
+'<div class="qr-datos">'+
+'<p><b>Código:</b> '+cod+'</p>'+
+'<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
+'<p><b>Vigencia:</b> Permanente</p>'+
+'<p><b>Verificación:</b> Escanee el código QR</p>'+
+'</div></div>'+
+'<div class="firmas">'+
+'<div class="firma"><div class="linea-firma"></div>'+
+'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+
+'<p>DOCENTE — ESTRUCTURA I / II</p>'+
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
+'<div class="firma"><div class="linea-firma"></div>'+
+'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>'+
+'<p>COORDINADORA DE CARRERA</p>'+
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
+'</div>'+
+'<hr style="margin:20px 0">'+
+'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>'+
+'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>'+
+'</div>';
+}
+}
+
+verificarAcapite();
+</script>
+</body>
+</html>

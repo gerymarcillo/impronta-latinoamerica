@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M03 - Viga + Sismo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #3498db;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.rubrica-box{background:#34495e;border-left:4px solid #e74c3c;border-radius:8px;padding:20px;margin:15px 0}
+.rubrica-box h4{color:#e74c3c;margin-bottom:10px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #9b59b6;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#9b59b6;margin-bottom:8px;font-size:14px}
+.solucion{background:#1e1e2e;border-left:3px solid #2ecc71;padding:12px;margin-top:10px;border-radius:6px;font-size:13px;color:#bdc3c7;display:none}
+.solucion.visible{display:block}
+.btn-solucion{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M03</h1>
+<h2>VIGA + SISMO — ANÁLISIS ESTRUCTURAL Y DISEÑO SISMORRESISTENTE</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+</ol>
+</div>
+
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo introduce el <strong>análisis estructural de vigas</strong> y el <strong>diseño sismorresistente</strong>, aplicando la <strong>NEC-15</strong> y el <strong>ACI 318</strong>.</p>
+<p>El análisis de viga es el corazón del diseño estructural: aquí se determinan las fuerzas internas (cortante, momento, rotación, deflexión) que servirán para dimensionar el acero de refuerzo.</p>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
+</div>
+
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Resolver una viga articulada aplicando las ecuaciones de la resistencia de materiales, calculando reacciones, cortantes, momentos, rotaciones y deflexiones, y verificando que la deflexión no exceda L/240 (NEC-15).</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Comprender la diferencia entre viga simplemente apoyada y viga empotrada</li>
+<li>Calcular reacciones, cortante V(x), momento M(x), rotación θ(x) y deflexión δ(x)</li>
+<li>Calcular el momento estático Me y el momento de diseño Md</li>
+<li>Interpretar el Diagrama Mariposa en el análisis sísmico</li>
+<li>Verificar la deflexión admisible L/240 (NEC-15)</li>
+</ul>
+</div>
+
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+<h3>3.1 ¿Qué es una viga simplemente apoyada?</h3>
+<p>Es una viga con <strong>extremos articulados</strong> (M = 0). Transmite las cargas a los apoyos mediante reacciones verticales.</p>
+
+<h3>3.2 ¿Qué es una viga empotrada?</h3>
+<p>Es una viga con <strong>extremos fijos</strong> (M ≠ 0). Resiste momentos sísmicos y disipa energía.</p>
+
+<h3>3.3 Cálculo del cortante, momento, rotación y deflexión</h3>
+<div class="formula">V(x) = R1 - w·x</div>
+<div class="formula">M(x) = R1·x - w·x²/2</div>
+<div class="formula">θ(x) = (w / 24EI) · (4x³ - 6Lv·x² + Lv³)</div>
+<div class="formula">δ(x) = (w·x / 24EI) · (Lv³ - 2Lv·x² + x³)</div>
+
+<h3>3.4 Momento de diseño sísmico</h3>
+<div class="formula">Me = Cu · Lt · (Lv - b_col)² / 8</div>
+<div class="formula-grande">Md = Me · f_viga · f_fisura · Fm</div>
+<p>Donde:</p>
+<ul>
+<li><b>f_viga</b> = 0.65 (factor de viga)</li>
+<li><b>f_fisura</b> = 0.85 (factor de fisura)</li>
+<li><b>Fm</b> = 1.35 (factor de mayoración sísmica)</li>
+</ul>
+
+<h3>3.5 Diagrama Mariposa</h3>
+<p>Representa la envolvente de momentos que <strong>cambian de signo</strong> por reversión sísmica: negativo en apoyos, positivo en centro.</p>
+
+<h3>3.6 Deflexión admisible (NEC-15)</h3>
+<div class="formula">δadm = Lv / 240</div>
+</div>
+
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Carga lineal</td><td>w = Cu · b_trib</td><td>t/m</td></tr>
+<tr><td>Reacciones</td><td>R1 = R2 = w·Lv/2</td><td>t</td></tr>
+<tr><td>Cortante</td><td>V(x) = R1 - w·x</td><td>t</td></tr>
+<tr><td>Momento</td><td>M(x) = R1·x - w·x²/2</td><td>t·m</td></tr>
+<tr><td>Momento máximo</td><td>Mmax = w·Lv²/8</td><td>t·m</td></tr>
+<tr><td>Rotación máxima</td><td>θmax = w·Lv³/(24·EI)</td><td>rad</td></tr>
+<tr><td>Deflexión máxima</td><td>δmax = 5·w·Lv⁴/(384·EI)</td><td>mm</td></tr>
+<tr><td>Momento estático</td><td>Me = Cu·Lt·(Lv-bcol)²/8</td><td>t·m</td></tr>
+<tr><td>Momento de diseño</td><td>Md = Me · f_viga · f_fisura · Fm</td><td>t·m</td></tr>
+<tr><td>Deflexión admisible</td><td>δadm = Lv/240</td><td>mm</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del problema</h4>
+<ul>
+<li><b>Cu:</b> 1.064 t/m²</li>
+<li><b>Lv:</b> 6.00 m</li>
+<li><b>Lt:</b> 5.75 m</li>
+<li><b>b_trib:</b> 5.75 m</li>
+<li><b>b_col:</b> 0.38 m</li>
+<li><b>b_viga:</b> 0.30 m</li>
+<li><b>h_viga:</b> 0.45 m</li>
+<li><b>fc:</b> 210 kg/cm²</li>
+<li><b>fy:</b> 4200 kg/cm²</li>
+<li><b>Fm:</b> 1.35</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Calcular la carga lineal (w)<br>
+w = Cu · b_trib = 1.064 × 5.75 = <b>6.118 t/m</b></div>
+
+<div class="paso"><strong>PASO 2:</strong> Calcular las reacciones (R1 = R2)<br>
+R1 = R2 = w · Lv / 2 = 6.118 × 6.00 / 2 = <b>18.354 t</b></div>
+
+<div class="paso"><strong>PASO 3:</strong> Calcular el cortante máximo<br>
+Vmax = R1 = <b>18.354 t</b></div>
+
+<div class="paso"><strong>PASO 4:</strong> Calcular el momento máximo<br>
+Mmax = w · Lv² / 8 = 6.118 × 36 / 8 = <b>27.531 t·m</b></div>
+
+<div class="paso"><strong>PASO 5:</strong> Calcular la deflexión máxima<br>
+E = 15100·√210 = 218819 kg/cm² = 2188190 t/m²<br>
+I = 0.30 × 0.45³ / 12 = 0.002278 m⁴<br>
+EI = 2188190 × 0.002278 = 4984.7 t·m²<br>
+δmax = 5 × 6.118 × 6.00⁴ / (384 × 4984.7) = <b>20.71 mm</b><br>
+δadm = Lv / 240 = 6000 / 240 = <b>25.00 mm</b><br>
+✅ <b>CUMPLE L/240</b></div>
+
+<div class="paso"><strong>PASO 6:</strong> Calcular el momento estático (Me)<br>
+Me = Cu · Lt · (Lv - b_col)² / 8<br>
+Me = 1.064 × 5.75 × (6.00 - 0.38)² / 8<br>
+Me = 1.064 × 5.75 × 31.584 / 8 = <b>24.154 t·m</b></div>
+
+<div class="paso"><strong>PASO 7:</strong> Calcular el momento de diseño (Md)<br>
+Md = Me · f_viga · f_fisura · Fm<br>
+Md = 24.154 × 0.65 × 0.85 × 1.35 = <b>18.016 t·m</b></div>
+
+<div class="ejemplo">
+<h4>Verificación</h4>
+<table class="tabla">
+<thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>w</td><td>6.118</td><td>t/m</td></tr>
+<tr><td>R1 = R2</td><td>18.354</td><td>t</td></tr>
+<tr><td>Vmax</td><td>18.354</td><td>t</td></tr>
+<tr><td>Mmax</td><td>27.531</td><td>t·m</td></tr>
+<tr><td>δmax</td><td>20.71</td><td>mm</td></tr>
+<tr><td>δadm</td><td>25.00</td><td>mm</td></tr>
+<tr><td><b>Estado</b></td><td><b>✅ CUMPLE L/240</b></td><td>—</td></tr>
+<tr><td>Me</td><td>24.154</td><td>t·m</td></tr>
+<tr><td><b>Md</b></td><td><b>18.016</b></td><td><b>t·m</b></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="seccion" id="evaluacion">
+<h2>6. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+
+<div class="rubrica-box">
+<h4>Rúbrica Bloques C y D (por criterios)</h4>
+<div class="criterio"><strong>Criterio 1 - Técnico (25%)</strong>: impacto estructural</div>
+<div class="criterio"><strong>Criterio 2 - Normativo (25%)</strong>: NEC-15 / ACI 318</div>
+<div class="criterio"><strong>Criterio 3 - Ético (25%)</strong>: responsabilidad profesional</div>
+<div class="criterio"><strong>Criterio 4 - Trazabilidad (25%)</strong>: documentación</div>
+</div>
+</div>
+
+<div class="seccion" id="ejercicios">
+<h2>7. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1: Viga simplemente apoyada</h4>
+<p>Calcular las reacciones R1 = R2 para Lv = 5.50 m y w = 6.118 t/m.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>R1 = R2 = w·Lv/2 = 6.118 × 5.50 / 2 = 16.825 t</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2: Momento máximo</h4>
+<p>Calcular el momento máximo Mmax para Lv = 5.50 m y w = 6.118 t/m.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Mmax = w·Lv²/8 = 6.118 × 30.25 / 8 = 23.138 t·m</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3: Deflexión</h4>
+<p>Calcular la deflexión máxima δmax para w = 6.118 t/m, Lv = 5.50 m, EI = 4984.7 t·m².</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>δmax = 5·w·Lv⁴/(384·EI) = 5 × 6.118 × 915.06 / (384 × 4984.7) = 14.36 mm</strong><br>
+δadm = Lv/240 = 5500/240 = 22.92 mm<br>✅ CUMPLE</p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4: Momento de diseño</h4>
+<p>Calcular Md para Me = 24.154 t·m, f_viga = 0.65, f_fisura = 0.85, Fm = 1.35.</p>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion"><p><strong>Md = 24.154 × 0.65 × 0.85 × 1.35 = 18.016 t·m</strong></p></div>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5: Reflexión final</h4>
+<ol style="padding-left:20px;font-size:14px">
+<li>¿Por qué se aplica Fm = 1.35 en el diseño sísmico?</li>
+<li>¿Qué pasa si la deflexión supera L/240?</li>
+<li>¿Cómo se relaciona Md con el diseño del acero?</li>
+</ol>
+<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
+<div class="solucion">
+<p>1. Porque amplifica el momento estático para considerar la sobrerresistencia y la incertidumbre sísmica.<br>
+2. No cumple NEC-15. Se debe aumentar el peralte, la inercia o reducir la luz.<br>
+3. Md determina el área de acero As requerida en la viga.</p>
+</div>
+</div>
+</div>
+
+<div class="seccion" id="conexion">
+<h2>8. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M01</td><td>h_eq</td><td>Cálculo de carga muerta</td></tr>
+<tr><td>M02</td><td>Cu, W, Pu</td><td>Este módulo recibe las cargas</td></tr>
+<tr><td><b>M03</b></td><td><b>Cu, W</b></td><td><b>Este módulo</b></td></tr>
+<tr><td>M04</td><td>Md, Vu</td><td>Diseño de cortante</td></tr>
+<tr><td>M05</td><td>Pu, Md</td><td>Diseño de columna</td></tr>
+<tr><td>M06</td><td>Cu, h_eq</td><td>Diseño de losa</td></tr>
+</tbody>
+</table>
+
+<div class="cita">
+"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="modulo_03_viga_sismo.html" class="btn btn-orange">Ir al Cuestionario M03</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+
+<script>
+function verSolucion(btn){
+var sol=btn.nextElementSibling;
+sol.classList.toggle('visible');
+btn.textContent=sol.classList.contains('visible')?'Ocultar solución':'Ver solución';
+}
+</script>
+</body>
+</html>
