@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual de Ingreso y Proyectos - ECT-UNESUM-2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1100px;margin:0 auto}
+
+.header{background:linear-gradient(135deg,#1B263B,#0D1B2A);border-left:8px solid #E0A800;border-right:8px solid #E0A800;border-radius:12px;padding:35px 25px;margin-bottom:30px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:30px;margin-bottom:12px;letter-spacing:2px}
+.header h2{color:#ecf0f1;font-size:16px;font-weight:normal;margin-bottom:6px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+
+.seccion{background:#1B263B;border-radius:12px;padding:28px;margin-bottom:22px;border-left:5px solid #E0A800}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:18px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+
+.tabla{width:100%;border-collapse:collapse;margin:15px 0;font-size:12px}
+.tabla th{background:#34495e;color:#5dade2;padding:10px 8px;text-align:left;border:1px solid #1a1a1a;font-size:11px;letter-spacing:1px}
+.tabla td{padding:9px 8px;border:1px solid #1a1a1a;color:#ecf0f1;vertical-align:middle}
+.tabla tr:nth-child(even){background:#152238}
+.tabla tr:hover{background:#1e3a5f}
+.tabla .codigo{color:#f39c12;font-weight:bold;font-family:monospace}
+.btn-maps{background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;text-decoration:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;display:inline-block;transition:all 0.3s;white-space:nowrap}
+.btn-maps:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(46,204,113,0.4)}
+
+.area-box{background:linear-gradient(135deg,rgba(155,89,182,0.15),rgba(22,160,133,0.15));border:2px solid rgba(155,89,182,0.5);border-radius:12px;padding:22px;margin:18px 0;text-align:center}
+.area-box h3{color:#c39bd3;font-size:17px;margin-bottom:12px}
+.area-box p{color:#ecf0f1;font-size:14px;margin-bottom:12px}
+.area-box .datos{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:15px 0}
+.area-box .dato{background:rgba(10,14,26,0.6);padding:8px 16px;border-radius:20px;font-size:12px;color:#5dade2;font-weight:bold}
+.area-box .btn-maps-area{background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;text-decoration:none;padding:12px 28px;border-radius:30px;font-size:13px;font-weight:bold;display:inline-block;transition:all 0.3s}
+.area-box .btn-maps-area:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(46,204,113,0.4)}
+
+.codigo-box{background:#0D1B2A;border:2px solid #f39c12;border-radius:8px;padding:12px 18px;margin:10px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:15px;font-weight:bold}
+.codigo-box .label{color:#f39c12;font-size:11px;font-weight:normal;letter-spacing:1px;display:block;margin-bottom:4px}
+
+.pasos{background:#0D1B2A;border-left:4px solid #2ecc71;border-radius:8px;padding:18px;margin:15px 0}
+.pasos h4{color:#2ecc71;margin-bottom:12px;font-size:15px}
+.pasos ol{padding-left:22px}
+.pasos ol li{padding:6px 0;font-size:14px;color:#ecf0f1}
+.pasos ol li b{color:#f39c12}
+
+.alerta{background:#3a1e1e;border-left:4px solid #e74c3c;border-radius:8px;padding:15px;margin:15px 0;font-size:13px}
+.alerta b{color:#e74c3c}
+
+.info-box{background:#1e3a5f;border-left:4px solid #5dade2;border-radius:8px;padding:15px;margin:15px 0;font-size:13px}
+.info-box b{color:#5dade2}
+
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:25px 0;padding:20px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#152238;border-radius:8px;font-size:14px}
+
+.btn-imprimir{display:block;margin:30px auto;background:linear-gradient(135deg,#E0A800,#e67e22);color:white;border:none;padding:16px 50px;border-radius:50px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:2px;box-shadow:0 10px 30px rgba(224,168,0,0.4);transition:all 0.3s}
+.btn-imprimir:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(224,168,0,0.6)}
+
+.pie{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+
+.faq{background:#0D1B2A;border-radius:8px;padding:18px;margin:12px 0;border-left:4px solid #9b59b6}
+.faq h4{color:#c39bd3;font-size:14px;margin-bottom:8px}
+.faq p{font-size:13px;color:#bdc3c7;margin:0}
+
+@media print{
+  body{background:white;color:black;padding:10px}
+  .header{background:white;border:2px solid #000}
+  .seccion{background:white;border-left:4px solid #000;page-break-inside:avoid}
+  .seccion h2{color:#000;border-bottom:1px solid #000}
+  .seccion h3{color:#333}
+  .tabla th{background:#eee;color:#000}
+  .tabla td{color:#000;border:1px solid #999}
+  .codigo-box{background:#f5f5f5;color:#000;border:2px solid #333}
+  .btn-imprimir,.btn-maps,.btn-maps-area{display:none}
+  .pasos,.alerta,.info-box,.faq,.cita,.area-box{background:#f9f9f9;color:#000;border-left:4px solid #333}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>MANUAL DE INGRESO Y PROYECTOS</h1>
+<h2>PLATAFORMA DE FORMACIÓN MODULAR — EL CONOCIMIENTO TRANSFORMA</h2>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<h3>Proyecto UNESUM-REZ-2026-JIPIJAPA-001</h3>
+</div>
+
+<div class="seccion">
+<h2>1. ¿QUÉ ES ESTA PLATAFORMA?</h2>
+<p>La plataforma <b>El Conocimiento Transforma</b> es el espacio digital donde los estudiantes de <b>Estructura I</b> (Sexto semestre) y <b>Estructuras II</b> (Séptimo semestre) desarrollan el proyecto multidisciplinario <b>UNESUM-REZ-2026-JIPIJAPA-001</b>.</p>
+<p>Aquí encontrarás:</p>
+<ul>
+<li>Los <b>8 módulos formativos</b> (M01 a M08)</li>
+<li>Los <b>23 proyectos asignables</b> de estructuras especiales del cantón Jipijapa</li>
+<li>El <b>laboratorio vivo</b> Agua Dulce (Escuela Presidente Urbina)</li>
+<li>El <b>área del proyecto multidisciplinario</b> (50.47 ha, 22 puntos UTM)</li>
+<li>Las <b>guías de estudio</b> y <b>cuestionarios</b> por módulo</li>
+</ul>
+</div>
+
+<div class="seccion">
+<h2>2. ÁREA DEL PROYECTO MULTIDISCIPLINARIO</h2>
+<div class="area-box">
+<h3>🌎 ÁREA PILOTO — 50.47 HECTÁREAS</h3>
+<p>Todas las estructuras especiales están dentro del área piloto del proyecto UNESUM-REZ-2026-JIPIJAPA-001, ubicada en la zona sur de Manabí.</p>
+<div class="datos">
+<span class="dato">📐 50.47 hectáreas</span>
+<span class="dato">📍 22 puntos UTM</span>
+<span class="dato">🗺️ Subcircuitos 3.2 y 3.3</span>
+<span class="dato">🏘️ 4 parroquias</span>
+</div>
+<a href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank" class="btn-maps-area">📍 Ver área en Google Maps</a>
+</div>
+<p>El área del proyecto es el <b>territorio común</b> donde se desarrollan todos los proyectos. Cada estudiante trabaja en una estructura específica dentro de esta área.</p>
+</div>
+
+<div class="seccion">
+<h2>3. CÓMO INGRESAR</h2>
+<div class="pasos">
+<h4>Pasos para acceder</h4>
+<ol>
+<li>Entra a la plataforma desde tu navegador.</li>
+<li>Presiona <b>"COMENZAR"</b> en la portada.</li>
+<li>Selecciona tu <b>ROL</b>: <b>Estudiante</b> o <b>Docente</b>.</li>
+<li>Escribe tu <b>nombre completo</b>.</li>
+<li>Escribe tu <b>cédula / matrícula</b>.</li>
+<li>Escribe tu <b>código de acceso</b> (te lo da el docente).</li>
+<li>Presiona <b>"INGRESAR Y VER PROYECTO"</b>.</li>
+</ol>
+</div>
+
+<div class="info-box">
+<b>Acceso abierto:</b> antes de ingresar con tu código, puedes presionar <b>"🔍 EXPLORAR PROYECTOS"</b> en la portada para ver todos los proyectos disponibles con su ubicación en Google Maps, sin necesidad de login.
+</div>
+</div>
+
+<div class="seccion">
+<h2>4. CÓDIGOS VÁLIDOS</h2>
+
+<h3>Códigos de acceso</h3>
+<div class="codigo-box"><span class="label">ACCESO GLOBAL (sorteo automático)</span>UNESUM-2026</div>
+<div class="codigo-box"><span class="label">ACCESO PERSONAL ESTUDIANTE (sorteo automático)</span>ALU-2026-001 ... ALU-2026-035</div>
+<div class="codigo-box"><span class="label">ACCESO DOCENTE</span>DOCENTE-2026</div>
+<div class="codigo-box"><span class="label">ACCESO A PROYECTO DIRECTO</span>ECT-002 (Escuela Presidente Urbina)</div>
+
+<div class="info-box">
+<b>Nota:</b> si no tienes código personal, usa <b>UNESUM-2026</b>. El sistema te sorteará un proyecto automáticamente.
+</div>
+</div>
+
+<div class="seccion">
+<h2>5. CÓMO SE ASIGNA EL PROYECTO</h2>
+<div class="pasos">
+<h4>Reglas de asignación (acceso cerrado)</h4>
+<ol>
+<li>El <b>sorteo</b> solo ocurre al ingresar con código (<b>UNESUM-2026</b> o <b>ALU-2026-XXX</b>).</li>
+<li>Cada estudiante recibe <b>un proyecto</b> de estructura especial.</li>
+<li>Cada proyecto admite <b>máximo 2 estudiantes</b>.</li>
+<li>Tienes <b>2 intentos</b> para cambiar de proyecto.</li>
+<li>Después del 2do intento, el proyecto queda <b>fijo</b>.</li>
+<li>El proyecto se guarda en tu navegador (localStorage).</li>
+</ol>
+</div>
+
+<div class="info-box">
+<b>Acceso abierto:</b> la ventana pública de exploración <b>NO sortea</b>. Solo muestra los 23 proyectos y sus ubicaciones en Maps. El sorteo es exclusivo del acceso cerrado con código.
+</div>
+
+<div class="alerta">
+<b>Importante:</b> si entras desde otro dispositivo o borras el historial del navegador, perderás la asignación. Anota tu proyecto asignado.
+</div>
+</div>
+
+<div class="seccion">
+<h2>6. LISTA DE PROYECTOS DISPONIBLES</h2>
+<p>23 estructuras especiales del cantón Jipijapa. Todas disponibles para <b>formación</b> (Sexto/Séptimo) y <b>titulación</b> (tesis de pregrado). Haz clic en <b>"Ver en Maps"</b> para abrir la ubicación.</p>
+
+<h3>Centros académicos (5)</h3>
+<table class="tabla">
+<thead>
+<tr><th>Código</th><th>Nombre</th><th>Parroquia</th><th>Prioridad</th><th>Ubicación</th></tr>
+</thead>
+<tbody>
+<tr><td class="codigo">ECT-001</td><td>U.E. Fiscal Alejo Lascano</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">ECT-002</td><td>Escuela Presidente Urbina ⭐</td><td>La América</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.0529,-80.0704" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">ECT-003</td><td>U.E. Quince de Octubre</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3573,-80.5835" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">ECT-004</td><td>U.E. Manuel Inocencio Parrales y Guale</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3561,-80.5963" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">ECT-005</td><td>U.E. Daniel López</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3480,-80.5741" target="_blank">📍 Ver</a></td></tr>
+</tbody>
+</table>
+<p style="font-size:12px;color:#bdc3c7;font-style:italic">⭐ ECT-002 es el laboratorio vivo (aula invertida), transversal a todos los estudiantes.</p>
+
+<h3>Hospitales y centros de salud (8)</h3>
+<table class="tabla">
+<thead>
+<tr><th>Código</th><th>Nombre</th><th>Parroquia</th><th>Prioridad</th><th>Ubicación</th></tr>
+</thead>
+<tbody>
+<tr><td class="codigo">HOS-001</td><td>Hospital Básico Jipijapa</td><td>Jipijapa</td><td>Muy Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-002</td><td>Hospital del IESS Jipijapa</td><td>Jipijapa</td><td>Muy Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-003</td><td>Centro de Salud Jipijapa</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-004</td><td>Subcentro Puerto Cayo</td><td>Puerto Cayo</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.5500,-80.8167" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-005</td><td>Subcentro El Anegado</td><td>El Anegado</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.4000,-80.6000" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-006</td><td>Subcentro La Unión</td><td>La Unión</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.4167,-80.5667" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-007</td><td>Subcentro Machalilla</td><td>Machalilla</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.5000,-80.7667" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">HOS-008</td><td>Subcentro Puerto López</td><td>Puerto López</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.5500,-80.8167" target="_blank">📍 Ver</a></td></tr>
+</tbody>
+</table>
+
+<h3>Instituciones públicas (10)</h3>
+<table class="tabla">
+<thead>
+<tr><th>Código</th><th>Nombre</th><th>Parroquia</th><th>Prioridad</th><th>Ubicación</th></tr>
+</thead>
+<tbody>
+<tr><td class="codigo">INS-001</td><td>GAD Municipal de Jipijapa</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-002</td><td>Prefectura de Manabí — Delegación Jipijapa</td><td>Jipijapa</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-003</td><td>Servicio Nacional de Gestión de Riesgos</td><td>Jipijapa</td><td>Muy Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-004</td><td>Cuerpo de Bomberos de Jipijapa</td><td>Jipijapa</td><td>Muy Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-005</td><td>Policía Nacional — Distrito Jipijapa</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-006</td><td>Registro Civil — Jipijapa</td><td>Jipijapa</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-007</td><td>Mercado Central de Jipijapa</td><td>Jipijapa</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-008</td><td>Terminal Terrestre de Jipijapa</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-009</td><td>INAMHI — Estación Jipijapa</td><td>Jipijapa</td><td>Media</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+<tr><td class="codigo">INS-010</td><td>Centro de Salud Municipal</td><td>Jipijapa</td><td>Alta</td><td><a class="btn-maps" href="https://www.google.com/maps?q=-1.3486,-80.5789" target="_blank">📍 Ver</a></td></tr>
+</tbody>
+</table>
+
+<div class="info-box">
+<b>Nota:</b> las coordenadas son aproximadas. Si detectas un error, avisa al docente para actualizar el enlace.
+</div>
+</div>
+
+<div class="seccion">
+<h2>7. QUÉ VERÁS DENTRO</h2>
+<ul>
+<li><b>M01</b> — Inercia Equivalente</li>
+<li><b>M02</b> — Cálculo de Cargas</li>
+<li><b>M03</b> — Viga + Sismo</li>
+<li><b>M04</b> — Viga Resiliente</li>
+<li><b>M05</b> — Diseño de Columna</li>
+<li><b>M06</b> — Diseño de Losa</li>
+<li><b>M07</b> — Análisis Dinámico Modal</li>
+<li><b>M08</b> — Análisis Estocástico + Contribución Doctoral (3 fases: F1, F2, F3)</li>
+</ul>
+</div>
+
+<div class="seccion">
+<h2>8. EL LABORATORIO VIVO: AGUA DULCE</h2>
+<p>La <b>Escuela Presidente Urbina</b> (AMIE 13H04567), ubicada en el recinto Agua Dulce, parroquia La América, es el <b>aula invertida</b> y <b>laboratorio vivo</b> del proyecto.</p>
+<p>Ahí se experimenta, se mide y se valida el modelo estocástico. Todos los estudiantes pasan por Agua Dulce, independientemente del proyecto que tengan asignado.</p>
+<p><b>Datos:</b></p>
+<ul>
+<li>9 estudiantes</li>
+<li>1 docente</li>
+<li>~200 habitantes en la comunidad</li>
+<li>Escuela que el sistema olvidó, la comunidad que la recuerda</li>
+</ul>
+</div>
+
+<div class="seccion">
+<h2>9. PREGUNTAS FRECUENTES</h2>
+
+<div class="faq">
+<h4>¿Qué hago si no me gusta el proyecto asignado?</h4>
+<p>Puedes pedir un segundo intento. El sistema te sorteará otro proyecto disponible. Después de eso, queda fijo.</p>
+</div>
+
+<div class="faq">
+<h4>¿Puedo cambiar de proyecto si ya usé mis 2 intentos?</h4>
+<p>No. Después del 2do intento, el proyecto queda fijo para garantizar la trazabilidad.</p>
+</div>
+
+<div class="faq">
+<h4>¿Qué pasa si borro el historial del navegador?</h4>
+<p>Pierdes la asignación. Debes volver a entrar y el sistema te sorteará un proyecto.</p>
+</div>
+
+<div class="faq">
+<h4>¿Qué pasa si dos estudiantes quieren el mismo proyecto?</h4>
+<p>El sistema permite <b>máximo 2 estudiantes por proyecto</b>. Si ya hay 2, se sortea otro.</p>
+</div>
+
+<div class="faq">
+<h4>¿Puedo ver los proyectos sin ingresar código?</h4>
+<p>Sí. Presiona <b>"🔍 EXPLORAR PROYECTOS"</b> en la portada. Verás los 23 proyectos con su ubicación en Google Maps, sin necesidad de login.</p>
+</div>
+
+<div class="faq">
+<h4>¿Cuál es la diferencia entre acceso abierto y acceso cerrado?</h4>
+<p><b>Abierto:</b> solo exploración (ver proyectos y Maps). <b>Cerrado:</b> con código, el sistema te sortea un proyecto y accedes a los 8 módulos.</p>
+</div>
+
+<div class="faq">
+<h4>¿Cuántos módulos tengo que completar?</h4>
+<p>Los 8 módulos (M01–M08). Cada uno tiene 15 preguntas. El M08 tiene 45 (3 fases × 15).</p>
+</div>
+
+<div class="faq">
+<h4>¿Cómo obtengo el certificado?</h4>
+<p>Al completar cada módulo con ≥60 puntos, el sistema genera un certificado individual con tu nombre, cédula, puntaje, clasificación y código único de verificación.</p>
+</div>
+
+<div class="faq">
+<h4>¿Los proyectos sirven para tesis de titulación?</h4>
+<p>Sí. Los 23 proyectos están disponibles tanto para formación (Sexto/Séptimo) como para titulación (tesis de pregrado).</p>
+</div>
+</div>
+
+<div class="cita">
+"La escuela que el sistema olvidó, la comunidad que la recuerda,<br>
+la UNESUM que la recupera. Vamos a cambiar la historia."
+</div>
+
+<button class="btn-imprimir" onclick="window.print()">IMPRIMIR / GUARDAR COMO PDF</button>
+
+<div class="pie">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001</p>
+</div>
+
+</div>
+</body>
+</html>
