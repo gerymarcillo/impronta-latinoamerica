@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-GENERADOR DEL INDEX.HTML - VERSIÓN DESDE CERO
+GENERADOR DEL INDEX.HTML - VERSIÓN ACTUALIZADA CON M08
 Proyecto: ECT-UNESUM-2026
 - Portada con impronta (docente + IA)
 - Login con código del proyecto
-- Validación de códigos integrada
-- DOS imágenes de portada: principal (grande) + secundaria (pequeña)
+- 8 módulos (M01-M07 + M08 con 3 fases)
+- M08: Card único con F1, F2, F3
 """
 
 from pathlib import Path
@@ -14,407 +14,547 @@ HTML = '''<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>El Conocimiento Transforma - UNESUM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Conocimiento Transforma - UNESUM 2026</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
-.container{max-width:1100px;margin:0 auto}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;overflow-x:hidden;position:relative}
 
-/* PORTADA */
-.portada{min-height:95vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(93,173,226,0.12) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(243,156,18,0.08) 0%,transparent 60%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
+.particula{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(93,173,226,0.8) 0%,transparent 70%);animation:flotar linear infinite;opacity:0.4}
+@keyframes flotar{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.6}90%{opacity:0.6}100%{transform:translateY(-100px) scale(1);opacity:0}}
 
-/* CONTENEDOR DE IMÁGENES DE PORTADA */
-.portada-imagenes{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:25px;flex-wrap:wrap}
-.portada-imagen-principal{max-width:400px;width:100%;border-radius:15px;box-shadow:0 20px 60px rgba(243,156,18,0.3);border:3px solid #f39c12}
-.portada-imagen-secundaria{max-width:200px;width:100%;border-radius:12px;box-shadow:0 15px 40px rgba(52,152,219,0.3);border:3px solid #3498db;opacity:0.95}
+#loader{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0a0e1a,#141a2e);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
+#loader.oculto{opacity:0;visibility:hidden}
+.loader-logo{width:140px;animation:latido 2s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(93,173,226,0.8))}
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.loader-titulo{color:#5dade2;font-size:22px;font-weight:bold;letter-spacing:6px;margin-top:25px;text-shadow:0 0 20px rgba(93,173,226,0.7)}
+.loader-barra{width:280px;height:4px;background:rgba(93,173,226,0.15);border-radius:2px;margin-top:25px;overflow:hidden}
+.loader-barra-fill{height:100%;background:linear-gradient(90deg,#16a085,#5dade2,#f39c12,#16a085);background-size:200% 100%;border-radius:2px;width:0%;animation:cargar 2.5s ease-in-out forwards,brillar 2s linear infinite}
+@keyframes cargar{0%{width:0%}100%{width:100%}}
+@keyframes brillar{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.loader-frase{color:#bdc3c7;font-size:12px;font-style:italic;margin-top:20px;letter-spacing:2px;opacity:0.7}
 
-.portada-titulo{font-size:38px;color:#5dade2;font-weight:bold;letter-spacing:3px;margin-bottom:12px;text-shadow:0 0 20px rgba(93,173,226,0.5)}
-.portada-subtitulo{font-size:17px;color:#ecf0f1;margin-bottom:8px;letter-spacing:1px}
-.portada-descripcion{font-size:13px;color:#bdc3c7;margin-bottom:4px;font-style:italic}
-.portada-territorio{font-size:15px;color:#f39c12;margin:15px 0 5px 0;font-weight:bold;letter-spacing:1px}
+.container{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:1}
 
-/* IMPRONTA */
-.impronta-frase{color:#f39c12;font-style:italic;font-size:13px;margin:18px 0;padding:12px 20px;background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-radius:10px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:750px}
+.portada{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px;position:relative}
+.portada-logo-glow{position:relative;margin-bottom:30px}
+.portada-logo-glow img{height:110px;filter:drop-shadow(0 0 50px rgba(93,173,226,0.6));animation:flotarLogo 4s ease-in-out infinite;position:relative;z-index:2}
+.portada-logo-glow::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(93,173,226,0.4) 0%,transparent 70%);border-radius:50%;animation:pulsoLogo 3s ease-in-out infinite;z-index:1}
+@keyframes flotarLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulsoLogo{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6}50%{transform:translate(-50%,-50%) scale(1.3);opacity:0.2}}
+
+.portada-titulo{font-size:52px;font-weight:900;letter-spacing:6px;background:linear-gradient(135deg,#5dade2,#16a085,#f39c12,#5dade2);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradienteTitulo 5s ease infinite;text-shadow:0 0 60px rgba(93,173,226,0.4);margin-bottom:15px;line-height:1.2}
+@keyframes gradienteTitulo{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+.portada-subtitulo{font-size:18px;color:#ecf0f1;letter-spacing:4px;margin-bottom:12px;font-weight:300}
+.portada-descripcion{font-size:14px;color:#bdc3c7;letter-spacing:2px;margin-bottom:6px;font-style:italic}
+.portada-territorio{display:inline-block;background:linear-gradient(135deg,rgba(22,160,133,0.2),rgba(93,173,226,0.2));border:1px solid rgba(93,173,226,0.4);border-radius:30px;padding:10px 24px;margin:25px 0 15px 0;color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;box-shadow:0 0 30px rgba(93,173,226,0.2)}
+
+.typewriter{display:inline-block;overflow:hidden;white-space:nowrap;border-right:3px solid #f39c12;animation:escribir 3.5s steps(30,end),cursor 0.8s step-end infinite;max-width:100%}
+@keyframes escribir{from{width:0}to{width:100%}}
+@keyframes cursor{50%{border-color:transparent}}
+
+.impronta-frase{color:#f39c12;font-style:italic;font-size:14px;margin:25px 0;padding:15px 25px;background:rgba(22,160,133,0.08);border-radius:12px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:800px;backdrop-filter:blur(10px);letter-spacing:1px}
 .impronta-frase span{color:#5dade2;font-weight:bold;font-style:normal}
-.impronta-portada{display:flex;gap:18px;margin:20px 0;flex-wrap:wrap;justify-content:center;align-items:center}
-.impronta-portada-item{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;border:2px solid #34495e;min-width:270px}
-.impronta-portada-item.humano{border-left:5px solid #3498db}
-.impronta-portada-item.ia{border-left:5px solid #9b59b6}
-.impronta-portada-avatar{font-size:44px;flex-shrink:0}
-.impronta-portada-info{text-align:left}
-.impronta-portada-rol{color:#f39c12;font-size:10px;font-weight:bold;letter-spacing:2px;margin-bottom:5px}
-.impronta-portada-nombre{color:#5dade2;font-size:14px;font-weight:bold;margin-bottom:3px;line-height:1.3}
-.impronta-portada-item.ia .impronta-portada-nombre{color:#c39bd3}
-.impronta-portada-desc{color:#bdc3c7;font-size:11px;margin-bottom:2px}
-.impronta-portada-link{color:#f39c12;font-size:10px;text-decoration:none;display:inline-block;margin-top:5px;padding:2px 8px;border:1px solid #f39c12;border-radius:4px}
-.impronta-divisor{font-size:26px;color:#f39c12;font-weight:bold}
 
-.portada-cita{font-size:12px;color:#bdc3c7;margin-top:15px;font-style:italic;max-width:700px;line-height:1.5}
-.portada-btn{margin-top:25px;padding:15px 50px;font-size:16px;letter-spacing:2px}
+.impronta-portada{display:flex;gap:25px;margin:30px 0;flex-wrap:wrap;justify-content:center;align-items:center}
+.impronta-item{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:16px;border:1px solid rgba(93,173,226,0.2);min-width:300px;transition:all 0.4s ease;position:relative;overflow:hidden}
+.impronta-item::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(93,173,226,0.1),transparent);transition:left 0.6s ease}
+.impronta-item:hover::before{left:100%}
+.impronta-item.humano{border-left:5px solid #5dade2}
+.impronta-item.ia{border-left:5px solid #9b59b6}
+.impronta-item:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(93,173,226,0.3)}
+.impronta-avatar{font-size:52px;flex-shrink:0;filter:drop-shadow(0 0 15px rgba(93,173,226,0.5))}
+.impronta-info{text-align:left}
+.impronta-rol{color:#f39c12;font-size:11px;font-weight:bold;letter-spacing:3px;margin-bottom:6px}
+.impronta-nombre{color:#5dade2;font-size:15px;font-weight:bold;margin-bottom:4px;line-height:1.3}
+.impronta-item.ia .impronta-nombre{color:#c39bd3}
+.impronta-desc{color:#bdc3c7;font-size:12px;margin-bottom:3px}
+.impronta-link{color:#f39c12;font-size:11px;text-decoration:none;display:inline-block;margin-top:6px;padding:3px 10px;border:1px solid #f39c12;border-radius:6px;transition:all 0.3s}
+.impronta-link:hover{background:#f39c12;color:#0a0e1a}
+.impronta-divisor{font-size:32px;color:#f39c12;font-weight:bold;text-shadow:0 0 20px rgba(243,156,18,0.7)}
 
-/* BOTONES */
-.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.portada-cita{color:#bdc3c7;font-size:13px;font-style:italic;max-width:750px;margin:20px 0;line-height:1.7;letter-spacing:0.5px}
+.portada-contexto{color:#5dade2;font-size:13px;font-style:italic;max-width:750px;line-height:1.8;margin-bottom:30px}
+
+.btn-epico{background:linear-gradient(135deg,#16a085,#5dade2,#f39c12);background-size:200% 200%;color:white;border:none;padding:20px 60px;border-radius:50px;cursor:pointer;font-size:18px;font-weight:bold;letter-spacing:4px;margin-top:20px;text-transform:uppercase;position:relative;overflow:hidden;animation:gradienteTitulo 4s ease infinite;box-shadow:0 15px 50px rgba(93,173,226,0.4);transition:all 0.3s ease;text-decoration:none;display:inline-block}
+.btn-epico:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 25px 70px rgba(93,173,226,0.6)}
+.btn-epico::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.3),transparent);animation:barridoBoton 3s ease infinite}
+@keyframes barridoBoton{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
+
+.login-box{background:rgba(20,26,46,0.7);backdrop-filter:blur(20px);border-radius:20px;padding:40px;max-width:600px;margin:60px auto;border:1px solid rgba(93,173,226,0.3);box-shadow:0 30px 80px rgba(0,0,0,0.5)}
+.login-box h2{color:#f39c12;margin-bottom:25px;font-size:24px;text-align:center;letter-spacing:2px}
+.login-box input[type="text"]{width:100%;padding:15px;margin:10px 0;border:2px solid rgba(93,173,226,0.3);border-radius:10px;background:rgba(10,14,26,0.8);color:#ecf0f1;font-size:15px;transition:all 0.3s}
+.login-box input[type="text"]:focus{outline:none;border-color:#5dade2;box-shadow:0 0 20px rgba(93,173,226,0.4)}
+.campo-ayuda{color:#7f8c8d;font-size:12px;text-align:left;margin-top:-4px;margin-bottom:10px;padding-left:4px}
+.rol-selector{margin-bottom:20px;text-align:left}
+.titulo-rol{color:#f39c12;font-size:14px;font-weight:bold;display:block;margin-bottom:10px;letter-spacing:1px}
+.rol-opciones{display:flex;gap:12px}
+.rol-opcion{flex:1;background:rgba(10,14,26,0.6);border:2px solid rgba(93,173,226,0.3);border-radius:10px;padding:14px;cursor:pointer;text-align:center;font-size:14px;transition:all 0.3s}
+.rol-opcion:hover{border-color:#5dade2}
+.rol-opcion.activa{border-color:#16a085;background:rgba(22,160,133,0.2);box-shadow:0 0 20px rgba(22,160,133,0.4)}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:14px 28px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:bold;margin:8px 4px;text-decoration:none;display:inline-block;transition:all 0.3s;letter-spacing:1px}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(52,152,219,0.4)}
 .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
 .btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
 
-/* LOGIN */
-.login-box{background:#2c3e50;border-radius:12px;padding:30px;max-width:550px;margin:40px auto;text-align:center;border:2px solid #34495e}
-.login-box h2{color:#f39c12;margin-bottom:20px;font-size:20px}
-.login-box input[type="text"]{width:100%;padding:12px;margin:8px 0;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px}
-.login-box input[type="text"]:focus{outline:none;border-color:#f39c12}
-.campo-ayuda{color:#7f8c8d;font-size:11px;text-align:left;margin-top:-4px;margin-bottom:8px;padding-left:4px}
+.alerta-error{background:rgba(192,57,43,0.8);color:white;padding:15px;border-radius:10px;margin:15px 0;text-align:center;font-weight:bold;border:1px solid #e74c3c;animation:shake 0.5s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.alerta-ok{background:rgba(39,174,96,0.8);color:white;padding:15px;border-radius:10px;margin:15px 0;text-align:center;font-weight:bold;border:1px solid #2ecc71;animation:pulseOk 0.6s}
+@keyframes pulseOk{0%{transform:scale(0.9);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
 
-/* ROL */
-.rol-selector{margin-bottom:18px;text-align:left}
-.rol-selector label.titulo-rol{color:#f39c12;font-size:13px;font-weight:bold;display:block;margin-bottom:8px}
-.rol-opciones{display:flex;gap:10px}
-.rol-opcion{flex:1;background:#1e1e2e;border:2px solid #34495e;border-radius:8px;padding:12px;cursor:pointer;text-align:center;font-size:13px}
-.rol-opcion.activa{border-color:#f39c12;background:#34495e}
-
-/* PROYECTO ASIGNADO */
-.proyecto-box{background:linear-gradient(135deg,#16a085,#1abc9c);border-radius:12px;padding:25px;margin:20px 0;border:2px solid #f39c12;text-align:center}
-.proyecto-titulo{color:white;font-size:12px;font-weight:bold;letter-spacing:2px;margin-bottom:10px;opacity:0.9}
-.proyecto-nombre{color:white;font-size:22px;font-weight:bold;margin-bottom:12px;text-shadow:0 2px 5px rgba(0,0,0,0.3)}
-.proyecto-datos{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-.proyecto-dato{background:rgba(0,0,0,0.25);padding:6px 14px;border-radius:20px;font-size:12px;color:white;font-weight:bold}
-
-/* HEADER */
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
-.header-logo{height:70px}
-.header-imagenes{display:flex;align-items:center;gap:10px}
-.header-imagen{height:70px;border-radius:8px;border:2px solid #f39c12}
-.header-imagen-mini{height:50px;border-radius:8px;border:2px solid #3498db;opacity:0.9}
+.header{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);border-left:6px solid #f39c12;border-radius:16px;padding:25px;margin-bottom:25px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
+.header-logo{height:70px;filter:drop-shadow(0 0 15px rgba(93,173,226,0.5))}
 .header-texto{text-align:center;flex:1;min-width:280px}
-.header h1{color:#5dade2;font-size:24px;margin-bottom:6px}
-.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
-.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
-.header p{color:#bdc3c7;font-style:italic;margin-top:8px;font-size:11px}
+.header h1{color:#5dade2;font-size:26px;margin-bottom:8px;letter-spacing:2px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.header p{color:#bdc3c7;font-style:italic;margin-top:8px;font-size:12px}
 
-/* SECCIONES */
-.seccion-titulo{color:#f39c12;font-size:20px;text-align:center;margin:35px 0 15px 0;padding-bottom:10px;border-bottom:2px solid #34495e}
-.seccion-subtitulo{color:#bdc3c7;font-size:12px;text-align:center;margin-bottom:15px;font-style:italic}
+.proyecto-box{background:linear-gradient(135deg,rgba(22,160,133,0.3),rgba(93,173,226,0.3));backdrop-filter:blur(15px);border-radius:16px;padding:30px;margin:25px 0;border:2px solid rgba(243,156,18,0.5);text-align:center;box-shadow:0 20px 60px rgba(22,160,133,0.2)}
+.proyecto-titulo{color:white;font-size:13px;font-weight:bold;letter-spacing:4px;margin-bottom:12px;opacity:0.9}
+.proyecto-nombre{color:white;font-size:24px;font-weight:bold;margin-bottom:15px;text-shadow:0 2px 10px rgba(0,0,0,0.5)}
+.proyecto-datos{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.proyecto-dato{background:rgba(0,0,0,0.3);padding:8px 16px;border-radius:20px;font-size:13px;color:white;font-weight:bold;backdrop-filter:blur(10px)}
 
-/* GRIDS */
-.modulos-grid,.recursos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
-.modulo-card{background:#2c3e50;border-left:5px solid #3498db;border-radius:10px;padding:18px;text-decoration:none;color:#ecf0f1;display:block;transition:transform 0.2s}
-.modulo-card:hover{transform:translateY(-3px);border-left-color:#f39c12}
-.modulo-card h3{color:#5dade2;margin-bottom:6px;font-size:15px}
-.modulo-card .icon{font-size:28px;margin-bottom:6px}
-.modulo-card .desc{color:#bdc3c7;font-size:12px;margin-top:6px}
-.modulo-card .status{color:#2ecc71;font-size:11px;margin-top:8px;font-weight:bold}
+.seccion-titulo{color:#f39c12;font-size:24px;text-align:center;margin:50px 0 10px 0;padding-bottom:15px;letter-spacing:3px;position:relative}
+.seccion-titulo::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:linear-gradient(90deg,transparent,#f39c12,transparent);border-radius:2px}
+.seccion-subtitulo{color:#bdc3c7;font-size:13px;text-align:center;margin-bottom:30px;font-style:italic;letter-spacing:1px}
 
-.recurso-card{background:#2c3e50;border-radius:10px;padding:18px;text-decoration:none;color:#ecf0f1;display:flex;align-items:center;gap:12px;border-left:5px solid #f39c12}
-.recurso-icon{font-size:32px;flex-shrink:0}
-.recurso-info h4{color:#5dade2;font-size:14px;margin-bottom:3px}
-.recurso-info p{color:#bdc3c7;font-size:11px}
+.modulos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;perspective:1200px}
+.modulo-card{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:18px;padding:28px;text-decoration:none;color:#ecf0f1;display:block;transition:all 0.5s cubic-bezier(0.23,1,0.32,1);position:relative;overflow:hidden;border:1px solid rgba(93,173,226,0.2);transform-style:preserve-3d}
+.modulo-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;background:var(--color-modulo,#3498db);transition:height 0.4s ease}
+.modulo-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(93,173,226,0.15),transparent);transition:left 0.7s ease;pointer-events:none}
+.modulo-card:hover::after{left:100%}
+.modulo-card:hover{transform:translateY(-12px) rotateX(5deg) rotateY(-5deg);box-shadow:0 30px 80px rgba(93,173,226,0.4);border-color:var(--color-modulo,#3498db)}
+.modulo-card:hover::before{height:100%;opacity:0.08}
+.modulo-icon{font-size:44px;margin-bottom:15px;display:block;filter:drop-shadow(0 0 15px var(--color-modulo,#3498db));transition:transform 0.4s ease}
+.modulo-card:hover .modulo-icon{transform:scale(1.2) rotate(5deg)}
+.modulo-card h3{color:#5dade2;margin-bottom:8px;font-size:17px;letter-spacing:1px;transition:color 0.3s}
+.modulo-card:hover h3{color:var(--color-modulo,#5dade2)}
+.modulo-card .desc{color:#bdc3c7;font-size:13px;margin-bottom:12px;line-height:1.5}
+.modulo-card .status{color:#2ecc71;font-size:12px;font-weight:bold;display:inline-block;padding:4px 12px;background:rgba(46,204,113,0.15);border-radius:20px;border:1px solid rgba(46,204,113,0.3)}
 
-/* PIE */
-.pie-pagina{text-align:center;margin-top:35px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:11px}
-.cita-final{color:#f39c12;font-style:italic;font-size:12px;text-align:center;margin-top:15px;padding:15px;background:#2c3e50;border-radius:8px;border-left:4px solid #f39c12;line-height:1.5}
-.hidden{display:none}
+.modulo-card.m08{border:2px solid #f39c12;background:linear-gradient(135deg,rgba(20,26,46,0.8),rgba(44,62,80,0.6))}
+.modulo-card.m08::before{height:6px;background:linear-gradient(90deg,#3498db,#9b59b6,#c0392b)}
+.fases-inner{display:grid;grid-template-columns:1fr;gap:10px;margin-top:15px}
+.fase-btn{background:rgba(10,14,26,0.6);border-radius:10px;padding:14px;text-decoration:none;color:#ecf0f1;display:flex;align-items:center;gap:12px;border-left:4px solid var(--color-fase);transition:all 0.3s;font-size:13px}
+.fase-btn:hover{background:rgba(93,173,226,0.15);transform:translateX(6px);box-shadow:0 8px 25px rgba(93,173,226,0.3)}
+.fase-btn.f1{--color-fase:#3498db}
+.fase-btn.f2{--color-fase:#9b59b6}
+.fase-btn.f3{--color-fase:#c0392b}
+.fase-icon{font-size:26px;flex-shrink:0}
+.fase-info{text-align:left}
+.fase-titulo{font-weight:bold;color:#5dade2;margin-bottom:3px;font-size:13px}
+.fase-btn.f2 .fase-titulo{color:#c39bd3}
+.fase-btn.f3 .fase-titulo{color:#e67e22}
+.fase-desc{font-size:11px;color:#bdc3c7}
 
-/* ALERTA */
-.alerta-error{background:#c0392b;color:white;padding:15px;border-radius:8px;margin:15px 0;text-align:center;font-weight:bold}
-.alerta-ok{background:#27ae60;color:white;padding:15px;border-radius:8px;margin:15px 0;text-align:center;font-weight:bold}
+.timeline{display:flex;justify-content:space-between;align-items:center;margin:50px 0;padding:30px;background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:20px;border:1px solid rgba(93,173,226,0.2);flex-wrap:wrap;gap:15px;position:relative}
+.timeline-hito{display:flex;flex-direction:column;align-items:center;flex:1;min-width:80px;position:relative;z-index:2}
+.timeline-circle{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#16a085,#5dade2);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:14px;box-shadow:0 0 30px rgba(93,173,226,0.5);transition:transform 0.3s;cursor:pointer}
+.timeline-circle:hover{transform:scale(1.2)}
+.timeline-circle.m08{background:linear-gradient(135deg,#9b59b6,#c0392b);box-shadow:0 0 35px rgba(192,57,43,0.6)}
+.timeline-label{color:#bdc3c7;font-size:11px;margin-top:10px;text-align:center;letter-spacing:0.5px}
+.timeline-line{flex:1;height:3px;background:linear-gradient(90deg,#16a085,#5dade2,#f39c12);border-radius:2px;min-width:20px;position:relative;opacity:0.5}
+
+.metricas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin:40px 0}
+.metrica-card{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:16px;padding:25px;text-align:center;border:1px solid rgba(93,173,226,0.2);transition:all 0.3s}
+.metrica-card:hover{transform:translateY(-8px);border-color:#f39c12;box-shadow:0 20px 50px rgba(243,156,18,0.3)}
+.metrica-num{font-size:42px;font-weight:900;background:linear-gradient(135deg,#16a085,#5dade2,#f39c12);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:8px;animation:gradienteTitulo 4s ease infinite;background-size:200% 200%}
+.metrica-label{color:#bdc3c7;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+
+.recursos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.recurso-card{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:14px;padding:22px;text-decoration:none;color:#ecf0f1;display:flex;align-items:center;gap:16px;border-left:5px solid #f39c12;transition:all 0.3s}
+.recurso-card:hover{transform:translateX(8px);border-left-color:#5dade2;box-shadow:0 15px 40px rgba(93,173,226,0.3)}
+.recurso-icon{font-size:36px;flex-shrink:0}
+.recurso-info h4{color:#5dade2;font-size:15px;margin-bottom:4px}
+.recurso-info p{color:#bdc3c7;font-size:12px}
+
+.pie-pagina{text-align:center;margin-top:60px;padding:30px;border-top:2px solid rgba(93,173,226,0.2);color:#7f8c8d;font-size:12px;letter-spacing:1px}
+.cita-final{color:#f39c12;font-style:italic;font-size:13px;text-align:center;margin:30px auto;padding:25px;background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:14px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:850px;line-height:1.7}
+
+.hidden{display:none !important}
+
+@media(max-width:768px){
+  .portada-titulo{font-size:32px;letter-spacing:3px}
+  .portada-subtitulo{font-size:14px;letter-spacing:2px}
+  .impronta-item{min-width:auto;padding:18px}
+  .btn-epico{padding:16px 40px;font-size:15px}
+  .header h1{font-size:20px}
+  .seccion-titulo{font-size:20px}
+  .timeline{padding:20px 10px}
+  .timeline-label{font-size:10px}
+  .metrica-num{font-size:32px}
+}
 </style>
 </head>
 <body>
+
+<div class="fondo-animado" id="fondo"></div>
+
+<div id="loader">
+  <img src="logo_unesum.png" alt="UNESUM" class="loader-logo">
+  <div class="loader-titulo">EL CONOCIMIENTO TRANSFORMA</div>
+  <div class="loader-barra"><div class="loader-barra-fill"></div></div>
+  <div class="loader-frase">Inicializando plataforma ECT-UNESUM-2026...</div>
+</div>
+
 <div class="container">
 
-<!-- PANTALLA 1: PORTADA -->
 <div id="pantalla-portada" class="portada">
 
-<!-- DOS IMÁGENES: PRINCIPAL + SECUNDARIA -->
-<div class="portada-imagenes">
-<img src="portada_estructural.png" alt="Portada Principal" class="portada-imagen-principal">
-<img src="portada_estructural_2.png" alt="Portada Secundaria" class="portada-imagen-secundaria">
+  <div class="portada-logo-glow">
+    <img src="portada_estructural.png" alt="Portada">
+  </div>
+
+  <div class="portada-titulo">
+    <span class="typewriter">EL CONOCIMIENTO TRANSFORMA</span>
+  </div>
+
+  <div class="portada-subtitulo">PROYECTO DE FORMACIÓN MODULAR</div>
+  <div class="portada-descripcion">ESTRUCTURA I — ESTRUCTURA II</div>
+  <div class="portada-descripcion">Carrera de Ingeniería Civil — UNESUM</div>
+
+  <div class="portada-territorio">🏫 LABORATORIO VIVO: AGUA DULCE</div>
+  <div class="portada-descripcion">Escuela Presidente Urbina (AMIE 13H04567)</div>
+  <div class="portada-descripcion">Parroquia La América, Jipijapa, Manabí</div>
+
+  <div class="impronta-frase">
+    🤝 <span>IMPRONTA DE AUTORÍA DESDE EL INICIO</span><br>
+    "Desde cero. Juntos. Con propósito."
+  </div>
+
+  <div class="impronta-portada">
+    <div class="impronta-item humano">
+      <div class="impronta-avatar">👨‍🏫</div>
+      <div class="impronta-info">
+        <div class="impronta-rol">AUTOR HUMANO</div>
+        <div class="impronta-nombre">Ing. Gery Lorenzo Marcillo Merino, Msc.</div>
+        <div class="impronta-desc">Docente — Estructura I / II</div>
+        <div class="impronta-desc">Carrera de Ingeniería Civil — UNESUM</div>
+      </div>
+    </div>
+    <div class="impronta-divisor">×</div>
+    <div class="impronta-item ia">
+      <div class="impronta-avatar">🤖</div>
+      <div class="impronta-info">
+        <div class="impronta-rol">IA COLABORADORA</div>
+        <div class="impronta-nombre">DeepSeek <span style="color:#7f8c8d;font-size:12px">深度求索</span></div>
+        <div class="impronta-desc">Modelo V3 — Asistente de programación</div>
+        <a href="https://www.deepseek.com" target="_blank" class="impronta-link">🌐 www.deepseek.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="portada-cita">"La escuela que el sistema olvidó, la comunidad que la recuerda, la UNESUM que la recupera. Vamos a cambiar la historia."</div>
+
+  <div class="portada-contexto">
+    🧱 Modelo construido <b>"ladrillo por ladrillo"</b> — Enfoque estocástico desde la raíz.<br>
+    🌋 Cinturón de Fuego · 💧 Falta de agua · 🏫 Falta de valores · 🌿 Naturaleza resiliente
+  </div>
+
+  <button class="btn-epico" onclick="irAlLogin()">🚀 COMENZAR</button>
 </div>
 
-<div class="portada-titulo">EL CONOCIMIENTO TRANSFORMA</div>
-<div class="portada-subtitulo">PROYECTO DE FORMACIÓN MODULAR</div>
-<div class="portada-descripcion">ESTRUCTURA I — ESTRUCTURA II</div>
-<div class="portada-descripcion">Carrera de Ingeniería Civil — UNESUM</div>
-<div class="portada-territorio">🎯 TERRITORIO PILOTO: AGUA DULCE</div>
-<div class="portada-descripcion">Escuela Presidente Urbina (AMIE 13H04567)</div>
-<div class="portada-descripcion">Parroquia La Unión, Jipijapa, Manabí</div>
-
-<div class="impronta-frase">
-🤝 <span>IMPRONTA DE AUTORÍA DESDE EL INICIO</span><br>
-"Desde cero. Juntos. Con propósito."
-</div>
-
-<div class="impronta-portada">
-<div class="impronta-portada-item humano">
-<div class="impronta-portada-avatar">👨‍🏫</div>
-<div class="impronta-portada-info">
-<div class="impronta-portada-rol">AUTOR HUMANO</div>
-<div class="impronta-portada-nombre">Ing. Gery Lorenzo Marcillo Merino, Msc.</div>
-<div class="impronta-portada-desc">Docente — Estructura I / II</div>
-<div class="impronta-portada-desc">Carrera de Ingeniería Civil — UNESUM</div>
-</div>
-</div>
-
-<div class="impronta-divisor">×</div>
-
-<div class="impronta-portada-item ia">
-<div class="impronta-portada-avatar">🤖</div>
-<div class="impronta-portada-info">
-<div class="impronta-portada-rol">IA COLABORADORA</div>
-<div class="impronta-portada-nombre">DeepSeek <span style="color:#7f8c8d;font-size:12px">深度求索</span></div>
-<div class="impronta-portada-desc">Modelo V3 — Asistente de programación</div>
-<a href="https://www.deepseek.com" target="_blank" class="impronta-portada-link">🌐 www.deepseek.com</a>
-</div>
-</div>
-</div>
-
-<div class="portada-cita">"La escuela que el sistema olvidó, la comunidad que la recuerda, la UNESUM que la recupera. Vamos a cambiar la historia."</div>
-
-<button class="btn btn-orange portada-btn" onclick="irAlLogin()">🚀 COMENZAR</button>
-</div>
-
-<!-- PANTALLA 2: LOGIN -->
 <div id="pantalla-login" class="hidden">
-<div class="header">
-<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
-<div class="header-texto">
-<h1>EL CONOCIMIENTO TRANSFORMA</h1>
-<h2>PROYECTO DE FORMACIÓN MODULAR</h2>
-<h3>ESTRUCTURA I — ESTRUCTURA II</h3>
-<p>Carrera de Ingeniería Civil — UNESUM</p>
-</div>
-<div class="header-imagenes">
-<img src="portada_estructural.png" alt="Portada" class="header-imagen">
-<img src="portada_estructural_2.png" alt="Portada 2" class="header-imagen-mini">
-</div>
+  <div class="header">
+    <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+    <div class="header-texto">
+      <h1>EL CONOCIMIENTO TRANSFORMA</h1>
+      <h2>PROYECTO DE FORMACIÓN MODULAR</h2>
+      <h3>ESTRUCTURA I — ESTRUCTURA II</h3>
+      <p>Carrera de Ingeniería Civil — UNESUM</p>
+    </div>
+  </div>
+
+  <div class="login-box">
+    <h2>🔐 INGRESO A LA PLATAFORMA</h2>
+    <div class="rol-selector">
+      <label class="titulo-rol">SELECCIONE SU ROL:</label>
+      <div class="rol-opciones">
+        <label class="rol-opcion activa" id="rol-estudiante">
+          <input type="radio" name="rol" value="estudiante" checked onchange="cambiarRol()">
+          👤 Estudiante
+        </label>
+        <label class="rol-opcion" id="rol-docente">
+          <input type="radio" name="rol" value="docente" onchange="cambiarRol()">
+          🎓 Docente
+        </label>
+      </div>
+    </div>
+
+    <input type="text" id="input-nombre" placeholder="Nombre completo">
+    <input type="text" id="input-cedula" placeholder="Cédula / Matrícula">
+    <input type="text" id="input-codigo" placeholder="Código de acceso (UNESUM-2026, ALU-2026-XXX, ECT-002)">
+    <div class="campo-ayuda" id="ayuda-codigo">💡 Use: <b>UNESUM-2026</b> (global), <b>ALU-2026-XXX</b> (personal), <b>ECT-002</b> (proyecto) o <b>DOCENTE-2026</b></div>
+
+    <button class="btn btn-orange" onclick="ingresar()" style="width:100%;padding:16px;font-size:16px;letter-spacing:2px">🚀 INGRESAR Y VER PROYECTO</button>
+
+    <div id="alerta-codigo"></div>
+  </div>
 </div>
 
-<div class="login-box">
-<h2>🔐 Ingreso a la plataforma</h2>
-<div class="rol-selector">
-<label class="titulo-rol">Seleccione su rol:</label>
-<div class="rol-opciones">
-<label class="rol-opcion activa" id="rol-estudiante">
-<input type="radio" name="rol" value="estudiante" checked onchange="cambiarRol()">
-👤 Estudiante
-</label>
-<label class="rol-opcion" id="rol-docente">
-<input type="radio" name="rol" value="docente" onchange="cambiarRol()">
-🎓 Docente
-</label>
-</div>
-</div>
-
-<input type="text" id="input-nombre" placeholder="Nombre completo">
-<input type="text" id="input-cedula" placeholder="Cédula / Matrícula">
-<input type="text" id="input-codigo" placeholder="Código del proyecto (ej: ECT-002)">
-<div class="campo-ayuda">💡 El docente le asignará un código. Ejemplos: ECT-001, ECT-002, AGUA-001</div>
-
-<button class="btn" onclick="ingresar()">🚀 INGRESAR Y VER PROYECTO</button>
-
-<div id="alerta-codigo"></div>
-</div>
-</div>
-
-<!-- PANTALLA 3: MENÚ PRINCIPAL -->
 <div id="pantalla-modulos" class="hidden">
-<div class="header">
-<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
-<div class="header-texto">
-<h1>📚 PLATAFORMA DE FORMACIÓN MODULAR</h1>
-<h2 id="saludo-estudiante"></h2>
-<h3>EL CONOCIMIENTO TRANSFORMA — Estructura I / Estructura II</h3>
-<p>Carrera de Ingeniería Civil — UNESUM</p>
-</div>
-<div class="header-imagenes">
-<img src="portada_estructural.png" alt="Portada" class="header-imagen">
-<img src="portada_estructural_2.png" alt="Portada 2" class="header-imagen-mini">
-</div>
-</div>
+  <div class="header">
+    <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+    <div class="header-texto">
+      <h1>📚 PLATAFORMA DE FORMACIÓN MODULAR</h1>
+      <h2 id="saludo-estudiante"></h2>
+      <h3>EL CONOCIMIENTO TRANSFORMA — 8 MÓDULOS</h3>
+      <p>Carrera de Ingeniería Civil — UNESUM</p>
+    </div>
+  </div>
 
-<!-- PROYECTO ASIGNADO -->
-<div id="proyecto-asignado-box"></div>
+  <div id="proyecto-asignado-box"></div>
 
-<!-- MÓDULOS -->
-<h2 class="seccion-titulo">📚 MÓDULOS DEL PROGRAMA</h2>
-<p class="seccion-subtitulo">6 módulos temáticos con evaluación por competencias</p>
-<div class="modulos-grid">
-<a href="modulo_01_inercia_equivalente.html" class="modulo-card">
-<div class="icon">🎯</div>
-<h3>M01 — Inercia Equivalente</h3>
-<div class="desc">Teorema de Steiner + Altura equivalente</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-<a href="modulo_02_calculo_cargas.html" class="modulo-card">
-<div class="icon">⚖️</div>
-<h3>M02 — Cálculo de Cargas</h3>
-<div class="desc">NEC-15 + ACI 318</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-<a href="modulo_03_viga_sismo.html" class="modulo-card">
-<div class="icon">🏗️</div>
-<h3>M03 — Viga + Sismo</h3>
-<div class="desc">Reacciones, cortantes, momentos</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-<a href="modulo_04_acero_cortante.html" class="modulo-card">
-<div class="icon">✂️</div>
-<h3>M04 — Acero a Cortante</h3>
-<div class="desc">Estribos + confinamiento</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-<a href="modulo_05_diseno_columna.html" class="modulo-card">
-<div class="icon">🏛️</div>
-<h3>M05 — Diseño de Columna</h3>
-<div class="desc">Flexo-compresión + P-M</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-<a href="modulo_06_diseno_losa.html" class="modulo-card">
-<div class="icon">🧱</div>
-<h3>M06 — Diseño de Losa</h3>
-<div class="desc">Nervios articulados + armadura</div>
-<div class="status">✅ 15 preguntas</div>
-</a>
-</div>
+  <h2 class="seccion-titulo">📚 MÓDULOS DEL PROGRAMA</h2>
+  <p class="seccion-subtitulo">8 módulos temáticos con evaluación por competencias</p>
 
-<!-- RECURSOS -->
-<h2 class="seccion-titulo">📚 RECURSOS DEL PROGRAMA</h2>
-<div class="recursos-grid">
-<a href="manual_programa.html" class="recurso-card" target="_blank">
-<div class="recurso-icon">📘</div>
-<div class="recurso-info"><h4>Manual del Programa</h4><p>Visión completa</p></div>
-</a>
-<a href="M01_guia_estudio.html" class="recurso-card" target="_blank">
-<div class="recurso-icon">📗</div>
-<div class="recurso-info"><h4>Guía de Estudio M01</h4><p>Material del estudiante</p></div>
-</a>
-<a href="tabla_nec15.html" class="recurso-card" target="_blank">
-<div class="recurso-icon">📄</div>
-<div class="recurso-info"><h4>Tabla NEC-15</h4><p>Cargas vivas y combinaciones</p></div>
-</a>
-<a href="tabla_aci318.html" class="recurso-card" target="_blank">
-<div class="recurso-icon">📄</div>
-<div class="recurso-info"><h4>Tabla ACI 318</h4><p>Factores de mayoración</p></div>
-</a>
-</div>
+  <div class="modulos-grid">
+    <a href="modulo_01_inercia_equivalente.html" class="modulo-card" style="--color-modulo:#3498db">
+      <span class="modulo-icon">🎯</span>
+      <h3>M01 — Inercia Equivalente</h3>
+      <div class="desc">Teorema de Steiner + Altura equivalente h_eq</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
 
-<!-- PIE -->
-<div class="pie-pagina">
-<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
-<p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
-<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
-</div>
+    <a href="modulo_02_calculo_cargas.html" class="modulo-card" style="--color-modulo:#f39c12">
+      <span class="modulo-icon">⚖️</span>
+      <h3>M02 — Cálculo de Cargas</h3>
+      <div class="desc">NEC-15 Tabla 9 + Combinación 1.2D + 1.6L</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
 
-<div class="cita-final">
-"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."<br>
-— Proyecto ECT-UNESUM-2026
-</div>
+    <a href="modulo_03_viga_sismo.html" class="modulo-card" style="--color-modulo:#f1c40f">
+      <span class="modulo-icon">🏗️</span>
+      <h3>M03 — Viga + Sismo</h3>
+      <div class="desc">Reacciones, cortantes, momentos, diagrama mariposa</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
+
+    <a href="modulo_04_acero_cortante.html" class="modulo-card" style="--color-modulo:#e74c3c">
+      <span class="modulo-icon">✂️</span>
+      <h3>M04 — Viga Resiliente</h3>
+      <div class="desc">Flexión + cortante, estribos, confinamiento</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
+
+    <a href="modulo_05_diseno_columna.html" class="modulo-card" style="--color-modulo:#9b59b6">
+      <span class="modulo-icon">🏛️</span>
+      <h3>M05 — Diseño de Columna</h3>
+      <div class="desc">Flexo-compresión + Diagrama P-M</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
+
+    <a href="modulo_06_diseno_losa.html" class="modulo-card" style="--color-modulo:#2ecc71">
+      <span class="modulo-icon">🧱</span>
+      <h3>M06 — Diseño de Losa</h3>
+      <div class="desc">Losa alivianada + nervios articulados + armadura</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
+
+    <a href="modulo_07_analisis_dinamico.html" class="modulo-card" style="--color-modulo:#16a085">
+      <span class="modulo-icon">📈</span>
+      <h3>M07 — Análisis Dinámico Modal</h3>
+      <div class="desc">K, M, ω, T + Kalman + Phyphox + Monte Carlo</div>
+      <div class="status">✅ 15 preguntas</div>
+    </a>
+
+    <div class="modulo-card m08">
+      <span class="modulo-icon">🧠</span>
+      <h3>M08 — Análisis Estocástico y Contribución Doctoral</h3>
+      <div class="desc">Monte Carlo + Markov + IA + DMTP — 3 fases formativas</div>
+      <div class="status">✅ 45 preguntas · 3 fases</div>
+
+      <div class="fases-inner">
+        <a href="M08_F1_guia_estudio.html" class="fase-btn f1">
+          <div class="fase-icon">📘</div>
+          <div class="fase-info">
+            <div class="fase-titulo">F1 — Análisis Estocástico Formativo</div>
+            <div class="fase-desc">Monte Carlo + Markov + Confiabilidad</div>
+          </div>
+        </a>
+        <a href="M08_F2_guia_estudio.html" class="fase-btn f2">
+          <div class="fase-icon">📗</div>
+          <div class="fase-info">
+            <div class="fase-titulo">F2 — Modelos Predictivos Aplicados</div>
+            <div class="fase-desc">Luces 6 m + REDi™ + Territorial</div>
+          </div>
+        </a>
+        <a href="M08_F3_guia_estudio.html" class="fase-btn f3">
+          <div class="fase-icon">📕</div>
+          <div class="fase-info">
+            <div class="fase-titulo">F3 — Contribución Doctoral DMTP + IA</div>
+            <div class="fase-desc">RNA + XGBoost + PCA + DMTP</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="seccion-titulo">🗺️ RECORRIDO FORMATIVO</h2>
+  <p class="seccion-subtitulo">De la inercia al análisis estocástico doctoral: 8 módulos en 17 semanas</p>
+
+  <div class="timeline">
+    <div class="timeline-hito"><div class="timeline-circle">M01</div><div class="timeline-label">Inercia<br>Sem 3-4</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M02</div><div class="timeline-label">Cargas<br>Sem 5-6</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M03</div><div class="timeline-label">Viga<br>Sem 7-9</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M04</div><div class="timeline-label">Cortante<br>Sem 10-11</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M05</div><div class="timeline-label">Columna<br>Sem 12-14</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M06</div><div class="timeline-label">Losa<br>Sem 15-16</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle">M07</div><div class="timeline-label">Dinámico<br>Sem 17</div></div>
+    <div class="timeline-line"></div>
+    <div class="timeline-hito"><div class="timeline-circle m08">M08</div><div class="timeline-label">Estocástico<br>+ Doctoral</div></div>
+  </div>
+
+  <h2 class="seccion-titulo">📊 MÉTRICAS DEL PROGRAMA</h2>
+  <p class="seccion-subtitulo">Todo lo que el estudiante aprenderá</p>
+
+  <div class="metricas-grid">
+    <div class="metrica-card"><div class="metrica-num" data-target="8">0</div><div class="metrica-label">MÓDULOS</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="150">0</div><div class="metrica-label">PREGUNTAS</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="72">0</div><div class="metrica-label">ALGORITMOS PYTHON</div></div>
+    <div class="metrica-card"><div class="metrica-num" data-target="3">0</div><div class="metrica-label">FASES FORMATIVAS</div></div>
+  </div>
+
+  <h2 class="seccion-titulo">📖 RECURSOS DEL PROGRAMA</h2>
+  <p class="seccion-subtitulo">Material de consulta y apoyo</p>
+
+  <div class="recursos-grid">
+    <a href="manual_programa.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">📘</div>
+      <div class="recurso-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto</p></div>
+    </a>
+    <a href="M01_guia_estudio.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">📗</div>
+      <div class="recurso-info"><h4>Guía de Estudio M01</h4><p>Material del estudiante</p></div>
+    </a>
+    <a href="tabla_nec15.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">📄</div>
+      <div class="recurso-info"><h4>Tabla NEC-15</h4><p>Cargas vivas y combinaciones</p></div>
+    </a>
+    <a href="tabla_aci318.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">📄</div>
+      <div class="recurso-info"><h4>Tabla ACI 318</h4><p>Factores de mayoración</p></div>
+    </a>
+    <a href="portafolio_docente.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">👨‍🏫</div>
+      <div class="recurso-info"><h4>Portafolio Docente</h4><p>Producción científica</p></div>
+    </a>
+    <a href="bibliografia.html" class="recurso-card" target="_blank">
+      <div class="recurso-icon">📚</div>
+      <div class="recurso-info"><h4>Bibliografía</h4><p>Referencias verificables</p></div>
+    </a>
+  </div>
+
+  <div class="pie-pagina">
+    <p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+    <p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
+    <p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+  </div>
+
+  <div class="cita-final">
+    "Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."<br>
+    — Proyecto ECT-UNESUM-2026
+  </div>
 
 </div>
 </div>
 
 <script>
-// ============================================================
-// BASE DE DATOS DE PROYECTOS (integrada en el index.html)
-// ============================================================
-var PROYECTOS = {
-  "ECT-001": {
-    nombre: "U.E. Fiscal Alejo Lascano",
-    amie: "13H04545",
-    parroquia: "Jipijapa",
-    sector: "Urbano",
-    lat: -1.3486,
-    lon: -80.5789,
-    prioridad: "Alta",
-    tipo: "Centro Académico"
-  },
-  "ECT-002": {
-    nombre: "Escuela Presidente Urbina",
-    amie: "13H04567",
-    parroquia: "La Unión",
-    sector: "Agua Dulce",
-    lat: -1.0529420,
-    lon: -80.0704134,
-    prioridad: "Alta",
-    tipo: "Centro Académico",
-    estudiantes: 9,
-    docentes: 1,
-    destacado: true
-  },
-  "ECT-003": {
-    nombre: "U.E. Quince de Octubre",
-    amie: "POR_CONFIRMAR",
-    parroquia: "Jipijapa",
-    sector: "Urbano",
-    lat: -1.3573,
-    lon: -80.5835,
-    prioridad: "Alta",
-    tipo: "Centro Académico"
-  },
-  "ECT-004": {
-    nombre: "U.E. Manuel Inocencio Parrales y Guale",
-    amie: "POR_CONFIRMAR",
-    parroquia: "Jipijapa",
-    sector: "Urbano",
-    lat: -1.3561,
-    lon: -80.5963,
-    prioridad: "Alta",
-    tipo: "Centro Académico"
-  },
-  "ECT-005": {
-    nombre: "U.E. Daniel López",
-    amie: "13H01951",
-    parroquia: "Jipijapa",
-    sector: "Urbano",
-    lat: -1.3480,
-    lon: -80.5741,
-    prioridad: "Alta",
-    tipo: "Centro Académico"
-  },
-  "AGUA-001": {
-    nombre: "Escuela Presidente Urbina (Agua Dulce)",
-    amie: "13H04567",
-    parroquia: "La Unión",
-    sector: "Agua Dulce",
-    lat: -1.0529420,
-    lon: -80.0704134,
-    prioridad: "Alta",
-    tipo: "Centro Académico — Territorio Piloto",
-    estudiantes: 9,
-    docentes: 1,
-    destacado: true,
-    es_piloto: true
+(function(){
+  const fondo = document.getElementById('fondo');
+  const total = 30;
+  for(let i = 0; i < total; i++){
+    const p = document.createElement('div');
+    p.className = 'particula';
+    const size = Math.random() * 4 + 2;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    fondo.appendChild(p);
   }
+})();
+
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    document.getElementById('loader').classList.add('oculto');
+  }, 2500);
+});
+
+var PROYECTOS = {
+  "ECT-001": {nombre:"U.E. Fiscal Alejo Lascano", amie:"13H04545", parroquia:"Jipijapa", sector:"Urbano", prioridad:"Alta", tipo:"Centro Académico"},
+  "ECT-002": {nombre:"Escuela Presidente Urbina", amie:"13H04567", parroquia:"La América", sector:"Agua Dulce", prioridad:"Alta", tipo:"Centro Académico", estudiantes:9, docentes:1, destacado:true},
+  "ECT-003": {nombre:"U.E. Quince de Octubre", amie:"POR_CONFIRMAR", parroquia:"Jipijapa", sector:"Urbano", prioridad:"Alta", tipo:"Centro Académico"},
+  "ECT-004": {nombre:"U.E. Manuel Inocencio Parrales y Guale", amie:"POR_CONFIRMAR", parroquia:"Jipijapa", sector:"Urbano", prioridad:"Alta", tipo:"Centro Académico"},
+  "ECT-005": {nombre:"U.E. Daniel López", amie:"13H01951", parroquia:"Jipijapa", sector:"Urbano", prioridad:"Alta", tipo:"Centro Académico"},
+  "AGUA-001": {nombre:"Escuela Presidente Urbina (Agua Dulce)", amie:"13H04567", parroquia:"La América", sector:"Agua Dulce", prioridad:"Alta", tipo:"Territorio Piloto", estudiantes:9, docentes:1, destacado:true, es_piloto:true}
 };
 
-// ============================================================
-// CAMBIAR ROL
-// ============================================================
+var CODIGOS_ACCESO = {
+  "UNESUM-2026": {tipo:"global", nombre:"Acceso General UNESUM", rol:"estudiante", valido:true, proyecto_default:"ECT-002"},
+  "DOCENTE-2026": {tipo:"docente", nombre:"Ing. Gery Lorenzo Marcillo Merino, Msc.", rol:"docente", valido:true}
+};
+
+var NOMBRES_ESTUDIANTES = [
+  "Estudiante 001","Estudiante 002","Estudiante 003","Estudiante 004","Estudiante 005",
+  "Estudiante 006","Estudiante 007","Estudiante 008","Estudiante 009","Estudiante 010",
+  "Estudiante 011","Estudiante 012","Estudiante 013","Estudiante 014","Estudiante 015",
+  "Estudiante 016","Estudiante 017","Estudiante 018","Estudiante 019","Estudiante 020",
+  "Estudiante 021","Estudiante 022","Estudiante 023","Estudiante 024","Estudiante 025",
+  "Estudiante 026","Estudiante 027","Estudiante 028","Estudiante 029","Estudiante 030",
+  "Estudiante 031","Estudiante 032","Estudiante 033","Estudiante 034","Estudiante 035"
+];
+
+for(var i = 0; i < NOMBRES_ESTUDIANTES.length; i++){
+  var num = (i + 1).toString().padStart(3, '0');
+  var codigo = "ALU-2026-" + num;
+  CODIGOS_ACCESO[codigo] = {
+    tipo: "estudiante",
+    nombre: NOMBRES_ESTUDIANTES[i],
+    paralelo: "A",
+    valido: true,
+    proyecto_default: "ECT-002"
+  };
+}
+
 function cambiarRol(){
   var rol = document.querySelector('input[name="rol"]:checked').value;
   var opEst = document.getElementById('rol-estudiante');
   var opDoc = document.getElementById('rol-docente');
+  var ayuda = document.getElementById('ayuda-codigo');
+  var inputCodigo = document.getElementById('input-codigo');
+  
   if(rol === 'docente'){
     opDoc.classList.add('activa');
     opEst.classList.remove('activa');
-    document.getElementById('input-codigo').placeholder = 'Modo docente — No requiere código';
+    inputCodigo.placeholder = 'Código docente (DOCENTE-2026)';
+    ayuda.innerHTML = '💡 Docente: use <b>DOCENTE-2026</b>';
   } else {
     opEst.classList.add('activa');
     opDoc.classList.remove('activa');
-    document.getElementById('input-codigo').placeholder = 'Código del proyecto (ej: ECT-002)';
+    inputCodigo.placeholder = 'Código de acceso (UNESUM-2026, ALU-2026-XXX, ECT-002)';
+    ayuda.innerHTML = '💡 Use: <b>UNESUM-2026</b> (global), <b>ALU-2026-XXX</b> (personal), <b>ECT-002</b> (proyecto)';
   }
 }
 
-// ============================================================
-// IR AL LOGIN
-// ============================================================
 function irAlLogin(){
   document.getElementById('pantalla-portada').classList.add('hidden');
   document.getElementById('pantalla-login').classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// ============================================================
-// INGRESAR
-// ============================================================
 function ingresar(){
   var rol = document.querySelector('input[name="rol"]:checked').value;
   var n = document.getElementById('input-nombre').value.trim();
@@ -427,83 +567,122 @@ function ingresar(){
     return;
   }
 
-  // Validar código (excepto docente)
+  if(!codigo){
+    alerta.innerHTML = '<div class="alerta-error">⚠️ Escriba el código de acceso</div>';
+    return;
+  }
+
   var proyecto = null;
-  if(rol === 'estudiante'){
-    if(!codigo){
-      alerta.innerHTML = '<div class="alerta-error">⚠️ Escriba el código del proyecto</div>';
+  var codigoInfo = null;
+
+  if(CODIGOS_ACCESO[codigo]){
+    codigoInfo = CODIGOS_ACCESO[codigo];
+    
+    if(rol === 'docente' && codigoInfo.tipo !== 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Este código no es de docente. Use DOCENTE-2026</div>';
       return;
     }
-    if(!PROYECTOS[codigo]){
-      alerta.innerHTML = '<div class="alerta-error">❌ Código "' + codigo + '" no encontrado. Verifique con su docente.</div>';
+    if(rol === 'estudiante' && codigoInfo.tipo === 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Este código es solo para docentes</div>';
+      return;
+    }
+
+    if(codigoInfo.tipo === 'docente'){
+      proyecto = {nombre:"Acceso Docente — Todos los proyectos", amie:"—", parroquia:"Jipijapa", sector:"Todos", tipo:"Docente"};
+    } else {
+      var codigoProyecto = codigoInfo.proyecto_default || "ECT-002";
+      proyecto = PROYECTOS[codigoProyecto] || PROYECTOS["ECT-002"];
+    }
+
+    var mensaje = '✅ Código válido: ' + codigo;
+    if(codigoInfo.tipo === 'estudiante') mensaje += ' (' + codigoInfo.nombre + ')';
+    if(codigoInfo.tipo === 'global') mensaje += ' (Acceso General)';
+    if(codigoInfo.tipo === 'docente') mensaje += ' (Docente)';
+    alerta.innerHTML = '<div class="alerta-ok">' + mensaje + '</div>';
+  }
+  else if(PROYECTOS[codigo]){
+    if(rol === 'docente'){
+      alerta.innerHTML = '<div class="alerta-error">❌ Los docentes usan DOCENTE-2026</div>';
       return;
     }
     proyecto = PROYECTOS[codigo];
-    alerta.innerHTML = '<div class="alerta-ok">✅ Código válido: ' + codigo + '</div>';
-  } else {
-    // Docente: acceso completo
-    proyecto = {
-      nombre: "Acceso Docente — Todos los proyectos",
-      amie: "—",
-      parroquia: "Jipijapa",
-      sector: "Todos",
-      prioridad: "—",
-      tipo: "Docente"
-    };
+    codigoInfo = {tipo:"proyecto", nombre:proyecto.nombre};
+    alerta.innerHTML = '<div class="alerta-ok">✅ Código de proyecto válido: ' + codigo + '</div>';
+  }
+  else {
+    alerta.innerHTML = '<div class="alerta-error">❌ Código "' + codigo + '" no encontrado<br><small style="font-size:11px">Pruebe: UNESUM-2026, ALU-2026-001, DOCENTE-2026 o ECT-002</small></div>';
+    return;
   }
 
-  // Guardar en localStorage
   localStorage.setItem('usuario_rol', rol);
   localStorage.setItem('estudiante_nombre', n);
   localStorage.setItem('estudiante_cedula', c);
-  localStorage.setItem('codigo_proyecto', codigo);
-  localStorage.setItem('proyecto_asignado', JSON.stringify(proyecto));
+  localStorage.setItem('codigo_acceso', codigo);
+  localStorage.setItem('tipo_codigo', codigoInfo.tipo);
+  if(codigoInfo.nombre) localStorage.setItem('codigo_nombre', codigoInfo.nombre);
+  if(codigoInfo.paralelo) localStorage.setItem('estudiante_paralelo', codigoInfo.paralelo);
 
-  // Cambiar de pantalla
   setTimeout(function(){
     document.getElementById('pantalla-login').classList.add('hidden');
     document.getElementById('pantalla-modulos').classList.remove('hidden');
-
-    var saludo = (rol === 'docente') ? '🎓 Docente Expositor: ' : '👤 Estudiante: ';
+    var saludo = (rol === 'docente') ? '🎓 Docente: ' : '👤 Estudiante: ';
     document.getElementById('saludo-estudiante').textContent = saludo + n;
-
-    mostrarProyecto(proyecto, codigo, rol);
+    mostrarProyecto(proyecto, codigo, rol, codigoInfo);
+    animarContadores();
+    window.scrollTo({top:0, behavior:'smooth'});
   }, 800);
 }
 
-// ============================================================
-// MOSTRAR PROYECTO ASIGNADO
-// ============================================================
-function mostrarProyecto(p, codigo, rol){
+function mostrarProyecto(p, codigo, rol, codigoInfo){
   var contenedor = document.getElementById('proyecto-asignado-box');
-  
   var html = '<div class="proyecto-box">';
   html += '<div class="proyecto-titulo">🎯 PROYECTO ASIGNADO</div>';
   html += '<div class="proyecto-nombre">' + p.nombre + '</div>';
   html += '<div class="proyecto-datos">';
   if(codigo) html += '<span class="proyecto-dato">🔑 ' + codigo + '</span>';
+  if(codigoInfo && codigoInfo.nombre && codigoInfo.tipo === 'estudiante') 
+    html += '<span class="proyecto-dato">👤 ' + codigoInfo.nombre + '</span>';
+  if(codigoInfo && codigoInfo.paralelo) 
+    html += '<span class="proyecto-dato">📚 Paralelo ' + codigoInfo.paralelo + '</span>';
   if(p.amie && p.amie !== '—') html += '<span class="proyecto-dato">📋 AMIE: ' + p.amie + '</span>';
   if(p.parroquia) html += '<span class="proyecto-dato">📍 ' + p.parroquia + '</span>';
   if(p.sector) html += '<span class="proyecto-dato">🏘️ ' + p.sector + '</span>';
-  if(p.prioridad && p.prioridad !== '—') html += '<span class="proyecto-dato">⚡ ' + p.prioridad + '</span>';
   if(p.estudiantes) html += '<span class="proyecto-dato">👥 ' + p.estudiantes + ' estudiantes</span>';
   if(p.docentes) html += '<span class="proyecto-dato">👨‍🏫 ' + p.docentes + ' docente</span>';
   html += '</div>';
   if(p.destacado){
-    html += '<div style="color:#f39c12;font-size:13px;font-weight:bold;margin-top:10px">⭐ TERRITORIO PILOTO DEL MODELO ESTOCÁSTICO</div>';
+    html += '<div style="color:#f39c12;font-size:13px;font-weight:bold;margin-top:12px">⭐ TERRITORIO PILOTO DEL MODELO ESTOCÁSTICO</div>';
   }
   html += '</div>';
-  
   contenedor.innerHTML = html;
 }
 
-// ============================================================
-// INICIALIZAR
-// ============================================================
+function animarContadores(){
+  var contadores = document.querySelectorAll('.metrica-num');
+  contadores.forEach(function(el){
+    var target = parseInt(el.getAttribute('data-target'));
+    var actual = 0;
+    var incremento = target / 40;
+    var timer = setInterval(function(){
+      actual += incremento;
+      if(actual >= target){
+        actual = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(actual);
+    }, 30);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
-  console.log('📋 Proyectos disponibles:', Object.keys(PROYECTOS).length);
-  console.log('🔑 Códigos:', Object.keys(PROYECTOS).join(', '));
+  console.log('🔑 Códigos disponibles:');
+  console.log('   • UNESUM-2026 (global)');
+  console.log('   • ALU-2026-001 ... ALU-2026-035 (estudiantes)');
+  console.log('   • DOCENTE-2026 (docente)');
+  console.log('   • ECT-001, ECT-002, AGUA-001 (proyectos)');
+  console.log('📋 Proyectos:', Object.keys(PROYECTOS).length);
+  console.log('📚 Módulos: M01 → M08 (M08 = 3 fases F1/F2/F3)');
 });
 </script>
 </body>
@@ -516,25 +695,26 @@ if __name__ == "__main__":
     with open(ruta, "w", encoding="utf-8") as f:
         f.write(HTML)
     print("=" * 70)
-    print("GENERADOR DEL INDEX.HTML - VERSIÓN CON DOS IMÁGENES")
+    print("GENERADOR DEL INDEX.HTML - VERSIÓN ACTUALIZADA CON M08")
     print("=" * 70)
     print(f"\n✅ Archivo generado: {ruta}")
     print("\n📊 Contenido del index.html:")
-    print("   • Portada con DOS imágenes: principal + secundaria")
-    print("   • Imagen principal: portada_estructural.png (400px)")
-    print("   • Imagen secundaria: portada_estructural_2.png (200px)")
-    print("   • Login con código del proyecto")
-    print("   • Validación de códigos integrada")
-    print("   • 6 Módulos (M01 → M06)")
-    print("   • 4 Recursos")
-    print("   • Sistema de códigos: ECT-001, ECT-002, AGUA-001")
+    print("   • Portada épica con partículas y loader")
+    print("   • Impronta humano × IA (DeepSeek)")
+    print("   • Login con 3 tipos de código")
+    print("   • 8 Módulos (M01 → M07 + M08 con 3 fases)")
+    print("   • M08 como card único con F1, F2, F3")
+    print("   • Timeline de 8 hitos")
+    print("   • Métricas actualizadas (150 preguntas, 72 algoritmos)")
+    print("   • 6 Recursos")
     print("\n🔑 CÓDIGOS DISPONIBLES:")
-    print("   • ECT-001 → U.E. Fiscal Alejo Lascano")
-    print("   • ECT-002 → Escuela Presidente Urbina ⭐")
-    print("   • ECT-003 → U.E. Quince de Octubre")
-    print("   • ECT-004 → U.E. Manuel Inocencio Parrales y Guale")
-    print("   • ECT-005 → U.E. Daniel López")
-    print("   • AGUA-001 → Escuela Presidente Urbina (Territorio Piloto)")
-    print("\n🚀 Ahora abra el index.html en el navegador:")
-    print(f"   {ruta}")
+    print("   • UNESUM-2026 → Acceso global")
+    print("   • ALU-2026-001 a 035 → Estudiantes")
+    print("   • DOCENTE-2026 → Docente")
+    print("   • ECT-001 a ECT-005 + AGUA-001 → Proyectos")
+    print("\n📚 MÓDULOS M08 (3 FASES):")
+    print("   • M08_F1 → Análisis Estocástico Formativo (azul)")
+    print("   • M08_F2 → Modelos Predictivos Aplicados (morado)")
+    print("   • M08_F3 → Contribución Doctoral DMTP + IA (rojo)")
+    print("\n🚀 Ejecutar con: python generar_index.py")
     print("=" * 70)

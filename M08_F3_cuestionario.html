@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>M08_F3 - Cuestionario Contribución Doctoral</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #c0392b;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#e67e22;font-size:24px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
+.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
+.progreso-bar{background:linear-gradient(90deg,#c0392b,#e67e22);height:100%;width:0%;transition:width 0.4s}
+.btn{background:linear-gradient(135deg,#c0392b,#922b21);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #c0392b}
+.badge{background:#c0392b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.badge.orange{background:#f39c12}
+.badge.red{background:#e74c3c}
+.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
+.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
+.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
+.ejercicio-previo .campo strong{color:#2ecc71}
+.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #c0392b}
+textarea{width:100%;min-height:150px;padding:15px;border:2px solid #c0392b;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
+.resultado{background:#2c3e50;border:3px solid #c0392b;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
+.puntaje-grande{font-size:60px;font-weight:bold;color:#e67e22;margin:15px 0}
+.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
+.c-insuf{background:#7f8c8d;color:white}
+.c-basico{background:#16a085;color:white}
+.c-comp{background:#f39c12;color:white}
+.c-dest{background:#e67e22;color:white}
+.c-excel{background:#c0392b;color:white}
+.certificado{background:white;color:#2c3e50;border:4px solid #c0392b;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
+.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
+.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
+.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
+.firma{text-align:center;min-width:220px}
+.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
+.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
+.modalidad{background:#f8f9fa;border:2px dashed #c0392b;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
+.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
+.modalidad ul{list-style:none}
+.modalidad li{padding:4px 0;font-size:13px}
+.qr-section{display:flex;justify-content:space-between;align-items:center;margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;gap:20px;flex-wrap:wrap}
+.qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
+.qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
+.condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
+.condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
+.condiciones-box ul{list-style:none;padding-left:0}
+.condiciones-box li{padding:5px 0 5px 25px;position:relative;font-size:13px;color:#ecf0f1}
+.condiciones-box li:before{content:"☐";position:absolute;left:0;color:#2ecc71;font-weight:bold}
+.ejemplo-valido-box{background:#1e1e2e;border-left:4px solid #c0392b;border-radius:8px;padding:15px;margin:15px 0}
+.ejemplo-valido-box h4{color:#e67e22;font-size:13px;margin-bottom:8px}
+.ejemplo-valido-box p{color:#bdc3c7;font-size:13px;font-style:italic;margin:0}
+.criterios-box{background:#34495e;border-radius:8px;padding:15px;margin-top:15px}
+.criterios-box h4{color:#f39c12;font-size:13px;margin-bottom:10px}
+.criterios-box ul{list-style:none;padding-left:0}
+.criterios-box li{padding:4px 0;font-size:12px;color:#ecf0f1}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>M08_F3 — CONTRIBUCIÓN DOCTORAL</h1>
+<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<!-- PANTALLA 1: ACÁPITE -->
+<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
+<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">ACÁPITE DE ESTUDIO — M08_F3</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.</p>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #c0392b">
+<h3 style="color:#e67e22;font-size:16px;margin-bottom:12px">¿Qué aprenderás?</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Diseñar el DMTP (50 cm, tensor-puntal)</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Aplicar RNA, RF, XGBoost, PCA</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Justificar éticamente Agua Dulce</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Predecir respuesta sísmica con IA</li>
+</ul>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
+<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">Fórmulas clave</h3>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#e67e22;text-align:center;font-size:14px">C = 2.378 t·s/m</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#e67e22;text-align:center;font-size:14px">F = 231.02 t</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">β_V = 10%</div>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">Ejemplo resuelto</h3>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>RNA:</b> R² = 0.9999, error &lt; 1%</p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>DMTP:</b> reduce deriva de 1.61% a 0.76%</p>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #c0392b">
+<h3 style="color:#e67e22;font-size:16px;margin-bottom:12px">Qué se espera en Bloque C (Interpretación)</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#c0392b">▸</span> Justificar R² > 0.99 como validación</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#c0392b">▸</span> Interpretar PCA en variables dominantes</li>
+</ul>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
+<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">Qué se espera en Bloque D (Decisión)</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Impacto técnico: deriva y P(colapso)</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Norma: NEC-15, REDi™, ASCE 7</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Ética: valor social de Agua Dulce</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Trazabilidad: documentar el DMTP</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
+</div>
+</div>
+
+<!-- PANTALLA 2: CONDICIONES -->
+<div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
+<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">CONDICIONES DE RESPUESTA VÁLIDA — M08_F3</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #c0392b">
+<h3 style="color:#e67e22;font-size:16px;margin-bottom:12px">CÓMO SE EVALÚA</h3>
+<table style="width:100%;border-collapse:collapse">
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque A:</b> Conceptos</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">10 pts</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque B:</b> Cálculo</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">40 pts</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque C:</b> Interpretación</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque D:</b> Decisión</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts</td></tr>
+</table>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">QUÉ ESPERA EL SISTEMA</h3>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque A — Concepto:</b> explica con tus palabras, cubre criterios.</p>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b> muestra procedimiento, unidades, resultado.</p>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b> concepto + número + norma.</p>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b> problema + norma + ética + documentación.</p>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #c0392b">
+<h3 style="color:#e67e22;font-size:16px;margin-bottom:12px">EJEMPLO DE RESPUESTA VÁLIDA</h3>
+<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Por qué Agua Dulce justifica una intervención doctoral?"</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">VÁLIDA: "Porque aunque tiene 9 estudiantes, el valor social y formativo es enorme. Intervenir ahí es un acto de ética profesional y justicia territorial."</p>
+<p style="color:#e74c3c;font-size:13px">NO VÁLIDA: "Porque es un pueblo."</p>
+</div>
+
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">ENTENDIDO, COMENZAR PREGUNTAS</button>
+</div>
+</div>
+
+<!-- PANTALLA 3: CUESTIONARIO -->
+<div id="cuestionario-preguntas" style="display:none">
+<div class="info-bar">
+<span>Estudiante: <b id="info-estudiante">Estudiante</b></span>
+<span>Tiempo: <b id="info-tiempo">00:00</b></span>
+<span>Progreso: <b id="info-progreso">0/15</b></span>
+</div>
+<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
+<div id="contenedor-pregunta"></div>
+<div id="pantalla-resultado" style="display:none">
+<div class="resultado">
+<h2>RESULTADO M08_F3</h2>
+<div class="puntaje-grande" id="resultado-puntaje"></div>
+<div id="resultado-clasificacion"></div>
+</div>
+<div id="contenedor-certificado"></div>
+<div style="text-align:center;margin-top:20px">
+<a href="index.html" class="btn">Volver al menú</a>
+<button class="btn btn-orange" onclick="window.print()">Imprimir certificado</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+var MODULO_ACAPITE = "M08_F3";
+var inicioTiempo = null;
+var intervalo = null;
+var respuestas = {};
+var preguntaActual = 0;
+
+function marcarAcapiteLeido() {
+  localStorage.setItem("acapite_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-acapite").style.display = "none";
+  document.getElementById("pantalla-condiciones").style.display = "block";
+}
+
+function marcarCondicionesLeidas() {
+  localStorage.setItem("condiciones_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-condiciones").style.display = "none";
+  document.getElementById("cuestionario-preguntas").style.display = "block";
+  mostrar();
+  iniciarCronometro();
+}
+
+function iniciarCronometro() {
+  if (intervalo) return;
+  inicioTiempo = new Date();
+  intervalo = setInterval(function(){
+    var s = Math.floor((new Date() - inicioTiempo) / 1000);
+    var m = Math.floor(s / 60).toString().padStart(2, '0');
+    var ss = (s % 60).toString().padStart(2, '0');
+    document.getElementById('info-tiempo').textContent = m + ':' + ss;
+  }, 1000);
+}
+
+var PREGUNTAS = [
+{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras qué es el DMTP y por qué se llama tensor-puntal.",
+condiciones:["Definir DMTP","Explicar tensor-puntal","Indicar función principal"],
+ejemplo_valido:"El DMTP es un disipador de fluido viscoso de 50 cm que trabaja a tracción. Se llama tensor-puntal porque funciona como tensor (cable/barra) y puntal (rigidizador) con rótulas.",
+criterios:[
+{peso:40,desc:"Define DMTP",keywords:["disipador","amortiguador","fluido","viscoso","50"]},
+{peso:30,desc:"Tensor-puntal",keywords:["tensor","puntal","tracción","traccion","rótula","rotula"]},
+{peso:30,desc:"Función",keywords:["disipa","energía","energia","protege","reduce"]}
+]},
+{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras qué es una Red Neuronal Artificial (RNA) y cómo se aplica a la predicción sísmica.",
+condiciones:["Definir RNA","Indicar entrada y salida","Conectar con predicción"],
+ejemplo_valido:"Una RNA es un modelo de aprendizaje que aprende de datos. Entrada: fc, cargas, dimensiones. Salida: T1, deriva. Predice la respuesta sin necesidad de recalcular el modelo físico.",
+criterios:[
+{peso:40,desc:"Define RNA",keywords:["red","neuronal","aprendizaje","modelo","datos"]},
+{peso:30,desc:"Entrada/salida",keywords:["entrada","salida","input","output","t1","deriva"]},
+{peso:30,desc:"Predicción",keywords:["predice","predicción","prediccion","estima","rápido","rapido"]}
+]},
+{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique la diferencia entre Random Forest y XGBoost, y cuál de los dos es más adecuado para este proyecto.",
+condiciones:["Mencionar RF como bagging","Mencionar XGBoost como boosting","Indicar cuál es más adecuado"],
+ejemplo_valido:"RF combina árboles en paralelo (bagging), XGBoost los entrena secuencialmente (boosting). XGBoost suele ser más preciso, pero ambos alcanzan R² > 0.99.",
+criterios:[
+{peso:30,desc:"RF bagging",keywords:["bagging","paralelo","bosque","random","forest"]},
+{peso:30,desc:"XGBoost boosting",keywords:["boosting","secuencial","gradiente","xgboost"]},
+{peso:40,desc:"Cuál es más adecuado",keywords:["xgboost","preciso","ambos","r2"]}
+]},
+{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique qué es PCA y por qué es útil en el análisis de 10,000 modelos Monte Carlo.",
+condiciones:["Definir PCA","Mencionar reducción de dimensionalidad","Indicar utilidad con 10,000 modelos"],
+ejemplo_valido:"PCA reduce muchas variables a pocas componentes principales. Con 10,000 modelos, PCA permite visualizar patrones y detectar variables dominantes sin perder información crítica.",
+criterios:[
+{peso:40,desc:"Define PCA",keywords:["componentes","principales","reducción","reduccion","pca"]},
+{peso:30,desc:"Dimensionalidad",keywords:["dimensionalidad","variables","dimensiones","reduce"]},
+{peso:30,desc:"Utilidad",keywords:["patrón","patron","visualiza","10,000","dominante"]}
+]},
+{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
+enunciado:"Si C_total = 2.378 t·s/m y hay 16 disipadores, calcule C unitario.",
+ejercicio:{instrucciones:"C_unit = C_total / N_total",campos:[{label:"C_total",valor:2.378},{label:"N_total",valor:16},{label:"C_unit (t·s/m)",valor:0.149}]},
+condiciones:["Mostrar procedimiento","Indicar unidades","Dar resultado"],
+ejemplo_valido:"C_unit = 2.378/16 = 0.149 t·s/m.",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["2.378","16","divide"]},
+{peso:50,desc:"Resultado",keywords:["0.149","0.1486"]}
+]},
+{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"La RNA tiene 7 entradas, 32 neuronas ocultas 1, 16 neuronas ocultas 2, 5 salidas. Calcule el número total de pesos (sin sesgos).",
+ejercicio:{instrucciones:"Pesos = 7·32 + 32·16 + 16·5",campos:[{label:"7·32",valor:224},{label:"32·16",valor:512},{label:"16·5",valor:80},{label:"Total",valor:816}]},
+condiciones:["Mostrar procedimiento","Indicar unidades (pesos)","Dar resultado"],
+ejemplo_valido:"7·32 = 224, 32·16 = 512, 16·5 = 80. Total = 816 pesos.",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["224","512","80","multiplica"]},
+{peso:50,desc:"Resultado",keywords:["816"]}
+]},
+{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Si R² = 0.9999 y el error es &lt; 1%, calcule el error absoluto esperado si T1 real = 0.389 s.",
+ejercicio:{instrucciones:"Error absoluto = 0.01 · T1_real",campos:[{label:"Error máx (%)",valor:1},{label:"T1 real (s)",valor:0.389},{label:"Error absoluto (s)",valor:0.00389}]},
+condiciones:["Mostrar procedimiento","Indicar unidades","Dar resultado"],
+ejemplo_valido:"Error absoluto = 0.01 · 0.389 = 0.00389 s (3.89 ms).",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["0.01","0.389","multiplica"]},
+{peso:50,desc:"Resultado",keywords:["0.00389","0.0039","3.89"]}
+]},
+{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Si el DMTP reduce la deriva de 1.61% a 0.76%, calcule la reducción porcentual.",
+ejercicio:{instrucciones:"Reducción = (d_sin - d_con) / d_sin · 100",campos:[{label:"d_sin (%)",valor:1.61},{label:"d_con (%)",valor:0.76},{label:"Reducción (%)",valor:52.8}]},
+condiciones:["Mostrar procedimiento","Indicar unidades","Dar resultado"],
+ejemplo_valido:"(1.61-0.76)/1.61·100 = 52.8%.",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["1.61","0.76","reduce"]},
+{peso:50,desc:"Resultado",keywords:["52.8","52.7","53"]}
+]},
+{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:10,
+enunciado:"Si el DMTP reduce la deriva en 52.8% y aumenta el MTTF de 50 a 120 sismos, calcule la mejora combinada como producto de ambas mejoras.",
+ejercicio:{instrucciones:"Mejora total = (1 + 0.528) · (120/50)",campos:[{label:"Mejora deriva",valor:1.528},{label:"Mejora MTTF",valor:2.4},{label:"Mejora total",valor:3.667}]},
+condiciones:["Mostrar procedimiento","Indicar unidades","Dar resultado"],
+ejemplo_valido:"Mejora total = 1.528 · 2.4 = 3.667, es decir 266.7% de mejora combinada.",
+criterios:[
+{peso:40,desc:"Factor deriva",keywords:["1.528","1.53"]},
+{peso:40,desc:"Factor MTTF",keywords:["2.4","120","50"]},
+{peso:20,desc:"Resultado total",keywords:["3.667","3.67","266"]}
+]},
+{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique por qué R² > 0.99 es considerado una validación exitosa de la RNA. Justifique técnicamente.",
+condiciones:["Explicar qué mide R²","Justificar por qué 0.99 es excelente","Conectar con confiabilidad"],
+ejemplo_valido:"R² mide cuánta varianza explica el modelo. R² > 0.99 significa que el modelo captura el 99% de la variabilidad. Eso valida la RNA para predicción.",
+criterios:[
+{peso:40,desc:"Qué mide R²",keywords:["varianza","explica","correlación","correlacion"]},
+{peso:30,desc:"Por qué 0.99 es excelente",keywords:["99","casi","perfecto","excelente"]},
+{peso:30,desc:"Confiabilidad",keywords:["confiable","predicción","prediccion","validación","validacion"]}
+]},
+{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Si PC1 explica 60% y PC2 25%, ¿qué significa y cómo se interpreta?",
+condiciones:["Interpretar varianza explicada","Mencionar variables dominantes","Conectar con reducción"],
+ejemplo_valido:"PC1 explica el 60% de la varianza, PC2 el 25%. Juntas explican 85%. Eso significa que dos componentes capturan la mayor parte del comportamiento.",
+criterios:[
+{peso:40,desc:"Varianza explicada",keywords:["60","25","85","varianza"]},
+{peso:30,desc:"Variables dominantes",keywords:["dominante","mayor","componente","pc1"]},
+{peso:30,desc:"Reducción",keywords:["reduce","dimensionalidad","2","componentes"]}
+]},
+{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique cómo el DMTP mejora simultáneamente el comportamiento estructural y la clasificación REDi™.",
+condiciones:["Mencionar reducción de deriva","Mencionar mejora en MTTF","Conectar con REDi™"],
+ejemplo_valido:"El DMTP reduce la deriva de 1.61% a 0.76% y aumenta el MTTF de 50 a 120 sismos. Eso mejora el downtime y clasifica como REDi Silver.",
+criterios:[
+{peso:40,desc:"Reducción deriva",keywords:["deriva","1.61","0.76","reduce"]},
+{peso:30,desc:"MTTF",keywords:["mttf","120","50","aumenta"]},
+{peso:30,desc:"REDi™",keywords:["redi","silver","base","clasificación","clasificacion"]}
+]},
+{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
+enunciado:"Explique por qué la combinación RNA + Monte Carlo + Markov es más potente que cualquiera de los tres por separado.",
+condiciones:["Explicar aporte de cada uno","Indicar sinergia","Justificar con números"],
+ejemplo_valido:"Monte Carlo da la incertidumbre, Markov la evolución del daño, RNA la predicción rápida. Juntos permiten diseñar con percentil 95 y predecir colapso con precisión.",
+criterios:[
+{peso:30,desc:"Monte Carlo",keywords:["monte carlo","incertidumbre","simulación","simulacion"]},
+{peso:30,desc:"Markov",keywords:["markov","degradación","degradacion","evolución","evolucion"]},
+{peso:40,desc:"Sinergia",keywords:["sinergia","juntos","combinación","combinacion","potente"]}
+]},
+{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
+enunciado:"Se propone publicar el DMTP como patente internacional. ¿Qué considera antes de hacerlo? Justifique técnica y éticamente.",
+condiciones:["Técnico: validar con más ensayos","Normativo: revisar normativa de patentes","Ético: acceso libre para países en desarrollo","Trazabilidad: documentar todo"],
+ejemplo_valido:"Antes de patentar, valido con ensayos experimentales, reviso normativa de patentes y considero licencia abierta para países en desarrollo. La ética manda: la resiliencia debe ser accesible.",
+criterios:[
+{peso:25,desc:"Técnico",keywords:["ensayo","experimental","validación","validacion"]},
+{peso:25,desc:"Normativo",keywords:["patente","normativa","legal","registro"]},
+{peso:25,desc:"Ético",keywords:["ético","etico","acceso","libre","desarrollo"]},
+{peso:25,desc:"Trazabilidad",keywords:["documentar","registrar","informe"]}
+]},
+{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
+enunciado:"El proyecto doctoral propone intervenir Agua Dulce con DMTP. Un evaluador externo cuestiona que '9 estudiantes no justifican la inversión'. ¿Qué responde usted?",
+condiciones:["Técnico: la estructura especial justifica protección","Normativo: NEC-15 y estructuras especiales","Ético: valor social y justicia territorial","Trazabilidad: documentar la justificación"],
+ejemplo_valido:"Respondo que la escuela es estructura especial con valor social. No se mide por volumen sino por impacto ético y formativo. Documento la justificación y defiendo la intervención.",
+criterios:[
+{peso:25,desc:"Técnico",keywords:["estructura especial","escuela","protección","proteccion"]},
+{peso:25,desc:"Normativo",keywords:["nec","redi","especial","norma"]},
+{peso:25,desc:"Ético",keywords:["ético","etico","social","justicia","valor"]},
+{peso:25,desc:"Trazabilidad",keywords:["documentar","justificar","defender","informe"]}
+]}
+];
+
+document.getElementById('info-estudiante').textContent = localStorage.getItem('estudiante_nombre') || 'Estudiante';
+
+function mostrar(){
+var p = PREGUNTAS[preguntaActual], total = PREGUNTAS.length;
+document.getElementById('barra-progreso').style.width = (preguntaActual/total*100) + '%';
+document.getElementById('info-progreso').textContent = (preguntaActual+1) + '/' + total;
+var h = '<div class="pregunta-box">';
+h += '<div class="pregunta-header"><span class="badge">Bloque ' + p.bloque + '</span><span class="badge orange">' + p.nivel + '</span><span class="badge red">' + p.puntaje + ' pts</span></div>';
+
+if(p.ejercicio){
+h += '<div class="ejercicio-previo"><h4>EJERCICIO PREVIO (Andamiaje)</h4><p>' + p.ejercicio.instrucciones + '</p>';
+p.ejercicio.campos.forEach(function(c){h += '<div class="campo"><span>' + c.label + '</span><strong>' + c.valor + '</strong></div>';});
+h += '</div>';
+}
+
+if(p.condiciones){
+h += '<div class="condiciones-box"><h4>CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
+p.condiciones.forEach(function(c){h += '<li>' + c + '</li>';});
+h += '</ul></div>';
+}
+
+if(p.ejemplo_valido){
+h += '<div class="ejemplo-valido-box"><h4>EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"' + p.ejemplo_valido + '"</p></div>';
+}
+
+h += '<div class="enunciado">' + p.enunciado + '</div>';
+h += '<textarea id="resp_' + p.id + '" placeholder="Escriba su respuesta aquí...">' + (respuestas[p.id]||'') + '</textarea>';
+
+if(p.criterios){
+h += '<div class="criterios-box"><h4>CRITERIOS DE EVALUACIÓN</h4><ul>';
+p.criterios.forEach(function(c){h += '<li>' + c.desc + ' (' + c.peso + '%)</li>';});
+h += '</ul></div>';
+}
+
+h += '<div class="nav-buttons">';
+h += (preguntaActual>0) ? '<button class="btn" onclick="ant()">Anterior</button>' : '<div></div>';
+h += (preguntaActual<total-1) ? '<button class="btn btn-green" onclick="sig()">Siguiente</button>' : '<button class="btn btn-orange" onclick="fin()">Finalizar</button>';
+h += '</div></div>';
+
+document.getElementById('contenedor-pregunta').innerHTML = h;
+}
+
+function guardar(){var p = PREGUNTAS[preguntaActual];var t = document.getElementById('resp_' + p.id);if(t) respuestas[p.id] = t.value;}
+function ant(){guardar();preguntaActual--;mostrar();}
+function sig(){guardar();preguntaActual++;mostrar();}
+
+function calcPts(){
+var total = 0, maxTotal = 0;
+PREGUNTAS.forEach(function(p){
+var r = (respuestas[p.id]||'').toLowerCase();
+var puntos = 0;
+if(p.criterios){
+p.criterios.forEach(function(c){
+var ok = false;
+c.keywords.forEach(function(k){if(r.indexOf(k.toLowerCase()) !== -1) ok = true;});
+if(ok) puntos += c.peso;
+});
+} else {
+puntos = r.length > 15 ? 50 : 0;
+}
+total += puntos * p.puntaje / 100;
+maxTotal += p.puntaje;
+});
+return (total/maxTotal)*100;
+}
+
+function clasificar(p){
+if(p<40) return {txt:'INSUFICIENTE',css:'c-insuf'};
+if(p<60) return {txt:'BÁSICO',css:'c-basico'};
+if(p<80) return {txt:'COMPETENTE',css:'c-comp'};
+if(p<95) return {txt:'DESTACADO',css:'c-dest'};
+return {txt:'EXCELENTE',css:'c-excel'};
+}
+
+function fin(){
+guardar(); clearInterval(intervalo); intervalo = null;
+var pts = calcPts(); var cl = clasificar(pts);
+document.getElementById('contenedor-pregunta').innerHTML = '';
+document.getElementById('pantalla-resultado').style.display = 'block';
+document.getElementById('resultado-puntaje').textContent = pts.toFixed(1) + ' / 100';
+document.getElementById('resultado-clasificacion').innerHTML = '<div class="clasif ' + cl.css + '">' + cl.txt + '</div>';
+localStorage.setItem('M08_F3_puntaje', pts);
+
+if(pts >= 60){
+var cod = 'UNESUM-M08_F3-2026-' + Math.random().toString(36).substring(2,10).toUpperCase();
+var fecha = new Date().toLocaleDateString('es-EC');
+var nombre = localStorage.getItem('estudiante_nombre') || '';
+var cedula = localStorage.getItem('estudiante_cedula') || '';
+var lugar = localStorage.getItem('estudiante_lugar') || '';
+document.getElementById('contenedor-certificado').innerHTML =
+'<div class="certificado">' +
+'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">' +
+'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>' +
+'<h3>CARRERA DE INGENIERÍA CIVIL</h3>' +
+'<hr style="margin:15px 0">' +
+'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>' +
+'<hr style="margin:15px 0">' +
+'<h3>CERTIFICADO DE APROBACIÓN</h3>' +
+'<h3>Módulo M08_F3 — Contribución Doctoral (DMTP e IA)</h3>' +
+'<p style="margin:15px 0">La Universidad certifica que:</p>' +
+'<h2 style="color:#2c3e50">' + nombre + '</h2>' +
+'<p>C.C. ' + cedula + '</p>' +
+'<p style="margin:10px 0"><b>Lugar de intervención:</b> ' + lugar + '</p>' +
+'<p style="margin:15px 0">ha completado satisfactoriamente el módulo con:</p>' +
+'<h2 style="color:#c0392b">' + pts.toFixed(1) + ' / 100</h2>' +
+'<p><b>Clasificación: ' + cl.txt + '</b></p>' +
+'<div class="modalidad">' +
+'<h4>MODALIDAD DE APROBACIÓN:</h4>' +
+'<ul><li>Insumos de Trabajo Autónomo (TA)</li><li>Prácticas Formativas de Aplicación y Experimentación (PFAE)</li></ul>' +
+'</div>' +
+'<div class="qr-section">' +
+'<img src="qr_m01.png" alt="QR" class="qr-img">' +
+'<div class="qr-datos">' +
+'<p><b>Código:</b> ' + cod + '</p>' +
+'<p><b>Fecha de emisión:</b> ' + fecha + '</p>' +
+'<p><b>Vigencia:</b> Permanente</p>' +
+'</div>' +
+'</div>' +
+'<div class="firmas">' +
+'<div class="firma"><div class="linea-firma"></div>' +
+'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>' +
+'<p>DOCENTE — ESTRUCTURA I / II</p>' +
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>' +
+'<div class="firma"><div class="linea-firma"></div>' +
+'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>' +
+'<p>COORDINADORA DE CARRERA</p>' +
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>' +
+'</div>' +
+'<hr style="margin:20px 0">' +
+'<p style="font-style:italic;font-size:13px">"La escuela que el sistema olvidó, la comunidad que la recuerda, la UNESUM que la recupera."</p>' +
+'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>' +
+'</div>';
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio M08_F3 - Contribución Doctoral DMTP e IA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #c0392b;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#e67e22;font-size:26px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #c0392b}
+.seccion h2{color:#e67e22;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
+.seccion ul{list-style:none;padding-left:0}
+.seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#e67e22;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:15px 0}
+.tabla th{background:#34495e;color:#e67e22;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
+.tabla tr:nth-child(even){background:#34495e}
+.ejemplo{background:#34495e;border-left:4px solid #2ecc71;border-radius:8px;padding:20px;margin:15px 0}
+.ejemplo h4{color:#2ecc71;margin-bottom:10px}
+.paso{background:#1e1e2e;border-left:3px solid #c0392b;padding:10px 15px;margin:10px 0;font-size:14px}
+.paso strong{color:#f39c12}
+.ejercicio{background:#34495e;border-left:4px solid #c0392b;border-radius:8px;padding:15px;margin:10px 0}
+.ejercicio h4{color:#e67e22;margin-bottom:8px;font-size:14px}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:8px;padding:15px;margin-bottom:20px}
+.indice h3{color:#f39c12;margin-bottom:10px}
+.indice ol{padding-left:20px}
+.indice li{padding:4px 0;font-size:14px}
+.indice a{color:#e67e22;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.btn{background:linear-gradient(135deg,#c0392b,#922b21);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.pie-pagina{text-align:center;margin-top:40px;padding:20px;border-top:2px solid #34495e;color:#7f8c8d;font-size:12px}
+.pie-pagina p{margin:5px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>GUÍA DE ESTUDIO - M08_F3</h1>
+<h2>CONTRIBUCIÓN DOCTORAL: DMTP E INTELIGENCIA ARTIFICIAL</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<div class="indice">
+<h3>ÍNDICE DE CONTENIDOS</h3>
+<ol>
+<li><a href="#presentacion">Presentación del módulo</a></li>
+<li><a href="#objetivos">Objetivos de aprendizaje</a></li>
+<li><a href="#teoria">Fundamento teórico</a></li>
+<li><a href="#formulas">Fórmulas clave</a></li>
+<li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#evaluacion">Sistema de evaluación</a></li>
+<li><a href="#ejercicios">Ejercicios de práctica</a></li>
+<li><a href="#conexion">Conexión con otros módulos</a></li>
+<li><a href="#acapite">Acápite de Estudio</a></li>
+<li><a href="#condiciones">Condiciones de Respuesta Válida</a></li>
+</ol>
+</div>
+
+<div class="seccion" id="presentacion">
+<h2>1. PRESENTACIÓN DEL MÓDULO</h2>
+<p>Este módulo representa la <strong>contribución doctoral</strong> del proyecto: el diseño del <strong>Disipador Marcillo Tensor-Puntal (DMTP)</strong> y la aplicación de <strong>inteligencia artificial</strong> para predicción sísmica.</p>
+<p>El DMTP es un amortiguador de fluido viscoso de 50 cm, único en el mundo, que se instala en las esquinas de la estructura y permite reparación directa sin reforzamiento extremo.</p>
+<p>Se complementa con <strong>Redes Neuronales (RNA)</strong>, <strong>Random Forest</strong>, <strong>XGBoost</strong> y <strong>PCA + Clustering</strong> para predicción estocástica avanzada.</p>
+<p>El contexto es Agua Dulce: 1 escuela, 9 estudiantes, 9 fenómenos adversos. La justificación es ética: la escuela que el sistema olvidó.</p>
+<p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
+</div>
+
+<div class="seccion" id="objetivos">
+<h2>2. OBJETIVOS DE APRENDIZAJE</h2>
+<h3>Objetivo general</h3>
+<p>Diseñar y justificar el DMTP, aplicando inteligencia artificial para predecir respuesta sísmica y aportar conocimiento original.</p>
+<h3>Objetivos específicos</h3>
+<ul>
+<li>Diseñar el DMTP con C, F, β_V y geometría específica</li>
+<li>Aplicar RNA para predecir T1, T2, deriva, Sa, β_V</li>
+<li>Aplicar Random Forest y XGBoost para comparar</li>
+<li>Aplicar PCA y clustering para identificar patrones</li>
+<li>Justificar éticamente la intervención en Agua Dulce</li>
+</ul>
+</div>
+
+<div class="seccion" id="teoria">
+<h2>3. FUNDAMENTO TEÓRICO</h2>
+<h3>3.1 Disipador Marcillo Tensor-Puntal (DMTP)</h3>
+<p>Amortiguador de fluido viscoso, 50 cm, sistema tensor-puntal, rótulas en extremos. Coeficiente C = 2.378 t·s/m, F = 231.02 t, β_V = 10%.</p>
+
+<h3>3.2 Red Neuronal Artificial (RNA)</h3>
+<p>Arquitectura 7-32-16-5. Entrada: fc, b_col, h_col, Cm, Cv, He, L. Salida: T1, T2, deriva, Sa, β_V. 500 épocas, lr = 0.01.</p>
+
+<h3>3.3 Random Forest y XGBoost</h3>
+<p>Ensemble de árboles. RF: 20 árboles, profundidad 10. XGBoost: 30 estimadores, lr = 0.1. Ambos alcanzan R² > 0.99.</p>
+
+<h3>3.4 PCA y Clustering</h3>
+<p>PCA reduce dimensionalidad. K-means y DBSCAN agrupan modelos por comportamiento similar.</p>
+
+<h3>3.5 Contexto ético</h3>
+<p>Agua Dulce: 1 escuela, 9 estudiantes, comunidad rural, 9 fenómenos adversos. La intervención no es por volumen poblacional sino por valor social y formativo.</p>
+</div>
+
+<div class="seccion" id="formulas">
+<h2>4. FÓRMULAS CLAVE</h2>
+<table class="tabla">
+<thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
+<tbody>
+<tr><td>Coeficiente DMTP</td><td>C = 2.378 t·s/m</td><td>t·s/m</td></tr>
+<tr><td>Fuerza DMTP</td><td>F = 231.02 t</td><td>t</td></tr>
+<tr><td>Amortiguamiento</td><td>β_V = 10%</td><td>—</td></tr>
+<tr><td>Arquitectura RNA</td><td>7-32-16-5</td><td>—</td></tr>
+<tr><td>Precisión RNA</td><td>R² > 0.9999</td><td>—</td></tr>
+<tr><td>Error RNA</td><td>&lt; 1%</td><td>%</td></tr>
+<tr><td>RF / XGBoost R²</td><td>&gt; 0.99</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="ejemplo">
+<h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
+
+<div class="ejemplo">
+<h4>Datos del DMTP</h4>
+<ul>
+<li>C = 2.378 t·s/m</li>
+<li>F = 231.02 t</li>
+<li>β_V = 10%</li>
+<li>N disipadores = 16 (4 por esquinero)</li>
+<li>L = 50 cm</li>
+</ul>
+</div>
+
+<div class="paso"><strong>PASO 1:</strong> Calcular C unitario: 2.378/16 = 0.149 t·s/m.</div>
+<div class="paso"><strong>PASO 2:</strong> Definir geometría: cilindro 30 cm, vástago 15 cm, rótula 5 cm.</div>
+<div class="paso"><strong>PASO 3:</strong> Entrenar RNA con 10,000 muestras Monte Carlo.</div>
+<div class="paso"><strong>PASO 4:</strong> Evaluar R² > 0.9999 y error &lt; 1%.</div>
+<div class="paso"><strong>PASO 5:</strong> Comparar con RF y XGBoost.</div>
+<div class="paso"><strong>PASO 6:</strong> Aplicar PCA para identificar variables dominantes.</div>
+
+<div class="ejemplo">
+<h4>Resultados</h4>
+<p>RNA: R² = 0.9999, error &lt; 1%.</p>
+<p>RF: R² = 0.998, XGBoost: R² = 0.999.</p>
+<p>PCA: PC1 explica ~60%, PC2 ~25%.</p>
+<p>DMTP reduce deriva de 1.61% a 0.76%.</p>
+</div>
+</div>
+
+<div class="seccion" id="evaluacion">
+<h2>6. SISTEMA DE EVALUACIÓN</h2>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts</td></tr>
+</tbody>
+</table>
+<p><strong>Rúbrica Bloques C y D:</strong> Técnico (25%), Normativo (25%), Ético (25%), Trazabilidad (25%).</p>
+</div>
+
+<div class="seccion" id="ejercicios">
+<h2>7. EJERCICIOS DE PRÁCTICA</h2>
+
+<div class="ejercicio">
+<h4>Ejercicio 1</h4>
+<p>Calcule C unitario si hay 16 disipadores.</p>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 2</h4>
+<p>¿Por qué la RNA con 7-32-16-5 es suficiente para este problema?</p>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 3</h4>
+<p>Compare RF vs XGBoost. ¿Cuál elige y por qué?</p>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 4</h4>
+<p>Si PC1 explica 60%, ¿qué significa?</p>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio 5</h4>
+<p>¿Por qué Agua Dulce justifica una intervención con DMTP?</p>
+</div>
+</div>
+
+<div class="seccion" id="conexion">
+<h2>8. CONEXIÓN CON OTROS MÓDULOS</h2>
+<table class="tabla">
+<thead><tr><th>Módulo</th><th>Aporta</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>M07</td><td>Análisis modal</td><td>Entrada determinista</td></tr>
+<tr><td>M08_F1</td><td>Base estocástica</td><td>Fundamento</td></tr>
+<tr><td>M08_F2</td><td>Modelos aplicados</td><td>Puente a IA</td></tr>
+<tr><td>M08_F3</td><td>DMTP + IA</td><td>Contribución original</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="seccion" id="acapite" style="border-left-color:#f39c12">
+<h2>9. ACÁPITE DE ESTUDIO</h2>
+<p><b>Revisa este resumen ejecutivo antes de responder el cuestionario.</b></p>
+
+<h3>¿Qué aprenderás?</h3>
+<ul>
+<li>Diseñar el DMTP (50 cm, tensor-puntal)</li>
+<li>Aplicar RNA, RF, XGBoost, PCA</li>
+<li>Justificar éticamente Agua Dulce</li>
+<li>Predecir respuesta sísmica con IA</li>
+</ul>
+
+<h3>Fórmulas clave</h3>
+<div class="formula">C = 2.378 t·s/m</div>
+<div class="formula">F = 231.02 t</div>
+<div class="formula formula-grande">β_V = 10%</div>
+
+<h3>Ejemplo resuelto</h3>
+<p>RNA: R² = 0.9999, error &lt; 1%.</p>
+<p>DMTP reduce deriva de 1.61% a 0.76%.</p>
+
+<h3>Qué se espera en el Bloque C</h3>
+<ul>
+<li>Justificar R² > 0.99 como validación</li>
+<li>Interpretar PCA en variables dominantes</li>
+</ul>
+
+<h3>Qué se espera en el Bloque D</h3>
+<ul>
+<li>Impacto técnico: deriva y P(colapso)</li>
+<li>Norma: NEC-15, REDi™, ASCE 7</li>
+<li>Ética: valor social de Agua Dulce</li>
+<li>Trazabilidad: documentar el DMTP como aporte original</li>
+</ul>
+</div>
+
+<div class="seccion" id="condiciones" style="border-left-color:#2ecc71">
+<h2>10. CONDICIONES DE RESPUESTA VÁLIDA</h2>
+<p>Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<h3>Cómo se evalúa</h3>
+<table class="tabla">
+<thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Conceptos</td><td>10 pts (criterios)</td></tr>
+<tr><td>B</td><td>Cálculo</td><td>40 pts (número exacto)</td></tr>
+<tr><td>C</td><td>Interpretación</td><td>25 pts (razonamiento)</td></tr>
+<tr><td>D</td><td>Decisión</td><td>25 pts (criterios + ética)</td></tr>
+</tbody>
+</table>
+
+<h3>Qué espera el sistema</h3>
+<p><b>Bloque A — Concepto:</b> explica con tus palabras, cubre criterios, admite sinónimos.</p>
+<p><b>Bloque B — Cálculo:</b> muestra procedimiento, indica unidades, da resultado.</p>
+<p><b>Bloque C — Interpretación:</b> concepto técnico + justificación numérica + conexión normativa.</p>
+<p><b>Bloque D — Decisión:</b> problema + norma + ética + documentación.</p>
+
+<h3>Ejemplo de respuesta válida</h3>
+<div class="ejemplo">
+<h4>Pregunta: "¿Por qué Agua Dulce justifica una intervención doctoral?"</h4>
+<p style="color:#2ecc71">VÁLIDA: "Porque aunque tiene 9 estudiantes, el valor social y formativo es enorme. Intervenir ahí es un acto de ética profesional y justicia territorial."</p>
+<p style="color:#e74c3c">NO VÁLIDA: "Porque es un pueblo."</p>
+</div>
+
+<div class="cita">
+"La escuela que el sistema olvidó, la comunidad que la recuerda, la UNESUM que la recupera."
+</div>
+</div>
+
+<div style="text-align:center;margin:30px 0">
+<a href="M08_F3_cuestionario.html" class="btn btn-orange">Ir al Cuestionario M08_F3</a>
+<a href="index.html" class="btn">Volver al menú</a>
+</div>
+
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II - Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí - PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+</div>
+
+</div>
+</body>
+</html>

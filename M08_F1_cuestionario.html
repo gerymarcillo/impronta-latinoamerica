@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>M08_F1 - Cuestionario Análisis Estocástico Formativo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
+.container{max-width:1100px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #3498db;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header-logo{height:70px}
+.header-texto{text-align:center;flex:1;min-width:300px}
+.header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
+.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
+.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
+.tab.active{background:linear-gradient(135deg,#3498db,#2980b9);border-color:#3498db;color:white}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
+.progreso-bar{background:linear-gradient(90deg,#2ecc71,#3498db);height:100%;width:0%;transition:width 0.4s}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
+.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
+.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
+.seccion ul{list-style:none;padding-left:0;margin:10px 0}
+.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px;line-height:1.6}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
+.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #3498db}
+.badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.badge.orange{background:#f39c12}
+.badge.red{background:#e74c3c}
+.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
+.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
+.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
+.ejercicio-previo .campo strong{color:#2ecc71}
+.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #3498db}
+textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
+.rubrica{background:#34495e;border-radius:8px;padding:15px;margin-top:15px;font-size:12px}
+.rubrica h4{color:#f39c12;margin-bottom:10px}
+.rubrica ul{list-style:none}
+.rubrica li{padding:4px 0}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
+.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
+.puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
+.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
+.c-insuf{background:#7f8c8d;color:white}
+.c-basico{background:#16a085;color:white}
+.c-comp{background:#f39c12;color:white}
+.c-dest{background:#e67e22;color:white}
+.c-excel{background:#c0392b;color:white}
+.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
+.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
+.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
+.certificado code{background:#ecf0f1;padding:6px 12px;border-radius:6px;font-size:14px}
+.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
+.firma{text-align:center;min-width:220px}
+.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
+.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
+.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
+.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
+.modalidad ul{list-style:none}
+.modalidad li{padding:4px 0;font-size:13px}
+.qr-section{display:flex;justify-content:space-between;align-items:center;margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;gap:20px;flex-wrap:wrap}
+.qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
+.qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
+.qr-datos p{margin:5px 0}
+.condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
+.condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
+.condiciones-box ul{list-style:none;padding-left:0}
+.condiciones-box li{padding:5px 0 5px 25px;position:relative;font-size:13px;color:#ecf0f1}
+.condiciones-box li:before{content:"☐";position:absolute;left:0;color:#2ecc71;font-weight:bold}
+.ejemplo-valido-box{background:#1e1e2e;border-left:4px solid #3498db;border-radius:8px;padding:15px;margin:15px 0}
+.ejemplo-valido-box h4{color:#5dade2;font-size:13px;margin-bottom:8px}
+.ejemplo-valido-box p{color:#bdc3c7;font-size:13px;font-style:italic;margin:0}
+.criterios-box{background:#34495e;border-radius:8px;padding:15px;margin-top:15px}
+.criterios-box h4{color:#f39c12;font-size:13px;margin-bottom:10px}
+.criterios-box ul{list-style:none;padding-left:0}
+.criterios-box li{padding:4px 0;font-size:12px;color:#ecf0f1}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<div class="header-texto">
+<h1>M08_F1 — ANÁLISIS ESTOCÁSTICO FORMATIVO</h1>
+<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+</div>
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+</div>
+
+<!-- PANTALLA 1: ACÁPITE -->
+<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
+<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">ACÁPITE DE ESTUDIO — M08_F1</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.</p>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">¿Qué aprenderás?</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Simular variables aleatorias</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular distribución de T1</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Construir matriz de Markov</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Interpretar MTTF y P(colapso)</li>
+</ul>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
+<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">Fórmulas clave</h3>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">X ~ N(μ, σ)</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">π(k+1) = π(k) · P</div>
+<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">MTTF = (I - Q)⁻¹ · 1</div>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">Ejemplo resuelto</h3>
+<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> N = 5, T1_media = 0.389 s</p>
+<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> T1_std = 0.004 s → CV = 1.03% → P(T1>0.4) = 12%</p>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
+<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">Qué se espera en Bloque C (Interpretación)</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Explicar relación entre dispersión y riesgo</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Justificar con números</li>
+</ul>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
+<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">Qué se espera en Bloque D (Decisión)</h3>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Impacto técnico: diseño con percentil 95</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Norma: NEC-15</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Ética: reportar aunque sea desfavorable</li>
+<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> Trazabilidad: documentar</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
+</div>
+</div>
+
+<!-- PANTALLA 2: CONDICIONES -->
+<div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
+<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">CONDICIONES DE RESPUESTA VÁLIDA — M08_F1</h2>
+<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">CÓMO SE EVALÚA</h3>
+<table style="width:100%;border-collapse:collapse">
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque A:</b> Conceptos</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">10 pts (criterios)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque B:</b> Cálculo</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">40 pts (número exacto)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque C:</b> Interpretación</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (razonamiento)</td></tr>
+<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque D:</b> Decisión</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (criterios + ética)</td></tr>
+</table>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
+<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">QUÉ ESPERA EL SISTEMA</h3>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque A — Concepto:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Explica con tus palabras</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cubre los criterios indicados</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Muestra el procedimiento</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Indica unidades</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Da el resultado numérico</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Menciona el concepto técnico</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Justifica con números</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Conecta con otros módulos o normas</li>
+</ul>
+<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b></p>
+<ul style="list-style:none;padding-left:0">
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Identifica el problema técnico</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cita la norma aplicable</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Aplica criterio ético</li>
+<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Documenta tu decisión</li>
+</ul>
+</div>
+
+<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
+<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">EJEMPLO DE RESPUESTA VÁLIDA</h3>
+<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es la incertidumbre estructural?"</p>
+<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">VÁLIDA: "Es la variabilidad natural de las variables que definen la respuesta, como fc o cargas."</p>
+<p style="color:#e74c3c;font-size:13px">NO VÁLIDA: "No sé."</p>
+</div>
+
+<div style="text-align:center;margin-top:25px">
+<button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">ENTENDIDO, COMENZAR PREGUNTAS</button>
+</div>
+</div>
+
+<!-- PANTALLA 3: CUESTIONARIO -->
+<div id="cuestionario-preguntas" style="display:none">
+<div class="info-bar">
+<span>Estudiante: <b id="info-estudiante">Estudiante</b></span>
+<span>Tiempo: <b id="info-tiempo">00:00</b></span>
+<span>Progreso: <b id="info-progreso">0/15</b></span>
+</div>
+<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
+<div id="contenedor-pregunta"></div>
+<div id="pantalla-resultado" style="display:none">
+<div class="resultado">
+<h2>RESULTADO M08_F1</h2>
+<div class="puntaje-grande" id="resultado-puntaje"></div>
+<div id="resultado-clasificacion"></div>
+</div>
+<div id="contenedor-certificado"></div>
+<div style="text-align:center;margin-top:20px">
+<a href="index.html" class="btn">Volver al menú</a>
+<button class="btn btn-orange" onclick="window.print()">Imprimir certificado</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+var MODULO_ACAPITE = "M08_F1";
+var inicioTiempo = null;
+var intervalo = null;
+var respuestas = {};
+var preguntaActual = 0;
+
+function marcarAcapiteLeido() {
+  localStorage.setItem("acapite_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-acapite").style.display = "none";
+  document.getElementById("pantalla-condiciones").style.display = "block";
+}
+
+function marcarCondicionesLeidas() {
+  localStorage.setItem("condiciones_" + MODULO_ACAPITE + "_leido", "true");
+  document.getElementById("pantalla-condiciones").style.display = "none";
+  document.getElementById("cuestionario-preguntas").style.display = "block";
+  mostrar();
+  iniciarCronometro();
+}
+
+function iniciarCronometro() {
+  if (intervalo) return;
+  inicioTiempo = new Date();
+  intervalo = setInterval(function(){
+    var s = Math.floor((new Date() - inicioTiempo) / 1000);
+    var m = Math.floor(s / 60).toString().padStart(2, '0');
+    var ss = (s % 60).toString().padStart(2, '0');
+    document.getElementById('info-tiempo').textContent = m + ':' + ss;
+  }, 1000);
+}
+
+var PREGUNTAS = [
+{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras qué es la incertidumbre estructural y por qué es importante en el análisis sísmico.",
+condiciones:["Mencionar que es variabilidad natural","Relacionar con variables como fc o cargas","Conectar con el diseño sísmico"],
+ejemplo_valido:"Es la variabilidad natural de las variables que definen la respuesta, como fc o cargas. Es importante porque el diseño debe considerar esa variabilidad.",
+criterios:[
+{peso:40,desc:"Variabilidad natural",keywords:["variabilidad","varía","varia","incertidumbre","aleatorio"]},
+{peso:30,desc:"Variables de entrada",keywords:["fc","carga","cm","cv","dimensión","dimension"]},
+{peso:30,desc:"Diseño sísmico",keywords:["sísmico","sismico","diseño","diseno","estructura"]}
+]},
+{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
+enunciado:"Explique con sus palabras la diferencia entre análisis determinista y análisis estocástico.",
+condiciones:["Definir determinista","Definir estocástico","Dar ejemplo de cada uno"],
+ejemplo_valido:"El determinista usa un solo valor de cada variable. El estocástico usa distribuciones probabilísticas. Ejemplo: fc=210 es determinista; fc~N(210,31.5) es estocástico.",
+criterios:[
+{peso:33,desc:"Define determinista",keywords:["único","unico","solo","valor fijo","determinista"]},
+{peso:33,desc:"Define estocástico",keywords:["distribución","distribucion","probabilidad","aleatorio","estocástico","estocastico"]},
+{peso:34,desc:"Ejemplo",keywords:["fc","210","normal","ejemplo","carga"]}
+]},
+{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique con sus palabras en qué consiste el método de Monte Carlo aplicado a estructuras.",
+condiciones:["Mencionar generación de muestras aleatorias","Indicar que se calcula la respuesta por muestra","Conectar con estadísticas (media, desviación)"],
+ejemplo_valido:"Se generan N muestras aleatorias de fc y cargas. Para cada muestra se calcula la respuesta. Al final se obtienen estadísticas: media, desviación, percentiles.",
+criterios:[
+{peso:40,desc:"Muestras aleatorias",keywords:["muestras","aleatorias","simulaciones","n","random"]},
+{peso:30,desc:"Cálculo por muestra",keywords:["respuesta","calcula","cada","t1","deriva"]},
+{peso:30,desc:"Estadísticas",keywords:["media","desviación","desviacion","percentil","estadística","estadistica"]}
+]},
+{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
+enunciado:"Explique qué es una cadena de Markov y cómo se usa para modelar la degradación estructural.",
+condiciones:["Mencionar estados","Mencionar matriz de transición","Explicar la evolución π(k+1)=π(k)·P"],
+ejemplo_valido:"Es un modelo con estados (E0 a E4) y una matriz P que da probabilidades de transición. La degradación se modela aplicando π(k+1)=π(k)·P.",
+criterios:[
+{peso:30,desc:"Estados",keywords:["estado","e0","e1","e2","e3","e4"]},
+{peso:30,desc:"Matriz de transición",keywords:["matriz","transición","transicion","p"]},
+{peso:40,desc:"Evolución",keywords:["evolución","evolucion","pi","π","avanza","sismo"]}
+]},
+{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
+enunciado:"Si T1_media = 0.389 s y T1_CV = 1.03%, calcule T1_std.",
+ejercicio:{instrucciones:"T1_std = T1_media · CV",campos:[{label:"T1_media (s)",valor:0.389},{label:"CV",valor:0.0103},{label:"T1_std (s)",valor:0.004}]},
+condiciones:["Mostrar el procedimiento","Indicar unidades","Dar el resultado numérico"],
+ejemplo_valido:"T1_std = 0.389 · 0.0103 = 0.004 s",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["0.389","0.0103","multiplica","cv"]},
+{peso:50,desc:"Resultado",keywords:["0.004","0.0040"]}
+]},
+{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"En Monte Carlo con 5,000 simulaciones, T1_media = 0.39 s, T1_std = 0.008 s. Calcule el intervalo de confianza al 95% (P5 y P95) asumiendo distribución normal.",
+ejercicio:{instrucciones:"P5 = media - 1.645·std | P95 = media + 1.645·std",campos:[{label:"1.645·std",valor:0.0132},{label:"P5 (s)",valor:0.377},{label:"P95 (s)",valor:0.403}]},
+condiciones:["Mostrar procedimiento","Indicar unidades","Dar P5 y P95"],
+ejemplo_valido:"1.645·0.008 = 0.0132. P5 = 0.39 - 0.0132 = 0.377 s. P95 = 0.39 + 0.0132 = 0.403 s.",
+criterios:[
+{peso:40,desc:"Calcula P5",keywords:["0.377","0.3768"]},
+{peso:40,desc:"Calcula P95",keywords:["0.403","0.4032"]},
+{peso:20,desc:"Muestra procedimiento",keywords:["1.645","std","media"]}
+]},
+{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"En una matriz de Markov, P(E0→E0) = 0.85 y P(E0→E1) = 0.10. Calcule P(E0→E2), P(E0→E3), P(E0→E4).",
+ejercicio:{instrucciones:"Σ P(E0→Ej) = 1",campos:[{label:"Suma E0→E1 a E4",valor:0.15},{label:"P(E0→E2)",valor:0.03},{label:"P(E0→E3)",valor:0.015},{label:"P(E0→E4)",valor:0.005}]},
+condiciones:["Mostrar la suma","Dar cada probabilidad","Verificar que suman 1"],
+ejemplo_valido:"0.85 + 0.10 + P(E0→E2) + P(E0→E3) + P(E0→E4) = 1. Suma pendiente = 0.05. Distribuir proporcionalmente: E2=0.03, E3=0.015, E4=0.005.",
+criterios:[
+{peso:40,desc:"Suma pendiente",keywords:["0.05","1","suma"]},
+{peso:40,desc:"Probabilidades asignadas",keywords:["0.03","0.015","0.005"]},
+{peso:20,desc:"Verifica suma 1",keywords:["1.0","suman","verifica"]}
+]},
+{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Calcule el MTTF desde E0 si la submatriz Q tiene fila E0 = [0.85, 0.10, 0.03, 0.015]. Use MTTF = (I - Q)⁻¹ · 1.",
+ejercicio:{instrucciones:"MTTF es la inversa de (I-Q) multiplicada por vector de unos",campos:[{label:"1 - Q(E0,E0)",valor:0.15},{label:"Suma fila Q(E0)",valor:0.995},{label:"MTTF desde E0",valor:50}]},
+condiciones:["Mostrar la matriz I - Q","Indicar el procedimiento","Dar el resultado"],
+ejemplo_valido:"I - Q(E0) = [0.15, -0.10, -0.03, -0.015]. Aplicando la inversa al vector de unos se obtiene MTTF≈50 sismos.",
+criterios:[
+{peso:40,desc:"Plantea I - Q",keywords:["0.15","i-q","matriz"]},
+{peso:30,desc:"Procedimiento",keywords:["inversa","unos","solve"]},
+{peso:30,desc:"Resultado MTTF",keywords:["50","49","48"]}
+]},
+{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
+enunciado:"Si P(E4) = 0.005 a 30 sismos y P(E4) = 0.12 a 50 años, calcule el incremento porcentual de riesgo.",
+ejercicio:{instrucciones:"Incremento = (P50 - P30) / P30 · 100",campos:[{label:"P50 - P30",valor:0.115},{label:"Incremento",valor:"2300%"}]},
+condiciones:["Mostrar el procedimiento","Indicar el resultado","Interpretar el incremento"],
+ejemplo_valido:"(0.12 - 0.005)/0.005 · 100 = 2300%. El riesgo crece de forma no lineal con el tiempo.",
+criterios:[
+{peso:50,desc:"Procedimiento",keywords:["0.12","0.005","incremento","diferencia"]},
+{peso:50,desc:"Resultado",keywords:["2300","23","%"]}
+]},
+{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique por qué un CV alto en T1 implica mayor riesgo estructural. Justifique con números y cite la norma aplicable.",
+ejercicio:null,
+condiciones:["Mencionar relación CV-riesgo","Justificar con números","Citar NEC-15 o ASCE 7"],
+ejemplo_valido:"Un CV alto implica mayor dispersión en T1. Si T1 puede salir del rango [P5, P95], la estructura puede resonar con el sismo. NEC-15 exige verificar con periodo dentro de rangos seguros.",
+criterios:[
+{peso:40,desc:"Relación CV-riesgo",keywords:["dispersión","dispersion","riesgo","variabilidad","resonancia"]},
+{peso:30,desc:"Justificación numérica",keywords:["cv","%","t1","p5","p95"]},
+{peso:30,desc:"Norma",keywords:["nec","asce","norma","7-10"]}
+]},
+{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique qué significa que el estado estacionario dé P(E4) = 45% en el escenario sin DMTP.",
+condiciones:["Interpretar estado estacionario","Explicar significado de P(E4)=45%","Conectar con el largo plazo"],
+ejemplo_valido:"Significa que a largo plazo, sin DMTP, el 45% del tiempo la estructura estaría en colapso. Es un resultado inaceptable.",
+criterios:[
+{peso:40,desc:"Estado estacionario",keywords:["largo plazo","estacionario","equilibrio"]},
+{peso:30,desc:"P(E4)=45%",keywords:["45","colapso","mitad"]},
+{peso:30,desc:"Consecuencia",keywords:["inaceptable","peligro","falla","riesgo"]}
+]},
+{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
+enunciado:"Explique cómo el DMTP modifica la matriz de transición y qué efecto tiene sobre MTTF.",
+condiciones:["Mencionar recuperación desde E1, E2, E3","Explicar aumento de MTTF","Conectar con resiliencia"],
+ejemplo_valido:"El DMTP añade transiciones de recuperación (E1→E0, E2→E1, E3→E2). Esto aumenta el MTTF porque la estructura tarda más en llegar a E4.",
+criterios:[
+{peso:40,desc:"Recuperación",keywords:["recuperación","recuperacion","e1","e2","e3","e0"]},
+{peso:30,desc:"Aumenta MTTF",keywords:["mttf","aumenta","mayor","mejora"]},
+{peso:30,desc:"Resiliencia",keywords:["resiliencia","recupera","vuelve"]}
+]},
+{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
+enunciado:"Compare el escenario sin DMTP vs con DMTP a 50 años. Explique la diferencia en P(colapso) y en MTTF. Justifique con números.",
+condiciones:["Comparar P(colapso)","Comparar MTTF","Justificar con números"],
+ejemplo_valido:"Sin DMTP P(colapso)=12%, con DMTP P(colapso)=0.5%. MTTF sin DMTP=50 sismos, con DMTP=120 sismos. La mejora es sustancial.",
+criterios:[
+{peso:30,desc:"P(colapso) comparada",keywords:["12","0.5","colapso","%"]},
+{peso:30,desc:"MTTF comparado",keywords:["50","120","mttf"]},
+{peso:40,desc:"Mejora sustancial",keywords:["mejora","reducción","reduccion","diferencia"]}
+]},
+{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
+enunciado:"El cliente pide reducir el número de simulaciones Monte Carlo de 10,000 a 100 para 'ahorrar tiempo'. ¿Aprueba? Justifique técnica y éticamente.",
+condiciones:["Técnico: 100 simulaciones no estabilizan la media","Normativo: citar NEC-15 o ASCE 7","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
+ejemplo_valido:"No apruebo. Con 100 simulaciones la media y desviación no son estables. NEC-15 exige percentiles confiables. Rechazo, documento y notifico por escrito.",
+criterios:[
+{peso:30,desc:"Técnico: estabilidad",keywords:["estabilidad","convergencia","100","poco","insuficiente"]},
+{peso:20,desc:"Normativo",keywords:["nec","asce","norma"]},
+{peso:25,desc:"Ético",keywords:["responsabilidad","etico","ético","firma"]},
+{peso:25,desc:"Trazabilidad",keywords:["documentar","notificar","informe"]}
+]},
+{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
+enunciado:"El constructor omite el DMTP argumentando 'no es obligatorio por NEC-15'. La estructura cumple NEC-15 pero no REDi Silver. ¿Qué hace usted?",
+condiciones:["Identificar el problema: NEC-15 vs REDi","Aplicar criterio técnico: seguridad de vidas","Aplicar ética: responsabilidad profesional","Documentar y notificar"],
+ejemplo_valido:"Aunque NEC-15 lo permita, la estructura queda en REDi Base. Notifico al cliente, documento el riesgo, recomiendo DMTP por seguridad de vidas. Como ingeniero, priorizo la ética.",
+criterios:[
+{peso:25,desc:"Problema",keywords:["nec","redi","silver","base","diferencia"]},
+{peso:25,desc:"Técnico",keywords:["seguridad","vida","colapso","resiliencia"]},
+{peso:25,desc:"Ético",keywords:["responsabilidad","etico","ético","profesional"]},
+{peso:25,desc:"Documentar",keywords:["documentar","notificar","informe","escrito"]}
+]}
+];
+
+document.getElementById('info-estudiante').textContent = localStorage.getItem('estudiante_nombre') || 'Estudiante';
+
+function mostrar(){
+var p = PREGUNTAS[preguntaActual], total = PREGUNTAS.length;
+document.getElementById('barra-progreso').style.width = (preguntaActual/total*100) + '%';
+document.getElementById('info-progreso').textContent = (preguntaActual+1) + '/' + total;
+var h = '<div class="pregunta-box">';
+h += '<div class="pregunta-header"><span class="badge">Bloque ' + p.bloque + '</span><span class="badge orange">' + p.nivel + '</span><span class="badge red">' + p.puntaje + ' pts</span></div>';
+
+if(p.ejercicio){
+h += '<div class="ejercicio-previo"><h4>EJERCICIO PREVIO (Andamiaje)</h4><p>' + p.ejercicio.instrucciones + '</p>';
+p.ejercicio.campos.forEach(function(c){h += '<div class="campo"><span>' + c.label + '</span><strong>' + c.valor + '</strong></div>';});
+h += '</div>';
+}
+
+if(p.condiciones){
+h += '<div class="condiciones-box"><h4>CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
+p.condiciones.forEach(function(c){h += '<li>' + c + '</li>';});
+h += '</ul></div>';
+}
+
+if(p.ejemplo_valido){
+h += '<div class="ejemplo-valido-box"><h4>EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"' + p.ejemplo_valido + '"</p></div>';
+}
+
+h += '<div class="enunciado">' + p.enunciado + '</div>';
+h += '<textarea id="resp_' + p.id + '" placeholder="Escriba su respuesta aquí...">' + (respuestas[p.id]||'') + '</textarea>';
+
+if(p.criterios){
+h += '<div class="criterios-box"><h4>CRITERIOS DE EVALUACIÓN</h4><ul>';
+p.criterios.forEach(function(c){h += '<li>' + c.desc + ' (' + c.peso + '%)</li>';});
+h += '</ul></div>';
+}
+
+h += '<div class="nav-buttons">';
+h += (preguntaActual>0) ? '<button class="btn" onclick="ant()">Anterior</button>' : '<div></div>';
+h += (preguntaActual<total-1) ? '<button class="btn btn-green" onclick="sig()">Siguiente</button>' : '<button class="btn btn-orange" onclick="fin()">Finalizar</button>';
+h += '</div></div>';
+
+document.getElementById('contenedor-pregunta').innerHTML = h;
+}
+
+function guardar(){var p = PREGUNTAS[preguntaActual];var t = document.getElementById('resp_' + p.id);if(t) respuestas[p.id] = t.value;}
+function ant(){guardar();preguntaActual--;mostrar();}
+function sig(){guardar();preguntaActual++;mostrar();}
+
+function calcPts(){
+var total = 0, maxTotal = 0;
+PREGUNTAS.forEach(function(p){
+var r = (respuestas[p.id]||'').toLowerCase();
+var puntos = 0;
+if(p.criterios){
+p.criterios.forEach(function(c){
+var ok = false;
+c.keywords.forEach(function(k){if(r.indexOf(k.toLowerCase()) !== -1) ok = true;});
+if(ok) puntos += c.peso;
+});
+} else {
+puntos = r.length > 15 ? 50 : 0;
+}
+total += puntos * p.puntaje / 100;
+maxTotal += p.puntaje;
+});
+return (total/maxTotal)*100;
+}
+
+function clasificar(p){
+if(p<40) return {txt:'INSUFICIENTE',css:'c-insuf'};
+if(p<60) return {txt:'BÁSICO',css:'c-basico'};
+if(p<80) return {txt:'COMPETENTE',css:'c-comp'};
+if(p<95) return {txt:'DESTACADO',css:'c-dest'};
+return {txt:'EXCELENTE',css:'c-excel'};
+}
+
+function fin(){
+guardar(); clearInterval(intervalo); intervalo = null;
+var pts = calcPts(); var cl = clasificar(pts);
+document.getElementById('contenedor-pregunta').innerHTML = '';
+document.getElementById('pantalla-resultado').style.display = 'block';
+document.getElementById('resultado-puntaje').textContent = pts.toFixed(1) + ' / 100';
+document.getElementById('resultado-clasificacion').innerHTML = '<div class="clasif ' + cl.css + '">' + cl.txt + '</div>';
+localStorage.setItem('M08_F1_puntaje', pts);
+
+if(pts >= 60){
+var cod = 'UNESUM-M08_F1-2026-' + Math.random().toString(36).substring(2,10).toUpperCase();
+var fecha = new Date().toLocaleDateString('es-EC');
+var nombre = localStorage.getItem('estudiante_nombre') || '';
+var cedula = localStorage.getItem('estudiante_cedula') || '';
+var lugar = localStorage.getItem('estudiante_lugar') || '';
+document.getElementById('contenedor-certificado').innerHTML =
+'<div class="certificado">' +
+'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">' +
+'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>' +
+'<h3>CARRERA DE INGENIERÍA CIVIL</h3>' +
+'<hr style="margin:15px 0">' +
+'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>' +
+'<hr style="margin:15px 0">' +
+'<h3>CERTIFICADO DE APROBACIÓN</h3>' +
+'<h3>Módulo M08_F1 — Análisis Estocástico Formativo</h3>' +
+'<p style="margin:15px 0">La Universidad certifica que:</p>' +
+'<h2 style="color:#2c3e50">' + nombre + '</h2>' +
+'<p>C.C. ' + cedula + '</p>' +
+'<p style="margin:10px 0"><b>Lugar de intervención:</b> ' + lugar + '</p>' +
+'<p style="margin:15px 0">ha completado satisfactoriamente el módulo con:</p>' +
+'<h2 style="color:#2ecc71">' + pts.toFixed(1) + ' / 100</h2>' +
+'<p><b>Clasificación: ' + cl.txt + '</b></p>' +
+'<div class="modalidad">' +
+'<h4>MODALIDAD DE APROBACIÓN:</h4>' +
+'<ul><li>Insumos de Trabajo Autónomo (TA)</li><li>Prácticas Formativas de Aplicación y Experimentación (PFAE)</li></ul>' +
+'</div>' +
+'<div class="qr-section">' +
+'<img src="qr_m01.png" alt="QR" class="qr-img">' +
+'<div class="qr-datos">' +
+'<p><b>Código:</b> ' + cod + '</p>' +
+'<p><b>Fecha de emisión:</b> ' + fecha + '</p>' +
+'<p><b>Vigencia:</b> Permanente</p>' +
+'</div>' +
+'</div>' +
+'<div class="firmas">' +
+'<div class="firma"><div class="linea-firma"></div>' +
+'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>' +
+'<p>DOCENTE — ESTRUCTURA I / II</p>' +
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>' +
+'<div class="firma"><div class="linea-firma"></div>' +
+'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>' +
+'<p>COORDINADORA DE CARRERA</p>' +
+'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>' +
+'</div>' +
+'<hr style="margin:20px 0">' +
+'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>' +
+'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>' +
+'</div>';
+}
+}
+</script>
+</body>
+</html>
