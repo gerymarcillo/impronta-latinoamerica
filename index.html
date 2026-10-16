@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -7,11 +8,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;overflow-x:hidden;position:relative}
-
 .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(93,173,226,0.12) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(243,156,18,0.08) 0%,transparent 60%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
 .particula{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(93,173,226,0.8) 0%,transparent 70%);animation:flotar linear infinite;opacity:0.4}
 @keyframes flotar{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.6}90%{opacity:0.6}100%{transform:translateY(-100px) scale(1);opacity:0}}
-
 #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0a0e1a,#141a2e);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
 #loader.oculto{opacity:0;visibility:hidden}
 .loader-logo{width:140px;animation:latido 2s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(93,173,226,0.8))}
@@ -22,9 +21,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 @keyframes cargar{0%{width:0%}100%{width:100%}}
 @keyframes brillar{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 .loader-frase{color:#bdc3c7;font-size:12px;font-style:italic;margin-top:20px;letter-spacing:2px}
-
 .container{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:1}
-
 .portada{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px}
 .portada-logo-glow{position:relative;margin-bottom:30px}
 .portada-logo-glow img{height:110px;filter:drop-shadow(0 0 50px rgba(93,173,226,0.6));animation:flotarLogo 4s ease-in-out infinite;position:relative;z-index:2}
@@ -36,10 +33,8 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .portada-territorio{display:inline-block;background:linear-gradient(135deg,rgba(22,160,133,0.2),rgba(93,173,226,0.2));border:1px solid rgba(93,173,226,0.4);border-radius:30px;padding:10px 24px;margin:25px 0 15px 0;color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;box-shadow:0 0 30px rgba(93,173,226,0.2)}
 .portada-area{display:inline-block;background:linear-gradient(135deg,rgba(155,89,182,0.2),rgba(22,160,133,0.2));border:1px solid rgba(155,89,182,0.5);border-radius:30px;padding:12px 28px;margin:15px 0;color:#c39bd3;font-size:14px;font-weight:bold;letter-spacing:2px;box-shadow:0 0 30px rgba(155,89,182,0.2);text-decoration:none;transition:all 0.3s}
 .portada-area:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(155,89,182,0.4)}
-
 .impronta-frase{color:#f39c12;font-style:italic;font-size:14px;margin:25px 0;padding:15px 25px;background:rgba(22,160,133,0.08);border-radius:12px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:800px;backdrop-filter:blur(10px);letter-spacing:1px}
 .impronta-frase span{color:#5dade2;font-weight:bold;font-style:normal}
-
 .impronta-portada{display:flex;gap:25px;margin:30px 0;flex-wrap:wrap;justify-content:center;align-items:center}
 .impronta-item{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:16px;border:1px solid rgba(93,173,226,0.2);min-width:300px}
 .impronta-item.humano{border-left:5px solid #5dade2}
@@ -52,22 +47,17 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .impronta-desc{color:#bdc3c7;font-size:12px;margin-bottom:3px}
 .impronta-link{color:#f39c12;font-size:11px;text-decoration:none;display:inline-block;margin-top:6px;padding:3px 10px;border:1px solid #f39c12;border-radius:6px}
 .impronta-divisor{font-size:32px;color:#f39c12;font-weight:bold}
-
 .portada-cita{color:#bdc3c7;font-size:13px;font-style:italic;max-width:750px;margin:20px 0;line-height:1.7}
 .portada-contexto{color:#5dade2;font-size:13px;font-style:italic;max-width:750px;line-height:1.8;margin-bottom:30px}
-
 .btn-epico{background:linear-gradient(135deg,#16a085,#5dade2,#f39c12);background-size:200% 200%;color:white;border:none;padding:20px 50px;border-radius:50px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:3px;margin:15px 8px;text-transform:uppercase;animation:gradienteTitulo 4s ease infinite;box-shadow:0 15px 50px rgba(93,173,226,0.4);transition:all 0.3s;text-decoration:none;display:inline-block}
 .btn-epico:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 25px 70px rgba(93,173,226,0.6)}
 .btn-epico.btn-explorar{background:linear-gradient(135deg,#9b59b6,#16a085);box-shadow:0 15px 50px rgba(155,89,182,0.4)}
-.btn-epico.btn-explorar:hover{box-shadow:0 25px 70px rgba(155,89,182,0.6)}
-
 .ventana-publica{min-height:100vh;padding:40px 20px;display:none}
 .ventana-publica.activa{display:block}
 .ventana-publica .titulo{text-align:center;margin-bottom:30px}
 .ventana-publica h1{color:#5dade2;font-size:36px;letter-spacing:3px;margin-bottom:15px}
 .ventana-publica h2{color:#f39c12;font-size:18px;font-weight:normal;margin-bottom:10px}
 .ventana-publica p{color:#bdc3c7;font-size:14px;font-style:italic}
-
 .info-area{background:linear-gradient(135deg,rgba(155,89,182,0.15),rgba(22,160,133,0.15));border:2px solid rgba(155,89,182,0.4);border-radius:16px;padding:25px;margin:25px 0;text-align:center}
 .info-area h3{color:#c39bd3;font-size:18px;margin-bottom:12px}
 .info-area p{color:#ecf0f1;font-size:14px;margin-bottom:10px}
@@ -75,13 +65,10 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .info-area .dato{background:rgba(10,14,26,0.6);padding:8px 16px;border-radius:20px;font-size:12px;color:#5dade2;font-weight:bold}
 .info-area a{background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;text-decoration:none;padding:10px 25px;border-radius:30px;font-size:13px;font-weight:bold;display:inline-block;margin-top:10px;transition:all 0.3s}
 .info-area a:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(46,204,113,0.4)}
-
 .filtros{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0}
 .filtro{background:rgba(20,26,46,0.7);border:2px solid rgba(93,173,226,0.3);color:#ecf0f1;padding:10px 20px;border-radius:30px;cursor:pointer;font-size:13px;font-weight:bold;transition:all 0.3s}
 .filtro:hover,.filtro.activo{border-color:#f39c12;background:rgba(243,156,18,0.2);color:#f39c12}
-
 .proyectos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;margin-top:30px}
-
 .proyecto-card{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);border-radius:16px;padding:25px;border:1px solid rgba(93,173,226,0.2);transition:all 0.4s;position:relative;overflow:hidden}
 .proyecto-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--color-tipo,#3498db)}
 .proyecto-card:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(93,173,226,0.3);border-color:var(--color-tipo,#3498db)}
@@ -95,10 +82,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .proyecto-card .acciones{display:flex;gap:10px;flex-wrap:wrap}
 .proyecto-card .btn-accion{flex:1;padding:10px 15px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:bold;text-align:center;transition:all 0.3s;border:none;cursor:pointer}
 .proyecto-card .btn-maps{background:linear-gradient(135deg,#2ecc71,#27ae60);color:white}
-.proyecto-card .btn-maps:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(46,204,113,0.4)}
-
 .botones-inferiores{text-align:center;margin:50px 0 20px 0}
-
 .login-box{background:rgba(20,26,46,0.7);backdrop-filter:blur(20px);border-radius:20px;padding:40px;max-width:600px;margin:60px auto;border:1px solid rgba(93,173,226,0.3);box-shadow:0 30px 80px rgba(0,0,0,0.5)}
 .login-box h2{color:#f39c12;margin-bottom:25px;font-size:24px;text-align:center;letter-spacing:2px}
 .login-box input[type="text"]{width:100%;padding:15px;margin:10px 0;border:2px solid rgba(93,173,226,0.3);border-radius:10px;background:rgba(10,14,26,0.8);color:#ecf0f1;font-size:15px}
@@ -110,33 +94,26 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .rol-opcion{flex:1;background:rgba(10,14,26,0.6);border:2px solid rgba(93,173,226,0.3);border-radius:10px;padding:14px;cursor:pointer;text-align:center;font-size:14px;transition:all 0.3s}
 .rol-opcion:hover{border-color:#5dade2}
 .rol-opcion.activa{border-color:#16a085;background:rgba(22,160,133,0.2);box-shadow:0 0 20px rgba(22,160,133,0.4)}
-
 .btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:14px 28px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:bold;margin:8px 4px;text-decoration:none;display:inline-block;transition:all 0.3s;letter-spacing:1px}
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(52,152,219,0.4)}
 .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
 .btn-volver{background:linear-gradient(135deg,#7f8c8d,#5d6d7e);color:white;border:none;padding:12px 30px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:bold;letter-spacing:2px;transition:all 0.3s}
-.btn-volver:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(127,140,141,0.4)}
-
 .alerta-error{background:rgba(192,57,43,0.8);color:white;padding:15px;border-radius:10px;margin:15px 0;text-align:center;font-weight:bold;border:1px solid #e74c3c}
 .alerta-ok{background:rgba(39,174,96,0.8);color:white;padding:15px;border-radius:10px;margin:15px 0;text-align:center;font-weight:bold;border:1px solid #2ecc71}
-
 .header{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);border-left:6px solid #f39c12;border-radius:16px;padding:25px;margin-bottom:25px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
 .header-logo{height:70px}
 .header-texto{text-align:center;flex:1;min-width:280px}
 .header h1{color:#5dade2;font-size:26px;margin-bottom:8px;letter-spacing:2px}
 .header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
 .header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
-
 .proyecto-box{background:linear-gradient(135deg,rgba(22,160,133,0.3),rgba(93,173,226,0.3));backdrop-filter:blur(15px);border-radius:16px;padding:30px;margin:25px 0;border:2px solid rgba(243,156,18,0.5);text-align:center}
 .proyecto-titulo{color:white;font-size:13px;font-weight:bold;letter-spacing:4px;margin-bottom:12px;opacity:0.9}
 .proyecto-nombre{color:white;font-size:24px;font-weight:bold;margin-bottom:15px}
 .proyecto-datos{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
 .proyecto-dato{background:rgba(0,0,0,0.3);padding:8px 16px;border-radius:20px;font-size:13px;color:white;font-weight:bold}
-
 .seccion-titulo{color:#f39c12;font-size:24px;text-align:center;margin:50px 0 10px 0;padding-bottom:15px;letter-spacing:3px;position:relative}
 .seccion-titulo::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:linear-gradient(90deg,transparent,#f39c12,transparent);border-radius:2px}
 .seccion-subtitulo{color:#bdc3c7;font-size:13px;text-align:center;margin-bottom:30px;font-style:italic;letter-spacing:1px}
-
 .modulos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px}
 .modulo-card{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:18px;padding:28px;text-decoration:none;color:#ecf0f1;display:block;transition:all 0.5s;position:relative;overflow:hidden;border:1px solid rgba(93,173,226,0.2)}
 .modulo-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;background:var(--color-modulo,#3498db)}
@@ -159,12 +136,9 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .fase-btn.f2 .fase-titulo{color:#c39bd3}
 .fase-btn.f3 .fase-titulo{color:#e67e22}
 .fase-desc{font-size:11px;color:#bdc3c7}
-
 .pie-pagina{text-align:center;margin-top:60px;padding:30px;border-top:2px solid rgba(93,173,226,0.2);color:#7f8c8d;font-size:12px}
 .cita-final{color:#f39c12;font-style:italic;font-size:13px;text-align:center;margin:30px auto;padding:25px;background:rgba(20,26,46,0.6);border-radius:14px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:850px;line-height:1.7}
-
 .hidden{display:none !important}
-
 @media(max-width:768px){
   .portada-titulo{font-size:32px;letter-spacing:3px}
   .portada-subtitulo{font-size:14px;letter-spacing:2px}
@@ -189,7 +163,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 
 <div class="container">
 
-<!-- PANTALLA 1: PORTADA -->
 <div id="pantalla-portada" class="portada">
   <div class="portada-logo-glow">
     <img src="portada_estructural.png" alt="Portada">
@@ -245,7 +218,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <button class="btn-epico" onclick="irAlLogin()">🚀 INGRESAR A LA PLATAFORMA</button>
   </div>
 </div>
-
 <!-- PANTALLA 1.5: VENTANA PÚBLICA -->
 <div id="ventana-publica" class="ventana-publica">
   <div class="titulo">
@@ -425,6 +397,19 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
     <p>Estructura I / Estructura II — Carrera de Ingeniería Civil — UNESUM — PI 2026</p>
     <p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;padding:25px;border-top:2px solid rgba(93,173,226,0.3);color:#7f8c8d;font-size:12px;letter-spacing:1px;background:rgba(20,26,46,0.4);border-radius:12px;">
+    <p style="color:#5dade2;font-weight:bold;font-size:13px;margin-bottom:10px;">PROYECTO REGISTRADO EN SENESCYT — REG-INV-25-08261</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Proyecto:</b> UNESUM-REZ-2026-JIPIJAPA-001</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Investigador:</b> Ing. Gery Lorenzo Marcillo Merino, Msc.</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">ORCID:</b> <a href="https://orcid.org/0009-0000-5583-0042" target="_blank" style="color:#5dade2;text-decoration:none;">https://orcid.org/0009-0000-5583-0042</a></p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Línea:</b> Estructuras e ingeniería de materiales</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Grupo:</b> Innovación en diseño y tecnología de estructuras resilientes</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Institución:</b> Universidad Estatal del Sur de Manabí (UNESUM)</p>
+    <p style="margin:5px 0;"><b style="color:#f39c12;">Laboratorio Vivo:</b> Agua Dulce — Escuela Presidente Urbina (AMIE 13H04567)</p>
+    <p style="color:#f39c12;font-style:italic;font-size:13px;margin-top:15px;">"La escuela que el sistema olvidó, la comunidad que la recuerda,<br>la UNESUM que la recupera. Vamos a cambiar la historia."</p>
+    <p style="margin-top:10px;font-size:11px;color:#7f8c8d;">© 2026 — Proyecto ECT-UNESUM-2026 | Todos los derechos reservados</p>
   </div>
 
   <div class="cita-final">
@@ -608,7 +593,6 @@ function ingresar(){
     alerta.innerHTML = '<div class="alerta-ok">✅ Acceso docente concedido</div>';
   }
   else if(esGlobal || esPersonal){
-    // SORTEO
     var claves = Object.keys(PROYECTOS);
     var aleatorio = claves[Math.floor(Math.random() * claves.length)];
     proyecto = PROYECTOS[aleatorio];
