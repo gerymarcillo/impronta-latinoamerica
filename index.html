@@ -31,9 +31,37 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .portada-subtitulo{font-size:18px;color:#ecf0f1;letter-spacing:4px;margin-bottom:12px;font-weight:300}
 .portada-descripcion{font-size:14px;color:#bdc3c7;letter-spacing:2px;margin-bottom:6px;font-style:italic}
 .portada-territorio{display:inline-block;background:linear-gradient(135deg,rgba(22,160,133,0.2),rgba(93,173,226,0.2));border:1px solid rgba(93,173,226,0.4);border-radius:30px;padding:10px 24px;margin:25px 0 15px 0;color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;box-shadow:0 0 30px rgba(93,173,226,0.2)}
-.portada-area{display:inline-block;background:linear-gradient(135deg,rgba(155,89,182,0.2),rgba(22,160,133,0.2));border:1px solid rgba(155,89,182,0.5);border-radius:30px;padding:12px 28px;margin:15px 0;color:#c39bd3;font-size:14px;font-weight:bold;letter-spacing:2px;box-shadow:0 0 30px rgba(155,89,182,0.2);text-decoration:none;transition:all 0.3s}
+.portada-area{display:inline-block;background:linear-gradient(135deg,rgba(155,89,182,0.2),rgba(22,160,133,0.2));border:1px solid rgba(155,89,182,0.5);border-radius:30px;padding:12px 28px;margin:15px 0;color:#c39bd3;font-size:14px;font-weight:bold;letter-spacing:2px;text-decoration:none;transition:all 0.3s}
 .portada-area:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(155,89,182,0.4)}
-.impronta-frase{color:#f39c12;font-style:italic;font-size:14px;margin:25px 0;padding:15px 25px;background:rgba(22,160,133,0.08);border-radius:12px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:800px;backdrop-filter:blur(10px);letter-spacing:1px}
+.objetivos-box{background:linear-gradient(135deg,rgba(224,168,0,0.12),rgba(22,160,133,0.12));border:2px solid rgba(224,168,0,0.5);border-radius:16px;padding:25px;margin:25px 0;max-width:900px;text-align:left}
+.objetivos-box h3{color:#E0A800;font-size:16px;margin-bottom:15px;letter-spacing:2px;text-align:center}
+.objetivos-box .general{background:rgba(10,14,26,0.6);border-left:4px solid #5dade2;padding:12px 18px;border-radius:8px;margin-bottom:12px;font-size:13px}
+.objetivos-box .general b{color:#5dade2}
+.objetivos-box ul{list-style:none;padding-left:0}
+.objetivos-box ul li{padding:8px 0 8px 25px;position:relative;font-size:13px;color:#ecf0f1;border-bottom:1px dashed rgba(93,173,226,0.2)}
+.objetivos-box ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.amenazas-box{background:linear-gradient(135deg,rgba(192,57,43,0.15),rgba(224,168,0,0.15));border:2px solid rgba(192,57,43,0.5);border-radius:16px;padding:25px;margin:25px 0;max-width:900px}
+.amenazas-box h3{color:#ff6b6b;font-size:16px;margin-bottom:15px;letter-spacing:2px;text-align:center}
+.amenazas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.amenaza-item{background:rgba(10,14,26,0.6);border:1px solid rgba(192,57,43,0.4);border-radius:8px;padding:10px;text-align:center;font-size:12px;color:#ecf0f1}
+.alerta-ducto{background:linear-gradient(135deg,rgba(192,57,43,0.25),rgba(224,168,0,0.2));border:3px solid #c0392b;border-radius:16px;padding:25px;margin:25px 0;max-width:900px;text-align:center;animation:pulsoAlerta 2s infinite}
+@keyframes pulsoAlerta{0%,100%{box-shadow:0 0 20px rgba(192,57,43,0.3)}50%{box-shadow:0 0 40px rgba(192,57,43,0.7)}}
+.alerta-ducto h3{color:#ff6b6b;font-size:18px;margin-bottom:12px;letter-spacing:2px}
+.alerta-ducto p{color:#ecf0f1;font-size:13px;margin-bottom:10px;line-height:1.7}
+.alerta-ducto .datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:15px 0}
+.alerta-ducto .dato{background:rgba(10,14,26,0.7);border:1px solid #c0392b;border-radius:8px;padding:10px}
+.alerta-ducto .dato .label{color:#f39c12;font-size:11px;display:block;margin-bottom:4px}
+.alerta-ducto .dato .valor{color:#ff6b6b;font-size:15px;font-weight:bold}
+.respaldo-box{background:rgba(20,26,46,0.7);border:2px solid rgba(93,173,226,0.4);border-radius:16px;padding:25px;margin:25px 0;max-width:900px;text-align:center}
+.respaldo-box h3{color:#5dade2;font-size:16px;margin-bottom:15px;letter-spacing:2px}
+.respaldo-box .logos{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:15px 0}
+.respaldo-box .logos a{background:rgba(10,14,26,0.6);border:2px solid rgba(93,173,226,0.4);border-radius:12px;padding:15px 25px;text-decoration:none;color:#ecf0f1;font-size:13px;font-weight:bold;transition:all 0.3s;min-width:180px}
+.respaldo-box .logos a:hover{transform:translateY(-3px);border-color:#f39c12;box-shadow:0 10px 30px rgba(243,156,18,0.3)}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:25px 0;max-width:900px}
+.galeria img{width:100%;border-radius:10px;border:2px solid rgba(93,173,226,0.3);transition:all 0.3s}
+.galeria img:hover{transform:scale(1.03);border-color:#f39c12}
+.galeria-box h3{color:#5dade2;font-size:16px;margin-bottom:15px;letter-spacing:2px;text-align:center}
+.impronta-frase{color:#f39c12;font-style:italic;font-size:14px;margin:25px 0;padding:15px 25px;background:rgba(22,160,133,0.08);border-radius:12px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:800px}
 .impronta-frase span{color:#5dade2;font-weight:bold;font-style:normal}
 .impronta-portada{display:flex;gap:25px;margin:30px 0;flex-wrap:wrap;justify-content:center;align-items:center}
 .impronta-item{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:16px;border:1px solid rgba(93,173,226,0.2);min-width:300px}
@@ -64,7 +92,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .info-area .datos{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:15px 0}
 .info-area .dato{background:rgba(10,14,26,0.6);padding:8px 16px;border-radius:20px;font-size:12px;color:#5dade2;font-weight:bold}
 .info-area a{background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;text-decoration:none;padding:10px 25px;border-radius:30px;font-size:13px;font-weight:bold;display:inline-block;margin-top:10px;transition:all 0.3s}
-.info-area a:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(46,204,113,0.4)}
 .filtros{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0}
 .filtro{background:rgba(20,26,46,0.7);border:2px solid rgba(93,173,226,0.3);color:#ecf0f1;padding:10px 20px;border-radius:30px;cursor:pointer;font-size:13px;font-weight:bold;transition:all 0.3s}
 .filtro:hover,.filtro.activo{border-color:#f39c12;background:rgba(243,156,18,0.2);color:#f39c12}
@@ -137,6 +164,11 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .fase-btn.f3 .fase-titulo{color:#e67e22}
 .fase-desc{font-size:11px;color:#bdc3c7}
 .pie-pagina{text-align:center;margin-top:60px;padding:30px;border-top:2px solid rgba(93,173,226,0.2);color:#7f8c8d;font-size:12px}
+.pie-senecyt{text-align:center;margin-top:40px;padding:25px;border-top:2px solid rgba(224,168,0,0.3);background:rgba(20,26,46,0.4);border-radius:12px;color:#7f8c8d;font-size:12px;letter-spacing:1px}
+.pie-senecyt .titulo{color:#E0A800;font-weight:bold;font-size:13px;margin-bottom:10px}
+.pie-senecyt p{margin:5px 0}
+.pie-senecyt b{color:#f39c12}
+.pie-senecyt a{color:#5dade2;text-decoration:none}
 .cita-final{color:#f39c12;font-style:italic;font-size:13px;text-align:center;margin:30px auto;padding:25px;background:rgba(20,26,46,0.6);border-radius:14px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;max-width:850px;line-height:1.7}
 .hidden{display:none !important}
 @media(max-width:768px){
@@ -179,6 +211,66 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     📍 ÁREA DEL PROYECTO MULTIDISCIPLINARIO — 50.47 ha
   </a>
 
+  <div class="objetivos-box">
+    <h3>🎯 DELIMITACIÓN DE OBJETIVOS — PARTICIPACIÓN INGENIERÍA CIVIL</h3>
+    <div class="general">
+      <b>OBJETIVO GENERAL:</b> Organizar documentalmente el territorio del área piloto P1–P22 desde el campo formativo de Ingeniería Civil, con enfoque forense y modelado estocástico.
+    </div>
+    <ul>
+      <li><b>OE1:</b> Análisis forense de 23 estructuras especiales del área piloto.</li>
+      <li><b>OE2:</b> Modelado estocástico de vulnerabilidad territorial (Markov, Monte Carlo, IA).</li>
+      <li><b>OE3:</b> Alerta técnica sobre el ducto cajón del casco comercial.</li>
+      <li><b>OE4:</b> Plataforma ECT-UNESUM-2026 como herramienta forense de consulta abierta.</li>
+    </ul>
+  </div>
+
+  <div class="amenazas-box">
+    <h3>⚠️ 9 AMENAZAS FOCALIZADAS DEL SUR DE MANABÍ</h3>
+    <div class="amenazas-grid">
+      <div class="amenaza-item">🌊 Inundaciones</div>
+      <div class="amenaza-item">☀️ Sequías</div>
+      <div class="amenaza-item">🌋 Terremotos</div>
+      <div class="amenaza-item">🌊 Tsunami</div>
+      <div class="amenaza-item">⛰️ Deslizamientos</div>
+      <div class="amenaza-item">🔥 Incendios</div>
+      <div class="amenaza-item">☣️ Contaminación</div>
+      <div class="amenaza-item">🏗️ Colapso estructural</div>
+      <div class="amenaza-item">🐛 Plagas</div>
+    </div>
+  </div>
+
+  <div class="alerta-ducto">
+    <h3>🚨 ALERTA FORENSE — DUCTO CAJÓN DEL CASCO COMERCIAL</h3>
+    <p>El ducto cajón que atraviesa el casco comercial de Jipijapa presenta <b>40% de sedimentación</b> y una capacidad efectiva insuficiente para El Niño. Es una <b>bomba de tiempo</b> estructural.</p>
+    <div class="datos">
+      <div class="dato"><span class="label">Sección bruta</span><span class="valor">16 m²</span></div>
+      <div class="dato"><span class="label">Sedimentación</span><span class="valor">40%</span></div>
+      <div class="dato"><span class="label">Sección efectiva</span><span class="valor">9.6 m²</span></div>
+      <div class="dato"><span class="label">Caudal normal</span><span class="valor">1.8 m³/s</span></div>
+      <div class="dato"><span class="label">Caudal El Niño</span><span class="valor">5.4 m³/s</span></div>
+      <div class="dato"><span class="label">Capacidad actual</span><span class="valor">2.5 m³/s</span></div>
+    </div>
+    <p style="color:#ff6b6b;font-weight:bold;">Con El Niño, el caudal supera la capacidad en más del 100%. Riesgo severo de desbordamiento en el casco comercial.</p>
+  </div>
+
+  <div class="respaldo-box">
+    <h3>🏛️ RESPALDO INSTITUCIONAL</h3>
+    <div class="logos">
+      <a href="https://www.educacionsuperior.gob.ec/" target="_blank">🏛️ SENESCYT<br><small>REG-INV-25-08261</small></a>
+      <a href="https://jipijapa.gob.ec/" target="_blank">🏢 GAD Jipijapa<br><small>Aval OFI-00005</small></a>
+      <a href="https://www.unesum.edu.ec/" target="_blank">🎓 UNESUM<br><small>PI 2026</small></a>
+    </div>
+  </div>
+
+  <div class="galeria-box">
+    <h3>👥 TRABAJO EN EQUIPO — REUNIÓN MULTIDISCIPLINARIA</h3>
+    <div class="galeria">
+      <img src="foto_reunion_equipo_1.jpeg" alt="Reunión equipo 1">
+      <img src="foto_reunion_equipo_2.jpeg" alt="Reunión equipo 2">
+      <img src="foto_reunion_equipo_3.jpeg" alt="Reunión equipo 3">
+    </div>
+  </div>
+
   <div class="impronta-frase">
     🤝 <span>IMPRONTA DE AUTORÍA DESDE EL INICIO</span><br>
     "Desde cero. Juntos. Con propósito."
@@ -218,7 +310,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <button class="btn-epico" onclick="irAlLogin()">🚀 INGRESAR A LA PLATAFORMA</button>
   </div>
 </div>
-<!-- PANTALLA 1.5: VENTANA PÚBLICA -->
 <div id="ventana-publica" class="ventana-publica">
   <div class="titulo">
     <h1>📋 PROYECTOS DISPONIBLES</h1>
@@ -253,7 +344,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
   </div>
 </div>
 
-<!-- PANTALLA 2: LOGIN -->
 <div id="pantalla-login" class="hidden">
   <div class="header">
     <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
@@ -296,7 +386,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
   </div>
 </div>
 
-<!-- PANTALLA 3: MENÚ -->
 <div id="pantalla-modulos" class="hidden">
   <div class="header">
     <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
@@ -399,15 +488,20 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
   </div>
 
-  <div style="text-align:center;margin-top:40px;padding:25px;border-top:2px solid rgba(93,173,226,0.3);color:#7f8c8d;font-size:12px;letter-spacing:1px;background:rgba(20,26,46,0.4);border-radius:12px;">
-    <p style="color:#5dade2;font-weight:bold;font-size:13px;margin-bottom:10px;">PROYECTO REGISTRADO EN SENESCYT — REG-INV-25-08261</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Proyecto:</b> UNESUM-REZ-2026-JIPIJAPA-001</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Investigador:</b> Ing. Gery Lorenzo Marcillo Merino, Msc.</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">ORCID:</b> <a href="https://orcid.org/0009-0000-5583-0042" target="_blank" style="color:#5dade2;text-decoration:none;">https://orcid.org/0009-0000-5583-0042</a></p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Línea:</b> Estructuras e ingeniería de materiales</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Grupo:</b> Innovación en diseño y tecnología de estructuras resilientes</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Institución:</b> Universidad Estatal del Sur de Manabí (UNESUM)</p>
-    <p style="margin:5px 0;"><b style="color:#f39c12;">Laboratorio Vivo:</b> Agua Dulce — Escuela Presidente Urbina (AMIE 13H04567)</p>
+  <div class="pie-senecyt">
+    <p class="titulo">🏛️ PROYECTO REGISTRADO EN SENESCYT — REG-INV-25-08261</p>
+    <p><b>Proyecto:</b> UNESUM-REZ-2026-JIPIJAPA-001</p>
+    <p><b>Investigador:</b> Ing. Gery Lorenzo Marcillo Merino, Msc.</p>
+    <p><b>ORCID:</b> <a href="https://orcid.org/0009-0000-5583-0042" target="_blank">https://orcid.org/0009-0000-5583-0042</a></p>
+    <p><b>Aval GAD Jipijapa:</b> Oficio GADMJ-2026-DPOT-OFI-00005</p>
+    <p><b>Institución:</b> Universidad Estatal del Sur de Manabí (UNESUM)</p>
+    <p><b>Laboratorio Vivo:</b> Agua Dulce — Escuela Presidente Urbina (AMIE 13H04567)</p>
+    <p style="margin-top:15px;">
+      <a href="certificado_senecyt_participacion.pdf" target="_blank">📄 Certificado SENESCYT</a> |
+      <a href="oficio_gad_jipijapa_aval.pdf" target="_blank">📄 Oficio GAD Jipijapa</a> |
+      <a href="mapa_area_piloto_subcircuito_3_2.png" target="_blank">🗺️ Mapa 3.2</a> |
+      <a href="mapa_area_piloto_subcircuito_3_3.png" target="_blank">🗺️ Mapa 3.3</a>
+    </p>
     <p style="color:#f39c12;font-style:italic;font-size:13px;margin-top:15px;">"La escuela que el sistema olvidó, la comunidad que la recuerda,<br>la UNESUM que la recupera. Vamos a cambiar la historia."</p>
     <p style="margin-top:10px;font-size:11px;color:#7f8c8d;">© 2026 — Proyecto ECT-UNESUM-2026 | Todos los derechos reservados</p>
   </div>
@@ -419,7 +513,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 </div>
 
 </div>
-
 <script>
 (function(){
   const fondo = document.getElementById('fondo');
