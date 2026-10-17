@@ -52,6 +52,82 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .alerta-ducto .dato{background:rgba(10,14,26,0.7);border:1px solid #c0392b;border-radius:8px;padding:10px}
 .alerta-ducto .dato .label{color:#f39c12;font-size:11px;display:block;margin-bottom:4px}
 .alerta-ducto .dato .valor{color:#ff6b6b;font-size:15px;font-weight:bold}
+
+/* --- INICIO ESTILOS CAMBIO SOCIAL --- */
+.cambio-social-box {
+  background: linear-gradient(135deg, rgba(192,57,43,0.1), rgba(22,160,133,0.1));
+  border: 2px solid #e74c3c;
+  border-radius: 16px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 1000px;
+  box-shadow: 0 10px 40px rgba(231, 76, 60, 0.2);
+}
+.cambio-social-header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px dashed rgba(231, 76, 60, 0.4);
+  padding-bottom: 15px;
+}
+.cambio-social-header h2 {
+  color: #e74c3c;
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.cambio-social-header p {
+  color: #f39c12;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+}
+.cambio-social-content {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cambio-social-texto {
+  flex: 1;
+  min-width: 300px;
+  color: #ecf0f1;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: justify;
+}
+.alerta-q4 {
+  background: rgba(192, 57, 43, 0.2);
+  border-left: 4px solid #e74c3c;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.icono-alerta { font-size: 24px; }
+.cambio-social-imagen {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+.cambio-social-imagen img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  border: 3px solid #f39c12;
+  box-shadow: 0 15px 40px rgba(243, 156, 18, 0.3);
+  transition: transform 0.3s ease;
+}
+.cambio-social-imagen img:hover { transform: scale(1.05); }
+.leyenda-img {
+  color: #7f8c8d;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 10px;
+}
+/* --- FIN ESTILOS CAMBIO SOCIAL --- */
+
 .respaldo-box{background:rgba(20,26,46,0.7);border:2px solid rgba(93,173,226,0.4);border-radius:16px;padding:25px;margin:25px 0;max-width:900px;text-align:center}
 .respaldo-box h3{color:#5dade2;font-size:16px;margin-bottom:15px;letter-spacing:2px}
 .respaldo-box .logos{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:15px 0}
@@ -253,6 +329,39 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <p style="color:#ff6b6b;font-weight:bold;">Con El Niño, el caudal supera la capacidad en más del 100%. Riesgo severo de desbordamiento en el casco comercial.</p>
   </div>
 
+  <!-- ========================================== -->
+  <!-- SECCIÓN: EL CAMBIO SOCIAL Y EL ESLABÓN UNIVERSITARIO -->
+  <!-- ========================================== -->
+  <div class="cambio-social-box">
+    <div class="cambio-social-header">
+      <h2>🏛️ EL ESLABÓN UNIVERSITARIO: MÁS ALLÁ DEL "Q4"</h2>
+      <p>La evaluación es cualitativa y la justificación es el cambio social.</p>
+    </div>
+
+    <div class="cambio-social-content">
+      <!-- Texto principal -->
+      <div class="cambio-social-texto">
+        <p>La Universidad no es una torre de marfil. Es el <strong>eslabón estratégico</strong> que conecta la ciencia con el territorio (Zona 4).</p>
+        
+        <div class="alerta-q4">
+          <span class="icono-alerta">⚠️</span>
+          <p><b>UN ARTÍCULO Q4 NO MEJORA LA CALIDAD DE VIDA.</b><br>
+          La publicación academicista sin repercusión social es un "Q4 vacío".</p>
+        </div>
+
+        <p><b>LOS ARTÍCULOS CIENTÍFICOS REPERCUTEN CUANDO LOGRAN UN CAMBIO DE VIDA.</b> Nuestros modelos (Sexto/Séptimo, Agua Dulce, DMTP) no llenan planillas; transforman la realidad.</p>
+      </div>
+
+      <!-- Espacio para la Imagen de la Pirámide -->
+      <div class="cambio-social-imagen">
+        <!-- AQUÍ SUBES LA IMAGEN DE LA PIRÁMIDE QUE GENERASTE EN PYTHON -->
+        <img src="piramide_cambio_social_ect.png" alt="Pirámide del Cambio Social ECT-UNESUM">
+        <p class="leyenda-img">El modelo ECT-UNESUM: De la base pedagógica al impacto real en la comunidad.</p>
+      </div>
+    </div>
+  </div>
+  <!-- FIN SECCIÓN CAMBIO SOCIAL -->
+
   <div class="respaldo-box">
     <h3>🏛️ RESPALDO INSTITUCIONAL</h3>
     <div class="logos">
@@ -310,6 +419,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <button class="btn-epico" onclick="irAlLogin()">🚀 INGRESAR A LA PLATAFORMA</button>
   </div>
 </div>
+
 <div id="ventana-publica" class="ventana-publica">
   <div class="titulo">
     <h1>📋 PROYECTOS DISPONIBLES</h1>
@@ -513,6 +623,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 </div>
 
 </div>
+
 <script>
 (function(){
   const fondo = document.getElementById('fondo');
@@ -537,7 +648,7 @@ window.addEventListener('load', function(){
 
 var PROYECTOS = {
   "ECT-001": {nombre:"U.E. Fiscal Alejo Lascano", parroquia:"Jipijapa", tipo:"academico", prioridad:"Alta", lat:-1.3486, lon:-80.5789},
-  "ECT-002": {nombre:"Escuela Presidente Urbina (Agua Dulce)", parroquia:"La América", tipo:"academico", prioridad:"Alta", lat:-1.0529, lon:-80.0704, laboratorio_vivo:true},
+  "ECT-002": {nombre:"Escuela Presidente Urbina (Agua Dulce)", parroquia:"La América", tipo:"academico", prioridad:"Alta", lat:-1.4200, lon:-80.6500, laboratorio_vivo:true},
   "ECT-003": {nombre:"U.E. Quince de Octubre", parroquia:"Jipijapa", tipo:"academico", prioridad:"Alta", lat:-1.3573, lon:-80.5835},
   "ECT-004": {nombre:"U.E. Manuel Inocencio Parrales y Guale", parroquia:"Jipijapa", tipo:"academico", prioridad:"Alta", lat:-1.3561, lon:-80.5963},
   "ECT-005": {nombre:"U.E. Daniel López", parroquia:"Jipijapa", tipo:"academico", prioridad:"Alta", lat:-1.3480, lon:-80.5741},
