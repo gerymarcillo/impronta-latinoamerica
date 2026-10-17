@@ -54,79 +54,44 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .alerta-ducto .dato .valor{color:#ff6b6b;font-size:15px;font-weight:bold}
 
 /* --- INICIO ESTILOS CAMBIO SOCIAL --- */
-.cambio-social-box {
-  background: linear-gradient(135deg, rgba(192,57,43,0.1), rgba(22,160,133,0.1));
-  border: 2px solid #e74c3c;
-  border-radius: 16px;
-  padding: 30px;
-  margin: 40px auto;
-  max-width: 1000px;
-  box-shadow: 0 10px 40px rgba(231, 76, 60, 0.2);
-}
-.cambio-social-header {
-  text-align: center;
-  margin-bottom: 25px;
-  border-bottom: 2px dashed rgba(231, 76, 60, 0.4);
-  padding-bottom: 15px;
-}
-.cambio-social-header h2 {
-  color: #e74c3c;
-  font-size: 22px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-.cambio-social-header p {
-  color: #f39c12;
-  font-size: 15px;
-  font-weight: bold;
-  font-style: italic;
-}
-.cambio-social-content {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.cambio-social-texto {
-  flex: 1;
-  min-width: 300px;
-  color: #ecf0f1;
-  font-size: 14px;
-  line-height: 1.8;
-  text-align: justify;
-}
-.alerta-q4 {
-  background: rgba(192, 57, 43, 0.2);
-  border-left: 4px solid #e74c3c;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+.cambio-social-box {background: linear-gradient(135deg, rgba(192,57,43,0.1), rgba(22,160,133,0.1)); border: 2px solid #e74c3c; border-radius: 16px; padding: 30px; margin: 40px auto; max-width: 1000px; box-shadow: 0 10px 40px rgba(231, 76, 60, 0.2);}
+.cambio-social-header {text-align: center; margin-bottom: 25px; border-bottom: 2px dashed rgba(231, 76, 60, 0.4); padding-bottom: 15px;}
+.cambio-social-header h2 {color: #e74c3c; font-size: 22px; letter-spacing: 2px; margin-bottom: 10px;}
+.cambio-social-header p {color: #f39c12; font-size: 15px; font-weight: bold; font-style: italic;}
+.cambio-social-content {display: flex; gap: 30px; align-items: center; flex-wrap: wrap;}
+.cambio-social-texto {flex: 1; min-width: 300px; color: #ecf0f1; font-size: 14px; line-height: 1.8; text-align: justify;}
+.alerta-q4 {background: rgba(192, 57, 43, 0.2); border-left: 4px solid #e74c3c; padding: 15px; border-radius: 8px; margin: 20px 0; display: flex; align-items: center; gap: 15px;}
 .icono-alerta { font-size: 24px; }
-.cambio-social-imagen {
-  flex: 1;
-  min-width: 300px;
-  text-align: center;
-}
-.cambio-social-imagen img {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 12px;
-  border: 3px solid #f39c12;
-  box-shadow: 0 15px 40px rgba(243, 156, 18, 0.3);
-  transition: transform 0.3s ease;
-}
+.cambio-social-imagen {flex: 1; min-width: 300px; text-align: center;}
+.cambio-social-imagen img {width: 100%; max-width: 350px; border-radius: 12px; border: 3px solid #f39c12; box-shadow: 0 15px 40px rgba(243, 156, 18, 0.3); transition: transform 0.3s ease;}
 .cambio-social-imagen img:hover { transform: scale(1.05); }
-.leyenda-img {
-  color: #7f8c8d;
-  font-size: 12px;
-  font-style: italic;
-  margin-top: 10px;
-}
+.leyenda-img {color: #7f8c8d; font-size: 12px; font-style: italic; margin-top: 10px;}
 /* --- FIN ESTILOS CAMBIO SOCIAL --- */
+
+/* --- INICIO ESTILOS CERTIFICADO --- */
+#modal-certificado { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,14,26,0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+.formulario-cert { background: #141a2e; padding: 30px; border-radius: 15px; border: 2px solid #f39c12; text-align: center; max-width: 600px; width: 90%; }
+.formulario-cert h3 { color: #fff; margin-bottom: 15px; }
+.formulario-cert input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #5dade2; background: #0a0e1a; color: #fff; margin-bottom: 20px; font-size: 16px; box-sizing: border-box; }
+#certificado-real { display: none; background: #fff; width: 900px; max-width: 95vw; height: auto; min-height: 600px; padding: 40px; box-sizing: border-box; text-align: center; font-family: 'Arial', sans-serif; position: relative; color: #333; border: 10px solid #141a2e; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.cert-marca-agua { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; font-size: 150px; font-weight: bold; color: #000; pointer-events: none; }
+.cert-borde { border: 2px solid #f39c12; padding: 20px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+.cert-header h2 { color: #141a2e; font-size: 28px; margin-bottom: 5px; margin-top: 0;}
+.cert-header p { color: #5dade2; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin: 0; }
+.cert-header hr { border: 1px solid #f39c12; margin: 15px 0; }
+.cert-body h1 { color: #f39c12; font-size: 40px; margin-bottom: 15px; font-weight: 900; }
+.cert-body p { font-size: 16px; color: #555; }
+.cert-nombre { font-size: 32px; color: #141a2e; border-bottom: 2px solid #5dade2; display: inline-block; padding: 0 20px 5px 20px; margin: 15px 0; }
+.cert-descripcion { font-size: 16px; color: #555; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+.cert-firmas { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px; }
+.cert-firma-item { text-align: center; width: 200px; }
+.cert-firma-item hr { border-top: 1px solid #333; margin-bottom: 5px; }
+.cert-firma-item p { font-size: 12px; margin: 0; }
+.cert-firma-item small { font-size: 10px; color: #777; }
+.cert-sello { text-align: center; }
+.cert-sello-box { width: 80px; height: 80px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; margin: 0 auto; font-size: 10px; color: #999; }
+.cert-footer { font-size: 10px; color: #999; margin-top: 15px; }
+/* --- FIN ESTILOS CERTIFICADO --- */
 
 .respaldo-box{background:rgba(20,26,46,0.7);border:2px solid rgba(93,173,226,0.4);border-radius:16px;padding:25px;margin:25px 0;max-width:900px;text-align:center}
 .respaldo-box h3{color:#5dade2;font-size:16px;margin-bottom:15px;letter-spacing:2px}
@@ -362,6 +327,68 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
   </div>
   <!-- FIN SECCIÓN CAMBIO SOCIAL -->
 
+  <!-- ========================================== -->
+  <!-- BOTÓN Y MODAL PARA EL CERTIFICADO CACE -->
+  <!-- ========================================== -->
+  <div style="text-align: center; margin: 50px 0;">
+      <button onclick="abrirModalCertificado()" class="btn-epico" style="background: linear-gradient(135deg, #f39c12, #e67e22); border: 2px solid #fff;">
+          📜 OBTENER CERTIFICADO DE INDUCCIÓN
+      </button>
+  </div>
+
+  <div id="modal-certificado">
+      <div class="formulario-cert" id="formulario-ingreso">
+          <h3>Ingresa tu nombre completo para generar el certificado</h3>
+          <input type="text" id="nombre-estudiante" placeholder="Ej: Juan Pérez">
+          <button onclick="generarCertificado()" class="btn btn-orange" style="width: 100%;">Generar Certificado</button>
+          <button onclick="cerrarModalCertificado()" style="background: none; border: none; color: #7f8c8d; margin-top: 15px; cursor: pointer;">Cancelar</button>
+      </div>
+
+      <!-- CERTIFICADO REAL -->
+      <div id="certificado-real">
+          <div class="cert-marca-agua">UNESUM</div>
+          <div class="cert-borde">
+              <div class="cert-header">
+                  <h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                  <p>FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                  <hr>
+              </div>
+              <div class="cert-body">
+                  <h1>CERTIFICADO</h1>
+                  <p>Se otorga el presente reconocimiento a:</p>
+                  <h3 id="nombre-certificado" class="cert-nombre">NOMBRE DEL ESTUDIANTE</h3>
+                  <p class="cert-descripcion">
+                      Por haber completado exitosamente el <strong>Recorrido de Inducción y Validación</strong> de la Plataforma ECT-UNESUM-2026, demostrando conocimiento del modelo dinámico, la articulación curricular (Sexto-Séptimo) y el enfoque de impacto social (CACE) en el Laboratorio Vivo de Agua Dulce.
+                  </p>
+              </div>
+              <div class="cert-firmas">
+                  <div class="cert-firma-item">
+                      <hr>
+                      <p><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                      <small>Docente Investigador / ECT-UNESUM</small>
+                  </div>
+                  <div class="cert-sello">
+                      <div class="cert-sello-box">Sello / QR</div>
+                      <p style="font-size: 9px; color: #777; margin-top: 5px;">UNESUM-REZ-2026</p>
+                  </div>
+                  <div class="cert-firma-item">
+                      <hr>
+                      <p><strong>Comisión Académica</strong></p>
+                      <small>Carrera de Ingeniería Civil</small>
+                  </div>
+              </div>
+              <p class="cert-footer">Fecha de emisión: <span id="fecha-certificado"></span> | Código de verificación: ECT-2026-VAL</p>
+          </div>
+      </div>
+
+      <!-- Botones de impresión (ocultos al inicio) -->
+      <div id="botones-certificado" style="display: none; margin-top: 20px;">
+          <button onclick="imprimirCertificado()" class="btn btn-orange" style="padding: 15px 30px; font-size: 16px;">🖨️ Imprimir o Guardar en PDF</button>
+          <button onclick="cerrarModalCertificado()" class="btn-volver" style="padding: 15px 30px; margin-left: 10px;">Volver a la web</button>
+      </div>
+  </div>
+  <!-- FIN BOTÓN Y MODAL PARA EL CERTIFICADO CACE -->
+
   <div class="respaldo-box">
     <h3>🏛️ RESPALDO INSTITUCIONAL</h3>
     <div class="logos">
@@ -532,7 +559,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
       <div class="status">✅ 15 preguntas</div>
     </a>
     <a href="modulo_04_acero_cortante.html" class="modulo-card" style="--color-modulo:#e74c3c">
-      <span class="modulo-icon">✂️</span>
+      <span class="icono-alerta"></span>
       <h3>M04 — Viga Resiliente</h3>
       <div class="desc">Flexión + cortante, estribos</div>
       <div class="status">✅ 15 preguntas</div>
@@ -845,6 +872,68 @@ function mostrarProyecto(p, codigo, rol){
   html += '</div>';
   contenedor.innerHTML = html;
 }
+
+// --- LÓGICA DEL CERTIFICADO CACE ---
+function abrirModalCertificado() {
+    document.getElementById('modal-certificado').style.display = 'flex';
+    document.getElementById('certificado-real').style.display = 'none';
+    document.getElementById('botones-certificado').style.display = 'none';
+    document.getElementById('formulario-ingreso').style.display = 'block';
+    document.getElementById('nombre-estudiante').value = '';
+}
+
+function cerrarModalCertificado() {
+    document.getElementById('modal-certificado').style.display = 'none';
+}
+
+function generarCertificado() {
+    var nombre = document.getElementById('nombre-estudiante').value.trim();
+    if (nombre === "") {
+        alert("Por favor, ingrese su nombre completo.");
+        return;
+    }
+
+    document.getElementById('nombre-certificado').textContent = nombre.toUpperCase();
+    
+    var hoy = new Date();
+    var fechaTexto = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('fecha-certificado').textContent = fechaTexto;
+
+    document.getElementById('formulario-ingreso').style.display = 'none';
+    document.getElementById('certificado-real').style.display = 'block';
+    document.getElementById('botones-certificado').style.display = 'block';
+}
+
+function imprimirCertificado() {
+    var contenido = document.getElementById('certificado-real').innerHTML;
+    var ventanaImpresion = window.open('', '', 'height=800,width=1000');
+    ventanaImpresion.document.write('<html><head><title>Certificado ECT-UNESUM</title>');
+    ventanaImpresion.document.write('<style>');
+    ventanaImpresion.document.write('body{font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#fff;}');
+    ventanaImpresion.document.write('.cert-marca-agua {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.05;font-size:150px;font-weight:bold;color:#000;}');
+    ventanaImpresion.document.write('#certificado-real {background:#fff;width:900px;height:600px;padding:40px;box-sizing:border-box;text-align:center;position:relative;color:#333;border:10px solid #141a2e;}');
+    ventanaImpresion.document.write('.cert-borde {border:2px solid #f39c12;padding:20px;height:100%;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;}');
+    ventanaImpresion.document.write('.cert-header h2 {color:#141a2e;font-size:28px;margin:0 0 5px 0;} .cert-header p {color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;margin:0;} .cert-header hr {border:1px solid #f39c12;margin:15px 0;}');
+    ventanaImpresion.document.write('.cert-body h1 {color:#f39c12;font-size:40px;margin-bottom:15px;font-weight:900;} .cert-body p {font-size:16px;color:#555;}');
+    ventanaImpresion.document.write('.cert-nombre {font-size:32px;color:#141a2e;border-bottom:2px solid #5dade2;display:inline-block;padding:0 20px 5px 20px;margin:15px 0;} .cert-descripcion {font-size:16px;color:#555;line-height:1.6;max-width:700px;margin:0 auto;}');
+    ventanaImpresion.document.write('.cert-firmas {display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px;} .cert-firma-item {text-align:center;width:200px;} .cert-firma-item hr {border-top:1px solid #333;margin-bottom:5px;}');
+    ventanaImpresion.document.write('.cert-firma-item p {font-size:12px;margin:0;} .cert-firma-item small {font-size:10px;color:#777;} .cert-sello {text-align:center;} .cert-sello-box {width:80px;height:80px;background:#eee;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px dashed #ccc;margin:0 auto;font-size:10px;color:#999;}');
+    ventanaImpresion.document.write('.cert-footer {font-size:10px;color:#999;margin-top:15px;}');
+    ventanaImpresion.document.write('@media print { body { height: auto; } }');
+    ventanaImpresion.document.write('</style></head><body>');
+    ventanaImpresion.document.write('<div id="certificado-real" style="display:block;">');
+    ventanaImpresion.document.write(contenido);
+    ventanaImpresion.document.write('</div>');
+    ventanaImpresion.document.write('</body></html>');
+    ventanaImpresion.document.close();
+    ventanaImpresion.focus();
+    
+    setTimeout(function(){ 
+        ventanaImpresion.print(); 
+        ventanaImpresion.close(); 
+    }, 500);
+}
+// --- FIN LÓGICA DEL CERTIFICADO ---
 
 console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
 console.log('📋 Proyectos:', Object.keys(PROYECTOS).length);
