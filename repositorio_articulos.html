@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repositorio Científico — ECT-UNESUM-2026</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background: #0a0e1a; color: #ecf0f1; min-height: 100vh; padding: 40px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { color: #f39c12; font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; }
+    .header p { color: #bdc3c7; font-size: 15px; font-style: italic; }
+    
+    /* Estilos de los filtros (opcional) */
+    .filtros { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+    .filtro-btn { background: rgba(93,173,226,0.1); border: 1px solid #5dade2; color: #5dade2; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .filtro-btn:hover, .filtro-btn.activo { background: #5dade2; color: #0a0e1a; }
+
+    /* Grid de Artículos */
+    .grid-articulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    
+    /* Tarjeta de Artículo */
+    .card { background: #141a2e; border-radius: 12px; padding: 25px; border: 1px solid rgba(93,173,226,0.2); transition: all 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(93,173,226,0.2); border-color: #f39c12; }
+    
+    .card-titulo { color: #5dade2; font-size: 16px; font-weight: bold; margin-bottom: 12px; line-height: 1.4; }
+    .card-autores { color: #bdc3c7; font-size: 12px; margin-bottom: 15px; }
+    
+    .card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .etiqueta { font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 12px; }
+    .linea-A { background: rgba(241, 196, 15, 0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+    .linea-B { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+    .linea-C { background: rgba(155, 89, 182, 0.2); color: #9b59b6; border: 1px solid #9b59b6; }
+    .linea-D { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+    
+    .estado { display: inline-block; font-size: 11px; font-weight: bold; margin-bottom: 15px; }
+    .estado.borrador { color: #f39c12; }
+    .estado.revision { color: #2ecc71; }
+    .estado.preprint { color: #3498db; }
+    
+    .btn-descargar { display: block; text-align: center; background: rgba(93,173,226,0.1); color: #5dade2; border: 1px solid #5dade2; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: auto; }
+    .btn-descargar:hover { background: #5dade2; color: #0a0e1a; }
+    
+    .btn-volver { display: block; text-align: center; margin-top: 50px; color: #bdc3c7; text-decoration: none; font-weight: bold; }
+    .btn-volver:hover { color: #f39c12; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📚 REPOSITORIO CIENTÍFICO ECT-UNESUM</h1>
+        <p>Producción académica, innovación y transferencia tecnológica</p>
+    </div>
+
+    <!-- FILTROS (Puedes activarlos luego con JS) -->
+    <div class="filtros">
+        <div class="filtro-btn activo">Todos</div>
+        <div class="filtro-btn">Línea A (Predictivo)</div>
+        <div class="filtro-btn">Línea B (Estructural)</div>
+        <div class="filtro-btn">Línea C (Educación)</div>
+        <div class="filtro-btn">Línea D (Territorio)</div>
+    </div>
+
+    <div class="grid-articulos">
+
+        <!-- Artículo 1 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Rediseño Curricular Dinámico y Articulación Vertical en Ingeniería Civil: El Modelo ECT-UNESUM-2026...</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.; Pino, J. C.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-C">Línea C (Educación)</span>
+                </div>
+                <div class="estado preprint">🔵 Pre-print (Publicado en la Web)</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Ver Artículo</a>
+        </div>
+
+        <!-- Artículo 2 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Análisis territorial exploratorio de condiciones asociadas a inundaciones en Jipijapa, Ecuador</div>
+                <div class="card-autores">Marcillo, G. L.; Hernández, A. A.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-D">Línea D (Territorio)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador Avanzado</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 3 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Análisis territorial exploratorio de condiciones asociadas a deslizamientos en Jipijapa, Ecuador</div>
+                <div class="card-autores">Marcillo, G. L.; Hernández, A. A.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-D">Línea D (Territorio)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador Avanzado</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 4 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Inteligencia artificial para la gestión hídrica del Sur de Manabí: predicción de caudales, calidad del agua y riesgo de sequía</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.; Pino, J. C.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-A">Línea A (Predictivo)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador Metodológico</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 5 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Modelo Híbrido Académico-Prospectivo para la Gestión Hídrica Inteligente en la Zona Sur de Manabí</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-A">Línea A (Predictivo)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador Prospectivo</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 6 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Migración energética y métodos de inteligencia artificial en la evaluación del impacto del trasvase Daule</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.; Pino, J. C.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-D">Línea D (Territorio)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 7 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Modelo Integrado de Rigidez Energética: Análisis estructural determinista y estocástico de una viga de inercia variable</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.; Merchán, W. A.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-B">Línea B (Estructural)</span>
+                </div>
+                <div class="estado revision">🟢 En Revisión Interna</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Artículo</a>
+        </div>
+
+        <!-- Artículo 8 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">Modelo Académico-Prospectivo para la Innovación Educativa en Ingeniería Civil: Gestión del Conocimiento...</div>
+                <div class="card-autores">Marcillo, G. L.; Ponce, D. S.; Hernández, A. A.; Alcívar, M. M.; Pinargote, J. A.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-C">Línea C (Educación)</span>
+                </div>
+                <div class="estado borrador">🟡 Borrador</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Borrador</a>
+        </div>
+
+        <!-- Artículo 9 -->
+        <div class="card">
+            <div>
+                <div class="card-titulo">La Plataforma ECT-UNESUM-2026 como Modelo de Articulación de las Funciones Sustantivas: Un Enfoque D+V+I</div>
+                <div class="card-autores">Marcillo, G. L.</div>
+                <div class="card-meta">
+                    <span class="etiqueta linea-C">Línea C (Educación)</span>
+                </div>
+                <div class="estado revision">🟢 Listo para Envío</div>
+            </div>
+            <a href="#" class="btn-descargar" target="_blank">📄 Descargar Artículo</a>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="btn-volver">← Volver a la Plataforma</a>
+</div>
+
+</body>
+</html>
