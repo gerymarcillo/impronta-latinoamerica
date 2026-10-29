@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M02 - Clases de Materias y Proyectos - ECT-UNESUM</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:1000px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        
+        /* Banner Constructivista */
+        .banner-constructivista {background: linear-gradient(90deg, #f39c12, #e67e22); color: #0a0e1a; padding: 15px; border-radius: 10px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);}
+        .banner-constructivista h4 {margin: 0; font-size: 16px; font-weight: bold;}
+        .banner-constructivista p {margin: 5px 0 0 0; font-size: 13px;}
+
+        /* Pestañas */
+        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { background: #141a2e; color: #bdc3c7; border: 1px solid #34495e; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; transition: all 0.3s; }
+        .tab-btn.active { background: #5dade2; color: white; border-color: #5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.4); }
+        .tab-btn:hover:not(.active) { background: #1b263b; }
+        
+        /* Secciones */
+        .seccion-contenido {display: none; animation: fadeIn 0.5s;}
+        .seccion-contenido.active {display: block;}
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .seccion {background: #141a2e; padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #3498db;}
+        .seccion h2 {color: #5dade2; font-size: 20px; margin-bottom: 15px; border-bottom: 1px solid #34495e; padding-bottom: 10px;}
+        
+        /* Tarjetas de Clases */
+        .clase-card {background: #0a0e1a; border: 1px solid #34495e; border-radius: 10px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
+        .clase-info h3 {color: #f39c12; font-size: 16px; margin-bottom: 5px;}
+        .clase-info p {color: #bdc3c7; font-size: 13px; margin: 0;}
+        .btn-video {background: #e74c3c; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 13px;}
+        
+        /* Calculadora */
+        .calculadora-box {background: #0a0e1a; border: 1px solid #2ecc71; border-radius: 10px; padding: 20px; margin-top: 15px;}
+        .calculadora-box input {width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #34495e; background: #141a2e; color: white; margin-bottom: 10px; font-size: 16px;}
+        .calculadora-box button {width: 100%; padding: 12px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;}
+        #resultado-losa {margin-top: 15px; padding: 15px; background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; border-radius: 8px; display: none;}
+        
+        /* Formulario de Prácticas */
+        .form-box {background: rgba(52, 152, 219, 0.1); border: 2px dashed #3498db; border-radius: 10px; padding: 30px; text-align: center; margin-top: 15px;}
+        .btn-form {background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 15px; display: inline-block; margin-top: 15px;}
+        
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>M02 — CLASES Y RECURSOS</h1>
+        <p>Análisis Estructural y Cargas | ECT-UNESUM-2026</p>
+    </div>
+
+    <!-- 1. BANNER CONSTRUCTIVISTA -->
+    <div class="banner-constructivista">
+        <div style="font-size: 30px;">🏗️</div>
+        <div>
+            <h4>CONSTRUCTIVISMO: TÚ CONSTRUYES TU CONOCIMIENTO</h4>
+            <p>Antes de participar en clase, es <b>obligatorio</b> revisar la Guía de Estudio y las Clases Grabadas. <b>Esta revisión previa será evaluada (30%).</b></p>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="cambiarTab('materias', this)">📚 Clases de Materias (Currículo)</button>
+        <button class="tab-btn" onclick="cambiarTab('proyectos', this)">🏗️ Clases de Proyectos (Laboratorio Vivo)</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PESTAÑA 1: CLASES DE MATERIAS (CURRÍCULO)  -->
+    <!-- ========================================== -->
+    <div id="tab-materias" class="seccion-contenido active">
+        <div class="seccion">
+            <h2>📚 Clases de Materias (Aula Invertida)</h2>
+            <p style="color: #bdc3c7; margin-bottom: 20px;">Estas clases cubren el currículo oficial de Estructura I y II. Míralas antes de la clase presencial.</p>
+            
+            <div class="clase-card">
+                <div class="clase-info">
+                    <h3>Clase 1: Fundamento Teórico (Hibbeler)</h3>
+                    <p>Viga Simplemente Apoyada, Cálculo de V, M y deflexión.</p>
+                </div>
+                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+            </div>
+
+            <div class="clase-card">
+                <div class="clase-info">
+                    <h3>Clase 2: Formulación Matricial (Séptimo)</h3>
+                    <p>Matriz de Rigidez (K), Inversa y Curva Momento-Rotación.</p>
+                </div>
+                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+            </div>
+        </div>
+
+        <!-- CALCULADORA -->
+        <div class="seccion" style="border-left-color: #2ecc71;">
+            <h2>📐 Calculadora de Predimensionamiento</h2>
+            <p>Ingresa la luz de tu subcircuito para determinar el espesor de la losa:</p>
+            
+            <div class="calculadora-box">
+                <input type="number" id="luz-input" placeholder="Ej: 4.5 (metros)" step="0.1">
+                <button onclick="calcularLosa()">Calcular Espesor</button>
+                <div id="resultado-losa">
+                    <h3 id="losa-tipo" style="color: #2ecc71; margin-bottom: 5px;"></h3>
+                    <p id="losa-texto" style="font-size: 14px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PESTAÑA 2: CLASES DE PROYECTOS (LAB VIVO)  -->
+    <!-- ========================================== -->
+    <div id="tab-proyectos" class="seccion-contenido">
+        <div class="seccion" style="border-left-color: #f39c12;">
+            <h2>🏗️ Clases de Proyectos (Laboratorio Vivo)</h2>
+            <p style="color: #bdc3c7; margin-bottom: 20px;">Aquí no se enseña teoría; se enseña cómo trabajar en el Bloque 001. Videos de campo, prototipos y metodología.</p>
+            
+            <div class="clase-card">
+                <div class="clase-info">
+                    <h3>Clase 1: Prototipos Modulares de Rigidez (PMR)</h3>
+                    <p>Cómo armar el prototipo tipo puzzle para el ensayo de flexión.</p>
+                </div>
+                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+            </div>
+
+            <div class="clase-card">
+                <div class="clase-info">
+                    <h3>Clase 2: Ensayo con Phyphox (PHX) y GeoGebra (GGB)</h3>
+                    <p>Medición de frecuencia natural y validación experimental.</p>
+                </div>
+                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+            </div>
+        </div>
+
+        <!-- FORMULARIO DE PRÁCTICAS ABIERTO -->
+        <div class="seccion" style="border-left-color: #3498db;">
+            <h2>🌎 Oportunidad de Prácticas Preprofesionales (PPP)</h2>
+            <p style="color: #bdc3c7; margin-bottom: 15px;">¿Eres estudiante de la UNESUM, UTM, ULEAM, ESPAM o de otra universidad? Postula para realizar tus prácticas en nuestro Laboratorio Vivo (Bloque 001, Jipijapa).</p>
+            
+            <div class="form-box">
+                <h3 style="color: #3498db; font-size: 18px;">Registro de Postulantes y Horas PPP</h3>
+                <p style="color: #bdc3c7; font-size: 14px; margin-top: 10px;">Completa el formulario para registrar tus datos, tu universidad de origen y tus horas de vinculación.</p>
+                <!-- REEMPLAZA EL ENLACE CON TU GOOGLE FORM REAL -->
+                <a href="https://docs.google.com/forms/d/e/TU_ENLACE_AQUI/viewform" target="_blank" class="btn-form">📋 Abrir Formulario de Prácticas</a>
+                <p style="color: #7f8c8d; font-size: 12px; margin-top: 15px;">*Este formulario está abierto para estudiantes de todas las universidades de Manabí y del país.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Volver -->
+    <div style="text-align: center;">
+        <a href="modulo_02_calculo_cargas.html" class="btn-volver">← Volver a la Puerta del Módulo 02</a>
+    </div>
+
+</div>
+
+<script>
+    // Lógica de Pestañas
+    function cambiarTab(tab, boton) {
+        // Ocultar todas las secciones
+        document.querySelectorAll('.seccion-contenido').forEach(sec => sec.classList.remove('active'));
+        // Quitar el 'active' de todos los botones
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Mostrar la sección seleccionada
+        document.getElementById('tab-' + tab).classList.add('active');
+        // Marcar el botón como activo
+        boton.classList.add('active');
+    }
+
+    // Lógica de la Calculadora
+    function calcularLosa() {
+        const luz = parseFloat(document.getElementById('luz-input').value);
+        const resultadoDiv = document.getElementById('resultado-losa');
+        const tipoDiv = document.getElementById('losa-tipo');
+        const textoDiv = document.getElementById('losa-texto');
+
+        if (isNaN(luz) || luz <= 0) {
+            alert("Por favor, ingrese un valor numérico válido para la luz.");
+            return;
+        }
+
+        resultadoDiv.style.display = 'block';
+        
+        if (luz <= 3.60) {
+            tipoDiv.innerText = "Losa Alivianada (15 cm)";
+            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 3.60 m.`;
+        } else if (luz <= 4.80) {
+            tipoDiv.innerText = "Losa Alivianada (20 cm)";
+            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 4.80 m.`;
+        } else if (luz <= 6.00) {
+            tipoDiv.innerText = "Losa Alivianada (25 cm)";
+            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 6.00 m.`;
+        } else {
+            tipoDiv.innerText = "Prefabricada o Viga Secundaria";
+            tipoDiv.style.color = "#e74c3c";
+            textoDiv.innerText = `La luz de ${luz} m supera los 6.00 m. Se sugiere prefabricada o añadir viga secundaria.`;
+        }
+    }
+</script>
+
+</body>
+</html>
