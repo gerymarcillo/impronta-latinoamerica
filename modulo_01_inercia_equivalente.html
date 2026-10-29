@@ -20,12 +20,21 @@
         .btn-epico:disabled{opacity: 0.5; cursor: not-allowed; filter: grayscale(100%);}
         
         /* Estilos del chat */
-        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 300px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px;}
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 250px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px;}
         .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%; align-self: flex-start;}
         .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%; align-self: flex-end;}
         .input-group {display: flex; gap: 10px;}
         .input-group input {flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white;}
         .input-group button {background: #9b59b6; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;}
+        
+        /* Estilos del cuestionario */
+        .pregunta {margin-bottom: 25px; background: #0a0e1a; padding: 20px; border-radius: 10px; border-left: 4px solid #3498db;}
+        .pregunta.nivel-3 {border-left-color: #e74c3c;}
+        .pregunta p {color: #f39c12; font-weight: bold; font-size: 15px; margin-bottom: 15px;}
+        .pregunta label {display: block; color: #ecf0f1; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.02);}
+        .pregunta label:hover {background: rgba(93,173,226,0.1);}
+        .pregunta textarea {width: 100%; padding: 10px; background: #141a2e; color: white; border: 1px solid #34495e; border-radius: 8px; font-family: inherit; resize: vertical;}
+        .criterios-box {background: rgba(243,156,18,0.1); border: 1px solid #f39c12; border-radius: 8px; padding: 10px; margin-bottom: 15px; font-size: 12px; color: #ecf0f1;}
     </style>
 </head>
 <body>
@@ -78,12 +87,140 @@
         <h2 style="color: #5dade2; margin-bottom: 20px;">Cuestionario del Módulo 01</h2>
         <p style="color: #bdc3c7; margin-bottom: 20px;">Responde las 15 preguntas del módulo. <b>(Recuerda pasar primero por el Tutor Socrático para desbloquear esta sección)</b>.</p>
         
-        <button id="btn-cuestionario" class="btn-epico" onclick="finalizarExamen()" disabled>🚀 FINALIZAR Y EVALUAR</button>
+        <form id="formulario-m01">
+            <!-- NIVEL 1: DIAGNÓSTICO -->
+            <div style="background: rgba(52, 152, 219, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #3498db;">
+                <h3 style="color: #3498db; margin: 0;">🔍 NIVEL 1: DIAGNÓSTICO FORENSE (Preguntas 1-5)</h3>
+            </div>
+
+            <div class="pregunta">
+                <p>1. Al revisar el plano original de la Escuela Presidente Urbina, notas que la losa se modeló como maciza, pero físicamente es alivianada con nervios. ¿Qué error de diagnóstico se cometió?</p>
+                <label><input type="radio" name="p1" value="A"> A) Error en el cálculo de cargas vivas.</label>
+                <label><input type="radio" name="p1" value="B"> B) No se aplicó el concepto de losa equivalente, sobrestimando la inercia real.</label>
+                <label><input type="radio" name="p1" value="C"> C) Error en la ubicación del centroide de la columna.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>2. Si el estudiante calculó la inercia respecto al eje X, pero el sismo principal actúa en el eje Y, ¿qué falla se presenta?</p>
+                <label><input type="radio" name="p2" value="A"> A) Se usó un eje de referencia incorrecto (falta de análisis multieje).</label>
+                <label><input type="radio" name="p2" value="B"> B) La losa no resiste el cortante.</label>
+                <label><input type="radio" name="p2" value="C"> C) El acero de refuerzo está mal distribuido.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>3. En el subcircuito S3.2, el terreno tiene una pendiente del 15%. Si el estudiante asumió una cimentación plana, ¿cuál es la falla de diagnóstico?</p>
+                <label><input type="radio" name="p3" value="A"> A) Se ignoró la topografía del terreno, afectando la distribución de cargas.</label>
+                <label><input type="radio" name="p3" value="B"> B) Se sobrestimó el peso propio del concreto.</label>
+                <label><input type="radio" name="p3" value="C"> C) El software ETABS no reconoce pendientes.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>4. Al comparar la inercia de la viga del Bloque 001 con los planos del GAD, el valor difiere en un 20%. ¿Cuál es la causa más probable?</p>
+                <label><input type="radio" name="p4" value="A"> A) El estudiante usó una sección transversal diferente a la real (falta de verificación in situ).</label>
+                <label><input type="radio" name="p4" value="B"> B) La norma NEC-15 cambió el año pasado.</label>
+                <label><input type="radio" name="p4" value="C"> C) El acero tiene un módulo de elasticidad mayor.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>5. Al calcular el momento de inercia con Steiner, el estudiante no consideró la distancia "d" entre ejes. ¿Qué consecuencia tiene esto?</p>
+                <label><input type="radio" name="p5" value="A"> A) La inercia calculada es mucho menor a la real.</label>
+                <label><input type="radio" name="p5" value="B"> B) El centroide se desplaza al eje equivocado.</label>
+                <label><input type="radio" name="p5" value="C"> C) El cálculo está incompleto (falta el término Ad²).</label>
+            </div>
+
+            <!-- NIVEL 2: APLICACIÓN -->
+            <div style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 8px; margin: 30px 0 20px 0; border-left: 4px solid #9b59b6;">
+                <h3 style="color: #9b59b6; margin: 0;">⚙️ NIVEL 2: APLICACIÓN Y CÁLCULO (Preguntas 6-10)</h3>
+            </div>
+
+            <div class="pregunta">
+                <p>6. Si la losa del Bloque 001 tiene un área bruta de 50 m² y un área de nervios de 15 m², ¿qué área se usa para la losa equivalente?</p>
+                <label><input type="radio" name="p6" value="A"> A) 50 m² (el área total).</label>
+                <label><input type="radio" name="p6" value="B"> B) 15 m² (solo los nervios).</label>
+                <label><input type="radio" name="p6" value="C"> C) 35 m² (el área maciza).</label>
+            </div>
+
+            <div class="pregunta">
+                <p>7. Para calcular la inercia de una viga T, el centroide se ubica a 20 cm de la base. Si el área es 300 cm², ¿cuál es el término Ad² si el eje de referencia está a 40 cm?</p>
+                <label><input type="radio" name="p7" value="A"> A) 300 * (40-20)² = 120,000 cm⁴.</label>
+                <label><input type="radio" name="p7" value="B"> B) 300 * (40+20)² = 1,080,000 cm⁴.</label>
+                <label><input type="radio" name="p7" value="C"> C) 300 * 20 = 6,000 cm⁴.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>8. En Python, para calcular la inercia de la losa, ¿qué librería es la más adecuada para operaciones matriciales y vectoriales?</p>
+                <label><input type="radio" name="p8" value="A"> A) Pandas.</label>
+                <label><input type="radio" name="p8" value="B"> B) NumPy.</label>
+                <label><input type="radio" name="p8" value="C"> C) Matplotlib.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>9. Al modelar en ETABS la losa equivalente del Bloque 001, el software arroja una deflexión de 2 cm. Si la norma permite máximo L/240 y la luz es 6 m, ¿pasa la norma?</p>
+                <label><input type="radio" name="p9" value="A"> A) Sí, porque 2 cm es menor a 2.5 cm (600/240).</label>
+                <label><input type="radio" name="p9" value="B"> B) No, porque 2 cm es mayor a 1 cm.</label>
+                <label><input type="radio" name="p9" value="C"> C) No se puede saber sin el módulo de elasticidad.</label>
+            </div>
+
+            <div class="pregunta">
+                <p>10. Si se duplica la altura de la losa equivalente, ¿cómo varía el momento de inercia?</p>
+                <label><input type="radio" name="p10" value="A"> A) Se duplica.</label>
+                <label><input type="radio" name="p10" value="B"> B) Se multiplica por 4.</label>
+                <label><input type="radio" name="p10" value="C"> C) Se multiplica por 8 (porque depende del cubo de la altura).</label>
+            </div>
+
+            <!-- NIVEL 3: PENSAMIENTO CRÍTICO (RESPUESTA ABIERTA) -->
+            <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; margin: 30px 0 20px 0; border-left: 4px solid #e74c3c;">
+                <h3 style="color: #e74c3c; margin: 0;">🧠 NIVEL 3: PENSAMIENTO CRÍTICO Y ÉTICA (Preguntas 11-15)</h3>
+            </div>
+
+            <div class="pregunta nivel-3">
+                <p>11. Explique con sus palabras qué es la inercia centroidal de una sección y por qué es importante en el diseño de una losa alivianada del Bloque 001.</p>
+                <div class="criterios-box">
+                    <b>🎯 Criterios:</b> Menciona centroide (30%), rigidez (30%), relación con nervios/losa alivianada (40%).
+                </div>
+                <textarea id="r11" rows="3" placeholder="Escriba su explicación técnica aquí..."></textarea>
+            </div>
+
+            <div class="pregunta nivel-3">
+                <p>12. Explique la diferencia entre la altura real (H) y la altura equivalente (h_eq) de una losa alivianada. ¿Cuál es mayor y por qué?</p>
+                <div class="criterios-box">
+                    <b>🎯 Criterios:</b> Define H (30%), Define h_eq (30%), Explica por qué h_eq < H y el control de deflexión (40%).
+                </div>
+                <textarea id="r12" rows="3" placeholder="Escriba su explicación técnica aquí..."></textarea>
+            </div>
+
+            <div class="pregunta nivel-3">
+                <p>13. Calcule el centroide global (y_cg) de la sección compuesta y explique por qué no está en el centro geométrico.</p>
+                <div class="criterios-box">
+                    <b>🎯 Criterios:</b> Calcula o deduce y_cg lógicamente (50%), Explica la asimetría (50%).
+                </div>
+                <textarea id="r13" rows="3" placeholder="Escriba su respuesta aquí..."></textarea>
+            </div>
+
+            <div class="pregunta nivel-3">
+                <p>14. El constructor propone AUMENTAR bb de 40 a 50 cm para 'ahorrar concreto en nervios'. ¿Aprueba el cambio? Justifique técnica y éticamente.</p>
+                <div class="criterios-box">
+                    <b>🎯 Criterios:</b> Técnico: menos nervios, menos inercia (30%), Normativo: NEC-15 (20%), Ético: responsabilidad profesional (30%), Trazabilidad: documentar (20%).
+                </div>
+                <textarea id="r14" rows="3" placeholder="Escriba su respuesta aquí..."></textarea>
+            </div>
+
+            <div class="pregunta nivel-3">
+                <p>15. El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?</p>
+                <div class="criterios-box">
+                    <b>🎯 Criterios:</b> Identifica el problema (25%), Aplica normativa (25%), Acciones concretas (25%), Consecuencias legales (25%).
+                </div>
+                <textarea id="r15" rows="3" placeholder="Escriba su respuesta aquí..."></textarea>
+            </div>
+
+            <button type="button" class="btn-epico" onclick="finalizarExamen()">🚀 FINALIZAR Y EVALUAR</button>
+        </form>
     </div>
 </div>
 
 <script>
     // 1. LÓGICA DE PESTAÑAS
+    let tamizAprobado = false;
     function cambiarPestana(pestana, boton) {
         if (pestana === 'cuestionario' && !tamizAprobado) {
             alert("⚠️ Debes superar el Tamiz Socrático (en la pestaña 'Tutor') antes de acceder al cuestionario.");
@@ -96,9 +233,8 @@
         boton.classList.add('activa');
     }
 
-    // 2. LÓGICA DEL TUTOR SOCRÁTICO (TAMIZ + REPASO)
+    // 2. LÓGICA DEL TUTOR SOCRÁTICO
     let nivelTamiz = 0; 
-    let tamizAprobado = false;
 
     function responderTamiz() {
         const input = document.getElementById('input-socratico');
@@ -114,7 +250,6 @@
         setTimeout(() => {
             let respuesta = "";
 
-            // FASE 1: TAMIZ INICIAL
             if (nivelTamiz === 0) {
                 if (texto.includes("vacio") || texto.includes("hueco") || texto.includes("bloque") || texto.includes("inercia")) {
                     respuesta = "¡Excelente! Los vacíos no aportan inercia. Ahora dime: <b>si la losa real (H) tiene 25 cm, ¿la losa maciza equivalente (h_eq) debe ser más alta o más baja para tener la misma inercia?</b>";
@@ -134,17 +269,10 @@
                     respuesta = "¡Felicidades! Has superado el Tamiz. El Cuestionario ha sido desbloqueado. <br><br>Pero antes de que vayas, <b>vamos a repasar el cálculo</b>: Si la inercia total es 24548 cm⁴ y el ancho bb es 50 cm, <b>¿cuál es la altura equivalente (h_eq)?</b>";
                     nivelTamiz = 3; 
                     tamizAprobado = true;
-                    
-                    const btn = document.getElementById('btn-cuestionario');
-                    btn.disabled = false;
-                    btn.style.opacity = '1';
-                    btn.style.cursor = 'pointer';
                 } else {
                     respuesta = "Recuerda la ética. Un ingeniero no puede permitir materiales que no cumplen la norma. <b>¿Aceptarías el material de 168 kg/cm² sabiendo que puede colapsar?</b>";
                 }
-            } 
-            // FASE 2: REPASO GUIADO POST-TAMIZ
-            else if (nivelTamiz === 3) {
+            } else if (nivelTamiz === 3) {
                 if (texto.includes("18") || texto.includes("18.06")) {
                     respuesta = "¡Correcto! 18.06 cm. Ahora dime: <b>¿El nervio o la capa de compresión aporta más inercia en esta losa?</b>";
                     nivelTamiz = 4;
@@ -177,7 +305,7 @@
 
     function finalizarExamen() {
         alert("¡Cuestionario enviado! El sistema está calculando tu nota...");
-        // Aquí iría tu lógica de calificación final.
+        // Aquí iría la lógica de calificación automática de las preguntas 11 a 15
     }
 </script>
 
