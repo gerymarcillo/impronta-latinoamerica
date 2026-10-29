@@ -52,7 +52,6 @@
     <div style="text-align: center;">
         <button class="btn-pestana" id="btn-tab-clases" onclick="cambiarPestana('clases', this)">📚 Clases</button>
         <button class="btn-pestana" id="btn-tab-tutor" onclick="cambiarPestana('tutor', this)">🤖 Tutor Socrático</button>
-        <!-- El botón de cuestionario nace DESHABILITADO -->
         <button class="btn-pestana" id="btn-tab-cuestionario" onclick="cambiarPestana('cuestionario', this)" disabled>📝 Cuestionario (Bloqueado)</button>
     </div>
 
@@ -69,7 +68,7 @@
     <div id="seccion-tutor" class="seccion-modulo" style="display: none;">
         <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
             <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO (Tamiz de Aprendizaje Crítico)</h3>
-            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que tú mismo delimites el problema del Bloque 001. Si pasas este tamiz, se te aprobará el módulo y repasaremos juntos antes del examen.</p>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que tú mismo delimites el problema del Bloque 001.</p>
             
             <div id="chat-socratico" class="chat-box">
                 <div class="msg-tutor">
@@ -90,16 +89,15 @@
         <p style="color: #bdc3c7; margin-bottom: 20px;">Responde las 15 preguntas del módulo.</p>
         
         <form id="formulario-m01">
-            <!-- (Mismas 15 preguntas que ya tenías, las omito aquí para no hacer el mensaje tan largo, pero debes copiarlas de tu código anterior) -->
+            <!-- PREGUNTA 1 -->
             <div class="pregunta">
                 <p>1. Al revisar el plano original de la Escuela Presidente Urbina, notas que la losa se modeló como maciza, pero físicamente es alivianada con nervios. ¿Qué error de diagnóstico se cometió?</p>
                 <label><input type="radio" name="p1" value="A"> A) Error en el cálculo de cargas vivas.</label>
                 <label><input type="radio" name="p1" value="B"> B) No se aplicó el concepto de losa equivalente, sobrestimando la inercia real.</label>
                 <label><input type="radio" name="p1" value="C"> C) Error en la ubicación del centroide de la columna.</label>
             </div>
-            
-            <!-- ... (Aquí van las preguntas 2 a 15 que ya tenías) ... -->
-
+            <!-- (Aquí continúan las preguntas 2 a 14 en tu código original) -->
+            <!-- PREGUNTA 15 -->
             <div class="pregunta nivel-3">
                 <p>15. El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?</p>
                 <div class="criterios-box">
@@ -116,7 +114,6 @@
 <script>
     // 1. LÓGICA DE PESTAÑAS
     function cambiarPestana(pestana, boton) {
-        // Si el botón está deshabilitado, no hace nada
         if (boton.disabled) return;
 
         document.querySelectorAll('.seccion-modulo').forEach(sec => sec.style.display = 'none');
@@ -158,10 +155,9 @@
                 }
             } else if (nivelTamiz === 2) {
                 if (texto.includes("no") || texto.includes("rechazo") || texto.includes("norma") || texto.includes("seguridad")) {
-                    respuesta = "¡Felicidades! Has superado el Tamiz. El Cuestionario ha sido desbloqueado. <br><br>Pero antes de que vayas, <b>vamos a repasar el cálculo</b>: Si la inercia total es 24548 cm⁴ y el ancho bb es 50 cm, <b>¿cuál es la altura equivalente (h_eq)?</b>";
+                    respuesta = "¡Felicidades! Has superado el Tamiz. El Cuestionario ha sido desbloqueado. <br><br>Pero antes de que vayas, <b>vamos a repasar el cálculo</b>: <br>Recuerda la fórmula: h_eq = ∛(12 × I_total / bb) <br>Si en tu guía de estudio I_total = 24548 cm⁴ y bb = 50 cm, <b>¿cuál es el resultado de h_eq?</b>";
                     nivelTamiz = 3; 
                     
-                    // DESBLOQUEAR EL BOTÓN VISUALMENTE
                     const btnTab = document.getElementById('btn-tab-cuestionario');
                     btnTab.disabled = false;
                     btnTab.innerText = "📝 Cuestionario";
@@ -174,7 +170,8 @@
                     respuesta = "¡Correcto! 18.06 cm. Ahora dime: <b>¿El nervio o la capa de compresión aporta más inercia en esta losa?</b>";
                     nivelTamiz = 4;
                 } else {
-                    respuesta = "Casi. Recuerda la fórmula: <b>h_eq = Raíz cúbica de (12 * I_total / bb)</b>. Reemplaza: I_total = 24548 y bb = 50. ¿Cuál es el resultado?";
+                    // Corrección: Transparencia total con los datos
+                    respuesta = "No es el valor correcto. Revisa la operación: <b>12 × 24548 = 294576</b>. Luego divide entre 50: <b>294576 / 50 = 5891.52</b>. Finalmente, saca la raíz cúbica de 5891.52. ¿Cuál es el resultado? (Pista: está entre 18 y 19).";
                 }
             } else if (nivelTamiz === 4) {
                 if (texto.includes("nervio") || texto.includes("mas")) {
