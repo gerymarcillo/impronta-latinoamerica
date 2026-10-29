@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M02 - Tutor Socrático - ECT-UNESUM</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        
+        /* Estilos del chat (Igual que el M01) */
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
+        .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-start; border-left: 3px solid #9b59b6;}
+        .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-end; border-right: 3px solid #3498db;}
+        .input-group {display: flex; gap: 10px;}
+        .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
+        .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
+        .input-group button:hover {background: #8e44ad;}
+        
+        .btn-epico {display: block; width: 100%; padding: 20px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; text-align: center; text-decoration: none; transition: transform 0.2s;}
+        .btn-epico:hover {transform: scale(1.01);}
+        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); transform: none;}
+        
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; transition: background 0.3s;}
+        .btn-volver:hover {background: #2c3e50;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M02 — TUTOR SOCRÁTICO</h1>
+        <p>El Tamiz de Aprendizaje Crítico | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que tú mismo conectes la física de la viga (Sexto) con la matriz de rigidez (Séptimo). Si pasas este tamiz, se desbloqueará el cuestionario.</p>
+            
+            <div id="chat-socratico" class="chat-box">
+                <div class="msg-tutor">
+                    <b>Tutor:</b> Bienvenido al Tamiz del Módulo 02. Para comenzar, dime: <b>Si la viga del Bloque 001 tiene una luz de 6 metros y le aplicamos una carga de 2 t/m, ¿la deflexión será mayor en el centro de la viga o en los apoyos? ¿Por qué?</b>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()">Enviar</button>
+            </div>
+        </div>
+        
+        <!-- Botón para ir al cuestionario (Bloqueado hasta aprobar) -->
+        <button id="btn-cuestionario" class="btn-epico" onclick="irAlCuestionario()" disabled>📝 IR AL CUESTIONARIO (Bloqueado)</button>
+        
+        <div style="text-align: center;">
+            <a href="M02_clases.html" class="btn-volver">← Volver a las Clases</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
+    
+    // Big Data: Registro del Responsorio Socrático (Igual que M01)
+    let responsorioSocratico = {
+        modulo: "M02",
+        interacciones: []
+    };
+
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
+
+        if (texto === "") return;
+
+        // 1. Mostrar mensaje del estudiante
+        chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
+        
+        // 2. Guardar en Big Data (Markov)
+        responsorioSocratico.interacciones.push({
+            nivel: nivelTamiz,
+            mensaje: input.value,
+            tipo: "estudiante",
+            hora: new Date().toLocaleTimeString()
+        });
+        localStorage.setItem('responsorio_M02', JSON.stringify(responsorioSocratico));
+
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            let respuesta = "";
+
+            // 3. Lógica del Tamiz (Preguntas sobre Viga, Cargas y Matriz)
+            if (nivelTamiz === 0) {
+                if (texto.includes("centro") || texto.includes("medio")) {
+                    respuesta = "¡Correcto! La deflexión es mayor en el centro porque ahí se acumula la curvatura de la elástica. Ahora dime: <b>Si el contratista reduce la altura (peralte) de la viga de 45 cm a 35 cm, ¿la viga se deformará más o menos?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piénsalo. Imagina una regla de plástico: si la doblas por los extremos, <b>¿dónde se hace la curva más profunda?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("mas") || texto.includes("mayor") || texto.includes("aumenta")) {
+                    respuesta = "¡Excelente! Al reducir el peralte, la inercia (\(I\)) baja drásticamente porque depende del cubo de la altura. Por eso la deflexión aumenta. Última pregunta: <b>¿Qué diferencia hay entre la fórmula de Sexto (\(5qL^4/384EI\)) y la matriz de rigidez de Séptimo (\(4EI/L\))?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "Cuidado. Si reduces el peralte, la sección tiene menos material para resistir la flexión. <b>¿Crees que se deformará más o menos?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("matriz") || texto.includes("sistema") || texto.includes("nodos") || texto.includes("grados")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. Has demostrado que entiendes la relación entre la física de la viga y el análisis matricial. <b>El Cuestionario ha sido desbloqueado.</b>";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    // Desbloquear el botón del cuestionario
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.innerText = "📝 IR AL CUESTIONARIO (Desbloqueado)";
+                } else {
+                    respuesta = "La fórmula de Sexto calcula la deflexión de una sola viga. La matriz de Séptimo sirve para resolver <b>sistemas completos</b> con muchos nodos y grados de libertad. ¿Qué término crees que las conecta?";
+                }
+            } 
+            // Repaso Guiado (Post-Tamiz)
+            else if (nivelTamiz === 3) {
+                if (texto.includes("18") || texto.includes("18.06") || texto.includes("20")) {
+                    respuesta = "¡Correcto! Ahora dime: <b>¿Qué pasa con la matriz de rigidez si aumentamos el número de nodos en el pórtico?</b>";
+                    nivelTamiz = 4;
+                } else {
+                    respuesta = "Repasemos las luces del Bloque 001. Si la luz es de 5.20m, ¿qué espesor de losa usarías según la calculadora?";
+                }
+            } else if (nivelTamiz === 4) {
+                if (texto.includes("mas grande") || texto.includes("dimensión") || texto.includes("grados") || texto.includes("compleja")) {
+                    respuesta = "¡Muy bien! A mayor número de nodos, mayor es la matriz. Última pregunta de repaso: <b>¿Qué norma debes citar para verificar que las cargas vivas son las correctas para el Colegio Alejo Lascano?</b>";
+                    nivelTamiz = 5;
+                } else {
+                    respuesta = "Piensa en el pórtico 3D. <b>¿La matriz de un pórtico de 2 pisos es más grande o más pequeña que la de una sola viga?</b>";
+                }
+            } else if (nivelTamiz === 5) {
+                if (texto.includes("nec") || texto.includes("nec-15") || texto.includes("norma")) {
+                    respuesta = "¡Excelente! Has repasado los conceptos clave del Módulo 02. <b>Ahora sí, puedes ir al Cuestionario con confianza.</b>";
+                    nivelTamiz = 6; 
+                } else {
+                    respuesta = "Piensa en la norma ecuatoriana de construcción. <b>¿Qué siglas tiene? (NEC-15)</b>";
+                }
+            } else {
+                respuesta = "Ya estás listo. Haz clic en el botón verde para ir al Cuestionario. ¡Mucho éxito!";
+            }
+
+            // Mostrar respuesta del tutor y guardar en Big Data
+            chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            responsorioSocratico.interacciones.push({
+                nivel: nivelTamiz,
+                mensaje: respuesta,
+                tipo: "tutor",
+                hora: new Date().toLocaleTimeString()
+            });
+            localStorage.setItem('responsorio_M02', JSON.stringify(responsorioSocratico));
+
+        }, 1000);
+    }
+
+    function irAlCuestionario() {
+        if (tamizAprobado) {
+            window.location.href = "M02_cuestionario.html"; 
+        }
+    }
+</script>
+
+</body>
+</html>
