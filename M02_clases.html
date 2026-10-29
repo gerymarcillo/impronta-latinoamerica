@@ -129,13 +129,15 @@
                 </div>
                 <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
             </div>
- <div class="clase-card">
-            <div class="clase-info">
-                <h3>🐍 Análisis Estocástico (Monte Carlo)</h3>
-                <p>Descarga el script de Python que simula 5000 escenarios de falla de la viga del Bloque 001.</p>
+
+            <div class="clase-card">
+                <div class="clase-info">
+                    <h3>🐍 Análisis Estocástico (Monte Carlo)</h3>
+                    <p>Descarga el script de Python que simula 5000 escenarios de falla de la viga del Bloque 001.</p>
+                </div>
+                <a href="modulo02_estocastico_viga.py" download class="btn-video" style="background: #3498db;">📥 Descargar Script</a>
             </div>
-            <a href="modulo02_estocastico_viga.py" download class="btn-video" style="background: #3498db;">📥 Descargar Script</a>
-        </div>
+
             <div class="clase-card">
                 <div class="clase-info">
                     <h3>Clase 2: Ensayo con Phyphox (PHX) y GeoGebra (GGB)</h3>
@@ -153,7 +155,6 @@
             <div class="form-box">
                 <h3 style="color: #3498db; font-size: 18px;">Registro de Postulantes y Horas PPP</h3>
                 <p style="color: #bdc3c7; font-size: 14px; margin-top: 10px;">Completa el formulario para registrar tus datos, tu universidad de origen y tus horas de vinculación.</p>
-                <!-- REEMPLAZA EL ENLACE CON TU GOOGLE FORM REAL -->
                 <a href="https://docs.google.com/forms/d/e/TU_ENLACE_AQUI/viewform" target="_blank" class="btn-form">📋 Abrir Formulario de Prácticas</a>
                 <p style="color: #7f8c8d; font-size: 12px; margin-top: 15px;">*Este formulario está abierto para estudiantes de todas las universidades de Manabí y del país.</p>
             </div>
@@ -170,14 +171,9 @@
 <script>
     // Lógica de Pestañas
     function cambiarTab(tab, boton) {
-        // Ocultar todas las secciones
         document.querySelectorAll('.seccion-contenido').forEach(sec => sec.classList.remove('active'));
-        // Quitar el 'active' de todos los botones
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        
-        // Mostrar la sección seleccionada
         document.getElementById('tab-' + tab).classList.add('active');
-        // Marcar el botón como activo
         boton.classList.add('active');
     }
 
