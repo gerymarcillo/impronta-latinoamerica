@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M02 - Cuestionario - ECT-UNESUM</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .pregunta {margin-bottom: 25px; background: #0a0e1a; padding: 20px; border-radius: 10px; border-left: 4px solid #3498db;}
+        .pregunta.nivel-2 {border-left-color: #f39c12;}
+        .pregunta.nivel-3 {border-left-color: #e74c3c;}
+        .pregunta p {color: #ecf0f1; font-weight: bold; font-size: 15px; margin-bottom: 15px;}
+        .pregunta label {display: block; color: #bdc3c7; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.02);}
+        .pregunta label:hover {background: rgba(93,173,226,0.1);}
+        .pregunta textarea {width: 100%; padding: 10px; background: #141a2e; color: white; border: 1px solid #34495e; border-radius: 8px; font-family: inherit; resize: vertical;}
+        
+        .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:10px;cursor:pointer;margin-top:30px;transition:transform 0.2s;}
+        .btn-epico:hover{transform:scale(1.02);}
+        
+        /* Estilos del resultado */
+        #pantalla-resultado {display: none; text-align: center; padding: 40px; background: #0a0e1a; border-radius: 15px; margin-top: 20px; border: 2px solid #3498db;}
+        .nota-grande {font-size: 60px; font-weight: bold; margin: 20px 0;}
+        .aprobado {color: #2ecc71; border-color: #2ecc71;}
+        .reprobado {color: #e74c3c; border-color: #e74c3c;}
+        
+        /* Estilos del reporte */
+        #reporte-detallado {display: none; text-align: left; background: #141a2e; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #34495e;}
+        .reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
+        .reporte-item {background: #0a0e1a; padding: 10px; border-radius: 5px; font-size: 12px;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M02 — CUESTIONARIO DE EVALUACIÓN</h1>
+        <p>Análisis Estructural y Cargas | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo" id="formulario-contenedor">
+        <form id="formulario-m02" onsubmit="event.preventDefault();">
+            
+            <!-- PREGUNTAS NIVEL BÁSICO -->
+            <div class="pregunta">
+                <p>1. ¿Cuál es la diferencia principal entre una viga simplemente apoyada y una viga empotrada?</p>
+                <label><input type="radio" name="p1" value="A"> A) La simplemente apoyada tiene rotación en los extremos; la empotrada no.</label>
+                <label><input type="radio" name="p1" value="B"> B) La empotrada no soporta cargas verticales.</label>
+                <label><input type="radio" name="p1" value="C"> C) No hay diferencia.</label>
+            </div>
+            <div class="pregunta">
+                <p>2. ¿Qué tipo de carga genera el peso de las personas y los muebles en un aula?</p>
+                <label><input type="radio" name="p2" value="A"> A) Carga Muerta.</label>
+                <label><input type="radio" name="p2" value="B"> B) Carga Viva.</label>
+                <label><input type="radio" name="p2" value="C"> C) Carga Sísmica.</label>
+            </div>
+            <div class="pregunta">
+                <p>3. Según la NEC-15, ¿qué factor de mayoración se aplica a la carga viva en la combinación 1.2D + 1.6L?</p>
+                <label><input type="radio" name="p3" value="A"> A) 1.2.</label>
+                <label><input type="radio" name="p3" value="B"> B) 1.6.</label>
+                <label><input type="radio" name="p3" value="C"> C) 1.4.</label>
+            </div>
+            <div class="pregunta">
+                <p>4. ¿Qué representa la inercia (\(I\)) en la fórmula de la deflexión?</p>
+                <label><input type="radio" name="p4" value="A"> A) La resistencia de la sección a la flexión.</label>
+                <label><input type="radio" name="p4" value="B"> B) El peso del concreto.</label>
+                <label><input type="radio" name="p4" value="C"> C) La longitud de la viga.</label>
+            </div>
+            <div class="pregunta">
+                <p>5. En la fórmula de la rigidez \(k = 48EI/L^3\), ¿qué pasa si la longitud \(L\) se duplica?</p>
+                <label><input type="radio" name="p5" value="A"> A) La rigidez aumenta.</label>
+                <label><input type="radio" name="p5" value="B"> B) La rigidez disminuye 8 veces.</label>
+                <label><input type="radio" name="p5" value="C"> C) La rigidez no cambia.</label>
+            </div>
+
+            <!-- PREGUNTAS NIVEL MEDIO -->
+            <div class="pregunta nivel-2">
+                <p>6. Si la luz de una losa es de 5.20 m, ¿qué espesor de losa alivianada se recomienda según el criterio de predimensionamiento?</p>
+                <label><input type="radio" name="p6" value="A"> A) 15 cm.</label>
+                <label><input type="radio" name="p6" value="B"> B) 20 cm.</label>
+                <label><input type="radio" name="p6" value="C"> C) 25 cm.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>7. Calcule el momento máximo de una viga simplemente apoyada con L=4m y q=5 kN/m.</p>
+                <label><input type="radio" name="p7" value="A"> A) 10 kN·m.</label>
+                <label><input type="radio" name="p7" value="B"> B) 20 kN·m.</label>
+                <label><input type="radio" name="p7" value="C"> C) 5 kN·m.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>8. ¿Para qué sirve la matriz de rigidez \(K\) en el análisis estructural?</p>
+                <label><input type="radio" name="p8" value="A"> A) Para calcular el peso de la estructura.</label>
+                <label><input type="radio" name="p8" value="B"> B) Para relacionar las fuerzas nodales con los desplazamientos.</label>
+                <label><input type="radio" name="p8" value="C"> C) Para calcular el costo del concreto.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>9. Si una viga tiene una rotación de 0.005 rad en el apoyo, ¿qué significa físicamente?</p>
+                <label><input type="radio" name="p9" value="A"> A) Que la viga se rompió.</label>
+                <label><input type="radio" name="p9" value="B"> B) Que el extremo de la viga giró 0.005 radianes respecto a su posición original.</label>
+                <label><input type="radio" name="p9" value="C"> C) Que la carga aplicada es cero.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>10. ¿Qué herramienta tecnológica se usa para medir la frecuencia natural del Prototipo Modular de Rigidez (PMR)?</p>
+                <label><input type="radio" name="p10" value="A"> A) Phyphox (PHX).</label>
+                <label><input type="radio" name="p10" value="B"> B) Word.</label>
+                <label><input type="radio" name="p10" value="C"> C) PowerPoint.</label>
+            </div>
+
+            <!-- PREGUNTAS NIVEL AVANZADO (ABIERTAS) -->
+            <div class="pregunta nivel-3">
+                <p>11. Explique por qué la rotación en los apoyos de una viga simplemente apoyada no es cero, a pesar de que el momento flector en esos puntos sí es cero.</p>
+                <textarea id="r11" rows="3" placeholder="Escriba su explicación..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>12. Si el contratista quiere reducir el peralte de la viga del Bloque 001 de 45 cm a 35 cm para ahorrar concreto, ¿qué le respondería desde la ética profesional y qué implicaciones tiene en la inercia?</p>
+                <textarea id="r12" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>13. Explique la diferencia entre la fórmula cerrada de Sexto (\(5qL^4/384EI\)) y el análisis matricial de Séptimo (Matriz K). ¿Cuándo usaría cada una?</p>
+                <textarea id="r13" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>14. ¿Cómo influye la Falla Cedeño en la selección del espesor de la losa y en el diseño de la viga del Bloque 001?</p>
+                <textarea id="r14" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>15. Desde su rol como estudiante ECT-UNESUM, ¿por qué es importante validar el software ETABS con el cálculo manual y con el ensayo de Phyphox?</p>
+                <textarea id="r15" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+
+            <button type="button" class="btn-epico" id="btn-finalizar" onclick="calificarExamen()">🚀 FINALIZAR Y EVALUAR</button>
+        </form>
+    </div>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <div id="pantalla-resultado">
+        <h1 style="color: #5dade2;">RESULTADO M02</h1>
+        <div id="nota-final" class="nota-grande"></div>
+        <div id="feedback-niveles" style="color: #bdc3c7; margin-bottom: 20px; font-size: 14px;"></div>
+        
+        <div id="reporte-detallado">
+            <h3 style="color: #5dade2; text-align: center; border-bottom: 1px solid #34495e; padding-bottom: 10px;">REPORTE DE AUDITORÍA</h3>
+            <div id="contenido-reporte"></div>
+        </div>
+
+        <button onclick="mostrarReporte()" id="btn-ver-reporte" class="btn-epico" style="background: #3498db; margin-top: 20px;">📄 Ver Preguntas y Respuestas Correctas</button>
+        <button onclick="imprimirReporte()" class="btn-epico" style="background: #2ecc71;">🖨️ Imprimir Reporte</button>
+        <div style="margin-top:20px;">
+            <a href="M02_tutor.html" style="color: #bdc3c7; text-decoration: none;">← Volver al Tutor Socrático</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let respuestasEstudiante = {};
+    let examenCalificado = false;
+
+    function calificarExamen() {
+        if (examenCalificado) return;
+        examenCalificado = true;
+        document.getElementById('btn-finalizar').disabled = true;
+
+        respuestasEstudiante = {
+            p1: document.querySelector('input[name="p1"]:checked')?.value || "N/A",
+            p2: document.querySelector('input[name="p2"]:checked')?.value || "N/A",
+            p3: document.querySelector('input[name="p3"]:checked')?.value || "N/A",
+            p4: document.querySelector('input[name="p4"]:checked')?.value || "N/A",
+            p5: document.querySelector('input[name="p5"]:checked')?.value || "N/A",
+            p6: document.querySelector('input[name="p6"]:checked')?.value || "N/A",
+            p7: document.querySelector('input[name="p7"]:checked')?.value || "N/A",
+            p8: document.querySelector('input[name="p8"]:checked')?.value || "N/A",
+            p9: document.querySelector('input[name="p9"]:checked')?.value || "N/A",
+            p10: document.querySelector('input[name="p10"]:checked')?.value || "N/A",
+            r11: document.getElementById('r11').value || "N/A",
+            r12: document.getElementById('r12').value || "N/A",
+            r13: document.getElementById('r13').value || "N/A",
+            r14: document.getElementById('r14').value || "N/A",
+            r15: document.getElementById('r15').value || "N/A"
+        };
+
+        // 1. Calificar Opción Múltiple (P1 a P10)
+        let aciertosCerrados = 0;
+        const respuestasCorrectas = { p1: "A", p2: "B", p3: "B", p4: "A", p5: "B", p6: "C", p7: "A", p8: "B", p9: "B", p10: "A" };
+
+        for (let key in respuestasCorrectas) {
+            if (respuestasEstudiante[key] === respuestasCorrectas[key]) aciertosCerrados++;
+        }
+
+        // 2. Calificar Abiertas (P11 a P15)
+        let puntajeAbierto = 0;
+        function evaluarTexto(idPregunta, palabrasClave) {
+            const texto = respuestasEstudiante[idPregunta].toLowerCase();
+            if (texto.trim() === "" || texto === "n/a") return 0; 
+            let aciertos = 0;
+            palabrasClave.forEach(grupo => {
+                for (let palabra of grupo) {
+                    if (texto.includes(palabra)) { aciertos++; break; }
+                }
+            });
+            return (aciertos / palabrasClave.length) * 20; 
+        }
+
+        puntajeAbierto += evaluarTexto('r11', [["curvatura", "integral", "elastica"], ["rotacion", "giro", "deformacion"], ["momento", "carga"]]);
+        puntajeAbierto += evaluarTexto('r12', [["inercia", "cubo", "altura"], ["deflexion", "aumenta", "deformacion"], ["etica", "seguridad", "norma"]]);
+        puntajeAbierto += evaluarTexto('r13', [["sistema", "matriz", "nodos"], ["viga", "simple", "formula"], ["complejo", "grados", "libertad"]]);
+        puntajeAbierto += evaluarTexto('r14', [["falla", "cedeño", "suelo"], ["inercia", "espesor", "rigidez"], ["incertidumbre", "monte carlo", "dmtp"]]);
+        puntajeAbierto += evaluarTexto('r15', [["software", "etabs", "calculadora"], ["manual", "phyphox", "validar"], ["error", "criterio", "etica"]]);
+
+        // 3. Calcular Nota Final
+        const notaCerradas = (aciertosCerrados / 10) * 50; 
+        const notaAbiertas = (puntajeAbierto / 100) * 50;
+        const notaFinal = Math.round(notaCerradas + notaAbiertas);
+
+        // 4. Mostrar Resultados
+        document.getElementById('formulario-contenedor').style.display = 'none';
+        document.getElementById('pantalla-resultado').style.display = 'block';
+        
+        const divNota = document.getElementById('nota-final');
+        divNota.innerText = notaFinal + " / 100";
+        
+        if (notaFinal >= 60) {
+            divNota.className = 'nota-grande aprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
+            document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 02.";
+        } else {
+            divNota.className = 'nota-grande reprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
+            document.getElementById('feedback-niveles').innerHTML = "⚠️ <b>INSUFICIENTE.</b> Recuerda esperar 24 horas para tu próximo intento.";
+        }
+    }
+
+    function mostrarReporte() {
+        const divReporte = document.getElementById('reporte-detallado');
+        const contenido = document.getElementById('contenido-reporte');
+        const btn = document.getElementById('btn-ver-reporte');
+
+        if (divReporte.style.display === 'block') {
+            divReporte.style.display = 'none';
+            btn.innerText = "📄 Ver Preguntas y Respuestas Correctas";
+            return;
+        }
+
+        const textoPreguntas = [
+            "1. Diferencia viga simple vs empotrada <b>(Correcta: A)</b>",
+            "2. Carga de personas y muebles <b>(Correcta: B)</b>",
+            "3. Factor de mayoración carga viva <b>(Correcta: B)</b>",
+            "4. Qué representa la inercia <b>(Correcta: A)</b>",
+            "5. Si L se duplica, rigidez <b>(Correcta: B)</b>",
+            "6. Espesor para luz de 5.20m <b>(Correcta: C)</b>",
+            "7. Momento máximo (L=4, q=5) <b>(Correcta: A)</b>",
+            "8. Para qué sirve la matriz K <b>(Correcta: B)</b>",
+            "9. Significado de rotación 0.005 rad <b>(Correcta: B)</b>",
+            "10. Herramienta para medir frecuencia <b>(Correcta: A)</b>"
+        ];
+
+        let html = "<div class='reporte-grid'>";
+        textoPreguntas.forEach((preg, index) => {
+            const id = "p" + (index + 1);
+            const resp = respuestasEstudiante[id];
+            const esCorrecta = (resp === ["A","B","B","A","B","C","A","B","B","A"][index]);
+            const color = esCorrecta ? "#2ecc71" : "#e74c3c";
+            
+            html += `<div class="reporte-item">
+                <p>${preg}</p>
+                <p>Tu respuesta: <b style="color: ${color};">${resp}</b></p>
+            </div>`;
+        });
+        html += "</div>";
+
+        html += "<h4 style='color: #f39c12; margin-top: 20px;'>Respuestas Abiertas:</h4>";
+        for (let i = 11; i <= 15; i++) {
+            html += `<div class="reporte-item" style="margin-bottom: 10px;">
+                <p><b>Pregunta ${i}:</b> ${respuestasEstudiante['r' + i]}</p>
+            </div>`;
+        }
+
+        contenido.innerHTML = html;
+        divReporte.style.display = 'block';
+        btn.innerText = "🔼 Ocultar Reporte de Auditoría";
+    }
+
+    function imprimirReporte() {
+        document.getElementById('reporte-detallado').style.display = 'block';
+        window.print();
+    }
+</script>
+
+</body>
+</html>
