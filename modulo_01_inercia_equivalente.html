@@ -36,7 +36,6 @@
         .pregunta label {display: block; color: #ecf0f1; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.02);}
         .pregunta label:hover {background: rgba(93,173,226,0.1);}
         .pregunta textarea {width: 100%; padding: 10px; background: #141a2e; color: white; border: 1px solid #34495e; border-radius: 8px; font-family: inherit; resize: vertical;}
-        .criterios-box {background: rgba(243,156,18,0.1); border: 1px solid #f39c12; border-radius: 8px; padding: 10px; margin-bottom: 15px; font-size: 12px; color: #ecf0f1;}
         
         /* Estilos del resultado */
         #pantalla-resultado {display: none; text-align: center; padding: 40px; background: #0a0e1a; border-radius: 15px; margin-top: 20px; border: 2px solid #3498db;}
@@ -48,6 +47,14 @@
         #reporte-detallado {display: none; text-align: left; background: #141a2e; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #34495e;}
         .reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
         .reporte-item {background: #0a0e1a; padding: 10px; border-radius: 5px; font-size: 12px;}
+        
+        /* Estilos para impresión */
+        @media print {
+            body { background: white; color: black; }
+            .btn-epico, #botones-nav { display: none; }
+            #reporte-detallado { border: 1px solid #ccc; background: white; color: black; }
+            .reporte-item { background: white; border: 1px solid #eee; }
+        }
     </style>
 </head>
 <body>
@@ -59,7 +66,6 @@
         <p>Evaluación de Pensamiento Crítico | Proyecto ECT-UNESUM-2026</p>
     </div>
 
-    <!-- BOTONES DE NAVEGACIÓN -->
     <div id="botones-nav" style="text-align: center;">
         <button class="btn-pestana" id="btn-tab-clases" onclick="cambiarPestana('clases', this)">📚 Clases</button>
         <button class="btn-pestana" id="btn-tab-tutor" onclick="cambiarPestana('tutor', this)">🤖 Tutor Socrático</button>
@@ -171,7 +177,7 @@
 <script>
     let respuestasEstudiante = {};
     let nivelTamiz = 0; 
-    let examenCalificado = false; // Bloqueo de seguridad
+    let examenCalificado = false;
 
     function cambiarPestana(pestana, boton) {
         if (boton.disabled) return;
@@ -234,31 +240,28 @@
     }
 
     function calificarExamen() {
-        // Bloqueo de seguridad para evitar doble clic
         if (examenCalificado) return;
         examenCalificado = true;
         document.getElementById('btn-finalizar').disabled = true;
 
-        // 1. Recopilar Respuestas del Estudiante
         respuestasEstudiante = {
-            p1: document.querySelector('input[name="p1"]:checked')?.value || "Sin responder",
-            p2: document.querySelector('input[name="p2"]:checked')?.value || "Sin responder",
-            p3: document.querySelector('input[name="p3"]:checked')?.value || "Sin responder",
-            p4: document.querySelector('input[name="p4"]:checked')?.value || "Sin responder",
-            p5: document.querySelector('input[name="p5"]:checked')?.value || "Sin responder",
-            p6: document.querySelector('input[name="p6"]:checked')?.value || "Sin responder",
-            p7: document.querySelector('input[name="p7"]:checked')?.value || "Sin responder",
-            p8: document.querySelector('input[name="p8"]:checked')?.value || "Sin responder",
-            p9: document.querySelector('input[name="p9"]:checked')?.value || "Sin responder",
-            p10: document.querySelector('input[name="p10"]:checked')?.value || "Sin responder",
-            r11: document.getElementById('r11').value || "Sin responder",
-            r12: document.getElementById('r12').value || "Sin responder",
-            r13: document.getElementById('r13').value || "Sin responder",
-            r14: document.getElementById('r14').value || "Sin responder",
-            r15: document.getElementById('r15').value || "Sin responder"
+            p1: document.querySelector('input[name="p1"]:checked')?.value || "N/A",
+            p2: document.querySelector('input[name="p2"]:checked')?.value || "N/A",
+            p3: document.querySelector('input[name="p3"]:checked')?.value || "N/A",
+            p4: document.querySelector('input[name="p4"]:checked')?.value || "N/A",
+            p5: document.querySelector('input[name="p5"]:checked')?.value || "N/A",
+            p6: document.querySelector('input[name="p6"]:checked')?.value || "N/A",
+            p7: document.querySelector('input[name="p7"]:checked')?.value || "N/A",
+            p8: document.querySelector('input[name="p8"]:checked')?.value || "N/A",
+            p9: document.querySelector('input[name="p9"]:checked')?.value || "N/A",
+            p10: document.querySelector('input[name="p10"]:checked')?.value || "N/A",
+            r11: document.getElementById('r11').value || "N/A",
+            r12: document.getElementById('r12').value || "N/A",
+            r13: document.getElementById('r13').value || "N/A",
+            r14: document.getElementById('r14').value || "N/A",
+            r15: document.getElementById('r15').value || "N/A"
         };
 
-        // 2. Calificar Opción Múltiple
         let aciertosCerrados = 0;
         const respuestasCorrectas = { p1: "B", p2: "A", p3: "A", p4: "A", p5: "C", p6: "A", p7: "A", p8: "B", p9: "A", p10: "C" };
 
@@ -268,11 +271,10 @@
             }
         }
 
-        // 3. Calificar Abiertas (Blindado contra NaN)
         let puntajeAbierto = 0;
         function evaluarTexto(idPregunta, palabrasClave) {
             const texto = respuestasEstudiante[idPregunta].toLowerCase();
-            if (texto.trim() === "" || texto === "sin responder") return 0; 
+            if (texto.trim() === "" || texto === "n/a") return 0; 
             let aciertos = 0;
             palabrasClave.forEach(grupo => {
                 for (let palabra of grupo) {
@@ -288,12 +290,10 @@
         puntajeAbierto += evaluarTexto('r14', [["inercia", "deflexion"], ["no", "rechazo", "norma"], ["documentar", "notificar", "escrito"]]);
         puntajeAbierto += evaluarTexto('r15', [["problema", "grave", "deficit"], ["norma", "nec", "aci"], ["notificar", "documentar", "suspender"], ["responsabilidad", "penal", "civil"]]);
 
-        // 4. Nota Final
         const notaCerradas = (aciertosCerrados / 10) * 50; 
         const notaAbiertas = (puntajeAbierto / 100) * 50;
         const notaFinal = Math.round(notaCerradas + notaAbiertas);
 
-        // 5. Mostrar Resultados
         document.getElementById('formulario-m01').style.display = 'none';
         document.getElementById('pantalla-resultado').style.display = 'block';
         
@@ -311,14 +311,14 @@
         }
     }
 
-    // 6. Lógica para Mostrar el Reporte de Auditoría
     function mostrarReporte() {
         const divReporte = document.getElementById('reporte-detallado');
         const contenido = document.getElementById('contenido-reporte');
+        const btn = document.getElementById('btn-ver-reporte');
 
         if (divReporte.style.display === 'block') {
             divReporte.style.display = 'none';
-            document.getElementById('btn-ver-reporte').innerText = "📄 Ver Preguntas y Respuestas Correctas";
+            btn.innerText = "📄 Ver Preguntas y Respuestas Correctas";
             return;
         }
 
@@ -358,10 +358,9 @@
 
         contenido.innerHTML = html;
         divReporte.style.display = 'block';
-        document.getElementById('btn-ver-reporte').innerText = "🔼 Ocultar Reporte de Auditoría";
+        btn.innerText = "🔼 Ocultar Reporte de Auditoría";
     }
 
-    // 7. Lógica para Imprimir
     function imprimirReporte() {
         document.getElementById('reporte-detallado').style.display = 'block';
         window.print();
