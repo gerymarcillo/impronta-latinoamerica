@@ -20,7 +20,6 @@
         .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
         .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:10px;cursor:pointer;margin-top:30px;transition:transform 0.2s;}
         .btn-epico:hover{transform:scale(1.02);}
-        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%);}
         
         /* Estilos del chat */
         .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 250px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px;}
@@ -44,6 +43,11 @@
         .nota-grande {font-size: 60px; font-weight: bold; margin: 20px 0;}
         .aprobado {color: #2ecc71; border-color: #2ecc71;}
         .reprobado {color: #e74c3c; border-color: #e74c3c;}
+        
+        /* Estilos del reporte */
+        #reporte-detallado {display: none; text-align: left; background: #141a2e; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #34495e;}
+        .reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
+        .reporte-item {background: #0a0e1a; padding: 10px; border-radius: 5px; font-size: 12px;}
     </style>
 </head>
 <body>
@@ -66,23 +70,15 @@
     <div id="seccion-clases" class="seccion-modulo" style="display: block;">
         <h2 style="color: #5dade2; margin-bottom: 20px;">Teorema de Steiner y Losas Equivalentes</h2>
         <p style="color: #ecf0f1; line-height: 1.8;">El Teorema de los Ejes Paralelos (Steiner) nos permite calcular el momento de inercia de una sección respecto a cualquier eje. En el Bloque 001, transformamos los nervios de la losa en una sección maciza equivalente para calcular su inercia real.</p>
-        <div style="background: #0a0e1a; padding: 20px; border-radius: 10px; border: 1px dashed #f39c12; text-align: center; margin: 20px 0;">
-            <p style="color: #f39c12; font-size: 20px; font-weight: bold;">Fórmula: I = Ic + A * d²</p>
-        </div>
     </div>
 
     <!-- PESTAÑA 2: TUTOR SOCRÁTICO -->
     <div id="seccion-tutor" class="seccion-modulo" style="display: none;">
         <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
-            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO (Tamiz)</h3>
-            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que tú mismo delimites el problema del Bloque 001.</p>
-            
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
             <div id="chat-socratico" class="chat-box">
-                <div class="msg-tutor">
-                    <b>Tutor:</b> Bienvenido al Tamiz. Para comenzar, dime: <b>¿Por qué crees que una losa alivianada no se puede modelar directamente como una losa maciza en ETABS?</b>
-                </div>
+                <div class="msg-tutor"><b>Tutor:</b> Bienvenido al Tamiz. <b>¿Por qué crees que una losa alivianada no se puede modelar directamente como una losa maciza en ETABS?</b></div>
             </div>
-            
             <div class="input-group">
                 <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
                 <button onclick="responderTamiz()">Enviar</button>
@@ -93,45 +89,66 @@
     <!-- PESTAÑA 3: CUESTIONARIO -->
     <div id="seccion-cuestionario" class="seccion-modulo" style="display: none;">
         <h2 style="color: #5dade2; margin-bottom: 20px;">Cuestionario del Módulo 01</h2>
-        <p style="color: #bdc3c7; margin-bottom: 20px;">Responde las 15 preguntas del módulo.</p>
-        
-        <form id="formulario-m01">
-            <!-- PREGUNTAS 1 A 10 (OPCIÓN MÚLTIPLE - RESUMIDAS PARA EL EJEMPLO) -->
-            <div class="pregunta">
-                <p>1. Al revisar el plano original de la Escuela Presidente Urbina, notas que la losa se modeló como maciza... ¿Qué error de diagnóstico se cometió?</p>
-                <label><input type="radio" name="p1" value="A"> A) Error en el cálculo de cargas vivas.</label>
-                <label><input type="radio" name="p1" value="B"> B) No se aplicó el concepto de losa equivalente, sobrestimando la inercia real.</label>
-                <label><input type="radio" name="p1" value="C"> C) Error en la ubicación del centroide de la columna.</label>
-            </div>
-            <!-- (Asume que aquí están las preguntas 2 a 10 con sus respectivos name="p2"... "p10") -->
+        <form id="formulario-m01" onsubmit="event.preventDefault();">
             
-            <!-- PREGUNTAS 11 A 15 (DESARROLLO) -->
-            <div class="pregunta nivel-3">
-                <p>11. Explique con sus palabras qué es la inercia centroidal de una sección y por qué es importante en el diseño de una losa alivianada del Bloque 001.</p>
-                <textarea id="r11" rows="3" placeholder="Escriba su explicación..."></textarea>
+            <div class="pregunta"><p>1. ¿Qué error se cometió al modelar como maciza?</p>
+                <label><input type="radio" name="p1" value="A"> A) Cargas vivas.</label>
+                <label><input type="radio" name="p1" value="B"> B) No se aplicó losa equivalente.</label>
+                <label><input type="radio" name="p1" value="C"> C) Centroide de columna.</label>
+            </div>
+            <div class="pregunta"><p>2. Si se calculó eje X pero sismo actúa en Y, ¿qué falla hay?</p>
+                <label><input type="radio" name="p2" value="A"> A) Eje incorrecto.</label>
+                <label><input type="radio" name="p2" value="B"> B) Cortante.</label>
+                <label><input type="radio" name="p2" value="C"> C) Acero mal distribuido.</label>
+            </div>
+            <div class="pregunta"><p>3. En terreno con pendiente, si se asume plana, ¿qué falla hay?</p>
+                <label><input type="radio" name="p3" value="A"> A) Se ignoró la topografía.</label>
+                <label><input type="radio" name="p3" value="B"> B) Peso propio.</label>
+                <label><input type="radio" name="p3" value="C"> C) ETABS no reconoce pendientes.</label>
+            </div>
+            <div class="pregunta"><p>4. Inercia difiere en 20% de planos, ¿causa probable?</p>
+                <label><input type="radio" name="p4" value="A"> A) Sección diferente a la real.</label>
+                <label><input type="radio" name="p4" value="B"> B) Norma cambió.</label>
+                <label><input type="radio" name="p4" value="C"> C) Módulo de elasticidad mayor.</label>
+            </div>
+            <div class="pregunta"><p>5. No considerar la distancia "d" en Steiner, ¿qué consecuencia tiene?</p>
+                <label><input type="radio" name="p5" value="A"> A) Inercia menor.</label>
+                <label><input type="radio" name="p5" value="B"> B) Centroide equivocado.</label>
+                <label><input type="radio" name="p5" value="C"> C) Falta término Ad².</label>
+            </div>
+            <div class="pregunta"><p>6. Área bruta 50 m², área nervios 15 m². ¿Área losa equivalente?</p>
+                <label><input type="radio" name="p6" value="A"> A) 50 m².</label>
+                <label><input type="radio" name="p6" value="B"> B) 15 m².</label>
+                <label><input type="radio" name="p6" value="C"> C) 35 m².</label>
+            </div>
+            <div class="pregunta"><p>7. Centroide a 20 cm, eje a 40 cm, área 300 cm². ¿Término Ad²?</p>
+                <label><input type="radio" name="p7" value="A"> A) 120,000 cm⁴.</label>
+                <label><input type="radio" name="p7" value="B"> B) 1,080,000 cm⁴.</label>
+                <label><input type="radio" name="p7" value="C"> C) 6,000 cm⁴.</label>
+            </div>
+            <div class="pregunta"><p>8. Librería Python ideal para matrices:</p>
+                <label><input type="radio" name="p8" value="A"> A) Pandas.</label>
+                <label><input type="radio" name="p8" value="B"> B) NumPy.</label>
+                <label><input type="radio" name="p8" value="C"> C) Matplotlib.</label>
+            </div>
+            <div class="pregunta"><p>9. Deflexión 2 cm, L/240 con luz 6m. ¿Pasa norma?</p>
+                <label><input type="radio" name="p9" value="A"> A) Sí, 2 cm < 2.5 cm.</label>
+                <label><input type="radio" name="p9" value="B"> B) No, 2 cm > 1 cm.</label>
+                <label><input type="radio" name="p9" value="C"> C) No se sabe.</label>
+            </div>
+            <div class="pregunta"><p>10. Si se duplica altura de losa, ¿cómo varía inercia?</p>
+                <label><input type="radio" name="p10" value="A"> A) Se duplica.</label>
+                <label><input type="radio" name="p10" value="B"> B) x4.</label>
+                <label><input type="radio" name="p10" value="C"> C) x8.</label>
             </div>
 
-            <div class="pregunta nivel-3">
-                <p>12. Explique la diferencia entre la altura real (H) y la altura equivalente (h_eq) de una losa alivianada. ¿Cuál es mayor y por qué?</p>
-                <textarea id="r12" rows="3" placeholder="Escriba su explicación..."></textarea>
-            </div>
+            <div class="pregunta nivel-3"><p>11. Explique qué es la inercia centroidal.</p><textarea id="r11" rows="3"></textarea></div>
+            <div class="pregunta nivel-3"><p>12. Diferencia entre H y h_eq.</p><textarea id="r12" rows="3"></textarea></div>
+            <div class="pregunta nivel-3"><p>13. Calcule centroide global y_cg.</p><textarea id="r13" rows="3"></textarea></div>
+            <div class="pregunta nivel-3"><p>14. ¿Aprueba aumentar bb de 40 a 50? Justifique.</p><textarea id="r14" rows="3"></textarea></div>
+            <div class="pregunta nivel-3"><p>15. Constructor usa bloques de 168 vs 210. ¿Qué hace?</p><textarea id="r15" rows="3"></textarea></div>
 
-            <div class="pregunta nivel-3">
-                <p>13. Calcule el centroide global (y_cg) de la sección compuesta y explique por qué no está en el centro geométrico.</p>
-                <textarea id="r13" rows="3" placeholder="Escriba su respuesta..."></textarea>
-            </div>
-
-            <div class="pregunta nivel-3">
-                <p>14. El constructor propone AUMENTAR bb de 40 a 50 cm para 'ahorrar concreto en nervios'. ¿Aprueba el cambio? Justifique técnica y éticamente.</p>
-                <textarea id="r14" rows="3" placeholder="Escriba su respuesta..."></textarea>
-            </div>
-
-            <div class="pregunta nivel-3">
-                <p>15. El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?</p>
-                <textarea id="r15" rows="3" placeholder="Escriba su respuesta..."></textarea>
-            </div>
-
-            <button type="button" class="btn-epico" onclick="calificarExamen()">🚀 FINALIZAR Y EVALUAR</button>
+            <button type="button" class="btn-epico" id="btn-finalizar" onclick="calificarExamen()">🚀 FINALIZAR Y EVALUAR</button>
         </form>
     </div>
 
@@ -140,14 +157,21 @@
         <h1 style="color: #5dade2;">RESULTADO M01</h1>
         <div id="nota-final" class="nota-grande"></div>
         <div id="feedback-niveles" style="color: #bdc3c7; margin-bottom: 20px; font-size: 14px;"></div>
+        
+        <div id="reporte-detallado">
+            <h3 style="color: #5dade2; text-align: center; border-bottom: 1px solid #34495e; padding-bottom: 10px;">REPORTE DE AUDITORÍA</h3>
+            <div id="contenido-reporte"></div>
+        </div>
+
+        <button onclick="mostrarReporte()" id="btn-ver-reporte" class="btn-epico" style="background: #3498db; margin-top: 20px;">📄 Ver Preguntas y Respuestas Correctas</button>
         <button onclick="imprimirReporte()" class="btn-epico" style="background: #2ecc71;">🖨️ Imprimir Reporte</button>
     </div>
 </div>
 
 <script>
-    // --- LÓGICA DEL TUTOR SOCRÁTICO ---
+    let respuestasEstudiante = {};
     let nivelTamiz = 0; 
-    let tamizAprobado = false;
+    let examenCalificado = false; // Bloqueo de seguridad
 
     function cambiarPestana(pestana, boton) {
         if (boton.disabled) return;
@@ -163,143 +187,113 @@
         const chat = document.getElementById('chat-socratico');
 
         if (texto === "") return;
-
         chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
         input.value = "";
         chat.scrollTop = chat.scrollHeight;
 
         setTimeout(() => {
             let respuesta = "";
-
             if (nivelTamiz === 0) {
                 if (texto.includes("vacio") || texto.includes("hueco") || texto.includes("bloque") || texto.includes("inercia")) {
-                    respuesta = "¡Excelente! Los vacíos no aportan inercia. Ahora dime: <b>si la losa real (H) tiene 25 cm, ¿la losa maciza equivalente (h_eq) debe ser más alta o más baja?</b>";
+                    respuesta = "¡Excelente! Ahora dime: <b>¿h_eq debe ser más alta o más baja que H?</b>";
                     nivelTamiz = 1;
-                } else {
-                    respuesta = "Piénsalo de nuevo. <b>¿El poliestireno aporta rigidez al concreto?</b>";
-                }
+                } else { respuesta = "Piénsalo. <b>¿El poliestireno aporta rigidez?</b>"; }
             } else if (nivelTamiz === 1) {
-                if (texto.includes("menor") || texto.includes("baja") || texto.includes("18") || texto.includes("menos")) {
-                    respuesta = "¡Muy bien! h_eq es menor. Última pregunta de ética: <b>si el contratista quiere usar bloques de 168 kg/cm² en lugar de 210, ¿qué le responderías?</b>";
+                if (texto.includes("menor") || texto.includes("baja")) {
+                    respuesta = "¡Muy bien! Última ética: <b>¿Aceptarías bloques de 168 en lugar de 210?</b>";
                     nivelTamiz = 2;
-                } else {
-                    respuesta = "Si la losa tiene huecos, la cantidad de concreto es menor. <b>¿Necesitas más o menos altura de concreto macizo para igualar la inercia?</b>";
-                }
+                } else { respuesta = "Si hay huecos, hay menos concreto. <b>¿Necesitas más o menos altura?</b>"; }
             } else if (nivelTamiz === 2) {
-                if (texto.includes("no") || texto.includes("rechazo") || texto.includes("norma") || texto.includes("seguridad")) {
-                    respuesta = "¡Felicidades! Has superado el Tamiz. El Cuestionario ha sido desbloqueado. <br><br>Repasemos el cálculo: Si I_total = 24548 y bb = 50, <b>¿cuál es h_eq?</b>";
+                if (texto.includes("no") || texto.includes("rechazo") || texto.includes("norma")) {
+                    respuesta = "¡Felicidades! Tamiz superado. Cuestionario desbloqueado.<br><br>Repaso: Si I=24548 y bb=50, <b>¿cuál es h_eq?</b>";
                     nivelTamiz = 3; 
                     const btnTab = document.getElementById('btn-tab-cuestionario');
                     btnTab.disabled = false;
                     btnTab.innerText = "📝 Cuestionario";
-                } else {
-                    respuesta = "Un ingeniero no puede permitir materiales que no cumplen la norma. <b>¿Aceptarías el material de 168 kg/cm²?</b>";
-                }
+                } else { respuesta = "Un ingeniero no acepta materiales fuera de norma. <b>¿Aceptarías 168 kg/cm²?</b>"; }
             } else if (nivelTamiz === 3) {
                 if (texto.includes("18") || texto.includes("18.06")) {
-                    respuesta = "¡Correcto! Ahora dime: <b>¿El nervio o la capa de compresión aporta más inercia?</b>";
+                    respuesta = "¡Correcto! <b>¿El nervio o la capa aporta más inercia?</b>";
                     nivelTamiz = 4;
-                } else {
-                    respuesta = "Revisa la operación: <b>12 × 24548 / 50 = 5891.52</b>. Saca la raíz cúbica. ¿Cuál es el resultado? (Pista: entre 18 y 19).";
-                }
+                } else { respuesta = "<b>12 × 24548 / 50 = 5891.52</b>. Raíz cúbica. (Pista: entre 18 y 19)."; }
             } else if (nivelTamiz === 4) {
                 if (texto.includes("nervio") || texto.includes("mas")) {
-                    respuesta = "¡Muy bien! Última pregunta de repaso: <b>¿Qué norma citas para verificar que la deflexión es segura?</b>";
+                    respuesta = "¡Muy bien! Última: <b>¿Qué norma verifica la deflexión?</b>";
                     nivelTamiz = 5;
-                } else {
-                    respuesta = "<b>¿Cuál crees que tiene más inercia?</b>";
-                }
+                } else { respuesta = "<b>¿Cuál tiene más inercia?</b>"; }
             } else if (nivelTamiz === 5) {
-                if (texto.includes("nec") || texto.includes("l/240") || texto.includes("norma")) {
-                    respuesta = "¡Excelente! Has repasado los 3 conceptos clave. <b>Ahora sí, ve al Cuestionario.</b>";
+                if (texto.includes("nec") || texto.includes("l/240")) {
+                    respuesta = "¡Excelente! <b>Ve al Cuestionario.</b>";
                     nivelTamiz = 6; 
-                } else {
-                    respuesta = "Piensa en la norma ecuatoriana. <b>¿Qué siglas tiene? (NEC-15)</b>";
-                }
-            } else {
-                respuesta = "Ya estás listo. Ve al Cuestionario.";
-            }
+                } else { respuesta = "Norma ecuatoriana. <b>¿Siglas? (NEC-15)</b>"; }
+            } else { respuesta = "Ya estás listo. Ve al Cuestionario."; }
 
             chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
             chat.scrollTop = chat.scrollHeight;
         }, 1000);
     }
 
-    // --- ALGORITMO DE CALIFICACIÓN COMPLETO ---
     function calificarExamen() {
-        // 1. Calificar Opción Múltiple (P1 a P10)
-        let aciertosCerrados = 0;
-        const respuestasCorrectas = {
-            p1: "B", p2: "A", p3: "A", p4: "A", p5: "C",
-            p6: "A", p7: "A", p8: "B", p9: "A", p10: "C"
+        // Bloqueo de seguridad para evitar doble clic
+        if (examenCalificado) return;
+        examenCalificado = true;
+        document.getElementById('btn-finalizar').disabled = true;
+
+        // 1. Recopilar Respuestas del Estudiante
+        respuestasEstudiante = {
+            p1: document.querySelector('input[name="p1"]:checked')?.value || "Sin responder",
+            p2: document.querySelector('input[name="p2"]:checked')?.value || "Sin responder",
+            p3: document.querySelector('input[name="p3"]:checked')?.value || "Sin responder",
+            p4: document.querySelector('input[name="p4"]:checked')?.value || "Sin responder",
+            p5: document.querySelector('input[name="p5"]:checked')?.value || "Sin responder",
+            p6: document.querySelector('input[name="p6"]:checked')?.value || "Sin responder",
+            p7: document.querySelector('input[name="p7"]:checked')?.value || "Sin responder",
+            p8: document.querySelector('input[name="p8"]:checked')?.value || "Sin responder",
+            p9: document.querySelector('input[name="p9"]:checked')?.value || "Sin responder",
+            p10: document.querySelector('input[name="p10"]:checked')?.value || "Sin responder",
+            r11: document.getElementById('r11').value || "Sin responder",
+            r12: document.getElementById('r12').value || "Sin responder",
+            r13: document.getElementById('r13').value || "Sin responder",
+            r14: document.getElementById('r14').value || "Sin responder",
+            r15: document.getElementById('r15').value || "Sin responder"
         };
 
+        // 2. Calificar Opción Múltiple
+        let aciertosCerrados = 0;
+        const respuestasCorrectas = { p1: "B", p2: "A", p3: "A", p4: "A", p5: "C", p6: "A", p7: "A", p8: "B", p9: "A", p10: "C" };
+
         for (let key in respuestasCorrectas) {
-            const opciones = document.getElementsByName(key);
-            for (let i = 0; i < opciones.length; i++) {
-                if (opciones[i].checked && opciones[i].value === respuestasCorrectas[key]) {
-                    aciertosCerrados++;
-                }
+            if (respuestasEstudiante[key] === respuestasCorrectas[key]) {
+                aciertosCerrados++;
             }
         }
 
-        // 2. Calificar Preguntas Abiertas (P11 a P15) con Sinónimos
+        // 3. Calificar Abiertas (Blindado contra NaN)
         let puntajeAbierto = 0;
-        let feedbackAbierto = [];
-
-        // Función auxiliar para verificar sinónimos
         function evaluarTexto(idPregunta, palabrasClave) {
-            const texto = document.getElementById(idPregunta).value.toLowerCase();
+            const texto = respuestasEstudiante[idPregunta].toLowerCase();
+            if (texto.trim() === "" || texto === "sin responder") return 0; 
             let aciertos = 0;
             palabrasClave.forEach(grupo => {
                 for (let palabra of grupo) {
                     if (texto.includes(palabra)) { aciertos++; break; }
                 }
             });
-            return (aciertos / palabrasClave.length) * 20; // Cada pregunta vale 20 puntos (5 preguntas * 20 = 100)
+            return (aciertos / palabrasClave.length) * 20; 
         }
 
-        // P11: Inercia Centroidal
-        puntajeAbierto += evaluarTexto('r11', [
-            ["centroide", "baricentro", "centro de gravedad"],
-            ["rigidez", "resistencia", "flexion"],
-            ["nervio", "alivianada", "hueco"]
-        ]);
+        puntajeAbierto += evaluarTexto('r11', [["centroide", "baricentro"], ["rigidez", "resistencia"], ["nervio", "alivianada", "hueco"]]);
+        puntajeAbierto += evaluarTexto('r12', [["altura real", "espesor real"], ["equivalente", "maciza"], ["menor", "vacio", "hueco"]]);
+        puntajeAbierto += evaluarTexto('r13', [["16.94", "momento", "suma"], ["asimetric", "capa", "arriba"]]);
+        puntajeAbierto += evaluarTexto('r14', [["inercia", "deflexion"], ["no", "rechazo", "norma"], ["documentar", "notificar", "escrito"]]);
+        puntajeAbierto += evaluarTexto('r15', [["problema", "grave", "deficit"], ["norma", "nec", "aci"], ["notificar", "documentar", "suspender"], ["responsabilidad", "penal", "civil"]]);
 
-        // P12: Diferencia H y h_eq
-        puntajeAbierto += evaluarTexto('r12', [
-            ["altura real", "espesor real", "h "],
-            ["equivalente", "maciza", "misma inercia"],
-            ["menor", "vacio", "hueco"]
-        ]);
-
-        // P13: Centroide Global
-        puntajeAbierto += evaluarTexto('r13', [
-            ["16.94", "momento", "suma", "area"],
-            ["asimetric", "capa de compresion", "arriba"]
-        ]);
-
-        // P14: Reducción de Capa (bb)
-        puntajeAbierto += evaluarTexto('r14', [
-            ["inercia", "deflexion", "rigidez"],
-            ["no", "rechazo", "norma", "seguridad"],
-            ["documentar", "notificar", "escrito"]
-        ]);
-
-        // P15: Bloques de menor resistencia
-        puntajeAbierto += evaluarTexto('r15', [
-            ["problema", "grave", "estructural", "deficit"],
-            ["norma", "nec", "aci"],
-            ["notificar", "documentar", "suspender", "demoler"],
-            ["responsabilidad", "penal", "civil", "legal"]
-        ]);
-
-        // 3. Calcular Nota Final (50% cerradas, 50% abiertas)
+        // 4. Nota Final
         const notaCerradas = (aciertosCerrados / 10) * 50; 
         const notaAbiertas = (puntajeAbierto / 100) * 50;
         const notaFinal = Math.round(notaCerradas + notaAbiertas);
 
-        // 4. Mostrar Resultados
+        // 5. Mostrar Resultados
         document.getElementById('formulario-m01').style.display = 'none';
         document.getElementById('pantalla-resultado').style.display = 'block';
         
@@ -309,16 +303,67 @@
         if (notaFinal >= 60) {
             divNota.className = 'nota-grande aprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
-            document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 01.<br>Nota Opción Múltiple: " + aciertosCerrados + "/10<br>Nota Desarrollo: " + Math.round(puntajeAbierto) + "/100";
+            document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 01.";
         } else {
             divNota.className = 'nota-grande reprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
-            document.getElementById('feedback-niveles').innerHTML = "⚠️ <b>INSUFICIENTE.</b> Revisa el material y vuelve a intentarlo.<br>Nota Opción Múltiple: " + aciertosCerrados + "/10<br>Nota Desarrollo: " + Math.round(puntajeAbierto) + "/100<br><br><b>Recuerda que debes esperar 24 horas para tu próximo intento.</b>";
+            document.getElementById('feedback-niveles').innerHTML = "⚠️ <b>INSUFICIENTE.</b> Recuerda esperar 24 horas para tu próximo intento.";
         }
     }
 
-    // 5. Función para Imprimir Reporte
+    // 6. Lógica para Mostrar el Reporte de Auditoría
+    function mostrarReporte() {
+        const divReporte = document.getElementById('reporte-detallado');
+        const contenido = document.getElementById('contenido-reporte');
+
+        if (divReporte.style.display === 'block') {
+            divReporte.style.display = 'none';
+            document.getElementById('btn-ver-reporte').innerText = "📄 Ver Preguntas y Respuestas Correctas";
+            return;
+        }
+
+        const textoPreguntas = [
+            "1. ¿Qué error se cometió al modelar como maciza? <b>(Correcta: B)</b>",
+            "2. Si se calculó eje X pero sismo actúa en Y, ¿qué falla hay? <b>(Correcta: A)</b>",
+            "3. En terreno con pendiente, si se asume plana, ¿qué falla hay? <b>(Correcta: A)</b>",
+            "4. Inercia difiere en 20% de planos, ¿causa probable? <b>(Correcta: A)</b>",
+            "5. No considerar la distancia 'd' en Steiner, ¿qué consecuencia tiene? <b>(Correcta: C)</b>",
+            "6. Área bruta 50 m², área nervios 15 m². ¿Área losa equivalente? <b>(Correcta: A)</b>",
+            "7. Centroide a 20 cm, eje a 40 cm, área 300 cm². ¿Término Ad²? <b>(Correcta: A)</b>",
+            "8. Librería Python ideal para matrices: <b>(Correcta: B)</b>",
+            "9. Deflexión 2 cm, L/240 con luz 6m. ¿Pasa norma? <b>(Correcta: A)</b>",
+            "10. Si se duplica altura de losa, ¿cómo varía inercia? <b>(Correcta: C)</b>"
+        ];
+
+        let html = "<div class='reporte-grid'>";
+        textoPreguntas.forEach((preg, index) => {
+            const id = "p" + (index + 1);
+            const resp = respuestasEstudiante[id];
+            const esCorrecta = (resp === ["B","A","A","A","C","A","A","B","A","C"][index]);
+            const color = esCorrecta ? "#2ecc71" : "#e74c3c";
+            
+            html += `<div class="reporte-item">
+                <p>${preg}</p>
+                <p>Tu respuesta: <b style="color: ${color};">${resp}</b></p>
+            </div>`;
+        });
+        html += "</div>";
+
+        html += "<h4 style='color: #f39c12; margin-top: 20px;'>Respuestas Abiertas:</h4>";
+        for (let i = 11; i <= 15; i++) {
+            html += `<div class="reporte-item" style="margin-bottom: 10px;">
+                <p><b>Pregunta ${i}:</b> ${respuestasEstudiante['r' + i]}</p>
+            </div>`;
+        }
+
+        contenido.innerHTML = html;
+        divReporte.style.display = 'block';
+        document.getElementById('btn-ver-reporte').innerText = "🔼 Ocultar Reporte de Auditoría";
+    }
+
+    // 7. Lógica para Imprimir
     function imprimirReporte() {
+        document.getElementById('reporte-detallado').style.display = 'block';
         window.print();
     }
 </script>
