@@ -1,762 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>M01 - Inercia Equivalente</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
-.container{max-width:1100px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #3498db;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
-.header-logo{height:70px}
-.header-imagen{height:70px;border-radius:8px;border:2px solid #3498db}
-.header-texto{text-align:center;flex:1;min-width:300px}
-.header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
-.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
-.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
-.header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
-.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
-.tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
-.tab.active{background:linear-gradient(135deg,#3498db,#2980b9);border-color:#3498db;color:white}
-.tab-content{display:none}
-.tab-content.active{display:block}
-.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
-.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
-.progreso-bar{background:linear-gradient(90deg,#2ecc71,#3498db);height:100%;width:0%;transition:width 0.4s}
-.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
-.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
-.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
-.btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
-.btn-desactivado:hover{transform:none !important;box-shadow:none !important}
-.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #3498db}
-.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
-.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
-.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
-.seccion ul{list-style:none;padding-left:0;margin:10px 0}
-.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px;line-height:1.6}
-.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
-.formula-box{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:10px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
-.formula-box.grande{font-size:18px;color:#f39c12;font-weight:bold}
-.tabla{width:100%;border-collapse:collapse;margin:15px 0}
-.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
-.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
-.tabla tr:nth-child(even){background:#34495e}
-.videos-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #e74c3c}
-.videos-section h2{color:#e74c3c;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
-.video-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.video-info h4{color:#5dade2;font-size:15px;margin-bottom:6px}
-.video-info p{color:#bdc3c7;font-size:12px;margin:0}
-.video-botones{display:flex;gap:8px;flex-wrap:wrap}
-.descargas-section{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #2ecc71}
-.descargas-section h2{color:#2ecc71;font-size:20px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #34495e}
-.descarga-item{background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.descarga-icon{font-size:36px;flex-shrink:0}
-.descarga-info{flex:1;min-width:200px}
-.descarga-info h4{color:#5dade2;font-size:15px;margin-bottom:4px}
-.descarga-info p{color:#bdc3c7;font-size:12px;margin:0}
-.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
-.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #3498db}
-.badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
-.badge.orange{background:#f39c12}
-.badge.red{background:#e74c3c}
-.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
-.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
-.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
-.ejercicio-previo .campo strong{color:#2ecc71}
-.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #3498db}
-textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
-.rubrica{background:#34495e;border-radius:8px;padding:15px;margin-top:15px;font-size:12px}
-.rubrica h4{color:#f39c12;margin-bottom:10px}
-.rubrica ul{list-style:none}
-.rubrica li{padding:4px 0}
-.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
-.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
-.puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
-.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
-.c-insuf{background:#7f8c8d;color:white}
-.c-basico{background:#16a085;color:white}
-.c-comp{background:#f39c12;color:white}
-.c-dest{background:#e67e22;color:white}
-.c-excel{background:#c0392b;color:white}
-.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
-.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
-.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
-.certificado code{background:#ecf0f1;padding:6px 12px;border-radius:6px;font-size:14px}
-.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
-.firma{text-align:center;min-width:220px}
-.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
-.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
-.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
-.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
-.modalidad ul{list-style:none}
-.modalidad li{padding:4px 0;font-size:13px}
-.qr-section{display:flex;justify-content:space-between;align-items:center;margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;gap:20px;flex-wrap:wrap}
-.qr-img{width:120px;height:120px;border:2px solid #2c3e50;border-radius:8px;padding:4px;background:white}
-.qr-datos{flex:1;text-align:left;font-size:12px;color:#2c3e50;font-family:Arial;min-width:220px}
-.qr-datos p{margin:5px 0}
-.verificacion-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:12px;padding:25px;margin:20px 0;text-align:center}
-.verificacion-box h3{color:#2ecc71;font-size:20px;margin-bottom:15px}
-.condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
-.condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
-.condiciones-box ul{list-style:none;padding-left:0}
-.condiciones-box li{padding:5px 0 5px 25px;position:relative;font-size:13px;color:#ecf0f1}
-.condiciones-box li:before{content:"☐";position:absolute;left:0;color:#2ecc71;font-weight:bold}
-.ejemplo-valido-box{background:#1e1e2e;border-left:4px solid #3498db;border-radius:8px;padding:15px;margin:15px 0}
-.ejemplo-valido-box h4{color:#5dade2;font-size:13px;margin-bottom:8px}
-.ejemplo-valido-box p{color:#bdc3c7;font-size:13px;font-style:italic;margin:0}
-.criterios-box{background:#34495e;border-radius:8px;padding:15px;margin-top:15px}
-.criterios-box h4{color:#f39c12;font-size:13px;margin-bottom:10px}
-.criterios-box ul{list-style:none;padding-left:0}
-.criterios-box li{padding:4px 0;font-size:12px;color:#ecf0f1}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M01 - Inercia Equivalente - ECT-UNESUM</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        .btn-pestana{background:#141a2e;color:#bdc3c7;border:1px solid #34495e;padding:10px 20px;margin:0 5px;border-radius:8px;cursor:pointer;font-size:14px;transition:all 0.3s;}
+        .btn-pestana:hover{background:#1b263b;color:white;}
+        .btn-pestana.activa{background:#5dade2;color:white;border-color:#5dade2;box-shadow:0 0 15px rgba(93,173,226,0.5);}
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:10px;cursor:pointer;margin-top:30px;transition:transform 0.2s;}
+        .btn-epico:hover{transform:scale(1.02);}
+        .btn-epico:disabled{opacity: 0.5; cursor: not-allowed; filter: grayscale(100%);}
+    </style>
 </head>
 <body>
+
 <div class="container">
+    <!-- ENCABEZADO -->
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M01 — INERCIA EQUIVALENTE</h1>
+        <p>Evaluación de Pensamiento Crítico | Proyecto ECT-UNESUM-2026</p>
+    </div>
 
-<div class="header">
-<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
-<div class="header-texto">
-<h1>🎯 M01 — INERCIA EQUIVALENTE</h1>
-<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
-<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
-<p>PI 2026 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
-</div>
-<img src="portada_estructural.png" alt="Portada" class="header-imagen">
-</div>
+    <!-- BOTONES DE NAVEGACIÓN -->
+    <div style="text-align: center;">
+        <button class="btn-pestana" onclick="cambiarPestana('clases', this)">📚 Clases</button>
+        <button class="btn-pestana" onclick="cambiarPestana('tutor', this)">🤖 Tutor Socrático</button>
+        <button class="btn-pestana" onclick="cambiarPestana('cuestionario', this)">📝 Cuestionario</button>
+    </div>
 
-<div class="tabs">
-<button class="tab active" onclick="cambiarTab('videos', this)">🎥 Clases</button>
-<button class="tab" onclick="cambiarTab('consulta', this)">📚 Consulta</button>
-<button class="tab" onclick="cambiarTab('descargas', this)">📖 Descargas</button>
-<button class="tab" onclick="cambiarTab('cuestionario', this)">✏️ Cuestionario</button>
-</div>
+    <!-- PESTAÑA 1: CLASES -->
+    <div id="seccion-clases" class="seccion-modulo" style="display: block;">
+        <h2 style="color: #5dade2; margin-bottom: 20px;">Teorema de Steiner y Losas Equivalentes</h2>
+        <p style="color: #ecf0f1; line-height: 1.8;">El Teorema de los Ejes Paralelos (Steiner) nos permite calcular el momento de inercia de una sección respecto a cualquier eje. En el Bloque 001, transformamos los nervios de la losa en una sección maciza equivalente para calcular su inercia real.</p>
+        <div style="background: #0a0e1a; padding: 20px; border-radius: 10px; border: 1px dashed #f39c12; text-align: center; margin: 20px 0;">
+            <p style="color: #f39c12; font-size: 20px; font-weight: bold;">Fórmula: I = Ic + A * d²</p>
+        </div>
+    </div>
 
-<!-- TAB VIDEOS -->
-<div id="tab-videos" class="tab-content active">
-<div class="videos-section">
-<h2>🎥 CLASES GRABADAS — M01</h2>
-<p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 1 — Fundamento Teórico</h4>
-<p>📅 10/10/2026 | ⏱ 10 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 2 — Ejemplo Resuelto</h4>
-<p>📅 12/10/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div class="video-item">
-<div class="video-info">
-<h4>🎬 Clase 3 — Caso Real: Laboratorio Vivo Agua Dulce</h4>
-<p>📅 15/10/2026 | ⏱ 8 min | 👨‍🏫 Ing. Gery Marcillo</p>
-</div>
-<div class="video-botones">
-<button class="btn-desactivado" disabled>🎥 Próximamente</button>
-<button class="btn-desactivado" disabled>⬇️ Próximamente</button>
-</div>
-</div>
-<div style="background:#1e1e2e;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin-top:20px;text-align:center">
-<p style="color:#f39c12;font-size:13px;margin:0">💡 <b>Nota:</b> Las clases se activarán después de cada grabación con Google Meet.</p>
-</div>
-</div>
-</div>
+    <!-- PESTAÑA 2: TUTOR SOCRÁTICO (TU CÓDIGO INSERTADO AQUÍ) -->
+    <div id="seccion-tutor" class="seccion-modulo" style="display: none;">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO (Tamiz de Aprendizaje Crítico)</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que tú mismo delimites el problema del Bloque 001. Si pasas este tamiz, se te aprobará el módulo.</p>
+            
+            <!-- Chat -->
+            <div id="chat-socratico" style="background: #0a0e1a; padding: 15px; border-radius: 8px; height: 250px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
+                <div style="background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%;">
+                    <b>Tutor:</b> Bienvenido al Tamiz. Para comenzar, dime: <b>¿Por qué crees que una losa alivianada no se puede modelar directamente como una losa maciza en ETABS?</b>
+                </div>
+            </div>
+            
+            <!-- Input -->
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white;" onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()" style="background: #9b59b6; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">Enviar</button>
+            </div>
+        </div>
+    </div>
 
-<!-- TAB CONSULTA -->
-<div id="tab-consulta" class="tab-content">
-<div class="seccion">
-<h2>📚 CONSULTA — M01 INERCIA EQUIVALENTE</h2>
-<h3>🎯 ¿Qué es la inercia equivalente?</h3>
-<p>La <b>inercia equivalente</b> es la propiedad geométrica que permite modelar una losa alivianada como una losa maciza ficticia en programas como ETABS o SAP2000, manteniendo la misma rigidez a flexión.</p>
-<h3>📐 Fórmulas clave</h3>
-<div class="formula-box">Inercia propia:  I₀ = b · h³ / 12</div>
-<div class="formula-box">Teorema de Steiner:  I = I₀ + A · d²</div>
-<div class="formula-box">Inercia total:  I_total = Σ (I₀ + A · d²)</div>
-<div class="formula-box grande">Altura equivalente:  h_eq = ∛ (12 · I_total / bb)</div>
-<h3>🔑 Conceptos clave</h3>
-<ul>
-<li><b>Inercia centroidal:</b> resistencia a flexión respecto al eje centroidal</li>
-<li><b>Teorema de Steiner:</b> traslado de inercia de ejes paralelos</li>
-<li><b>Altura equivalente:</b> espesor ficticio de losa maciza equivalente</li>
-<li><b>Diferencia H vs h_eq:</b> H es el espesor real, h_eq es el equivalente</li>
-</ul>
-<h3>📊 Datos del modelo base</h3>
-<table class="tabla">
-<tr><th>Dato</th><th>Valor</th></tr>
-<tr><td>H (altura total)</td><td>25 cm</td></tr>
-<tr><td>bn (ancho nervio)</td><td>10 cm</td></tr>
-<tr><td>bb (ancho bloque)</td><td>50 cm</td></tr>
-<tr><td>tc (capa de compresión)</td><td>5 cm</td></tr>
-<tr><td>I_total</td><td>24548 cm⁴</td></tr>
-<tr><td><b>h_eq</b></td><td><b>18.06 cm</b></td></tr>
-</table>
-<h3>📚 Referencias</h3>
-<ul>
-<li>Marcillo et al. (2026) — <i>Rigidez Energética aplicada a la Ingeniería Civil</i></li>
-<li>Hibbeler (2018) — <i>Análisis de Estructuras</i></li>
-<li>NEC-15 — Norma Ecuatoriana de la Construcción</li>
-<li>ACI 318-19</li>
-</ul>
-<div style="text-align:center;margin-top:25px">
-<a href="M01_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
-</div>
-</div>
-</div>
-
-<!-- TAB DESCARGAS -->
-<div id="tab-descargas" class="tab-content">
-<div class="descargas-section">
-<h2>📖 DESCARGAS — M01</h2>
-<p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
-<div class="descarga-item">
-<div class="descarga-icon">📘</div>
-<div class="descarga-info"><h4>Manual del Programa</h4><p>Visión completa del proyecto ECT-UNESUM-2026</p></div>
-<a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div class="descarga-item">
-<div class="descarga-icon">📗</div>
-<div class="descarga-info"><h4>Guía de Estudio M01</h4><p>Material de consulta para estudiantes</p></div>
-<a href="M01_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div class="descarga-item">
-<div class="descarga-icon">📙</div>
-<div class="descarga-info"><h4>Manual del Docente M01</h4><p>Rúbrica por criterios + evaluación</p></div>
-<a href="M01_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div class="descarga-item">
-<div class="descarga-icon">📄</div>
-<div class="descarga-info"><h4>Tabla NEC-15</h4><p>Cargas vivas y combinaciones</p></div>
-<a href="tabla_nec15.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div class="descarga-item">
-<div class="descarga-icon">📄</div>
-<div class="descarga-info"><h4>Tabla ACI 318</h4><p>Factores de mayoración</p></div>
-<a href="tabla_aci318.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-</div>
-</div>
-
-<!-- TAB CUESTIONARIO -->
-<div id="tab-cuestionario" class="tab-content">
-
-<!-- PANTALLA 1: ACÁPITE -->
-<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
-<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M01</h2>
-<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.<br>Es <b>obligatorio</b> para garantizar que comprendes los criterios de evaluación.</p>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 ¿Qué aprenderás?</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular la inercia centroidal de una sección</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Aplicar el Teorema de Steiner</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Determinar la altura equivalente h_eq</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Interpretar el impacto en la deflexión</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
-<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">📐 Fórmulas clave</h3>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I₀ = b · h³ / 12</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">I_total = Σ (I₀ + A · d²)</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">h_eq = ∛(12 · I_total / bb)</div>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
-<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Ejemplo resuelto</h3>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> H = 25 cm, bb = 50 cm, bn = 10 cm, tc = 5 cm</p>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> A_capa = 250 cm², A_nervio = 200 cm², y_cg = 16.94 cm</p>
-<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> I_total = 24548 cm⁴ → h_eq = 18.06 cm</p>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
-<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C? (Interpretación)</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Menciona la relación inversa inercia-deflexión</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Justifica con números (ej: -7.5%)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Conecta con M06 (losa) o L/240</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
-<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D? (Decisión)</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> deflexión supera L/240</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Norma aplicable:</b> NEC-15</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Criterio ético:</b> reportar aunque sea desfavorable</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Trazabilidad:</b> documentar la decisión</li>
-</ul>
-</div>
-<div style="text-align:center;margin-top:25px">
-<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
-</div>
-</div>
-
-<!-- PANTALLA 2: CONDICIONES -->
-<div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
-<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M01</h2>
-<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 CÓMO SE EVALÚA</h3>
-<table style="width:100%;border-collapse:collapse">
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque A:</b> Conceptos</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">10 pts (criterios)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque B:</b> Cálculo</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">40 pts (número exacto)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque C:</b> Interpretación</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (razonamiento)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque D:</b> Decisión</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (criterios + ética)</td></tr>
-</table>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
-<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">✅ QUÉ ESPERA EL SISTEMA</h3>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque A — Concepto:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Explica con tus palabras</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cubre los criterios indicados</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Puedes usar sinónimos</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Muestra el procedimiento</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Indica unidades</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Da el resultado numérico</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Menciona el concepto técnico</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Justifica con números</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Conecta con otros módulos o normas</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Identifica el problema técnico</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cita la norma aplicable</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Aplica criterio ético</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Documenta tu decisión</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">💡 EJEMPLO DE RESPUESTA VÁLIDA</h3>
-<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es la inercia centroidal?"</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es la resistencia a flexión de una figura cuando el eje pasa por su centro de gravedad."</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</p>
-<p style="color:#e74c3c;font-size:13px;margin-bottom:5px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
-<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
-<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">🎯 RECUERDA</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> No hay una sola respuesta correcta</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Se valora el razonamiento</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Puedes expresarte con tus propias palabras</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> El error es parte del aprendizaje</li>
-</ul>
-</div>
-<div style="text-align:center;margin-top:25px">
-<button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ ENTENDIDO, COMENZAR PREGUNTAS</button>
-</div>
-</div>
-
-<!-- PANTALLA 3: CUESTIONARIO -->
-<div id="cuestionario-preguntas" style="display:none">
-<div class="info-bar">
-<span>👤 <b id="info-estudiante">Estudiante</b></span>
-<span>⏱ <b id="info-tiempo">00:00</b></span>
-<span>📊 <b id="info-progreso">0/15</b></span>
-</div>
-<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
-<div id="contenedor-pregunta"></div>
-<div id="pantalla-resultado" style="display:none">
-<div class="resultado">
-<h2>🏆 RESULTADO M01</h2>
-<div class="puntaje-grande" id="resultado-puntaje"></div>
-<div id="resultado-clasificacion"></div>
-</div>
-<div id="contenedor-certificado"></div>
-<div style="text-align:center;margin-top:20px">
-<a href="index.html" class="btn">← Volver al menú</a>
-<button class="btn btn-orange" onclick="window.print()">🖨 Imprimir certificado</button>
-</div>
-</div>
-</div>
-
-</div>
-
+    <!-- PESTAÑA 3: CUESTIONARIO -->
+    <div id="seccion-cuestionario" class="seccion-modulo" style="display: none;">
+        <h2 style="color: #5dade2; margin-bottom: 20px;">Cuestionario del Módulo 01</h2>
+        <p style="color: #bdc3c7; margin-bottom: 20px;">Responde las 15 preguntas del módulo. <b>(Recuerda pasar primero por el Tutor Socrático)</b>.</p>
+        
+        <!-- Botón de Finalizar (Bloqueado hasta pasar el tamiz) -->
+        <button id="btn-cuestionario" class="btn-epico" onclick="finalizarExamen()" disabled>🚀 FINALIZAR Y EVALUAR</button>
+    </div>
 </div>
 
 <script>
-function cambiarTab(tabId, btn){
-document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
-document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
-document.getElementById('tab-'+tabId).classList.add('active');
-btn.classList.add('active');
-}
+    // 1. LÓGICA DE PESTAÑAS
+    function cambiarPestana(pestana, boton) {
+        // Validación de seguridad para el cuestionario
+        if (pestana === 'cuestionario' && !tamizAprobado) {
+            alert("⚠️ Debes superar el Tamiz Socrático (en la pestaña 'Tutor') antes de acceder al cuestionario.");
+            return;
+        }
 
-var MODULO_ACAPITE = "M01";
-var inicioTiempo = null;
-var intervalo = null;
+        document.querySelectorAll('.seccion-modulo').forEach(sec => sec.style.display = 'none');
+        document.querySelectorAll('.btn-pestana').forEach(btn => btn.classList.remove('activa'));
+        document.getElementById('seccion-' + pestana).style.display = 'block';
+        boton.classList.add('activa');
+    }
 
-function verificarAcapite() {
-  var leido = localStorage.getItem("acapite_" + MODULO_ACAPITE + "_leido");
-  if (leido === "true") {
-    document.getElementById("pantalla-acapite").style.display = "none";
-    verificarCondiciones();
-  } else {
-    document.getElementById("pantalla-acapite").style.display = "block";
-    document.getElementById("pantalla-condiciones").style.display = "none";
-    document.getElementById("cuestionario-preguntas").style.display = "none";
-  }
-}
+    // 2. LÓGICA DEL TUTOR SOCRÁTICO (EL TAMIZ)
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
 
-function marcarAcapiteLeido() {
-  localStorage.setItem("acapite_" + MODULO_ACAPITE + "_leido", "true");
-  document.getElementById("pantalla-acapite").style.display = "none";
-  verificarCondiciones();
-}
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
 
-function verificarCondiciones() {
-  var leido = localStorage.getItem("condiciones_" + MODULO_ACAPITE + "_leido");
-  if (leido === "true") {
-    document.getElementById("pantalla-condiciones").style.display = "none";
-    document.getElementById("cuestionario-preguntas").style.display = "block";
-    mostrar();
-    iniciarCronometro();
-  } else {
-    document.getElementById("pantalla-condiciones").style.display = "block";
-    document.getElementById("cuestionario-preguntas").style.display = "none";
-  }
-}
+        if (texto === "") return;
 
-function marcarCondicionesLeidas() {
-  localStorage.setItem("condiciones_" + MODULO_ACAPITE + "_leido", "true");
-  document.getElementById("pantalla-condiciones").style.display = "none";
-  document.getElementById("cuestionario-preguntas").style.display = "block";
-  mostrar();
-  iniciarCronometro();
-}
+        // Mostrar mensaje del estudiante
+        chat.innerHTML += `<div style="background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; align-self: flex-end; max-width: 80%;"><b>Tú:</b> ${input.value}</div>`;
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
 
-function iniciarCronometro() {
-  if (intervalo) return;
-  inicioTiempo = new Date();
-  intervalo = setInterval(function(){
-    var s = Math.floor((new Date() - inicioTiempo) / 1000);
-    var m = Math.floor(s / 60).toString().padStart(2, '0');
-    var ss = (s % 60).toString().padStart(2, '0');
-    document.getElementById('info-tiempo').textContent = m + ':' + ss;
-  }, 1000);
-}
+        setTimeout(() => {
+            let respuesta = "";
 
-var PREGUNTAS = [
-{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué es la inercia centroidal de una sección y por qué es importante en el diseño de una losa alivianada.",
-ejercicio:null,
-condiciones:["Mencionar que es una propiedad geométrica de la sección","Relacionar con la resistencia a flexión","Mencionar el eje centroidal (o centro de gravedad)"],
-ejemplo_valido:"Es la resistencia a flexión que tiene una figura cuando el eje pasa por su centro de gravedad.",
-criterios:[
-{peso:40,desc:"Resistencia a flexión",keywords:["flexión","flexion","flexionar","doblar","deformar","flex"]},
-{peso:30,desc:"Propiedad de la sección",keywords:["propiedad","sección","seccion","figura","área","area","geométrica","geometrica"]},
-{peso:30,desc:"Eje centroidal",keywords:["centroidal","centroide","centro de gravedad","eje","gravedad"]}
-]},
-{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué dice el Teorema de Steiner y para qué sirve en el cálculo de losas alivianadas.",
-ejercicio:null,
-condiciones:["Mencionar que la inercia se traslada entre ejes paralelos","Indicar la fórmula o su significado (I = I₀ + A·d²)","Conectar con el cálculo de losas alivianadas"],
-ejemplo_valido:"Dice que la inercia respecto a un eje cualquiera es igual a la inercia centroidal más el área por la distancia al cuadrado. Sirve para calcular la inercia de una losa alivianada que tiene nervios y capa.",
-criterios:[
-{peso:40,desc:"Traslado de inercia",keywords:["traslada","trasladar","paralelo","steiner","ejes"]},
-{peso:30,desc:"Fórmula o significado",keywords:["i0","inercia centroidal","área","area","distancia","cuadrado","fórmula","formula"]},
-{peso:30,desc:"Aplicación a losa alivianada",keywords:["losa","alivianada","nervio","capa","compresión","compresion"]}
-]},
-{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique con sus palabras por qué se calcula la altura equivalente (h_eq) en una losa alivianada y qué pasaría si no se calculara.",
-ejercicio:null,
-condiciones:["Mencionar que permite modelar la losa como maciza","Indicar que mantiene la misma inercia","Explicar consecuencia si no se calcula"],
-ejemplo_valido:"Se calcula para poder modelar la losa alivianada como si fuera maciza en ETABS. Si no se calcula, la inercia sería incorrecta y la deflexión también.",
-criterios:[
-{peso:40,desc:"Modelado como maciza",keywords:["maciza","modelar","etabs","sap","programa"]},
-{peso:30,desc:"Equivalencia de inercia",keywords:["inercia","equivalente","misma","rigidez"]},
-{peso:30,desc:"Consecuencia si no se calcula",keywords:["incorrecta","error","deflexión","deflexion","falla","problema"]}
-]},
-{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique la diferencia entre la altura real (H) y la altura equivalente (h_eq) de una losa alivianada. ¿Cuál es mayor y por qué?",
-ejercicio:null,
-condiciones:["Definir H como el espesor real","Definir h_eq como el espesor ficticio equivalente","Explicar por qué h_eq < H (los vacíos no aportan inercia)"],
-ejemplo_valido:"H es el espesor real de la losa, incluyendo los bloques huecos. h_eq es el espesor de una losa maciza que tendría la misma inercia. h_eq es menor porque los vacíos del aligeramiento no aportan inercia.",
-criterios:[
-{peso:30,desc:"Define H",keywords:["real","verdadero","espesor real","total"]},
-{peso:30,desc:"Define h_eq",keywords:["equivalente","ficticio","ficticia","maciza","h_eq"]},
-{peso:40,desc:"Explica por qué h_eq < H",keywords:["vacíos","vacios","hueco","aligeramiento","no aporta","menor"]}
-]},
-{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
-enunciado:"Calcule el área de la capa de compresión, del nervio y el área total para H=25 cm, bb=50 cm, bn=10 cm, tc=5 cm.",
-ejercicio:{instrucciones:"A_capa = bb · tc | A_nervio = bn · (H - tc) | A_total = A_capa + A_nervio",campos:[{label:"A_capa (cm²)",valor:250},{label:"A_nervio (cm²)",valor:200},{label:"A_total (cm²)",valor:450}]},
-condiciones:["Mostrar el procedimiento de cada área","Indicar unidades (cm²)","Dar el resultado numérico"],
-ejemplo_valido:"A_capa = 50·5 = 250 cm². A_nervio = 10·20 = 200 cm². A_total = 450 cm².",
-criterios:[
-{peso:33,desc:"A_capa correcta",keywords:["250"]},
-{peso:33,desc:"A_nervio correcta",keywords:["200"]},
-{peso:34,desc:"A_total correcta",keywords:["450"]}
-]},
-{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule el centroide global y_cg de la sección compuesta y explique por qué no está en el centro geométrico.",
-ejercicio:{instrucciones:"y_cg = Σ(Ai · yi) / Σ(Ai)",campos:[{label:"y_capa (cm)",valor:22.5},{label:"y_nervio (cm)",valor:10.0},{label:"y_cg (cm)",valor:16.94}]},
-condiciones:["Mostrar el procedimiento (suma de momentos / suma de áreas)","Indicar el resultado numérico","Explicar por qué no está en el centro geométrico"],
-ejemplo_valido:"y_cg = (250·22.5 + 200·10) / 450 = 16.94 cm. No está en el centro porque la capa de compresión está más arriba y su momento es mayor.",
-criterios:[
-{peso:50,desc:"Calcula y_cg correcto",keywords:["16.94","16,94"]},
-{peso:50,desc:"Explica por qué no está en el centro",keywords:["capa","arriba","superior","distribución","distribucion","no simétrica","no simetrica","momento"]}
-]},
-{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,
-enunciado:"Calcule la inercia total I_total aplicando el Teorema de Steiner. Indique qué componente aporta más inercia.",
-ejercicio:{instrucciones:"I_total = Σ(I0 + A·d²)",campos:[{label:"I_capa (cm⁴)",valor:520.8},{label:"I_nervio (cm⁴)",valor:6666.7},{label:"I_total (cm⁴)",valor:24548}]},
-condiciones:["Mostrar el procedimiento con Steiner","Indicar el resultado numérico","Identificar qué componente aporta más inercia"],
-ejemplo_valido:"I_capa = 520.8 + 250·5.56² = 8256 cm⁴. I_nervio = 6666.7 + 200·(-6.94)² = 16300 cm⁴. I_total = 24548 cm⁴. El nervio aporta más por su mayor área.",
-criterios:[
-{peso:40,desc:"Calcula I_total correcto",keywords:["24548"]},
-{peso:30,desc:"Muestra procedimiento Steiner",keywords:["steiner","i0","a·d","área","area","distancia"]},
-{peso:30,desc:"Identifica componente mayor",keywords:["nervio","capa","aporta","mayor"]}
-]},
-{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la altura equivalente h_eq y explique si es mayor o menor que H.",
-ejercicio:{instrucciones:"h_eq = ∛(12 · I_total / bb)",campos:[{label:"12 · I_total",valor:294576},{label:"12 · I_total / bb",valor:5891.5},{label:"h_eq (cm)",valor:18.06}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Explicar si es mayor o menor que H y por qué"],
-ejemplo_valido:"h_eq = ∛(294576/50) = ∛5891.5 = 18.06 cm. Es menor que H=25 cm porque los vacíos del aligeramiento no aportan inercia.",
-criterios:[
-{peso:50,desc:"Calcula h_eq correcto",keywords:["18.06","18,06"]},
-{peso:50,desc:"Explica h_eq < H",keywords:["menor","vacíos","vacios","aligeramiento","no aporta"]}
-]},
-{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la deflexión máxima con w=0.544 t/m, L=6 m, E=2.19e6 t/m², I_eq=0.000245 m⁴. Verifique si cumple L/240.",
-ejercicio:{instrucciones:"δ_max = 5·w·L⁴ / (384·E·I) | δ_adm = L/240",campos:[{label:"EI (t·m²)",valor:536.5},{label:"δ_max (mm)",valor:1.71},{label:"δ_adm (mm)",valor:25.00}]},
-condiciones:["Mostrar el procedimiento","Indicar el resultado numérico","Verificar si cumple con L/240"],
-ejemplo_valido:"EI = 2.19e6 · 0.000245 = 536.5 t·m². δ_max = 5·0.544·6⁴/(384·536.5) = 1.71 mm. δ_adm = 6000/240 = 25 mm. Cumple.",
-criterios:[
-{peso:40,desc:"Calcula δ_max correcto",keywords:["1.71","1,71"]},
-{peso:30,desc:"Calcula δ_adm correcto",keywords:["25","25.00","25,00"]},
-{peso:30,desc:"Verifica cumplimiento",keywords:["cumple","ok","verifica","satisface"]}
-]},
-{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Compare dos losas: Losa A con bb=40 cm (2.5 nervios/m) y Losa B con bb=50 cm (2 nervios/m). ¿Cuál tiene mayor inercia y menor deflexión? Justifique técnicamente y cite la norma aplicable.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Menor bb → más nervios por metro → más inercia.",campos:[{label:"Losa A (bb=40 cm)",valor:"2.5 nervios/m"},{label:"Losa B (bb=50 cm)",valor:"2 nervios/m"},{label:"Mayor inercia",valor:"Losa A"}]},
-condiciones:["Identificar que la Losa A tiene más nervios por metro","Conectar con mayor inercia","Conectar con menor deflexión","Citar NEC-15 o L/240"],
-ejemplo_valido:"La Losa A tiene más nervios por metro (2.5 vs 2), por lo tanto tiene mayor inercia y menor deflexión. Esto se verifica con la NEC-15 que exige δ ≤ L/240.",
-criterios:[
-{peso:30,desc:"Identifica más nervios en Losa A",keywords:["más nervios","mas nervios","2.5","40"]},
-{peso:30,desc:"Conecta con mayor inercia",keywords:["inercia","rigidez","mayor"]},
-{peso:20,desc:"Conecta con menor deflexión",keywords:["deflexión","deflexion","menor","deforma"]},
-{peso:20,desc:"Cita norma",keywords:["nec","l/240","240","norma"]}
-]},
-{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique físicamente por qué la altura equivalente (h_eq) es menor que la altura real (H). Dé un ejemplo con los datos del modelo.",
-ejercicio:null,
-condiciones:["Mencionar los vacíos del aligeramiento","Indicar que solo aporta el nervio y la capa de compresión","Dar ejemplo con números"],
-ejemplo_valido:"h_eq es menor que H porque los bloques huecos no aportan inercia. Solo el nervio (200 cm²) y la capa (250 cm²) aportan. Por eso h_eq=18.06 cm < H=25 cm.",
-criterios:[
-{peso:40,desc:"Menciona vacíos del aligeramiento",keywords:["vacíos","vacios","hueco","aligeramiento","bloque"]},
-{peso:30,desc:"Menciona nervio y capa",keywords:["nervio","capa","compresión","compresion"]},
-{peso:30,desc:"Da ejemplo con números",keywords:["18.06","25","24548","cm"]}
-]},
-{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Explique cómo se usa h_eq en el M06 (Diseño de Losa) y qué pasaría si se usara H en lugar de h_eq.",
-ejercicio:null,
-condiciones:["Mencionar que h_eq alimenta al M06","Explicar que sirve para verificar deflexión","Explicar consecuencia de usar H en lugar de h_eq"],
-ejemplo_valido:"h_eq se usa en el M06 para calcular la inercia equivalente de la losa. Si se usara H en lugar de h_eq, la inercia sería mayor y la deflexión calculada sería menor que la real, lo que sería un diseño no seguro.",
-criterios:[
-{peso:30,desc:"h_eq alimenta al M06",keywords:["m06","losa","siguiente","módulo","modulo"]},
-{peso:30,desc:"Sirve para verificar deflexión",keywords:["deflexión","deflexion","verificar","inercia"]},
-{peso:40,desc:"Consecuencia de usar H",keywords:["sobreestima","subestima","no seguro","error","incorrecto"]}
-]},
-{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
-enunciado:"Explique qué pasa con la inercia, la rigidez y la deflexión si la capa de compresión (tc) baja de 5 a 3 cm. Justifique con números.",
-ejercicio:null,
-condiciones:["Mencionar que baja la inercia","Mencionar que baja la rigidez","Mencionar que sube la deflexión","Justificar con números"],
-ejemplo_valido:"Si tc baja de 5 a 3 cm, el área de la capa de compresión baja de 250 a 150 cm². La inercia total baja, la rigidez baja y la deflexión sube. El impacto es significativo porque la capa está lejos del centroide.",
-criterios:[
-{peso:30,desc:"Baja la inercia",keywords:["inercia","baja","disminuye","menor"]},
-{peso:30,desc:"Baja la rigidez",keywords:["rigidez","baja","disminuye","menor"]},
-{peso:20,desc:"Sube la deflexión",keywords:["deflexión","deflexion","sube","aumenta","mayor"]},
-{peso:20,desc:"Justifica con números",keywords:["250","150","cm²","cm2"]}
-]},
-{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
-enunciado:"El constructor propone AUMENTAR bb de 40 a 50 cm para 'ahorrar concreto en nervios'. ¿Aprueba el cambio? Justifique técnica y éticamente.",
-ejercicio:{instrucciones:"Recuerde: bb = distancia entre ejes de nervios. Mayor bb → menos nervios → menos inercia → más deflexión.",campos:[{label:"bb actual",valor:"40 cm (2.5 nervios/m)"},{label:"bb propuesto",valor:"50 cm (2 nervios/m)"},{label:"Impacto",valor:"-20% nervios"}]},
-condiciones:["Técnico: al subir bb, hay menos nervios, menos inercia, más deflexión","Normativo: citar NEC-15","Ético: responsabilidad profesional","Trazabilidad: documentar la decisión"],
-ejemplo_valido:"No apruebo. Al subir bb de 40 a 50 cm, se reduce el número de nervios por metro en 20%. Esto baja la inercia y aumenta la deflexión, pudiendo superar L/240 según NEC-15. Rechazar el cambio, documentar y notificar por escrito. Como ingeniero firmante, soy responsable civil y penal.",
-criterios:[
-{peso:30,desc:"Técnico: menos nervios = menos inercia",keywords:["menos nervios","inercia","deflexión","deflexion","rigidez"]},
-{peso:20,desc:"Normativo: cita NEC-15",keywords:["nec","l/240","norma"]},
-{peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","firma","rechazo"]},
-{peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","notificar","registrar","informe"]}
-]},
-{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
-enunciado:"El constructor usa bloques de menor resistencia (168 kg/cm² en lugar de 210 kg/cm², déficit -20%). ¿Qué hace usted como ingeniero responsable?",
-ejercicio:{instrucciones:"Considere NEC-15, ACI 318, NTE INEN, ética profesional",campos:[{label:"Resistencia especificada",valor:"210 kg/cm²"},{label:"Resistencia real",valor:"168 kg/cm²"},{label:"Déficit",valor:"-20%"}]},
-condiciones:["Identificar el problema: resistencia especificada vs real","Aplicar normativa: NEC-15, ACI 318, NTE INEN","Acciones concretas: rechazar, notificar, suspender, documentar","Consecuencias legales: responsabilidad civil y penal"],
-ejemplo_valido:"El déficit del 20% viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito al constructor, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal por cualquier falla.",
-criterios:[
-{peso:25,desc:"Identifica el problema",keywords:["déficit","deficit","20","resistencia","menor","168","210"]},
-{peso:25,desc:"Aplica normativa",keywords:["nec","aci","nte","inen","norma"]},
-{peso:25,desc:"Acciones concretas",keywords:["rechazar","notificar","suspender","documentar","paralizar"]},
-{peso:25,desc:"Consecuencias legales",keywords:["responsabilidad","civil","penal","denuncia","legal"]}
-]}
-];
+            if (nivelTamiz === 0) {
+                if (texto.includes("vacio") || texto.includes("hueco") || texto.includes("bloque") || texto.includes("inercia")) {
+                    respuesta = "¡Excelente! Los vacíos no aportan inercia. Ahora dime: <b>si la losa real (H) tiene 25 cm, ¿la losa maciza equivalente (h_eq) debe ser más alta o más baja para tener la misma inercia?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piénsalo de nuevo. Si la losa tiene bloques de poliestireno, <b>¿ese material aporta rigidez al concreto?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("menor") || texto.includes("baja") || texto.includes("18") || texto.includes("menos")) {
+                    respuesta = "¡Muy bien! h_eq es menor. Última pregunta para aprobar: <b>si el contratista quiere usar bloques de 168 kg/cm² en lugar de 210 kg/cm², ¿qué le responderías como ingeniero ético?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "Revisa tu cálculo. Si la losa tiene huecos, la cantidad de concreto es menor. <b>¿Necesitas más o menos altura de concreto macizo para igualar la inercia?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("no") || texto.includes("rechazo") || texto.includes("norma") || texto.includes("seguridad")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. El Cuestionario ha sido desbloqueado.";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    // Desbloquear el botón del cuestionario
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                } else {
+                    respuesta = "Recuerda la ética. Un ingeniero no puede permitir materiales que no cumplen la norma. <b>¿Aceptarías el material de 168 kg/cm² sabiendo que puede colapsar?</b>";
+                }
+            }
 
-var respuestas={},preguntaActual=0;
-var MODULO="M01",TITULO="Inercia Equivalente";
-document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
+            chat.innerHTML += `<div style="background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%;"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
 
-function mostrar(){
-var p=PREGUNTAS[preguntaActual],total=PREGUNTAS.length;
-document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)+'%';
-document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
-var h='<div class="pregunta-box">';
-h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
+        }, 1000);
+    }
 
-if(p.ejercicio){
-h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
-p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
-h+='</div>';
-}
-
-if(p.condiciones){
-h+='<div class="condiciones-box"><h4>✅ CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
-p.condiciones.forEach(function(c){h+='<li>'+c+'</li>';});
-h+='</ul><p style="color:#7f8c8d;font-size:11px;margin-top:10px;font-style:italic">Puedes usar otras palabras, pero debes cubrir estos criterios.</p></div>';
-}
-
-if(p.ejemplo_valido){
-h+='<div class="ejemplo-valido-box"><h4>💡 EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"'+p.ejemplo_valido+'"</p></div>';
-}
-
-h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
-h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
-
-if(p.criterios){
-h+='<div class="criterios-box"><h4>🎯 CRITERIOS DE EVALUACIÓN</h4><ul>';
-p.criterios.forEach(function(c){h+='<li>✅ '+c.desc+' ('+c.peso+'%)</li>';});
-h+='</ul></div>';
-}
-
-h+='<div class="rubrica"><h4>🎯 RÚBRICA GENERAL</h4><ul>';
-h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
-h+='<li>🟧 Básico (40-60%): Responde sin cubrir todos los criterios</li>';
-h+='<li>🟨 Competente (60-80%): Cubre la mayoría de criterios</li>';
-h+='<li>🟩 Excelente (80-100%): Cubre todos los criterios con claridad</li>';
-h+='</ul></div></div>';
-
-h+='<div class="nav-buttons">';
-h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
-h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
-h+='</div>';
-
-document.getElementById('contenedor-pregunta').innerHTML=h;
-}
-
-function guardar(){var p=PREGUNTAS[preguntaActual];var t=document.getElementById('resp_'+p.id);if(t)respuestas[p.id]=t.value;}
-function ant(){guardar();preguntaActual--;mostrar();}
-function sig(){guardar();preguntaActual++;mostrar();}
-
-function calcPts(){
-var total=0,maxTotal=0;
-PREGUNTAS.forEach(function(p){
-var r=(respuestas[p.id]||'').toLowerCase();
-var puntosPregunta=0;
-if(p.criterios){
-p.criterios.forEach(function(c){
-var encontrado=false;
-c.keywords.forEach(function(k){
-if(r.indexOf(k.toLowerCase())!==-1) encontrado=true;
-});
-if(encontrado) puntosPregunta += c.peso;
-});
-} else {
-puntosPregunta = r.length > 15 ? 50 : 0;
-}
-total += puntosPregunta * p.puntaje / 100;
-maxTotal += p.puntaje;
-});
-return (total/maxTotal)*100;
-}
-
-function clasificar(p){
-if(p<40)return{txt:'INSUFICIENTE',css:'c-insuf'};
-if(p<60)return{txt:'BÁSICO',css:'c-basico'};
-if(p<80)return{txt:'COMPETENTE',css:'c-comp'};
-if(p<95)return{txt:'DESTACADO',css:'c-dest'};
-return{txt:'EXCELENTE',css:'c-excel'};
-}
-
-function fin(){
-guardar();clearInterval(intervalo);intervalo=null;
-var pts=calcPts();var cl=clasificar(pts);
-document.getElementById('contenedor-pregunta').innerHTML='';
-document.getElementById('pantalla-resultado').style.display='block';
-document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
-document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
-localStorage.setItem(MODULO+'_puntaje',pts);
-
-if(pts>=60){
-var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
-var fecha=new Date().toLocaleDateString('es-EC');
-var nombre=localStorage.getItem('estudiante_nombre')||'';
-var cedula=localStorage.getItem('estudiante_cedula')||'';
-var lugar=localStorage.getItem('estudiante_lugar')||'';
-var rol=localStorage.getItem('usuario_rol')||'estudiante';
-var rolTexto=(rol==='docente')?'DOCENTE EXPOSITOR':'ESTUDIANTE';
-document.getElementById('contenedor-certificado').innerHTML=
-'<div class="certificado">'+
-'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">'+
-'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>'+
-'<h3>FACULTAD DE CIENCIAS TÉCNICAS</h3>'+
-'<h3>CARRERA DE INGENIERÍA CIVIL</h3>'+
-'<hr style="margin:15px 0">'+
-'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
-'<hr style="margin:15px 0">'+
-'<h3>CERTIFICADO DE APROBACIÓN</h3>'+
-'<h3>Módulo M01 — Inercia Equivalente</h3>'+
-'<p style="margin:15px 0">La Universidad certifica que:</p>'+
-'<h2 style="color:#2c3e50">'+nombre+'</h2>'+
-'<p>C.C. '+cedula+'</p>'+
-'<p style="margin:10px 0"><b>Rol: '+rolTexto+'</b></p>'+
-'<p style="margin:10px 0"><b>Lugar de intervención:</b> '+lugar+'</p>'+
-'<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
-'<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
-'<p><b>Clasificación: '+cl.txt+'</b></p>'+
-'<div class="modalidad">'+
-'<h4>MODALIDAD DE APROBACIÓN:</h4>'+
-'<ul>'+
-'<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
-'<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
-'</ul></div>'+
-'<div class="qr-section">'+
-'<img src="qr_m01.png" alt="QR" class="qr-img">'+
-'<div class="qr-datos">'+
-'<p><b>Código:</b> '+cod+'</p>'+
-'<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
-'<p><b>Vigencia:</b> Permanente</p>'+
-'<p><b>Verificación:</b> Escanee el código QR</p>'+
-'</div>'+
-'</div>'+
-'<div class="firmas">'+
-'<div class="firma"><div class="linea-firma"></div>'+
-'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+
-'<p>DOCENTE — ESTRUCTURA I / II</p>'+
-'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
-'<div class="firma"><div class="linea-firma"></div>'+
-'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>'+
-'<p>COORDINADORA DE CARRERA</p>'+
-'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
-'</div>'+
-'<hr style="margin:20px 0">'+
-'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>'+
-'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>'+
-'</div>';
-}
-}
-
-verificarAcapite();
+    function finalizarExamen() {
+        alert("¡Cuestionario enviado! El sistema está calculando tu nota...");
+    }
 </script>
+
 </body>
 </html>
