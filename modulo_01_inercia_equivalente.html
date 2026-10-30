@@ -11,26 +11,34 @@
         .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
         .header h1{color:#5dade2;font-size:24px;}
         .header p{color:#bdc3c7;font-size:14px;}
+        
         .btn-pestana{background:#141a2e;color:#bdc3c7;border:1px solid #34495e;padding:10px 20px;margin:0 5px;border-radius:8px;cursor:pointer;font-size:14px;transition:all 0.3s;}
         .btn-pestana:hover:not(:disabled){background:#1b263b;color:white;}
         .btn-pestana.activa{background:#5dade2;color:white;border-color:#5dade2;box-shadow:0 0 15px rgba(93,173,226,0.5);}
         .btn-pestana:disabled {opacity: 0.4; cursor: not-allowed; border: 1px dashed #e74c3c;}
+        
         .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        
         .caja-algoritmo {background: rgba(52,152,219,0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-bottom: 20px;}
-        .caja-algoritmo input {padding: 12px; border-radius: 8px; border: 1px solid #3498db; background: #0a0e1a; color: white; font-size: 16px; width: 60%;}
-        .caja-algoritmo button {background: #3498db; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px;}
+        .caja-algoritmo input, .caja-algoritmo select {padding: 12px; border-radius: 8px; border: 1px solid #3498db; background: #0a0e1a; color: white; font-size: 16px; width: 100%; margin-bottom: 10px;}
+        .caja-algoritmo button {background: #3498db; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; width: 100%;}
         #resultado-predimension {display: none; background: #0a0e1a; border-left: 4px solid #2ecc71; padding: 15px; border-radius: 8px; margin-top: 15px;}
+
         .caja-teoria {background: #0a0e1a; border-left: 4px solid #5dade2; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
         .caja-teoria h2 {color: #5dade2; font-size: 20px; margin-bottom: 10px;}
         .caja-teoria p {color: #bdc3c7; font-size: 14px; text-align: justify;}
+
         .caja-aci {background: rgba(20,26,46,0.7); border: 1px solid rgba(243,156,18,0.4); padding: 20px; border-radius: 12px; margin-bottom: 20px;}
         .caja-aci h3 {color: #f39c12; font-size: 18px; margin-bottom: 10px;}
         .caja-aci ul {color: #bdc3c7; font-size: 14px; margin-left: 20px; line-height: 1.8;}
+
         .caja-ensayo {background: rgba(155,89,182,0.1); border: 2px solid #9b59b6; padding: 20px; border-radius: 12px; margin-bottom: 20px;}
         .caja-ensayo h3 {color: #c39bd3; font-size: 18px; margin-bottom: 10px;}
         .caja-ensayo p {color: #bdc3c7; font-size: 14px;}
+        
         .caja-descargas {background: rgba(20,26,46,0.7); border: 1px solid rgba(46,204,113,0.3); padding: 20px; border-radius: 12px; margin-bottom: 20px;}
         .btn-descarga {background: #2ecc71; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; display: inline-block; margin-right: 10px; font-size: 14px; margin-bottom: 10px;}
+
         .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
         .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%; align-self: flex-start; border-left: 3px solid #9b59b6;}
         .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 80%; align-self: flex-end; border-right: 3px solid #3498db;}
@@ -38,12 +46,14 @@
         .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
         .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
         .input-group button:hover {background: #8e44ad;}
+
         .pregunta {margin-bottom: 25px; background: #0a0e1a; padding: 20px; border-radius: 10px; border-left: 4px solid #3498db;}
         .pregunta.nivel-3 {border-left-color: #e74c3c;}
         .pregunta p {color: #f39c12; font-weight: bold; font-size: 15px; margin-bottom: 15px;}
         .pregunta label {display: block; color: #ecf0f1; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.02);}
         .pregunta label:hover {background: rgba(93,173,226,0.1);}
         .pregunta textarea {width: 100%; padding: 10px; background: #141a2e; color: white; border: 1px solid #34495e; border-radius: 8px; font-family: inherit; resize: vertical;}
+
         .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:10px;cursor:pointer;margin-top:30px;transition:transform 0.2s;}
         .btn-epico:hover{transform:scale(1.02);}
         #pantalla-resultado {display: none; text-align: center; padding: 40px; background: #0a0e1a; border-radius: 15px; margin-top: 20px; border: 2px solid #3498db;}
@@ -73,15 +83,46 @@
     <!-- PESTAÑA 1: CLASES -->
     <div id="seccion-clases" class="seccion-modulo" style="display: block;">
         <div class="caja-algoritmo">
-            <h3 style="color: #3498db; font-size: 20px; margin-bottom: 10px;">🎯 Paso 1: ¿Qué espesor de losa necesito?</h3>
-            <p style="color: #bdc3c7; font-size: 14px; margin-bottom: 15px;">Antes de calcular la inercia, define la geometría. Introduce la luz (L) para determinar el espesor.</p>
-            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                <input type="number" id="luz-predimension" placeholder="Ej: 4.5 (metros)" step="0.1">
-                <button onclick="calcularEspesorInicio()">Calcular Espesor</button>
+            <h3 style="color: #3498db; font-size: 20px; margin-bottom: 10px;">🎯 Paso 1: ¿Qué espesor y carga necesito?</h3>
+            
+            <!-- ACLARACIÓN DEL MÓDULO 2 -->
+            <div style="background: rgba(243,156,18,0.15); border-left: 4px solid #f39c12; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                <p style="color: #f39c12; font-size: 12px; margin: 0; font-weight: bold;">
+                    ⚠️ NOTA DE ARTICULACIÓN: Este algoritmo te da un <i>insumo base</i> (Carga Muerta y Viva). El análisis detallado y normativo de las cargas (NEC-15 y ACI 318) se estudia a fondo en el <b>Módulo 02 — Cálculo de Cargas</b>.
+                </p>
             </div>
+
+            <p style="color: #bdc3c7; font-size: 14px; margin-bottom: 15px;">Introduce la luz (L) y el tipo de uso para determinar el espesor, la Carga Muerta, la Carga Viva (NEC-15) y la Carga Última como referencia inicial.</p>
+            
+            <input type="number" id="luz-predimension" placeholder="Luz: Ej. 4.5 (metros)" step="0.1">
+            
+            <select id="uso-predimension">
+                <option value="vivienda">Vivienda (Cv = 0.20 t/m²)</option>
+                <option value="aulas">Aulas / Escuela (Cv = 0.29 t/m²)</option>
+                <option value="hospital">Hospital (Cv = 0.40 t/m²)</option>
+                <option value="bodega">Bodega Pesada (Cv = 1.20 t/m²)</option>
+            </select>
+            
+            <button onclick="calcularEspesorInicio()">Calcular Espesor y Carga</button>
+
             <div id="resultado-predimension">
                 <h4 id="predimension-tipo" style="font-size: 18px; margin-bottom: 5px;"></h4>
-                <p id="predimension-texto" style="color: #bdc3c7; font-size: 14px;"></p>
+                <p id="predimension-texto" style="color: #bdc3c7; font-size: 13px; margin-bottom: 15px;"></p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
+                        <span style="display: block; font-size: 11px; color: #7f8c8d;">Carga Muerta (Cm)</span>
+                        <span id="res-cm" style="font-size: 18px; font-weight: bold; color: #fff;">-</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
+                        <span style="display: block; font-size: 11px; color: #7f8c8d;">Carga Viva (Cv)</span>
+                        <span id="res-cv" style="font-size: 18px; font-weight: bold; color: #fff;">-</span>
+                    </div>
+                    <div style="background: rgba(243,156,18,0.2); border: 1px solid #f39c12; padding: 10px; border-radius: 6px;">
+                        <span style="display: block; font-size: 11px; color: #f39c12; font-weight: bold;">Carga Última (Cu)</span>
+                        <span id="res-cu" style="font-size: 18px; font-weight: bold; color: #f39c12;">-</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -140,8 +181,7 @@
             </div>
         </div>
     </div>
-
-    <!-- PESTAÑA 2: TUTOR SOCRÁTICO -->
+      <!-- PESTAÑA 2: TUTOR SOCRÁTICO -->
     <div id="seccion-tutor" class="seccion-modulo" style="display: none;">
         <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
             <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
@@ -159,7 +199,8 @@
             </div>
         </div>
     </div>
-     <!-- PESTAÑA 3: CUESTIONARIO -->
+
+    <!-- PESTAÑA 3: CUESTIONARIO -->
     <div id="seccion-cuestionario" class="seccion-modulo" style="display: none;">
         <h2 style="color: #5dade2; margin-bottom: 20px;">Cuestionario del Módulo 01</h2>
         <form id="formulario-m01" onsubmit="event.preventDefault();">
@@ -254,12 +295,16 @@
         boton.classList.add('activa');
     }
 
-    // --- LÓGICA DEL ALGORITMO DE INICIO ---
+    // --- LÓGICA DEL ALGORITMO DE INICIO (ESPESOR Y CARGAS) ---
     function calcularEspesorInicio() {
         const luz = parseFloat(document.getElementById('luz-predimension').value);
+        const uso = document.getElementById('uso-predimension').value;
         const resultadoDiv = document.getElementById('resultado-predimension');
         const tipoDiv = document.getElementById('predimension-tipo');
         const textoDiv = document.getElementById('predimension-texto');
+        const cmSpan = document.getElementById('res-cm');
+        const cvSpan = document.getElementById('res-cv');
+        const cuSpan = document.getElementById('res-cu');
 
         if (isNaN(luz) || luz <= 0) {
             alert("Por favor, ingrese un valor numérico válido para la luz.");
@@ -268,23 +313,46 @@
 
         resultadoDiv.style.display = 'block';
         
+        let cm = 0;
+        let cv = 0;
+        
+        // 1. Determinar Carga Muerta (Cm) según el espesor
         if (luz <= 3.60) {
             tipoDiv.innerText = "✅ Losa Alivianada de 15 cm";
             tipoDiv.style.color = "#3498db";
-            textoDiv.innerText = `Para una luz de ${luz} m, el peso propio es ~250 kg/m².`;
+            cm = 0.25 + 0.04 + 0.04 + 0.18; // 250kg + acabados + mampostería = 0.51 t/m2
+            textoDiv.innerText = `El peso propio de la losa es ~250 kg/m². Cm total (con acabados) = 0.51 t/m². (Insumo para M02).`;
         } else if (luz <= 4.80) {
             tipoDiv.innerText = "✅ Losa Alivianada de 20 cm";
             tipoDiv.style.color = "#2ecc71";
-            textoDiv.innerText = `Para una luz de ${luz} m, el peso propio es ~300 kg/m².`;
+            cm = 0.30 + 0.04 + 0.04 + 0.18; // 300kg + acabados + mampostería = 0.56 t/m2
+            textoDiv.innerText = `El peso propio de la losa es ~300 kg/m². Cm total (con acabados) = 0.56 t/m². (Insumo para M02).`;
         } else if (luz <= 6.00) {
             tipoDiv.innerText = "✅ Losa Alivianada de 25 cm";
             tipoDiv.style.color = "#f39c12";
-            textoDiv.innerText = `Para una luz de ${luz} m, el peso propio es ~360 kg/m².`;
+            cm = 0.36 + 0.04 + 0.04 + 0.18; // 360kg + acabados + mampostería = 0.62 t/m2
+            textoDiv.innerText = `El peso propio de la losa es ~360 kg/m². Cm total (con acabados) = 0.62 t/m². (Insumo para M02).`;
         } else {
             tipoDiv.innerText = "⚠️ Requiere Viga Secundaria o Prefabricada";
             tipoDiv.style.color = "#e74c3c";
             textoDiv.innerText = `La luz supera los 6.00 m. No se recomienda una losa alivianada de 25 cm.`;
+            cmSpan.innerText = "N/A"; cvSpan.innerText = "N/A"; cuSpan.innerText = "N/A";
+            return;
         }
+
+        // 2. Determinar Carga Viva (Cv) según el uso (NEC-15)
+        if (uso === "vivienda") cv = 0.20;
+        else if (uso === "aulas") cv = 0.29;
+        else if (uso === "hospital") cv = 0.40;
+        else if (uso === "bodega") cv = 1.20;
+
+        // 3. Calcular Carga Última (Cu = 1.2 Cm + 1.6 Cv)
+        let cu = (1.2 * cm) + (1.6 * cv);
+
+        // 4. Mostrar resultados
+        cmSpan.innerText = cm.toFixed(2) + ' t/m²';
+        cvSpan.innerText = cv.toFixed(2) + ' t/m²';
+        cuSpan.innerText = cu.toFixed(2) + ' t/m²';
     }
 
     // --- LÓGICA DEL TUTOR SOCRÁTICO (5 PREGUNTAS) ---
@@ -301,35 +369,30 @@
         setTimeout(() => {
             let respuesta = "";
             
-            // Pregunta 1
             if (nivelTamiz === 0) {
                 if (texto.includes("vacio") || texto.includes("hueco") || texto.includes("bloque") || texto.includes("inercia") || texto.includes("aligeran") || texto.includes("polietileno")) {
                     respuesta = "¡Excelente! Ahora dime: <b>Si h_eq es la altura de una losa maciza, ¿h_eq debe ser más alta o más baja que H (altura real)?</b>";
                     nivelTamiz = 1;
                 } else { respuesta = "Piénsalo. <b>¿El poliestireno (huecos) aporta rigidez al concreto?</b> Intenta explicarlo con tus propias palabras."; }
             } 
-            // Pregunta 2
             else if (nivelTamiz === 1) {
                 if (texto.includes("menor") || texto.includes("baja") || texto.includes("menos")) {
                     respuesta = "¡Muy bien! Ahora la parte ética: <b>Si el contratista trae bloques de 168 kg/cm² en lugar de 210 kg/cm², ¿qué harías tú como ingeniero?</b>";
                     nivelTamiz = 2;
                 } else { respuesta = "Si hay huecos, hay menos concreto. <b>¿Necesitas más o menos altura de losa maciza para igualar la inercia?</b>"; }
             } 
-            // Pregunta 3
             else if (nivelTamiz === 2) {
                 if (texto.includes("no") || texto.includes("rechazo") || texto.includes("norma") || texto.includes("peligro") || texto.includes("notificar") || texto.includes("prohibo")) {
                     respuesta = "¡Felicidades! Has demostrado criterio ético. Ahora un cálculo rápido: <b>Si I=24548 y bb=50, ¿cuál es el valor de h_eq? (Usa la fórmula de raíz cúbica)</b>";
                     nivelTamiz = 3; 
                 } else { respuesta = "Un ingeniero no acepta materiales fuera de norma. <b>¿Permitirías construir con un concreto más débil?</b>"; }
             } 
-            // Pregunta 4
             else if (nivelTamiz === 3) {
                 if (texto.includes("18") || texto.includes("18.06")) {
                     respuesta = "¡Correcto! (18.06 cm). Última pregunta conceptual: <b>¿El nervio o la capa de compresión aporta más inercia al sistema?</b>";
                     nivelTamiz = 4;
                 } else { respuesta = "<b>Pista: 12 × 24548 / 50 = 5891.52</b>. Ahora sácale la raíz cúbica. (Está entre 18 y 19)."; }
             } 
-            // Pregunta 5 (Desbloquea el cuestionario)
             else if (nivelTamiz === 4) {
                 if (texto.includes("nervio") || texto.includes("capa") || texto.includes("compresion") || texto.includes("loseta")) {
                     respuesta = "¡Muy bien! Has superado el Tamiz Socrático. <b>El botón del Cuestionario se ha desbloqueado. ¡Ve y demuestra lo que sabes!</b>";
