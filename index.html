@@ -968,43 +968,125 @@ function mostrarProyecto(p, codigo, rol){
   contenedor.innerHTML = html;
 }
 
-// LÓGICA DEL CERTIFICADO
-function abrirModalCertificado() {
-    document.getElementById('modal-certificado').style.display = 'flex';
-    document.getElementById('certificado-real').style.display = 'none';
-    document.getElementById('botones-certificado').style.display = 'none';
-    document.getElementById('formulario-ingreso').style.display = 'block';
-    document.getElementById('nombre-estudiante').value = '';
-}
 
-function cerrarModalCertificado() {
-    document.getElementById('modal-certificado').style.display = 'none';
-}
 
-function generarCertificado() {
-    var nombre = document.getElementById('nombre-estudiante').value.trim();
-    if (nombre === "") { alert("Por favor, ingrese su nombre completo."); return; }
-    document.getElementById('nombre-certificado').textContent = nombre.toUpperCase();
-    var hoy = new Date();
-    document.getElementById('fecha-certificado').textContent = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
-    document.getElementById('formulario-ingreso').style.display = 'none';
-    document.getElementById('certificado-real').style.display = 'block';
-    document.getElementById('botones-certificado').style.display = 'block';
-}
-
-function imprimirCertificado() {
-    var contenido = document.getElementById('certificado-real').innerHTML;
-    var ventanaImpresion = window.open('', '', 'height=800,width=1000');
-    ventanaImpresion.document.write('<html><head><title>Certificado ECT-UNESUM</title>');
-    ventanaImpresion.document.write('<style>body{font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#fff;}.cert-marca-agua{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.05;font-size:150px;font-weight:bold;color:#000;}#certificado-real{background:#fff;width:900px;height:600px;padding:40px;box-sizing:border-box;text-align:center;position:relative;color:#333;border:10px solid #141a2e;}.cert-borde{border:2px solid #f39c12;padding:20px;height:100%;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;}.cert-header h2{color:#141a2e;font-size:28px;margin:0 0 5px 0;}.cert-header p{color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;margin:0;}.cert-header hr{border:1px solid #f39c12;margin:15px 0;}.cert-body h1{color:#f39c12;font-size:40px;margin-bottom:15px;font-weight:900;}.cert-body p{font-size:16px;color:#555;}.cert-nombre{font-size:32px;color:#141a2e;border-bottom:2px solid #5dade2;display:inline-block;padding:0 20px 5px 20px;margin:15px 0;}.cert-descripcion{font-size:16px;color:#555;line-height:1.6;max-width:700px;margin:0 auto;}.cert-firmas{display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px;}.cert-firma-item{text-align:center;width:200px;}.cert-firma-item hr{border-top:1px solid #333;margin-bottom:5px;}.cert-firma-item p{font-size:12px;margin:0;}.cert-firma-item small{font-size:10px;color:#777;}.cert-sello{text-align:center;}.cert-sello-box{width:80px;height:80px;background:#eee;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px dashed #ccc;margin:0 auto;font-size:10px;color:#999;}.cert-footer{font-size:10px;color:#999;margin-top:15px;}@media print {body {height: auto;}}</style></head><body>');
-    ventanaImpresion.document.write('<div id="certificado-real" style="display:block;">' + contenido + '</div>');
-    ventanaImpresion.document.write('</body></html>');
-    ventanaImpresion.document.close();
-    ventanaImpresion.focus();
-    setTimeout(function(){ ventanaImpresion.print(); ventanaImpresion.close(); }, 500);
-}
 
 console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
+   // ==========================================
+    // NUEVA LÓGICA DE CERTIFICADOS (ESTUDIANTE / DOCENTE)
+    // ==========================================
+    let rolSeleccionado = "";
+
+    function abrirInduccion() {
+        document.getElementById('modal-induccion').style.display = 'flex';
+        document.getElementById('preguntas-estudiante').style.display = 'none';
+        document.getElementById('preguntas-docente').style.display = 'none';
+        document.getElementById('bloque-caces').style.display = 'none';
+        document.getElementById('msj-induccion').style.display = 'none';
+        document.getElementById('btn-rol-est').style.background = 'rgba(52,152,219,0.1)';
+        document.getElementById('btn-rol-doc').style.background = 'rgba(155,89,182,0.1)';
+    }
+
+    function seleccionarRolInduccion(rol) {
+        rolSeleccionado = rol;
+        document.getElementById('msj-induccion').style.display = 'none';
+        document.getElementById('bloque-caces').style.display = 'block';
+
+        if(rol === 'estudiante') {
+            document.getElementById('preguntas-estudiante').style.display = 'block';
+            document.getElementById('preguntas-docente').style.display = 'none';
+            document.getElementById('btn-rol-est').style.background = 'rgba(52,152,219,0.4)';
+            document.getElementById('btn-rol-doc').style.background = 'rgba(155,89,182,0.1)';
+        } else {
+            document.getElementById('preguntas-estudiante').style.display = 'none';
+            document.getElementById('preguntas-docente').style.display = 'block';
+            document.getElementById('btn-rol-est').style.background = 'rgba(52,152,219,0.1)';
+            document.getElementById('btn-rol-doc').style.background = 'rgba(155,89,182,0.4)';
+        }
+    }
+
+    function validarInduccion(rol) {
+        const msj = document.getElementById('msj-induccion');
+        
+        if (rol === 'estudiante') {
+            const i1 = document.querySelector('input[name="ind1"]:checked');
+            const i2 = document.querySelector('input[name="ind2"]:checked');
+            const i3 = document.querySelector('input[name="ind3"]:checked');
+
+            if (!i1 || !i2 || !i3) {
+                msj.style.display = 'block'; msj.style.color = '#e74c3c';
+                msj.innerText = "⚠️ Responde todas las preguntas.";
+                return;
+            }
+
+            if (i1.value === 'B' && i2.value === 'C' && i3.value === 'A') {
+                msj.style.display = 'block'; msj.style.color = '#2ecc71';
+                msj.innerText = "✅ ¡Excelente! Conoces el modelo. Generando tu certificado...";
+                setTimeout(() => {
+                    document.getElementById('modal-induccion').style.display = 'none';
+                    document.getElementById('certificado-estudiante').style.display = 'flex';
+                }, 1500);
+            } else {
+                msj.style.display = 'block'; msj.style.color = '#e74c3c';
+                msj.innerText = "❌ Respuesta incorrecta. Revisa los conceptos de la portada.";
+            }
+        } 
+        
+        else if (rol === 'docente') {
+            const r1 = document.getElementById('doc-r1').value.trim().toLowerCase();
+            const r2 = document.getElementById('doc-r2').value.trim().toLowerCase();
+            const r3 = document.getElementById('doc-r3').value.trim().toLowerCase();
+            const r4 = document.getElementById('doc-r4').value.trim().toLowerCase();
+            const r5 = document.getElementById('doc-r5').value.trim().toLowerCase();
+
+            if (r1.length < 20 || r2.length < 20 || r3.length < 20 || r4.length < 20 || r5.length < 20) {
+                msj.style.display = 'block'; msj.style.color = '#e74c3c';
+                msj.innerText = "⚠️ Respuestas muy cortas. Demuestre un análisis profundo (mínimo 20 caracteres).";
+                return;
+            }
+
+            const kw1 = ["proyecto", "articular", "malla", "curriculo", "bloque", "territorio", "aplicacion", "contexto"];
+            const kw2 = ["practica", "agua dulce", "laboratorio", "campo", "comunidad", "prototipo", "ensayo", "visita"];
+            const kw3 = ["python", "phyphox", "ia", "tecnologia", "software", "simulacion", "datos", "medicion", "herramienta", "aula invertida"];
+            const kw4 = ["evaluacion", "rubrica", "competencias", "pensamiento", "critico", "evidencia", "desempeño", "retroalimentacion", "neurociencia", "error"];
+            const kw5 = ["replicar", "latinoamerica", "innovacion", "impacto", "social", "modelo", "escalable", "calidad", "caces"];
+
+            function validarPregunta(texto, keywords) {
+                let aciertos = 0;
+                for (let k of keywords) {
+                    if (texto.includes(k)) aciertos++;
+                }
+                return aciertos >= 2; 
+            }
+
+            if (!validarPregunta(r1, kw1) || !validarPregunta(r2, kw2) || !validarPregunta(r3, kw3) || !validarPregunta(r4, kw4) || !validarPregunta(r5, kw5)) {
+                msj.style.display = 'block'; msj.style.color = '#e74c3c';
+                msj.innerText = "❌ Su responsorio no demuestra la apropiación del modelo. Incluya conceptos como 'territorio', 'aula invertida', 'neurociencia', 'impacto social' o 'CACES'.";
+                return;
+            }
+
+            msj.style.display = 'block'; msj.style.color = '#2ecc71';
+            msj.innerText = "✅ Responsorio validado. Ha demostrado capacidad de articulación. Generando Certificado Docente...";
+            
+            setTimeout(() => {
+                document.getElementById('modal-induccion').style.display = 'none';
+                document.getElementById('certificado-docente').style.display = 'flex';
+            }, 2000);
+        }
+    }
+
+    function cerrarInduccion() {
+        document.getElementById('modal-induccion').style.display = 'none';
+    }
+
+    function cerrarModalCertificado() {
+        document.getElementById('certificado-estudiante').style.display = 'none';
+        document.getElementById('certificado-docente').style.display = 'none';
+    }
+
+    function imprimirCertificadoActual() {
+        window.print();
+    }
 </script>
 </body>
 </html>
