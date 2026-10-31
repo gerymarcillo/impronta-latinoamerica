@@ -309,6 +309,53 @@
         window.print();
     }
 </script>
+    <!-- MODAL DEL CERTIFICADO -->
+<div id="modal-certificado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+    <div id="certificado-real" style="background:#fff; width:900px; max-width:95vw; height:auto; min-height:600px; padding:40px; box-sizing:border-box; text-align:center; position:relative; color:#333; border:10px solid #141a2e; box-shadow:0 0 50px rgba(0,0,0,0.8);">
+        
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.05; font-size:150px; font-weight:bold; color:#000; pointer-events:none;">UNESUM</div>
+        
+        <div style="border:2px solid #f39c12; padding:20px; height:100%; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
+            <div style="margin-bottom:20px;">
+                <h2 style="color:#141a2e; font-size:28px; margin:0 0 5px 0;">UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p style="color:#5dade2; font-size:14px; font-weight:bold; letter-spacing:2px; margin:0;">FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                <hr style="border:1px solid #f39c12; margin:15px 0;">
+            </div>
+            
+            <div>
+                <h1 style="color:#f39c12; font-size:40px; margin-bottom:15px; font-weight:900;">CERTIFICADO</h1>
+                <p style="font-size:16px; color:#555;">Se otorga el presente reconocimiento a:</p>
+                <h3 id="nombre-certificado" style="font-size:32px; color:#141a2e; border-bottom:2px solid #5dade2; display:inline-block; padding:0 20px 5px 20px; margin:15px 0;">NOMBRE DEL ESTUDIANTE</h3>
+                <p style="font-size:16px; color:#555; line-height:1.6; max-width:700px; margin:0 auto;">
+                    Por haber completado y aprobado exitosamente el <strong>Módulo 02 — Análisis Estructural y Cargas</strong>, demostrando dominio en el cálculo de cargas según NEC-15, formulación matricial y validación experimental.
+                </p>
+                <p style="font-size:18px; color:#e74c3c; font-weight:bold; margin-top:10px;">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;">
+                <div style="text-align:center; width:200px;">
+                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
+                    <p style="font-size:12px; margin:0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                    <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
+                </div>
+                <div style="text-align:center;">
+                    <div style="width:80px; height:80px; background:#eee; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px dashed #ccc; margin:0 auto; font-size:10px; color:#999;">Sello / QR</div>
+                </div>
+                <div style="text-align:center; width:200px;">
+                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
+                    <p style="font-size:12px; margin:0;"><strong>Comisión Académica</strong></p>
+                    <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
+                </div>
+            </div>
+            <p style="font-size:10px; color:#999; margin-top:15px;">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M02</p>
+        </div>
+    </div>
+    
+    <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
+        <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
+        <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
+    </div>
+</div>
 
 </body>
 </html>
