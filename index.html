@@ -967,7 +967,173 @@ function mostrarProyecto(p, codigo, rol){
   html += '</div>';
   contenedor.innerHTML = html;
 }
+<!-- ========================================== -->
+<!-- MODAL DE INDUCCIÓN (TAMIZ)                 -->
+<!-- ========================================== -->
+<div id="modal-induccion" class="modal-overlay">
+    <div class="modal-caja">
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: #5dade2; margin-bottom: 10px; font-size: 22px;">🧠 TAMIZ DE INDUCCIÓN ECT-UNESUM</h3>
+            <p style="color: #bdc3c7; margin-bottom: 15px; font-size: 14px;">Selecciona tu rol. Este paso no es un regalo; es una validación de competencias.</p>
+            
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="seleccionarRolInduccion('estudiante')" id="btn-rol-est" style="flex: 1; padding: 15px; border-radius: 10px; border: 2px solid #3498db; background: rgba(52,152,219,0.1); color: #3498db; font-weight: bold; cursor: pointer; transition: 0.3s;">👤 Estudiante</button>
+                <button onclick="seleccionarRolInduccion('docente')" id="btn-rol-doc" style="flex: 1; padding: 15px; border-radius: 10px; border: 2px solid #9b59b6; background: rgba(155,89,182,0.1); color: #9b59b6; font-weight: bold; cursor: pointer; transition: 0.3s;">🎓 Docente</button>
+            </div>
+        </div>
 
+        <div id="bloque-caces" style="display: none; background: linear-gradient(135deg, rgba(52,152,219,0.05), rgba(155,89,182,0.05)); border: 1px solid #5dade2; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+            <h4 style="color: #5dade2; margin-bottom: 10px; font-size: 14px; text-align: center;">🏛️ ALINEADO A LOS 4 EJES DEL CACES</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; color: #ecf0f1;">
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; border-left: 3px solid #2ecc71;"><b>Pertinencia:</b> Respuesta al territorio.</div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; border-left: 3px solid #f39c12;"><b>Articulación:</b> Teoría + Práctica.</div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; border-left: 3px solid #3498db;"><b>Innovación:</b> IA + TIC.</div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; border-left: 3px solid #e74c3c;"><b>Impacto:</b> Laboratorio Vivo.</div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO ESTUDIANTE -->
+        <div id="preguntas-estudiante" style="display: none;">
+            <div class="pregunta-box">
+                <p>1. ¿Cuál es el enfoque principal del proyecto ECT-UNESUM?</p>
+                <label><input type="radio" name="ind1" value="A"> A) Publicar artículos académicos sin impacto social.</label>
+                <label><input type="radio" name="ind1" value="B"> B) Transformar la realidad social mediante la ingeniería forense.</label>
+                <label><input type="radio" name="ind1" value="C"> C) Solo construir maquetas.</label>
+            </div>
+            <div class="pregunta-box">
+                <p>2. ¿Qué representa el Laboratorio Vivo de Agua Dulce?</p>
+                <label><input type="radio" name="ind2" value="A"> A) Un laboratorio de química.</label>
+                <label><input type="radio" name="ind2" value="B"> B) Un modelo abstracto.</label>
+                <label><input type="radio" name="ind2" value="C"> C) El territorio real donde se aplican los cálculos de ingeniería.</label>
+            </div>
+            <div class="pregunta-box">
+                <p>3. ¿Qué es la "Impronta de Autoría"?</p>
+                <label><input type="radio" name="ind3" value="A"> A) La simbiosis entre humano e IA para potenciar el aprendizaje.</label>
+                <label><input type="radio" name="ind3" value="B"> B) El nombre del autor del libro.</label>
+                <label><input type="radio" name="ind3" value="C"> C) Una técnica de construcción.</label>
+            </div>
+            <button onclick="validarInduccion('estudiante')" class="btn-validar">Validar y Generar Certificado</button>
+        </div>
+
+        <!-- FORMULARIO DOCENTE -->
+        <div id="preguntas-docente" style="display: none;">
+            <p style="color: #e74c3c; font-weight: bold; font-size: 13px; margin-bottom: 15px;">⚠️ Certificado Docente sujeto a validación de competencias.</p>
+            
+            <div style="margin-bottom: 12px;">
+                <label style="color: #f39c12; font-weight: bold; font-size: 13px;">1. ¿Cómo articula su materia con el proyecto (Bloque 001)?</label>
+                <textarea id="doc-r1" rows="2" placeholder="Explique la conexión real..."></textarea>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <label style="color: #f39c12; font-weight: bold; font-size: 13px;">2. ¿Qué práctica concreta propone para Agua Dulce?</label>
+                <textarea id="doc-r2" rows="2" placeholder="Describa la actividad..."></textarea>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <label style="color: #f39c12; font-weight: bold; font-size: 13px;">3. ¿Cómo utiliza la IA/tecnología en su planificación?</label>
+                <textarea id="doc-r3" rows="2" placeholder="Describa su metodología..."></textarea>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <label style="color: #f39c12; font-weight: bold; font-size: 13px;">4. ¿Cómo evalúa la consolidación en el estudiante?</label>
+                <textarea id="doc-r4" rows="2" placeholder="Describa su rúbrica..."></textarea>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="color: #f39c12; font-weight: bold; font-size: 13px;">5. ¿Por qué este modelo debe replicarse en Latinoamérica?</label>
+                <textarea id="doc-r5" rows="2" placeholder="Justifique la replicabilidad..."></textarea>
+            </div>
+            
+            <button onclick="validarInduccion('docente')" class="btn-validar" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">Enviar Responsorio y Validar</button>
+        </div>
+
+        <div id="msj-induccion" style="margin-top: 15px; text-align: center; font-weight: bold; display: none; font-size: 14px;"></div>
+        <button onclick="cerrarInduccion()" style="background: none; border: none; color: #7f8c8d; margin-top: 15px; cursor: pointer; width: 100%; text-align: center;">Cancelar</button>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- CERTIFICADO ESTUDIANTE                     -->
+<!-- ========================================== -->
+<div id="certificado-estudiante" class="modal-overlay">
+    <div class="certificado-caja">
+        <div class="cert-borde">
+            <div>
+                <h2 style="color: #141a2e; font-size: 28px; margin: 0 0 5px 0;">UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p style="color: #5dade2; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin: 0;">FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                <hr style="border: 1px solid #f39c12; margin: 15px 0;">
+            </div>
+            <div>
+                <h1 style="color: #f39c12; font-size: 40px; margin-bottom: 15px; font-weight: 900;">CERTIFICADO DE INDUCCIÓN</h1>
+                <p style="font-size: 16px; color: #555;">Se otorga a:</p>
+                <h3 id="nombre-certificado-est" style="font-size: 32px; color: #141a2e; border-bottom: 2px solid #5dade2; display: inline-block; padding: 0 20px 5px 20px; margin: 15px 0;">NOMBRE DEL ESTUDIANTE</h3>
+                <p style="font-size: 16px; color: #555; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+                    Por demostrar conocimiento del modelo dinámico (CACES) y el enfoque de impacto social, habilitándolo para el recorrido de los 8 módulos formativos. <i>"El cerebro aprende más del error y la corrección que del acierto" (Dificultad Deseable).</i>
+                </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;">
+                <div style="text-align: center; width: 220px;">
+                    <hr style="border-top: 1px solid #333; margin-bottom: 5px;">
+                    <p style="font-size: 12px; margin: 0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                    <small style="font-size: 10px; color: #777;">Creador del Modelo ECT-UNESUM</small>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; margin: 0 auto; font-size: 10px; color: #999;">Sello / QR</div>
+                </div>
+                <div style="text-align: center; width: 220px;">
+                    <hr style="border-top: 1px solid #333; margin-bottom: 5px;">
+                    <p style="font-size: 12px; margin: 0;"><strong>Coordinación Académica</strong></p>
+                    <small style="font-size: 10px; color: #777;">Carrera de Ingeniería Civil</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <button onclick="window.print()" class="btn-validar" style="width: auto; padding: 15px 30px; background: linear-gradient(135deg, #f39c12, #e67e22);">🖨️ Imprimir o Guardar</button>
+        <button onclick="cerrarModalCertificado()" style="background: #34495e; color: white; padding: 15px 30px; border-radius: 10px; font-weight: bold; border: none; cursor: pointer; font-size: 16px; margin-left: 10px;">Cerrar</button>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- CERTIFICADO DOCENTE                        -->
+<!-- ========================================== -->
+<div id="certificado-docente" class="modal-overlay">
+    <div class="certificado-caja">
+        <div class="cert-borde docente">
+            <div>
+                <h2 style="color: #141a2e; font-size: 28px; margin: 0 0 5px 0;">UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p style="color: #9b59b6; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin: 0;">COMISIÓN DE MEJORAMIENTO A LA CALIDAD ACADÉMICA</p>
+                <hr style="border: 1px solid #9b59b6; margin: 15px 0;">
+            </div>
+            <div>
+                <h1 style="color: #9b59b6; font-size: 36px; margin-bottom: 15px; font-weight: 900;">DOCENTE ARTICULADOR E INNOVADOR</h1>
+                <p style="font-size: 16px; color: #555;">Se certifica que:</p>
+                <h3 id="nombre-certificado-doc" style="font-size: 32px; color: #141a2e; border-bottom: 2px solid #9b59b6; display: inline-block; padding: 0 20px 5px 20px; margin: 15px 0;">NOMBRE DEL DOCENTE</h3>
+                <p style="font-size: 15px; color: #555; line-height: 1.6; max-width: 750px; margin: 0 auto;">
+                    Ha demostrado la capacidad de articular la teoría con el territorio, transitando del modelo tradicional al <b>Constructivismo y Aula Invertida</b>. Este certificado reconoce el desarrollo de la <b>resiliencia pedagógica</b> y su compromiso con el impacto social en Jipijapa y Agua Dulce, trabajando de la mano con las instituciones públicas.
+                </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;">
+                <div style="text-align: center; width: 180px;">
+                    <hr style="border-top: 1px solid #333; margin-bottom: 5px;">
+                    <p style="font-size: 11px; margin: 0;"><strong>Comisión de Mejoramiento</strong></p>
+                    <small style="font-size: 9px; color: #777;">Calidad Académica</small>
+                </div>
+                <div style="text-align: center; width: 180px;">
+                    <hr style="border-top: 1px solid #333; margin-bottom: 5px;">
+                    <p style="font-size: 11px; margin: 0;"><strong>Decano de la Facultad</strong></p>
+                    <small style="font-size: 9px; color: #777;">Ciencias Técnicas</small>
+                </div>
+                <div style="text-align: center; width: 180px;">
+                    <hr style="border-top: 1px solid #333; margin-bottom: 5px;">
+                    <p style="font-size: 11px; margin: 0;"><strong>Rector / Representante</strong></p>
+                    <small style="font-size: 9px; color: #777;">UNESUM</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <button onclick="window.print()" class="btn-validar" style="width: auto; padding: 15px 30px; background: linear-gradient(135deg, #9b59b6, #8e44ad);">🖨️ Imprimir o Guardar</button>
+        <button onclick="cerrarModalCertificado()" style="background: #34495e; color: white; padding: 15px 30px; border-radius: 10px; font-weight: bold; border: none; cursor: pointer; font-size: 16px; margin-left: 10px;">Cerrar</button>
+    </div>
+</div>
 
 // ==========================================
     // NUEVA LÓGICA DE CERTIFICADOS (ESTUDIANTE / DOCENTE)
