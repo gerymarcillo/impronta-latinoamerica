@@ -5,38 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M02 - Cuestionario - ECT-UNESUM</title>
     <style>
+        /* ==========================================
+           ESTILOS BASE Y FONDO CUÁNTICO (ADN DEL M01)
+           ========================================== */
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
-        .container{max-width:900px;margin:0 auto;}
-        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
-        .header h1{color:#5dade2;font-size:24px;}
-        .header p{color:#bdc3c7;font-size:14px;}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
+        .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
+        .container{max-width:900px;margin:0 auto;position:relative;z-index:1}
         
-        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
-        .pregunta {margin-bottom: 25px; background: #0a0e1a; padding: 20px; border-radius: 10px; border-left: 4px solid #3498db;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px}
+        .header h1{color:#5dade2;font-size:28px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 20px rgba(93,173,226,0.5)}
+        .header p{color:#bdc3c7;font-size:14px;font-style:italic}
+
+        /* Tarjetas de Preguntas */
+        .seccion-modulo{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);padding:30px;border-radius:18px;margin-top:20px;border:1px solid rgba(93,173,226,0.2);box-shadow:0 15px 40px rgba(0,0,0,0.4)}
+        
+        .pregunta {margin-bottom: 25px; background: rgba(10,14,26,0.6); padding: 20px; border-radius: 12px; border-left: 4px solid #3498db; transition: 0.3s;}
+        .pregunta:hover {background: rgba(10,14,26,0.8); transform: translateX(5px);}
         .pregunta.nivel-2 {border-left-color: #f39c12;}
         .pregunta.nivel-3 {border-left-color: #e74c3c;}
+        
         .pregunta p {color: #ecf0f1; font-weight: bold; font-size: 15px; margin-bottom: 15px;}
-        .pregunta label {display: block; color: #bdc3c7; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 5px; background: rgba(255,255,255,0.02);}
-        .pregunta label:hover {background: rgba(93,173,226,0.1);}
-        .pregunta textarea {width: 100%; padding: 10px; background: #141a2e; color: white; border: 1px solid #34495e; border-radius: 8px; font-family: inherit; resize: vertical;}
         
-        .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:10px;cursor:pointer;margin-top:30px;transition:transform 0.2s;}
-        .btn-epico:hover{transform:scale(1.02);}
+        .opcion-label {display: block; color: #bdc3c7; margin: 10px 0; cursor: pointer; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid transparent; transition: 0.3s;}
+        .opcion-label:hover {background: rgba(93,173,226,0.1); border-color: #5dade2;}
+        .opcion-label input {margin-right: 12px; transform: scale(1.2); accent-color: #5dade2;}
         
-        /* Estilos del resultado */
-        #pantalla-resultado {display: none; text-align: center; padding: 40px; background: #0a0e1a; border-radius: 15px; margin-top: 20px; border: 2px solid #3498db;}
+        .pregunta textarea {width: 100%; padding: 15px; background: #141a2e; color: white; border: 2px solid #34495e; border-radius: 10px; font-family: inherit; resize: vertical; font-size: 14px; outline: none; transition: 0.3s;}
+        .pregunta textarea:focus {border-color: #5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.2);}
+        
+        .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:12px;cursor:pointer;margin-top:30px;transition:transform 0.2s, box-shadow 0.2s; letter-spacing: 1px;}
+        .btn-epico:hover{transform:scale(1.02); box-shadow: 0 10px 30px rgba(243,156,18,0.4);}
+        
+        /* Pantalla de Resultados */
+        #pantalla-resultado {display: none; text-align: center; padding: 40px; background: rgba(10,14,26,0.8); border-radius: 18px; margin-top: 20px; border: 2px solid #3498db; backdrop-filter:blur(15px);}
         .nota-grande {font-size: 60px; font-weight: bold; margin: 20px 0;}
-        .aprobado {color: #2ecc71; border-color: #2ecc71;}
-        .reprobado {color: #e74c3c; border-color: #e74c3c;}
+        .aprobado {color: #2ecc71; border-color: #2ecc71; text-shadow: 0 0 20px rgba(46,204,113,0.4);}
+        .reprobado {color: #e74c3c; border-color: #e74c3c; text-shadow: 0 0 20px rgba(231,76,60,0.4);}
         
-        /* Estilos del reporte */
-        #reporte-detallado {display: none; text-align: left; background: #141a2e; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #34495e;}
-        .reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
-        .reporte-item {background: #0a0e1a; padding: 10px; border-radius: 5px; font-size: 12px;}
+        /* Reporte de Auditoría */
+        #reporte-detallado {display: none; text-align: left; background: rgba(20,26,46,0.9); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid #34495e;}
+        .reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;}
+        .reporte-item {background: #0a0e1a; padding: 15px; border-radius: 8px; font-size: 13px; border-left: 3px solid #3498db;}
+
+        /* Botón Volver */
+        .btn-volver{background:rgba(52,73,94,0.8);color:white;padding:15px 35px;border-radius:12px;text-decoration:none;font-weight:bold;display:inline-block;transition:0.3s;border:1px solid #5d6d7e;margin-top:20px;}
+        .btn-volver:hover{background:#34495e;transform:translateY(-2px);}
     </style>
 </head>
 <body>
+
+<div class="fondo-animado"></div>
 
 <div class="container">
     <div class="header">
@@ -51,65 +70,65 @@
             <!-- PREGUNTAS NIVEL BÁSICO -->
             <div class="pregunta">
                 <p>1. ¿Cuál es la diferencia principal entre una viga simplemente apoyada y una viga empotrada?</p>
-                <label><input type="radio" name="p1" value="A"> A) La simplemente apoyada tiene rotación en los extremos; la empotrada no.</label>
-                <label><input type="radio" name="p1" value="B"> B) La empotrada no soporta cargas verticales.</label>
-                <label><input type="radio" name="p1" value="C"> C) No hay diferencia.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="A"> A) La simplemente apoyada tiene rotación en los extremos; la empotrada no.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="B"> B) La empotrada no soporta cargas verticales.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="C"> C) No hay diferencia.</label>
             </div>
             <div class="pregunta">
                 <p>2. ¿Qué tipo de carga genera el peso de las personas y los muebles en un aula?</p>
-                <label><input type="radio" name="p2" value="A"> A) Carga Muerta.</label>
-                <label><input type="radio" name="p2" value="B"> B) Carga Viva.</label>
-                <label><input type="radio" name="p2" value="C"> C) Carga Sísmica.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="A"> A) Carga Muerta.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="B"> B) Carga Viva.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="C"> C) Carga Sísmica.</label>
             </div>
             <div class="pregunta">
                 <p>3. Según la NEC-15, ¿qué factor de mayoración se aplica a la carga viva en la combinación 1.2D + 1.6L?</p>
-                <label><input type="radio" name="p3" value="A"> A) 1.2.</label>
-                <label><input type="radio" name="p3" value="B"> B) 1.6.</label>
-                <label><input type="radio" name="p3" value="C"> C) 1.4.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="A"> A) 1.2.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="B"> B) 1.6.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="C"> C) 1.4.</label>
             </div>
             <div class="pregunta">
                 <p>4. ¿Qué representa la inercia (\(I\)) en la fórmula de la deflexión?</p>
-                <label><input type="radio" name="p4" value="A"> A) La resistencia de la sección a la flexión.</label>
-                <label><input type="radio" name="p4" value="B"> B) El peso del concreto.</label>
-                <label><input type="radio" name="p4" value="C"> C) La longitud de la viga.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="A"> A) La resistencia de la sección a la flexión.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="B"> B) El peso del concreto.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="C"> C) La longitud de la viga.</label>
             </div>
             <div class="pregunta">
                 <p>5. En la fórmula de la rigidez \(k = 48EI/L^3\), ¿qué pasa si la longitud \(L\) se duplica?</p>
-                <label><input type="radio" name="p5" value="A"> A) La rigidez aumenta.</label>
-                <label><input type="radio" name="p5" value="B"> B) La rigidez disminuye 8 veces.</label>
-                <label><input type="radio" name="p5" value="C"> C) La rigidez no cambia.</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="A"> A) La rigidez aumenta.</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="B"> B) La rigidez disminuye 8 veces.</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="C"> C) La rigidez no cambia.</label>
             </div>
 
             <!-- PREGUNTAS NIVEL MEDIO -->
             <div class="pregunta nivel-2">
                 <p>6. Si la luz de una losa es de 5.20 m, ¿qué espesor de losa alivianada se recomienda según el criterio de predimensionamiento?</p>
-                <label><input type="radio" name="p6" value="A"> A) 15 cm.</label>
-                <label><input type="radio" name="p6" value="B"> B) 20 cm.</label>
-                <label><input type="radio" name="p6" value="C"> C) 25 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="A"> A) 15 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="B"> B) 20 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="C"> C) 25 cm.</label>
             </div>
             <div class="pregunta nivel-2">
                 <p>7. Calcule el momento máximo de una viga simplemente apoyada con L=4m y q=5 kN/m.</p>
-                <label><input type="radio" name="p7" value="A"> A) 10 kN·m.</label>
-                <label><input type="radio" name="p7" value="B"> B) 20 kN·m.</label>
-                <label><input type="radio" name="p7" value="C"> C) 5 kN·m.</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="A"> A) 10 kN·m.</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="B"> B) 20 kN·m.</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="C"> C) 5 kN·m.</label>
             </div>
             <div class="pregunta nivel-2">
                 <p>8. ¿Para qué sirve la matriz de rigidez \(K\) en el análisis estructural?</p>
-                <label><input type="radio" name="p8" value="A"> A) Para calcular el peso de la estructura.</label>
-                <label><input type="radio" name="p8" value="B"> B) Para relacionar las fuerzas nodales con los desplazamientos.</label>
-                <label><input type="radio" name="p8" value="C"> C) Para calcular el costo del concreto.</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="A"> A) Para calcular el peso de la estructura.</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="B"> B) Para relacionar las fuerzas nodales con los desplazamientos.</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="C"> C) Para calcular el costo del concreto.</label>
             </div>
             <div class="pregunta nivel-2">
                 <p>9. Si una viga tiene una rotación de 0.005 rad en el apoyo, ¿qué significa físicamente?</p>
-                <label><input type="radio" name="p9" value="A"> A) Que la viga se rompió.</label>
-                <label><input type="radio" name="p9" value="B"> B) Que el extremo de la viga giró 0.005 radianes respecto a su posición original.</label>
-                <label><input type="radio" name="p9" value="C"> C) Que la carga aplicada es cero.</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="A"> A) Que la viga se rompió.</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="B"> B) Que el extremo de la viga giró 0.005 radianes respecto a su posición original.</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="C"> C) Que la carga aplicada es cero.</label>
             </div>
             <div class="pregunta nivel-2">
                 <p>10. ¿Qué herramienta tecnológica se usa para medir la frecuencia natural del Prototipo Modular de Rigidez (PMR)?</p>
-                <label><input type="radio" name="p10" value="A"> A) Phyphox (PHX).</label>
-                <label><input type="radio" name="p10" value="B"> B) Word.</label>
-                <label><input type="radio" name="p10" value="C"> C) PowerPoint.</label>
+                <label class="opcion-label"><input type="radio" name="p10" value="A"> A) Phyphox (PHX).</label>
+                <label class="opcion-label"><input type="radio" name="p10" value="B"> B) Word.</label>
+                <label class="opcion-label"><input type="radio" name="p10" value="C"> C) PowerPoint.</label>
             </div>
 
             <!-- PREGUNTAS NIVEL AVANZADO (ABIERTAS) -->
@@ -152,7 +171,7 @@
         <button onclick="mostrarReporte()" id="btn-ver-reporte" class="btn-epico" style="background: #3498db; margin-top: 20px;">📄 Ver Preguntas y Respuestas Correctas</button>
         <button onclick="imprimirReporte()" class="btn-epico" style="background: #2ecc71;">🖨️ Imprimir Reporte</button>
         <div style="margin-top:20px;">
-            <a href="M02_tutor.html" style="color: #bdc3c7; text-decoration: none;">← Volver al Tutor Socrático</a>
+            <a href="M02_clases.html" class="btn-volver">← Volver a Clases</a>
         </div>
     </div>
 </div>
