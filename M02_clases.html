@@ -3,173 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M02 - Clases de Materias y Proyectos - ECT-UNESUM</title>
+    <title>M02 — Cálculo de Cargas | ECT-UNESUM-2026</title>
     <style>
+        /* ESTILOS BASE Y FONDO CUÁNTICO */
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
-        .container{max-width:1000px;margin:0 auto;}
-        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
-        .header h1{color:#5dade2;font-size:24px;}
-        .header p{color:#bdc3c7;font-size:14px;}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
+        .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
+        .container{max-width:1100px;margin:0 auto;position:relative;z-index:1}
         
-        /* Banner Constructivista */
-        .banner-constructivista {background: linear-gradient(90deg, #f39c12, #e67e22); color: #0a0e1a; padding: 15px; border-radius: 10px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);}
-        .banner-constructivista h4 {margin: 0; font-size: 16px; font-weight: bold;}
-        .banner-constructivista p {margin: 5px 0 0 0; font-size: 13px;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px}
+        .header h1{color:#5dade2;font-size:32px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 20px rgba(93,173,226,0.5)}
+        .header p{color:#bdc3c7;font-size:15px;font-style:italic}
 
-        /* Pestañas */
-        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
-        .tab-btn { background: #141a2e; color: #bdc3c7; border: 1px solid #34495e; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; transition: all 0.3s; }
-        .tab-btn.active { background: #5dade2; color: white; border-color: #5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.4); }
-        .tab-btn:hover:not(.active) { background: #1b263b; }
-        
-        /* Secciones */
-        .seccion-contenido {display: none; animation: fadeIn 0.5s;}
-        .seccion-contenido.active {display: block;}
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tabs{display:flex;justify-content:center;gap:15px;margin-bottom:30px;flex-wrap:wrap}
+        .tab-btn{background:rgba(20,26,46,0.8);color:#bdc3c7;border:1px solid #34495e;padding:12px 25px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:bold;transition:all 0.3s}
+        .tab-btn.active{background:linear-gradient(135deg, #5dade2, #2980b9);color:white;border-color:#5dade2;box-shadow:0 0 20px rgba(93,173,226,0.5);transform:translateY(-2px)}
 
-        .seccion {background: #141a2e; padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #3498db;}
-        .seccion h2 {color: #5dade2; font-size: 20px; margin-bottom: 15px; border-bottom: 1px solid #34495e; padding-bottom: 10px;}
+        .seccion-contenido{display:none;animation:fadeIn 0.5s ease-out}
+        .seccion-contenido.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+        .card{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);padding:30px;border-radius:18px;margin-bottom:25px;border:1px solid rgba(93,173,226,0.2);border-left:5px solid #3498db;box-shadow:0 15px 40px rgba(0,0,0,0.4)}
+
+        /* Tarjetas de Sexto/Séptimo */
+        .grid-niveles {display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;}
+        .nivel-card {background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px; border: 2px solid transparent;}
+        .nivel-sexto {border-color: #2ecc71;}
+        .nivel-septimo {border-color: #e74c3c;}
+        .nivel-card h3 {font-size: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+        .nivel-sexto h3 {color: #2ecc71;}
+        .nivel-septimo h3 {color: #e74c3c;}
+        .nivel-card ul {list-style: none; padding-left: 0; font-size: 14px;}
+        .nivel-card ul li {margin-bottom: 8px; padding-left: 15px; position: relative;}
+        .nivel-card ul li:before {content: "▸"; position: absolute; left: 0; color: inherit;}
+        .resultado-box {background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 13px; border-left: 3px solid #f39c12;}
+
+        /* Calculadora y Recorrido */
+        .calculadora-box{background:rgba(10,14,26,0.8);border:1px solid #2ecc71;border-radius:14px;padding:25px;}
+        .calculadora-box label{display:block;color:#2ecc71;font-size:14px;font-weight:bold;margin-bottom:8px;}
+        .calculadora-box input, .calculadora-box select{width:100%;padding:15px;border-radius:10px;border:2px solid rgba(46,204,113,0.3);background:#141a2e;color:white;margin-bottom:20px;font-size:16px;font-weight:bold;outline:none;}
+        .calculadora-box button{width:100%;padding:16px;background:linear-gradient(135deg, #2ecc71, #27ae60);color:white;border:none;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer;transition:0.3s;}
+        .resultado-caja{margin-top:25px;padding:25px;background:rgba(46,204,113,0.08);border-left:4px solid #2ecc71;border-radius:12px;display:none;}
+        .res-grid {display: flex; gap: 15px; flex-wrap: wrap;}
+        .res-item {flex: 1; min-width: 120px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; text-align: center;}
+        .res-item span {font-size: 12px; color: #f39c12; display: block; margin-bottom: 5px;}
+        .res-item strong {font-size: 20px; color: white;}
         
-        /* Tarjetas de Clases */
-        .clase-card {background: #0a0e1a; border: 1px solid #34495e; border-radius: 10px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .clase-info h3 {color: #f39c12; font-size: 16px; margin-bottom: 5px;}
-        .clase-info p {color: #bdc3c7; font-size: 13px; margin: 0;}
-        .btn-video {background: #e74c3c; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 13px;}
+        .paso-box {display: flex; align-items: flex-start; gap: 15px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(93,173,226,0.1); transition: 0.3s;}
+        .paso-box:hover {border-color: #5dade2; transform: translateX(5px);}
+        .paso-numero {background: #f39c12; color: #0a0e1a; font-weight: bold; font-size: 18px; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0;}
+        .paso-texto h4 {color: #5dade2; font-size: 16px; margin-bottom: 5px;}
+        .paso-texto p {color: #bdc3c7; font-size: 13px;}
         
-        /* Calculadora */
-        .calculadora-box {background: #0a0e1a; border: 1px solid #2ecc71; border-radius: 10px; padding: 20px; margin-top: 15px;}
-        .calculadora-box input {width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #34495e; background: #141a2e; color: white; margin-bottom: 10px; font-size: 16px;}
-        .calculadora-box button {width: 100%; padding: 12px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;}
-        #resultado-losa {margin-top: 15px; padding: 15px; background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; border-radius: 8px; display: none;}
+        /* Recursos */
+        .btn-recurso {display: block; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center; font-size: 14px; transition: 0.3s; color: white;}
+        .btn-recurso:hover {transform: scale(1.02);}
+        .btn-volver{background:rgba(52,73,94,0.8);color:white;padding:15px 35px;border-radius:12px;text-decoration:none;font-weight:bold;display:inline-block;transition:0.3s;border:1px solid #5d6d7e;margin-top:30px;}
+        .btn-volver:hover{background:#34495e;transform:translateY(-2px);}
         
-        /* Formulario de Prácticas */
-        .form-box {background: rgba(52, 152, 219, 0.1); border: 2px dashed #3498db; border-radius: 10px; padding: 30px; text-align: center; margin-top: 15px;}
-        .btn-form {background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 15px; display: inline-block; margin-top: 15px;}
-        
-        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px;}
+        @media(max-width: 768px) { .grid-niveles {grid-template-columns: 1fr;} }
     </style>
 </head>
 <body>
-
+<div class="fondo-animado"></div>
 <div class="container">
     <div class="header">
-        <h1>M02 — CLASES Y RECURSOS</h1>
-        <p>Análisis Estructural y Cargas | ECT-UNESUM-2026</p>
+        <h1>M02 — ANÁLISIS ESTRUCTURAL Y CARGAS</h1>
+        <p>Del Cálculo Manual (Sexto) al Análisis Matricial (Séptimo) — Proyecto Bloque 001</p>
     </div>
 
-    <!-- 1. BANNER CONSTRUCTIVISTA -->
-    <div class="banner-constructivista">
-        <div style="font-size: 30px;">🏗️</div>
-        <div>
-            <h4>CONSTRUCTIVISMO: TÚ CONSTRUYES TU CONOCIMIENTO</h4>
-            <p>Antes de participar en clase, es <b>obligatorio</b> revisar la Guía de Estudio y las Clases Grabadas. <b>Esta revisión previa será evaluada (30%).</b></p>
-        </div>
-    </div>
-
-    <!-- PESTAÑAS DE NAVEGACIÓN -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="cambiarTab('materias', this)">📚 Clases de Materias (Currículo)</button>
-        <button class="tab-btn" onclick="cambiarTab('proyectos', this)">🏗️ Clases de Proyectos (Laboratorio Vivo)</button>
+        <button class="tab-btn active" onclick="cambiarTab('clases', this)">📚 Clases y Recorrido</button>
+        <button class="tab-btn" onclick="cambiarTab('calculadora', this)">📐 Calculadora</button>
+        <button class="tab-btn" onclick="cambiarTab('tutor', this)">🧠 Tutor Socrático</button>
+        <button class="tab-btn" onclick="cambiarTab('cuestionario', this)">📝 Cuestionario</button>
+        <button class="tab-btn" onclick="cambiarTab('recursos', this)">📂 Recursos</button>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PESTAÑA 1: CLASES DE MATERIAS (CURRÍCULO)  -->
-    <!-- ========================================== -->
-    <div id="tab-materias" class="seccion-contenido active">
-        <div class="seccion">
-            <h2>📚 Clases de Materias (Aula Invertida)</h2>
-            <p style="color: #bdc3c7; margin-bottom: 20px;">Estas clases cubren el currículo oficial de Estructura I y II. Míralas antes de la clase presencial.</p>
-            
-            <div class="clase-card">
-                <div class="clase-info">
-                    <h3>Clase 1: Fundamento Teórico (Hibbeler)</h3>
-                    <p>Viga Simplemente Apoyada, Cálculo de V, M y deflexión.</p>
-                </div>
-                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+    <!-- PESTAÑA 1: CLASES -->
+    <div id="tab-clases" class="seccion-contenido active">
+        <div class="grid-niveles">
+            <div class="nivel-card nivel-sexto">
+                <h3>🟢 SEXTO NIVEL (El Insumo)</h3>
+                <p style="font-size:14px; margin-bottom:15px;"><b>Objetivo:</b> Calcular la demanda estructural (cargas, cortantes, momentos y deflexiones) de la viga del Bloque 001 usando los criterios del Hibbeler y la NEC-15.</p>
+                <ul>
+                    <li>Ejemplo Hibbeler (Viga Simplemente Apoyada).</li>
+                    <li>Predimensionamiento por Luz Crítica (Espesores).</li>
+                    <li>Cargas según Uso (Vivienda, Bodega, Aula).</li>
+                    <li>Prototipos Modulares de Rigidez (PMR).</li>
+                    <li>Ensayo con Phyphox (PHX) y GeoGebra (GGB).</li>
+                </ul>
+                <div class="resultado-box"><b>Resultado:</b> El estudiante entrega el Vector de Cargas (Insumo Base) y el cálculo de la deflexión teórica.</div>
             </div>
-
-            <div class="clase-card">
-                <div class="clase-info">
-                    <h3>Clase 2: Formulación Matricial (Séptimo)</h3>
-                    <p>Matriz de Rigidez (K), Inversa y Curva Momento-Rotación.</p>
-                </div>
-                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
+            <div class="nivel-card nivel-septimo">
+                <h3>🔴 SÉPTIMO NIVEL (La Validación)</h3>
+                <p style="font-size:14px; margin-bottom:15px;"><b>Objetivo:</b> Tomar el insumo de Sexto y validarlo mediante el Análisis Matricial (Método de la Rigidez), evaluando la respuesta de la viga hiperestática y su impacto en el Pórtico 3D.</p>
+                <ul>
+                    <li>Formulación Matricial (Matriz de Rigidez K).</li>
+                    <li>Deducción de la Elástica (Condiciones de Borde).</li>
+                    <li>Curva Momento-Rotación (Efecto de EI).</li>
+                    <li>Ensamblaje del Pórtico 3D (6 GDL).</li>
+                    <li>Conexión con el Ciclo Nonaka-Takeuchi.</li>
+                </ul>
+                <div class="resultado-box"><b>Resultado:</b> El estudiante entrega la Matriz de Rigidez Validada y el análisis de incertidumbre (Monte Carlo).</div>
             </div>
         </div>
 
-        <!-- CALCULADORA -->
-        <div class="seccion" style="border-left-color: #2ecc71;">
-            <h2>📐 Calculadora de Predimensionamiento</h2>
-            <p>Ingresa la luz de tu subcircuito para determinar el espesor de la losa:</p>
-            
+        <div class="card">
+            <h2 style="color:#5dade2; margin-bottom:20px; text-align:center;">🏗️ RECORRIDO TEMÁTICO DEL MÓDULO</h2>
+            <div class="paso-box"><div class="paso-numero">1</div><div class="paso-texto"><h4>Fundamento Teórico (Hibbeler + Word de Elástica)</h4><p>Vigas isostáticas, cálculo de V, M y δ. Deducción de la ecuación de rotación.</p></div></div>
+            <div class="paso-box"><div class="paso-numero">2</div><div class="paso-texto"><h4>Cargas y Predimensionamiento (PPTX + Excel)</h4><p>Aplicación de la NEC-15 según el uso del subcircuito. Cálculo de espesores de losa.</p></div></div>
+            <div class="paso-box"><div class="paso-numero">3</div><div class="paso-texto"><h4>Formulación Matricial (PPTX + Excel Matricial)</h4><p>Paso de las fórmulas cerradas a la matriz de rigidez [K]. Cálculo de la inversa y vector de fuerzas.</p></div></div>
+            <div class="paso-box"><div class="paso-numero">4</div><div class="paso-texto"><h4>Ensayo y Validación (Phyphox + Python + MATLAB)</h4><p>Medición de la frecuencia natural del Prototipo Modular de Rigidez (PMR).</p></div></div>
+        </div>
+    </div>
+
+    <!-- PESTAÑA 2: CALCULADORA -->
+    <div id="tab-calculadora" class="seccion-contenido">
+        <div class="card" style="border-left-color:#2ecc71;">
+            <h2 style="color:#2ecc71;">📐 Calculadora de Predimensionamiento</h2>
             <div class="calculadora-box">
-                <input type="number" id="luz-input" placeholder="Ej: 4.5 (metros)" step="0.1">
-                <button onclick="calcularLosa()">Calcular Espesor</button>
-                <div id="resultado-losa">
-                    <h3 id="losa-tipo" style="color: #2ecc71; margin-bottom: 5px;"></h3>
-                    <p id="losa-texto" style="font-size: 14px;"></p>
+                <label>LUZ (L) — DISTANCIA ENTRE APOYOS (METROS):</label>
+                <input type="number" id="luz-input" placeholder="Ej: 4.5" step="0.1">
+                <label>TIPO DE USO DEL TERRITORIO:</label>
+                <select id="tipo-uso">
+                    <option value="0.29">Aulas / Escuela (Cv = 0.29 t/m²)</option>
+                    <option value="0.50">Hospital / Centro de Salud (Cv = 0.50 t/m²)</option>
+                    <option value="0.25">Vivienda / Oficina (Cv = 0.25 t/m²)</option>
+                </select>
+                <button onclick="calcularCargas()">Calcular Espesor y Carga</button>
+                <div id="resultado-losa" class="resultado-caja">
+                    <h3 id="losa-tipo"></h3>
+                    <p id="losa-texto"></p>
+                    <div class="res-grid">
+                        <div class="res-item"><span>Carga Muerta (Cm)</span><strong id="cm-valor">-</strong></div>
+                        <div class="res-item"><span>Carga Viva (Cv)</span><strong id="cv-valor">-</strong></div>
+                        <div class="res-item" style="border:1px solid #e67e22;"><span>Carga Última (Cu)</span><strong id="cu-valor" style="color:#e67e22;">-</strong></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PESTAÑA 2: CLASES DE PROYECTOS (LAB VIVO)  -->
-    <!-- ========================================== -->
-    <div id="tab-proyectos" class="seccion-contenido">
-        <div class="seccion" style="border-left-color: #f39c12;">
-            <h2>🏗️ Clases de Proyectos (Laboratorio Vivo)</h2>
-            <p style="color: #bdc3c7; margin-bottom: 20px;">Aquí no se enseña teoría; se enseña cómo trabajar en el Bloque 001. Videos de campo, prototipos y metodología.</p>
-            
-            <div class="clase-card">
-                <div class="clase-info">
-                    <h3>Clase 1: Prototipos Modulares de Rigidez (PMR)</h3>
-                    <p>Cómo armar el prototipo tipo puzzle para el ensayo de flexión.</p>
-                </div>
-                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
-            </div>
-
-            <div class="clase-card">
-                <div class="clase-info">
-                    <h3>🐍 Análisis Estocástico (Monte Carlo)</h3>
-                    <p>Descarga el script de Python que simula 5000 escenarios de falla de la viga del Bloque 001.</p>
-                </div>
-                <a href="modulo02_estocastico_viga.py" download class="btn-video" style="background: #3498db;">📥 Descargar Script</a>
-            </div>
-
-            <div class="clase-card">
-                <div class="clase-info">
-                    <h3>Clase 2: Ensayo con Phyphox (PHX) y GeoGebra (GGB)</h3>
-                    <p>Medición de frecuencia natural y validación experimental.</p>
-                </div>
-                <a href="#" class="btn-video">▶ Ver Clase (Próximamente)</a>
-            </div>
-        </div>
-
-        <!-- FORMULARIO DE PRÁCTICAS ABIERTO -->
-        <div class="seccion" style="border-left-color: #3498db;">
-            <h2>🌎 Oportunidad de Prácticas Preprofesionales (PPP)</h2>
-            <p style="color: #bdc3c7; margin-bottom: 15px;">¿Eres estudiante de la UNESUM, UTM, ULEAM, ESPAM o de otra universidad? Postula para realizar tus prácticas en nuestro Laboratorio Vivo (Bloque 001, Jipijapa).</p>
-            
-            <div class="form-box">
-                <h3 style="color: #3498db; font-size: 18px;">Registro de Postulantes y Horas PPP</h3>
-                <p style="color: #bdc3c7; font-size: 14px; margin-top: 10px;">Completa el formulario para registrar tus datos, tu universidad de origen y tus horas de vinculación.</p>
-<a href="https://docs.google.com/forms/d/e/..." target="_blank" class="btn-form">📋 Abrir Formulario de Prácticas</a>
-<p style="color: #7f8c8d; font-size: 12px; margin-top: 15px;">*Este formulario está abierto para estudiantes de todas las universidades de Manabí y del país.</p>
+    <!-- PESTAÑA 3: TUTOR -->
+    <div id="tab-tutor" class="seccion-contenido">
+        <div class="card" style="border-left-color:#9b59b6;">
+            <h2 style="color:#c39bd3;">🤖 TUTOR SOCRÁTICO</h2>
+            <div style="background:rgba(155,89,182,0.1);padding:20px;border-radius:12px;border:1px solid #9b59b6;">
+                <p style="color:#ecf0f1;font-size:15px;line-height:1.8;margin-bottom:15px;">
+                    <b style="color:#f39c12;">Tutor:</b> "El contratista cambió el bloque de 15 cm por uno de 20 cm en el casco comercial. ¿Cómo altera esto la carga muerta? ¿Es falla de diseño o supervisión?"
+                </p>
+                <textarea id="respuesta-tamiz" rows="4" style="width:100%;padding:15px;border-radius:10px;border:1px solid #5dade2;background:#0a0e1a;color:white;font-family:inherit;font-size:14px;margin-bottom:15px;outline:none;" placeholder="Escribe tu análisis forense aquí..."></textarea>
+                <button onclick="validarTamiz()" style="background:linear-gradient(135deg, #9b59b6, #8e44ad);color:white;border:none;padding:12px 25px;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.3s;">Enviar Respuesta</button>
+                <div id="msj-tamiz" style="margin-top:15px;font-weight:bold;display:none;"></div>
             </div>
         </div>
     </div>
 
-    <!-- Botón Volver -->
-    <div style="text-align: center;">
-        <a href="modulo_02_calculo_cargas.html" class="btn-volver">← Volver a la Puerta del Módulo 02</a>
+    <!-- PESTAÑA 4: CUESTIONARIO -->
+    <div id="tab-cuestionario" class="seccion-contenido">
+        <div class="card" style="border-left-color:#3498db; text-align:center;">
+            <h2 style="color:#3498db;">📝 Cuestionario de Evaluación M02</h2>
+            <p style="color:#bdc3c7;margin-bottom:20px;">15 preguntas (Bloques A, B, C y D).</p>
+            <a href="M02_cuestionario.html" style="display:inline-block; background:linear-gradient(135deg, #3498db, #2980b9); color:white; padding:20px 40px; border-radius:10px; font-weight:bold; font-size:18px; text-decoration:none; box-shadow: 0 10px 25px rgba(52,152,219,0.4);">
+                🚀 ABRIR CUESTIONARIO
+            </a>
+        </div>
     </div>
 
+    <!-- PESTAÑA 5: RECURSOS (CON LA CARPETA M02_recursos) -->
+    <div id="tab-recursos" class="seccion-contenido">
+        <div class="card" style="border-left-color:#3498db; margin-bottom: 25px;">
+            <h2 style="color:#3498db;">🟢 Recursos de Sexto Semestre (El Insumo)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(243,156,18,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📊</div>
+                    <h4 style="color: #f39c12; margin-bottom: 10px;">Teoría de Cargas</h4>
+                    <a href="M02_recursos/cargas_uso.pptx" download class="btn-recurso" style="background: linear-gradient(135deg, #f39c12, #e67e22);">📥 Descargar PPTX</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(52,152,219,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">🐍</div>
+                    <h4 style="color: #3498db; margin-bottom: 10px;">Algoritmo Hibbeler</h4>
+                    <a href="M02_recursos/algoritmo_hibbeler.py" download class="btn-recurso" style="background: linear-gradient(135deg, #3498db, #2980b9);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📐</div>
+                    <h4 style="color: #2ecc71; margin-bottom: 10px;">Predimensionamiento</h4>
+                    <a href="M02_recursos/algoritmo_espesores.py" download class="btn-recurso" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(155,89,182,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📊</div>
+                    <h4 style="color: #9b59b6; margin-bottom: 10px;">Inercia Equivalente</h4>
+                    <a href="M02_recursos/inercia_equivalente.xlsx" download class="btn-recurso" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">📥 Descargar Excel</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-left-color:#e74c3c;">
+            <h2 style="color:#e74c3c;">🔴 Recursos de Séptimo Semestre (La Validación)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(231,76,60,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📐</div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Formulación Matricial</h4>
+                    <a href="M02_recursos/formulacion_matricial.pptx" download class="btn-recurso" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">📥 Descargar PPTX</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(52,152,219,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📄</div>
+                    <h4 style="color: #3498db; margin-bottom: 10px;">Cálculo de Rotaciones</h4>
+                    <a href="M02_recursos/deduccion_rotaciones.docx" download class="btn-recurso" style="background: linear-gradient(135deg, #3498db, #2980b9);">📄 Descargar DOCX</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">🐍</div>
+                    <h4 style="color: #2ecc71; margin-bottom: 10px;">Viga Ejercicio 1</h4>
+                    <a href="M02_recursos/viga_ejercicio1.py" download class="btn-recurso" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(243,156,18,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">🐍</div>
+                    <h4 style="color: #f39c12; margin-bottom: 10px;">Viga Ejercicio 2</h4>
+                    <a href="M02_recursos/viga_ejercicio2.py" download class="btn-recurso" style="background: linear-gradient(135deg, #f39c12, #e67e22);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(155,89,182,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📈</div>
+                    <h4 style="color: #9b59b6; margin-bottom: 10px;">Curva M-θ</h4>
+                    <a href="M02_recursos/curva_momento_rotacion.py" download class="btn-recurso" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(231,76,60,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">📊</div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Gráficas 3D (M-θ-q)</h4>
+                    <a href="M02_recursos/graficas_3d_viga.py" download class="btn-recurso" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">🐍 Descargar Python</a>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(155,89,182,0.3); text-align: center;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">🔄</div>
+                    <h4 style="color: #9b59b6; margin-bottom: 10px;">Ciclo Nonaka</h4>
+                    <a href="M02_recursos/ciclo_nonaka.py" download class="btn-recurso" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🐍 Descargar Python</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;">
+        <a href="index.html" class="btn-volver">← Volver al Índice</a>
+    </div>
 </div>
 
 <script>
-    // Lógica de Pestañas
     function cambiarTab(tab, boton) {
         document.querySelectorAll('.seccion-contenido').forEach(sec => sec.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -177,36 +254,43 @@
         boton.classList.add('active');
     }
 
-    // Lógica de la Calculadora
-    function calcularLosa() {
+    function calcularCargas() {
         const luz = parseFloat(document.getElementById('luz-input').value);
-        const resultadoDiv = document.getElementById('resultado-losa');
-        const tipoDiv = document.getElementById('losa-tipo');
-        const textoDiv = document.getElementById('losa-texto');
-
-        if (isNaN(luz) || luz <= 0) {
-            alert("Por favor, ingrese un valor numérico válido para la luz.");
-            return;
-        }
-
-        resultadoDiv.style.display = 'block';
+        const cv = parseFloat(document.getElementById('tipo-uso').value);
+        const resBox = document.getElementById('resultado-losa');
+        if (isNaN(luz) || luz <= 0) { alert("Ingrese una luz válida."); return; }
+        resBox.style.display = 'block';
         
-        if (luz <= 3.60) {
-            tipoDiv.innerText = "Losa Alivianada (15 cm)";
-            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 3.60 m.`;
-        } else if (luz <= 4.80) {
-            tipoDiv.innerText = "Losa Alivianada (20 cm)";
-            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 4.80 m.`;
-        } else if (luz <= 6.00) {
-            tipoDiv.innerText = "Losa Alivianada (25 cm)";
-            textoDiv.innerText = `La luz de ${luz} m está dentro del rango de hasta 6.00 m.`;
+        let espesor = 20;
+        let tipoTxt = "";
+        if (luz <= 3.60) { tipoTxt = "Losa Alivianada (15 cm)"; espesor = 15; }
+        else if (luz <= 4.80) { tipoTxt = "Losa Alivianada (20 cm)"; espesor = 20; }
+        else if (luz <= 6.00) { tipoTxt = "Losa Alivianada (25 cm)"; espesor = 25; }
+        else { tipoTxt = "Prefabricada o Viga Secundaria"; espesor = 30; }
+
+        document.getElementById('losa-tipo').innerText = tipoTxt;
+        document.getElementById('losa-texto').innerText = `La luz de ${luz} m requiere este análisis.`;
+        
+        const pesoPropio = (espesor * 15) / 1000; 
+        const cm = pesoPropio + 0.26;
+        const cu = (1.4 * cm) + (1.7 * cv);
+
+        document.getElementById('cm-valor').innerText = cm.toFixed(2) + " t/m²";
+        document.getElementById('cv-valor').innerText = cv.toFixed(2) + " t/m²";
+        document.getElementById('cu-valor').innerText = cu.toFixed(2) + " t/m²";
+    }
+
+    function validarTamiz() {
+        const texto = document.getElementById('respuesta-tamiz').value.trim();
+        const msj = document.getElementById('msj-tamiz');
+        if (texto.length < 20) {
+            msj.style.display = 'block'; msj.style.color = '#e74c3c';
+            msj.innerText = "⚠️ Analiza más a fondo (mínimo 20 caracteres).";
         } else {
-            tipoDiv.innerText = "Prefabricada o Viga Secundaria";
-            tipoDiv.style.color = "#e74c3c";
-            textoDiv.innerText = `La luz de ${luz} m supera los 6.00 m. Se sugiere prefabricada o añadir viga secundaria.`;
+            msj.style.display = 'block'; msj.style.color = '#2ecc71';
+            msj.innerText = "✅ ¡Excelente análisis! Cuestionario desbloqueado.";
         }
     }
 </script>
-
 </body>
 </html>
