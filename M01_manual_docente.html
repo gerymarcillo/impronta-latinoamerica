@@ -2,52 +2,61 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Manual del Docente M01 - Inercia Equivalente</title>
+<title>Manual del Docente M01 - Inercia y Altura Equivalente</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
-.container{max-width:1000px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #e74c3c;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
-.header-logo{height:90px;margin-bottom:15px}
-.header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
-.header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
-.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
-.badge-prof{display:inline-block;background:#e74c3c;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
-.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #3498db}
-.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
-.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
-.seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
-.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
-.seccion ul{list-style:none;padding-left:0;margin:12px 0}
-.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
-.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
-.tabla{width:100%;border-collapse:collapse;margin:20px 0}
-.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
-.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
-.tabla tr:nth-child(even){background:#34495e}
-.rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #e74c3c}
-.rubrica-card h4{color:#e74c3c;margin-bottom:12px;font-size:16px}
-.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
-.criterio strong{color:#f39c12}
-.criterio .peso{display:inline-block;background:#e74c3c;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
-.ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
-.ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
-.ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
-.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
-.alerta h4{color:#e67e22;margin-bottom:8px}
-.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
-.indice h3{color:#f39c12;margin-bottom:12px}
-.indice ol{padding-left:25px;margin:0}
-.indice li{padding:6px 0;font-size:14px}
-.indice a{color:#5dade2;text-decoration:none}
-.indice a:hover{text-decoration:underline}
-.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
-.frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
-.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
-.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
-.botones{text-align:center;margin:30px 0}
-.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
-.pie-pagina p{margin:6px 0}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+    .container{max-width:1000px;margin:0 auto}
+    .header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #e74c3c;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+    .header-logo{height:90px;margin-bottom:15px}
+    .header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
+    .header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
+    .header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+    .badge-prof{display:inline-block;background:#e74c3c;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
+    
+    .seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #f39c12}
+    .seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+    .seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+    .seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
+    .seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+    .seccion ul{list-style:none;padding-left:0;margin:12px 0}
+    .seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+    .seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+    
+    .tabla{width:100%;border-collapse:collapse;margin:20px 0}
+    .tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+    .tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+    .tabla tr:nth-child(even){background:#34495e}
+    
+    .rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #e74c3c}
+    .rubrica-card h4{color:#e74c3c;margin-bottom:12px;font-size:16px}
+    .criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
+    .criterio strong{color:#f39c12}
+    .criterio .peso{display:inline-block;background:#e74c3c;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
+    
+    .ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
+    .ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
+    .ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
+    
+    .alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+    .alerta h4{color:#e67e22;margin-bottom:8px}
+    
+    .indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+    .indice h3{color:#f39c12;margin-bottom:12px}
+    .indice ol{padding-left:25px;margin:0}
+    .indice li{padding:6px 0;font-size:14px}
+    .indice a{color:#5dade2;text-decoration:none}
+    .indice a:hover{text-decoration:underline}
+    
+    .frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
+    .frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+    
+    .btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
+    .btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+    .botones{text-align:center;margin:30px 0}
+    
+    .pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+    .pie-pagina p{margin:6px 0}
 </style>
 </head>
 <body>
@@ -57,16 +66,16 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <div class="header">
 <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
 <h1>📙 MANUAL DEL DOCENTE — M01</h1>
-<h2>INERCIA EQUIVALENTE Y ALTURA EQUIVALENTE</h2>
+<h2>INERCIA EQUIVALENTE Y ALTURA EQUIVALENTE DE LOSA ALIVIANADA</h2>
 <h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
 <h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
 <span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
 </div>
 
 <div class="frase-destacada">
-"Los números son solo el vehículo.<br>
-El verdadero ingeniero interpreta, decide,<br>
-contextualiza, se responsabiliza."
+"El cálculo de la inercia no es un fin,<br>
+es el puente entre la geometría real<br>
+y el modelo estructural que lo representa."
 <span class="autor">— Proyecto ECT-UNESUM-2026</span>
 </div>
 
@@ -90,8 +99,8 @@ contextualiza, se responsabiliza."
 <!-- 1. PROPÓSITO -->
 <div class="seccion" id="proposito">
 <h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
-<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M01 — Inercia Equivalente.</p>
-<p>A diferencia de la evaluación tradicional (que compara palabras clave), este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en el Módulo M01 — Inercia Equivalente y Altura Equivalente.</p>
+<p>A diferencia de la evaluación tradicional (que solo mide si el estudiante se sabe la fórmula), este sistema evalúa la <strong>comprensión geométrica y el pensamiento crítico</strong>, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
 
 <div class="alerta">
 <h4>⚠️ IMPORTANTE</h4>
@@ -102,35 +111,35 @@ contextualiza, se responsabiliza."
 <!-- 2. MODELO BASE -->
 <div class="seccion" id="modelo">
 <h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
-<p>Todas las preguntas del M01 están ancladas al <strong>modelo base del Colegio Alejo Lascano</strong>:</p>
+<p>Todas las preguntas del M01 están ancladas al cálculo de la losa alivianada del <strong>Proyecto Multidisciplinario</strong>:</p>
 
 <table class="tabla">
 <thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
 <tbody>
-<tr><td>H (altura total losa)</td><td>25.0</td><td>cm</td></tr>
-<tr><td>bn (ancho nervio)</td><td>10.0</td><td>cm</td></tr>
-<tr><td>bb (ancho bloque)</td><td>50.0</td><td>cm</td></tr>
-<tr><td>tc (capa de compresión)</td><td>5.0</td><td>cm</td></tr>
-<tr><td>hn (altura del nervio)</td><td>20.0</td><td>cm</td></tr>
+<tr><td>H (altura total de losa)</td><td>25</td><td>cm</td></tr>
+<tr><td>bn (ancho del nervio)</td><td>10</td><td>cm</td></tr>
+<tr><td>bb (ancho del bloque)</td><td>50</td><td>cm</td></tr>
+<tr><td>tc (espesor capa de compresión)</td><td>5</td><td>cm</td></tr>
+<tr><td>fc</td><td>210</td><td>kg/cm²</td></tr>
+<tr><td>fy</td><td>4200</td><td>kg/cm²</td></tr>
 </tbody>
 </table>
 
-<h3>Resultados esperados:</h3>
+<h3>Resultados esperados (Ejemplo oficial del proyecto):</h3>
 <table class="tabla">
 <thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
 <tbody>
 <tr><td>A_capa</td><td>250</td><td>cm²</td></tr>
 <tr><td>A_nervio</td><td>200</td><td>cm²</td></tr>
-<tr><td>A_total</td><td>450</td><td>cm²</td></tr>
 <tr><td>y_cg (centroide)</td><td>16.94</td><td>cm</td></tr>
-<tr><td>I_total</td><td>24548</td><td>cm⁴</td></tr>
+<tr><td>I_total (inercia)</td><td>24548</td><td>cm⁴</td></tr>
 <tr><td><strong>h_eq (altura equivalente)</strong></td><td><strong>18.06</strong></td><td><strong>cm</strong></td></tr>
 </tbody>
 </table>
 
 <div class="alerta">
-<h4>💡 Valores de referencia del libro</h4>
-<p>El valor h_eq = 18.06 cm coincide con la tabla del libro de Marcelo Guerra para una losa alivianada de 25 cm. Esto valida el cálculo.</p>
+<h4>💡 Valores de referencia</h4>
+<p>El valor <strong>h_eq = 18.06 cm</strong> es el resultado oficial del ejemplo. Si el estudiante calcula con otras dimensiones, debe justificar sus resultados con el procedimiento completo (Teorema de Steiner).</p>
 </div>
 </div>
 
@@ -142,9 +151,9 @@ contextualiza, se responsabiliza."
 <tr><th>Bloque</th><th>Tipo</th><th>Preguntas</th><th>Puntaje</th><th>Método</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
-<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
-<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
+<tr><td><strong>A</strong></td><td>Conceptos</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
 <tr><td><strong>D</strong></td><td>Decisión profesional</td><td>2</td><td>25 pts</td><td><strong>Rúbrica + ética</strong></td></tr>
 <tr><td colspan="3"><strong>TOTAL</strong></td><td><strong>100 pts</strong></td><td>—</td></tr>
 </tbody>
@@ -155,8 +164,8 @@ contextualiza, se responsabiliza."
 <thead><tr><th>Bloque</th><th>Nivel de Bloom</th><th>Qué se evalúa</th></tr></thead>
 <tbody>
 <tr><td>A</td><td>Recordar / Entender</td><td>El estudiante comprende el concepto</td></tr>
-<tr><td>B</td><td>Aplicar</td><td>El estudiante usa las fórmulas</td></tr>
-<tr><td>C</td><td>Analizar / Evaluar</td><td>El estudiante interpreta los valores</td></tr>
+<tr><td>B</td><td>Aplicar</td><td>El estudiante usa las fórmulas de Steiner</td></tr>
+<tr><td>C</td><td>Analizar / Evaluar</td><td>El estudiante interpreta la inercia y h_eq</td></tr>
 <tr><td>D</td><td>Crear / Decidir</td><td>El estudiante decide como profesional</td></tr>
 </tbody>
 </table>
@@ -194,66 +203,66 @@ contextualiza, se responsabiliza."
 <p>Cada pregunta del Bloque C tiene <strong>3 criterios</strong> con pesos específicos:</p>
 
 <div class="rubrica-card">
-<h4>Pregunta C1 — Deflexión al reducir bb</h4>
+<h4>Pregunta C1 — Diferencia Losa Alivianada vs Maciza</h4>
 <div class="criterio">
 <strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span>
-<p>Menciona: inercia, deflexión, relación inversa, o impacto estructural.</p>
+<p>Menciona: vacíos, aligeramiento, nervios, capa de compresión.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 2 — Justifica con números</strong><span class="peso">30%</span>
-<p>Menciona: -7.5%, cambio porcentual, o compara I_total antes/después.</p>
+<strong>Criterio 2 — Explica la inercia</strong><span class="peso">30%</span>
+<p>Menciona: la losa alivianada tiene menos concreto en la zona de tracción, pero la misma capacidad si se calcula bien.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 3 — Conecta con otros módulos</strong><span class="peso">30%</span>
-<p>Menciona: M06 (losa), L/240, NEC-15, o consecuencias estructurales.</p>
+<strong>Criterio 3 — Conecta con h_eq</strong><span class="peso">30%</span>
+<p>Menciona: se necesita una altura equivalente para modelar en ETABS/SAP2000.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta C2 — ¿Por qué h_eq < H?</h4>
+<h4>Pregunta C2 — Impacto de reducir la inercia en 7.5%</h4>
 <div class="criterio">
-<strong>Criterio 1 — Identifica los vacíos</strong><span class="peso">40%</span>
-<p>Menciona: vacíos, aligeramiento, bloques huecos.</p>
-</div>
-<div class="criterio">
-<strong>Criterio 2 — Reconoce el aporte del nervio y capa</strong><span class="peso">30%</span>
-<p>Menciona: nervio, capa de compresión, aportan inercia.</p>
+<strong>Criterio 1 — Relación inversa</strong><span class="peso">40%</span>
+<p>Menciona: si la inercia baja, la deflexión aumenta.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 3 — Explica el concepto de equivalencia</strong><span class="peso">30%</span>
-<p>Menciona: misma inercia, modelado ETABS, losa maciza equivalente.</p>
-</div>
-</div>
-
-<div class="rubrica-card">
-<h4>Pregunta C3 — Relación con M06</h4>
-<div class="criterio">
-<strong>Criterio 1 — Identifica la conexión</strong><span class="peso">40%</span>
-<p>Menciona: h_eq alimenta a M06, I_eq para verificar deflexión.</p>
-</div>
-<div class="criterio">
-<strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span>
-<p>Menciona: cálculo de deflexión, verificación L/240.</p>
-</div>
-<div class="criterio">
-<strong>Criterio 3 — Consecuencia si no se calcula bien</strong><span class="peso">30%</span>
-<p>Menciona: sobreestima rigidez, subestima deflexión, diseño no seguro.</p>
-</div>
-</div>
-
-<div class="rubrica-card">
-<h4>Pregunta C4 — Reducción de tc</h4>
-<div class="criterio">
-<strong>Criterio 1 — Impacto en la inercia</strong><span class="peso">40%</span>
-<p>Menciona: I_total baja, h_eq baja.</p>
-</div>
-<div class="criterio">
-<strong>Criterio 2 — Explicación física</strong><span class="peso">30%</span>
-<p>Menciona: menor área alejada del centroide, menor aporte.</p>
+<strong>Criterio 2 — Justificación numérica</strong><span class="peso">30%</span>
+<p>Menciona: 7.5% de reducción de inercia implica ~7.5% de aumento en deflexión.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Consecuencia estructural</strong><span class="peso">30%</span>
-<p>Menciona: mayor deflexión, riesgo de no cumplir L/240.</p>
+<p>Menciona: posible fisuración, límite L/240, NEC-15.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C3 — Importancia de h_eq en el modelado</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica el uso</strong><span class="peso">40%</span>
+<p>Menciona: modelar la losa en software (ETABS, SAP2000).</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Justifica la equivalencia</strong><span class="peso">30%</span>
+<p>Menciona: misma inercia que la losa real, mantiene el comportamiento estructural.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Consecuencia de no usarla</strong><span class="peso">30%</span>
+<p>Menciona: error en la deflexión, diseño de viga incorrecto.</p>
+</div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C4 — Efecto de un bloque más grande</h4>
+<div class="criterio">
+<strong>Criterio 1 — Identifica el efecto</strong><span class="peso">40%</span>
+<p>Menciona: la inercia disminuye, el nervio se hace más angosto.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 2 — Explicación física</strong><span class="peso">30%</span>
+<p>Menciona: menos concreto en la sección, menos resistencia a flexión.</p>
+</div>
+<div class="criterio">
+<strong>Criterio 3 — Consecuencia estructural</strong><span class="peso">30%</span>
+<p>Menciona: mayor deflexión, necesidad de rediseñar.</p>
 </div>
 </div>
 
@@ -261,42 +270,42 @@ contextualiza, se responsabiliza."
 <p>Cada pregunta del Bloque D tiene <strong>4 criterios</strong> con pesos específicos:</p>
 
 <div class="rubrica-card">
-<h4>Pregunta D1 — Reducción de bb (12 pts)</h4>
+<h4>Pregunta D1 — Cambio de bloque de 15 a 20 cm (12 pts)</h4>
 <div class="criterio">
 <strong>Criterio 1 — Técnico</strong><span class="peso">25%</span>
-<p>Menciona: impacto en inercia, deflexión, L/240, rigidez.</p>
+<p>Menciona: altera la inercia, la deflexión y el peso propio.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 2 — Normativo</strong><span class="peso">25%</span>
-<p>Menciona: NEC-15, ACI 318, normativa aplicable.</p>
+<p>Menciona: NEC-15, ACI 318.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 3 — Ético</strong><span class="peso">25%</span>
-<p>Menciona: responsabilidad profesional, firma, rechazo justificado.</p>
+<p>Menciona: responsabilidad profesional, rechazo, notificación.</p>
 </div>
 <div class="criterio">
 <strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span>
-<p>Menciona: documentar, análisis estocástico, P95, memoria.</p>
+<p>Menciona: documentar, notificar al fiscalizador, responsabilidad civil.</p>
 </div>
 </div>
 
 <div class="rubrica-card">
-<h4>Pregunta D2 — Bloques de menor resistencia (13 pts)</h4>
+<h4>Pregunta D2 — Validar ETABS con cálculo manual (13 pts)</h4>
 <div class="criterio">
-<strong>Criterio 1 — Identifica el problema</strong><span class="peso">25%</span>
-<p>Menciona: resistencia especificada vs real, déficit del 20%.</p>
+<strong>Criterio 1 — Importancia de la validación</strong><span class="peso">25%</span>
+<p>Menciona: el software puede tener errores de modelado.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 2 — Aplica normativa</strong><span class="peso">25%</span>
-<p>Menciona: NEC-15, ACI 318, NTE INEN.</p>
+<strong>Criterio 2 — Rol del cálculo manual</strong><span class="peso">25%</span>
+<p>Menciona: verifica que los resultados del software tengan sentido físico.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 3 — Acciones concretas</strong><span class="peso">25%</span>
-<p>Menciona: rechazar, notificar, suspender obra, documentar.</p>
+<strong>Criterio 3 — Ética profesional</strong><span class="peso">25%</span>
+<p>Menciona: no se puede firmar un diseño sin verificar.</p>
 </div>
 <div class="criterio">
-<strong>Criterio 4 — Consecuencias legales</strong><span class="peso">25%</span>
-<p>Menciona: responsabilidad civil y penal, denuncia, Colegio de Ingenieros.</p>
+<strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span>
+<p>Menciona: documentar los cálculos, guardar memorias.</p>
 </div>
 </div>
 </div>
@@ -309,21 +318,21 @@ contextualiza, se responsabiliza."
 <p><strong>Método:</strong> Comparación por palabras clave con la respuesta esperada.</p>
 <div class="ejemplo">
 <strong>Pregunta:</strong> ¿Qué es la inercia centroidal?
-<div class="respuesta">Respuesta esperada: "Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal."</div>
-<div class="resultado">Palabras clave: propiedad, geométrica, resistencia, flexión, eje, centroidal</div>
+<div class="respuesta">Respuesta esperada: "Es la resistencia a flexión de una figura respecto a su eje centroidal."</div>
+<div class="resultado">Palabras clave: resistencia, flexión, eje centroidal</div>
 </div>
 
 <h3>5.2 Evaluación del Bloque B</h3>
 <p><strong>Método:</strong> Comparación numérica exacta con tolerancia del 5%.</p>
 <div class="ejemplo">
-<strong>Pregunta:</strong> Calcule I_total.
-<div class="respuesta">Respuesta esperada: 24548 cm⁴</div>
-<div class="resultado">Tolerancia: ±1227 cm⁴ (5%)</div>
+<strong>Pregunta:</strong> Calcule h_eq.
+<div class="respuesta">Respuesta esperada: 18.06 cm</div>
+<div class="resultado">Tolerancia: ±0.90 cm (5%)</div>
 </div>
 
 <h3>5.3 Evaluación del Bloque C</h3>
 <p><strong>Método:</strong> Rúbrica por criterios ponderados.</p>
-<ol>
+<ol style="padding-left:25px;font-size:14px">
 <li>Verifique cada criterio individualmente</li>
 <li>Asigne puntos por criterio cumplido</li>
 <li>Sume los puntos de todos los criterios</li>
@@ -332,11 +341,11 @@ contextualiza, se responsabiliza."
 
 <div class="ejemplo">
 <strong>Ejemplo de evaluación C1:</strong>
-<div class="respuesta">Respuesta del estudiante: "La inercia baja 7.5% y la deflexión sube aproximadamente lo mismo. Esto afecta la verificación con L/240 en el M06."</div>
+<div class="respuesta">Respuesta: "La losa alivianada tiene vacíos que la hacen más liviana, pero su inercia es menor. Por eso se calcula una h_eq para modelarla en ETABS."</div>
 <div class="resultado">
-✅ Criterio 1 (40%): "inercia", "deflexión" → 40%<br>
-✅ Criterio 2 (30%): "-7.5%", "mismo" → 30%<br>
-✅ Criterio 3 (30%): "L/240", "M06" → 30%<br>
+✅ Criterio 1 (40%): "vacíos", "alivianada" → 40%<br>
+✅ Criterio 2 (30%): "inercia menor" → 30%<br>
+✅ Criterio 3 (30%): "h_eq", "ETABS" → 30%<br>
 <strong>Total: 100% × 6 pts = 6/6 pts</strong>
 </div>
 </div>
@@ -349,7 +358,7 @@ contextualiza, se responsabiliza."
 <!-- 6. REPORTES -->
 <div class="seccion" id="reportes">
 <h2>6. 📊 CÓMO INTERPRETAR LOS REPORTES</h2>
-<p>Al finalizar cada módulo, el sistema genera un <strong>Reporte de Desempeño</strong> con:</p>
+<p>Al finalizar el módulo, el sistema genera un <strong>Reporte de Desempeño</strong> con:</p>
 <ul>
 <li>Puntaje por pregunta</li>
 <li>Preguntas correctas vs total</li>
@@ -375,11 +384,11 @@ contextualiza, se responsabiliza."
 </div>
 <div class="alerta">
 <h4>🚨 Alerta 2: Bloque C bajo</h4>
-<p>Si el promedio del Bloque C es menor a 50%, el estudiante no está interpretando correctamente los valores. Reforzar con ejercicios de interpretación.</p>
+<p>Si el promedio del Bloque C es menor a 50%, el estudiante no está interpretando correctamente la relación inercia-deflexión. Reforzar con ejercicios de interpretación.</p>
 </div>
 <div class="alerta">
 <h4>🚨 Alerta 3: Bloque B bajo</h4>
-<p>Si el promedio del Bloque B es menor a 50%, hay vacíos en el manejo de fórmulas. Reforzar con práctica guiada.</p>
+<p>Si el promedio del Bloque B es menor a 50%, hay vacíos en el manejo del Teorema de Steiner. Reforzar con práctica guiada.</p>
 </div>
 </div>
 
@@ -389,7 +398,7 @@ contextualiza, se responsabiliza."
 <p>La retroalimentación debe ser <strong>formativa</strong>, no punitiva. El objetivo es que el estudiante mejore su criterio profesional.</p>
 
 <h3>7.1 Estructura de la retroalimentación</h3>
-<ol>
+<ol style="padding-left:25px;font-size:14px">
 <li><strong>Lo que estuvo bien:</strong> Reconocer los aciertos específicos</li>
 <li><strong>Lo que falta:</strong> Señalar los criterios no cumplidos</li>
 <li><strong>Cómo mejorar:</strong> Dar una recomendación concreta</li>
@@ -398,7 +407,7 @@ contextualiza, se responsabiliza."
 <h3>7.2 Ejemplos de retroalimentación</h3>
 <div class="ejemplo">
 <strong>Caso:</strong> Estudiante con puntaje 60 en Bloque D1.
-<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (inercia baja 7.5%), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
+<div class="respuesta">Retroalimentación: "Su respuesta técnica es correcta (el cambio de bloque afecta la inercia), pero falta mencionar la normativa NEC-15, la responsabilidad profesional y la trazabilidad. En la próxima respuesta, incluya siempre: (1) impacto técnico, (2) norma aplicable, (3) criterio ético, (4) cómo documentaría la decisión."</div>
 </div>
 </div>
 
@@ -407,23 +416,23 @@ contextualiza, se responsabiliza."
 <h2>8. 🚨 ALERTAS PEDAGÓGICAS DEL M01</h2>
 
 <div class="alerta">
-<h4>Alerta 1: Confusión entre H y h_eq</h4>
-<p>Los estudiantes suelen confundir la altura real con la altura equivalente. Reforzar la diferencia conceptual.</p>
+<h4>Alerta 1: Confusión entre inercia propia y Steiner</h4>
+<p>Los estudiantes suelen olvidar sumar el término <i>A · d²</i> del Teorema de Steiner. Reforzar que la inercia total es la suma de la inercia propia más el término de traslación.</p>
 </div>
 
 <div class="alerta">
-<h4>Alerta 2: Error en Steiner</h4>
-<p>El error más común es usar la inercia propia sin sumar el término A·d². Reforzar la aplicación del teorema.</p>
+<h4>Alerta 2: Error en el centroide</h4>
+<p>El error más común es calcular mal el centroide global (<i>y<sub>cg</sub></i>). Reforzar que se debe ponderar por área: <i>y<sub>cg</sub> = Σ(A<sub>i</sub> · y<sub>i</sub>) / Σ(A<sub>i</sub>)</i>.</p>
 </div>
 
 <div class="alerta">
 <h4>Alerta 3: No interpretar el resultado</h4>
-<p>Muchos estudiantes obtienen h_eq = 18.06 pero no saben qué significa. Reforzar la interpretación física.</p>
+<p>Muchos estudiantes obtienen <i>h<sub>eq</sub> = 18.06</i> cm pero no saben qué significa. Reforzar la interpretación física: es una losa maciza ficticia que se comporta igual que la alivianada.</p>
 </div>
 
 <div class="alerta">
 <h4>Alerta 4: Bloque D vacío</h4>
-<p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales.</p>
+<p>Algunos estudiantes no responden el Bloque D porque "no saben qué hacer". Reforzar el criterio ético con casos reales (Escuela Presidente Urbina, Agua Dulce).</p>
 </div>
 </div>
 
@@ -434,8 +443,8 @@ contextualiza, se responsabiliza."
 <h3>9.1 Antes del módulo</h3>
 <ul>
 <li>Revisar la Guía de Estudio M01 con los estudiantes</li>
-<li>Reforzar los conceptos clave (Steiner, h_eq, deflexión)</li>
-<li>Discutir el caso real del Colegio Alejo Lascano</li>
+<li>Reforzar los conceptos clave (inercia, centroide, Steiner)</li>
+<li>Discutir el caso real del Proyecto Multidisciplinario</li>
 </ul>
 
 <h3>9.2 Durante el módulo</h3>
@@ -474,10 +483,10 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>A1</td><td>¿Qué es la inercia centroidal?</td><td>Propiedad geométrica que mide la resistencia a flexión respecto al eje centroidal.</td><td>2</td></tr>
-<tr><td>A2</td><td>¿Qué dice el Teorema de Steiner?</td><td>La inercia respecto a un eje paralelo es igual a la inercia centroidal más el área por la distancia al cuadrado.</td><td>2</td></tr>
-<tr><td>A3</td><td>¿Por qué se calcula h_eq?</td><td>Para modelar la losa alivianada como maciza en ETABS manteniendo la misma inercia.</td><td>3</td></tr>
-<tr><td>A4</td><td>Diferencia entre H y h_eq</td><td>H es el espesor real; h_eq es el espesor ficticio equivalente. h_eq &lt; H por los vacíos.</td><td>3</td></tr>
+<tr><td>A1</td><td>¿Qué es la inercia centroidal?</td><td>Resistencia a flexión respecto al eje centroidal.</td><td>2</td></tr>
+<tr><td>A2</td><td>¿Para qué sirve el Teorema de Steiner?</td><td>Para calcular la inercia de secciones compuestas (suma de I0 + A·d²).</td><td>3</td></tr>
+<tr><td>A3</td><td>¿Qué es la altura equivalente (h_eq)?</td><td>Espesor de una losa maciza ficticia con la misma inercia que la alivianada.</td><td>2</td></tr>
+<tr><td>A4</td><td>¿Cuál es el espesor mínimo de losa sin ábacos según ACI 318?</td><td>12.5 cm.</td><td>3</td></tr>
 </tbody>
 </table>
 
@@ -485,11 +494,11 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>B1</td><td>Calcule A_capa, A_nervio, A_total</td><td>A_capa = 250 cm²; A_nervio = 200 cm²; A_total = 450 cm²</td><td>6</td></tr>
-<tr><td>B2</td><td>Calcule y_cg</td><td>y_cg = 16.94 cm</td><td>8</td></tr>
-<tr><td>B3</td><td>Calcule I_total con Steiner</td><td>I_total = 24548 cm⁴</td><td>10</td></tr>
-<tr><td>B4</td><td>Calcule h_eq</td><td>h_eq = 18.06 cm</td><td>8</td></tr>
-<tr><td>B5</td><td>Calcule δmax y verifique L/240</td><td>δmax = 1.71 mm ≤ 25 mm ✅ CUMPLE</td><td>8</td></tr>
+<tr><td>B1</td><td>Calcule A_capa (H=25, bb=50, tc=5)</td><td>250 cm²</td><td>6</td></tr>
+<tr><td>B2</td><td>Calcule A_nervio (bn=10, H=25, tc=5)</td><td>200 cm²</td><td>8</td></tr>
+<tr><td>B3</td><td>Calcule h_eq (I_total=24548, bb=50)</td><td>18.06 cm</td><td>8</td></tr>
+<tr><td>B4</td><td>Calcule el peso propio (espesor=20cm)</td><td>0.30 t/m²</td><td>8</td></tr>
+<tr><td>B5</td><td>Espesor recomendado para luz de 5.20 m</td><td>25 cm</td><td>10</td></tr>
 </tbody>
 </table>
 
@@ -497,10 +506,10 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>C1</td><td>Deflexión al reducir bb</td><td>La inercia baja 7.5% y la deflexión sube aproximadamente lo mismo.</td><td>6</td></tr>
-<tr><td>C2</td><td>¿Por qué h_eq &lt; H?</td><td>Porque los vacíos del aligeramiento no aportan inercia.</td><td>6</td></tr>
-<tr><td>C3</td><td>Relación con M06</td><td>h_eq alimenta al M06 para verificar deflexión con L/240.</td><td>6</td></tr>
-<tr><td>C4</td><td>Reducción de tc</td><td>I_total baja, h_eq baja, deflexión sube.</td><td>7</td></tr>
+<tr><td>C1</td><td>Diferencia losa alivianada vs maciza</td><td>La alivianada tiene vacíos, menos peso y requiere h_eq para modelar.</td><td>6</td></tr>
+<tr><td>C2</td><td>Impacto de reducir inercia en 7.5%</td><td>La deflexión aumenta ~7.5%, riesgo de fisuración.</td><td>6</td></tr>
+<tr><td>C3</td><td>Importancia de h_eq en modelado</td><td>Permite modelar en ETABS como maciza manteniendo la misma inercia.</td><td>6</td></tr>
+<tr><td>C4</td><td>Efecto de un bloque más grande</td><td>Disminuye la inercia, menos concreto, mayor deflexión.</td><td>7</td></tr>
 </tbody>
 </table>
 
@@ -508,8 +517,8 @@ contextualiza, se responsabiliza."
 <table class="tabla">
 <thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
 <tbody>
-<tr><td>D1</td><td>Reducción de bb</td><td>No aprobar. Inercia baja, deflexión sube. Rechazar y documentar.</td><td>12</td></tr>
-<tr><td>D2</td><td>Bloques de menor resistencia</td><td>Rechazar material, notificar, suspender obra, documentar.</td><td>13</td></tr>
+<tr><td>D1</td><td>Cambio de bloque de 15 a 20 cm</td><td>Rechazar, notificar, documentar. Afecta inercia y seguridad.</td><td>12</td></tr>
+<tr><td>D2</td><td>Validar ETABS con cálculo manual</td><td>El software puede fallar. Validar garantiza seguridad y ética.</td><td>13</td></tr>
 </tbody>
 </table>
 </div>
@@ -517,8 +526,7 @@ contextualiza, se responsabiliza."
 <!-- BOTONES -->
 <div class="botones">
 <a href="M01_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
-<a href="modulo_01_inercia_equivalente.html" class="btn">📝 Ir al Cuestionario</a>
-<a href="manual_programa.html" class="btn">📖 Manual del Programa</a>
+<a href="M01_cuestionario.html" class="btn">📝 Ir al Cuestionario</a>
 <a href="index.html" class="btn">🏠 Volver al Inicio</a>
 <button class="btn" onclick="window.print()">🖨 Descargar PDF</button>
 </div>
@@ -529,7 +537,7 @@ contextualiza, se responsabiliza."
 <p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
 <p>Universidad Estatal del Sur de Manabí — PI 2026</p>
 <p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
-<p style="margin-top:15px;font-style:italic;color:#f39c12">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"El cálculo de la inercia no es un fin, es el puente entre la geometría real y el modelo estructural que lo representa."</p>
 </div>
 
 </div>
