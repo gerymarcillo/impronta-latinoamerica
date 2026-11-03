@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M01 - Cuestionario - ECT-UNESUM</title>
     <style>
-        /* ESTILOS DEL M02 (ADN DEL PROYECTO) */
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
         .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
@@ -166,6 +165,12 @@
         <h1 style="color:#5dade2;">RESULTADO M01</h1>
         <div id="nota-final" class="nota-grande"></div>
         <div id="feedback-niveles" style="color:#bdc3c7;margin-bottom:20px;font-size:14px;"></div>
+        
+        <!-- BOTÓN MORADO PARA EL CERTIFICADO -->
+        <div id="contenedor-certificado" style="display:none;">
+            <button onclick="pedirCertificado()" class="btn-epico" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); margin-bottom: 15px;">🎓 Obtener mi Micro-Credencial</button>
+        </div>
+
         <div id="reporte-detallado">
             <h3 style="color:#5dade2;text-align:center;border-bottom:1px solid #34495e;padding-bottom:10px;">REPORTE DE AUDITORÍA</h3>
             <div id="contenido-reporte"></div>
@@ -178,18 +183,16 @@
     </div>
 </div>
 
-<!-- MODAL DE LA MICRO-CREDENCIAL -->
+<!-- MODAL DEL CERTIFICADO -->
 <div id="modal-certificado">
     <div id="certificado-real">
         <div class="marca-agua">UNESUM</div>
-        
         <div class="contenido-cert">
             <div class="header-cert">
                 <h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
                 <p>FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
                 <hr>
             </div>
-            
             <div>
                 <h1 class="titulo-cert">MICRO-CREDENCIAL</h1>
                 <p class="texto-cert">Se otorga el presente reconocimiento a:</p>
@@ -199,7 +202,6 @@
                 </p>
                 <p class="nota-cert">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
             </div>
-            
             <div class="firmas">
                 <div class="firma">
                     <hr>
@@ -218,7 +220,6 @@
             <p class="fecha-cert">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M01</p>
         </div>
     </div>
-    
     <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
         <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
         <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
@@ -228,6 +229,7 @@
 <script>
     let respuestasEstudiante = {};
     let examenCalificado = false;
+    let notaFinalGlobal = 0; // Variable para guardar la nota
 
     function calificarExamen() {
         if (examenCalificado) return;
@@ -282,6 +284,7 @@
         const notaCerradas = (aciertosCerrados / 9) * 45;
         const notaAbiertas = (puntajeAbierto / 100) * 55;
         const notaFinal = Math.round(notaCerradas + notaAbiertas);
+        notaFinalGlobal = notaFinal; // Guardamos la nota
 
         document.getElementById('formulario-contenedor').style.display = 'none';
         document.getElementById('pantalla-resultado').style.display = 'block';
@@ -293,14 +296,7 @@
             divNota.className = 'nota-grande aprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
             document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 01.";
-            
-            setTimeout(() => {
-                const nombre = prompt("¡Felicidades! Has aprobado el Módulo 01. Ingresa tu Nombre Completo para emitir tu Micro-Credencial:");
-                if (nombre && nombre.trim() !== "") {
-                    abrirModalCertificado(nombre, notaFinal);
-                }
-            }, 1500);
-
+            document.getElementById('contenedor-certificado').style.display = 'block'; // Mostramos el botón morado
         } else {
             divNota.className = 'nota-grande reprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
@@ -308,6 +304,39 @@
         }
     }
 
+    // --- FUNCIONES DEL CERTIFICADO ---
+    function pedirCertificado() {
+        const nombre = prompt("¡Felicidades! Has aprobado el Módulo 01. Ingresa tu Nombre Completo para emitir tu Micro-Credencial:");
+        if (nombre && nombre.trim() !== "") {
+            abrirModalCertificado(nombre, notaFinalGlobal);
+        }
+    }
+
+    function abrirModalCertificado(nombre, nota) {
+        document.getElementById('nombre-certificado').innerText = nombre.toUpperCase();
+        document.getElementById('nota-certificado').innerText = nota;
+        
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('fecha-certificado').innerText = fechaFormateada;
+
+        document.getElementById('modal-certificado').style.display = 'flex';
+        document.getElementById('botones-certificado').style.display = 'block';
+    }
+
+    function cerrarModalCertificado() {
+        document.getElementById('modal-certificado').style.display = 'none';
+    }
+
+    function imprimirCertificado() {
+        document.getElementById('botones-certificado').style.display = 'none';
+        window.print();
+        setTimeout(() => {
+            document.getElementById('botones-certificado').style.display = 'block';
+        }, 500);
+    }
+
+    // --- FUNCIONES DEL REPORTE ---
     function mostrarReporte() {
         const divReporte = document.getElementById('reporte-detallado');
         const contenido = document.getElementById('contenido-reporte');
@@ -355,31 +384,6 @@
     function imprimirReporte() {
         document.getElementById('reporte-detallado').style.display = 'block';
         window.print();
-    }
-
-    // --- FUNCIONES DE LA MICRO-CREDENCIAL ---
-    function abrirModalCertificado(nombre, nota) {
-        document.getElementById('nombre-certificado').innerText = nombre.toUpperCase();
-        document.getElementById('nota-certificado').innerText = nota;
-        
-        const hoy = new Date();
-        const fechaFormateada = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
-        document.getElementById('fecha-certificado').innerText = fechaFormateada;
-
-        document.getElementById('modal-certificado').style.display = 'flex';
-        document.getElementById('botones-certificado').style.display = 'block';
-    }
-
-    function cerrarModalCertificado() {
-        document.getElementById('modal-certificado').style.display = 'none';
-    }
-
-    function imprimirCertificado() {
-        document.getElementById('botones-certificado').style.display = 'none';
-        window.print();
-        setTimeout(() => {
-            document.getElementById('botones-certificado').style.display = 'block';
-        }, 500);
     }
 </script>
 </body>
