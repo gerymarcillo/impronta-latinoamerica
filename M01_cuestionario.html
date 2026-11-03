@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M01 - Cuestionario - ECT-UNESUM</title>
+    <style>
+        /* ESTILOS DEL M02 (ADN DEL PROYECTO) */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
+        .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
+        .container{max-width:900px;margin:0 auto;position:relative;z-index:1}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px}
+        .header h1{color:#5dade2;font-size:28px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 20px rgba(93,173,226,0.5)}
+        .header p{color:#bdc3c7;font-size:14px;font-style:italic}
+        .seccion-modulo{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);padding:30px;border-radius:18px;margin-top:20px;border:1px solid rgba(93,173,226,0.2)}
+        .pregunta{margin-bottom:25px;background:rgba(10,14,26,0.6);padding:20px;border-radius:12px;border-left:4px solid #3498db;transition:0.3s}
+        .pregunta:hover{background:rgba(10,14,26,0.8);transform:translateX(5px)}
+        .pregunta.nivel-2{border-left-color:#f39c12}
+        .pregunta.nivel-3{border-left-color:#e74c3c}
+        .pregunta p{color:#ecf0f1;font-weight:bold;font-size:15px;margin-bottom:15px}
+        .opcion-label{display:block;color:#bdc3c7;margin:10px 0;cursor:pointer;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid transparent;transition:0.3s}
+        .opcion-label:hover{background:rgba(93,173,226,0.1);border-color:#5dade2}
+        .opcion-label input{margin-right:12px;transform:scale(1.2);accent-color:#5dade2}
+        .pregunta textarea{width:100%;padding:15px;background:#141a2e;color:white;border:2px solid #34495e;border-radius:10px;font-family:inherit;resize:vertical;font-size:14px;outline:none;transition:0.3s}
+        .pregunta textarea:focus{border-color:#5dade2;box-shadow:0 0 15px rgba(93,173,226,0.2)}
+        .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:12px;cursor:pointer;margin-top:30px;transition:transform 0.2s,box-shadow 0.2s;letter-spacing:1px}
+        .btn-epico:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(243,156,18,0.4)}
+        #pantalla-resultado{display:none;text-align:center;padding:40px;background:rgba(10,14,26,0.8);border-radius:18px;margin-top:20px;border:2px solid #3498db;backdrop-filter:blur(15px)}
+        .nota-grande{font-size:60px;font-weight:bold;margin:20px 0}
+        .aprobado{color:#2ecc71;text-shadow:0 0 20px rgba(46,204,113,0.4)}
+        .reprobado{color:#e74c3c;text-shadow:0 0 20px rgba(231,76,60,0.4)}
+        #reporte-detallado{display:none;text-align:left;background:rgba(20,26,46,0.9);padding:25px;border-radius:12px;margin-top:20px;border:1px solid #34495e}
+        .reporte-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px}
+        .reporte-item{background:#0a0e1a;padding:15px;border-radius:8px;font-size:13px;border-left:3px solid #3498db}
+    </style>
+</head>
+<body>
+<div class="fondo-animado"></div>
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px;margin-bottom:10px">
+        <h1>M01 — CUESTIONARIO DE EVALUACIÓN</h1>
+        <p>Inercia Equivalente y Altura Equivalente | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo" id="formulario-contenedor">
+        <form id="formulario-m01" onsubmit="event.preventDefault();">
+            
+            <h2 style="color:#5dade2;margin-bottom:20px;">BLOQUE A — CONCEPTOS (10 pts)</h2>
+            <div class="pregunta">
+                <p>1. ¿Qué es la inercia centroidal?</p>
+                <label class="opcion-label"><input type="radio" name="p1" value="A"> A) La resistencia a flexión respecto al eje centroidal.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="B"> B) El peso de la losa.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="C"> C) La distancia entre apoyos.</label>
+            </div>
+            <div class="pregunta">
+                <p>2. ¿Para qué sirve el Teorema de Steiner?</p>
+                <label class="opcion-label"><input type="radio" name="p2" value="A"> A) Para calcular el peso del concreto.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="B"> B) Para calcular la inercia de secciones compuestas.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="C"> C) Para medir la deflexión.</label>
+            </div>
+            <div class="pregunta">
+                <p>3. ¿Qué es la altura equivalente (h_eq)?</p>
+                <label class="opcion-label"><input type="radio" name="p3" value="A"> A) La altura real de la losa.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="B"> B) El espesor de una losa maciza ficticia con la misma inercia.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="C"> C) La altura del nervio.</label>
+            </div>
+            <div class="pregunta">
+                <p>4. ¿Cuál es el espesor mínimo de losa sin ábacos según ACI 318?</p>
+                <label class="opcion-label"><input type="radio" name="p4" value="A"> A) 10 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="B"> B) 12.5 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="C"> C) 15 cm.</label>
+            </div>
+
+            <h2 style="color:#f39c12;margin:30px 0 20px 0;">BLOQUE B — CÁLCULO (40 pts)</h2>
+            <div class="pregunta nivel-2">
+                <p>5. Si H=25 cm, bn=10 cm, bb=50 cm, tc=5 cm, ¿cuál es el área de la capa de compresión (A_capa)?</p>
+                <label class="opcion-label"><input type="radio" name="p5" value="A"> A) 250 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="B"> B) 200 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="C"> C) 450 cm².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>6. Con los mismos datos, ¿cuál es el área del nervio (A_nervio)?</p>
+                <label class="opcion-label"><input type="radio" name="p6" value="A"> A) 250 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="B"> B) 200 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="C"> C) 100 cm².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>7. Si la inercia total (I_total) es 24548 cm⁴ y bb=50 cm, ¿cuál es la altura equivalente (h_eq)?</p>
+                <label class="opcion-label"><input type="radio" name="p7" value="A"> A) 18.06 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="B"> B) 20.00 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="C"> C) 15.50 cm.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>8. Si el espesor de la losa es 20 cm, ¿cuál es el peso propio aproximado?</p>
+                <label class="opcion-label"><input type="radio" name="p8" value="A"> A) 0.30 t/m².</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="B"> B) 0.36 t/m².</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="C"> C) 0.25 t/m².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>9. Si la luz de una losa es 5.20 m, ¿qué espesor se recomienda?</p>
+                <label class="opcion-label"><input type="radio" name="p9" value="A"> A) 15 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="B"> B) 20 cm.</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="C"> C) 25 cm.</label>
+            </div>
+
+            <h2 style="color:#e74c3c;margin:30px 0 20px 0;">BLOQUE C — INTERPRETACIÓN (25 pts)</h2>
+            <div class="pregunta nivel-3">
+                <p>10. Explique por qué la inercia de la losa alivianada difiere de la losa maciza.</p>
+                <textarea id="r10" rows="3" placeholder="Escriba su explicación..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>11. Si la inercia disminuye un 7.5%, ¿qué pasa con la deflexión?</p>
+                <textarea id="r11" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>12. ¿Por qué es importante h_eq en el modelado estructural?</p>
+                <textarea id="r12" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>13. ¿Qué pasa con la inercia si el bloque de alivianamiento es más grande?</p>
+                <textarea id="r13" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+
+            <h2 style="color:#9b59b6;margin:30px 0 20px 0;">BLOQUE D — DECISIÓN (25 pts)</h2>
+            <div class="pregunta nivel-3">
+                <p>14. Si el contratista cambia el bloque de 15 cm por uno de 20 cm, ¿qué le responde desde la ética profesional?</p>
+                <textarea id="r14" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>15. Desde su rol como estudiante ECT-UNESUM, ¿por qué es importante validar el software ETABS con el cálculo manual?</p>
+                <textarea id="r15" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+
+            <button type="button" class="btn-epico" id="btn-finalizar" onclick="calificarExamen()">🚀 FINALIZAR Y EVALUAR</button>
+        </form>
+    </div>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <div id="pantalla-resultado">
+        <h1 style="color:#5dade2;">RESULTADO M01</h1>
+        <div id="nota-final" class="nota-grande"></div>
+        <div id="feedback-niveles" style="color:#bdc3c7;margin-bottom:20px;font-size:14px;"></div>
+        <div id="reporte-detallado">
+            <h3 style="color:#5dade2;text-align:center;border-bottom:1px solid #34495e;padding-bottom:10px;">REPORTE DE AUDITORÍA</h3>
+            <div id="contenido-reporte"></div>
+        </div>
+        <button onclick="mostrarReporte()" id="btn-ver-reporte" class="btn-epico" style="background:#3498db;margin-top:20px;">📄 Ver Preguntas y Respuestas Correctas</button>
+        <button onclick="imprimirReporte()" class="btn-epico" style="background:#2ecc71;">🖨️ Imprimir Reporte</button>
+        <div style="margin-top:20px;">
+            <a href="M01_guia_estudio.html" style="color:#bdc3c7;text-decoration:none;">← Volver a la Guía</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let respuestasEstudiante = {};
+    let examenCalificado = false;
+
+    function calificarExamen() {
+        if (examenCalificado) return;
+        examenCalificado = true;
+        document.getElementById('btn-finalizar').disabled = true;
+
+        respuestasEstudiante = {
+            p1: document.querySelector('input[name="p1"]:checked')?.value || "N/A",
+            p2: document.querySelector('input[name="p2"]:checked')?.value || "N/A",
+            p3: document.querySelector('input[name="p3"]:checked')?.value || "N/A",
+            p4: document.querySelector('input[name="p4"]:checked')?.value || "N/A",
+            p5: document.querySelector('input[name="p5"]:checked')?.value || "N/A",
+            p6: document.querySelector('input[name="p6"]:checked')?.value || "N/A",
+            p7: document.querySelector('input[name="p7"]:checked')?.value || "N/A",
+            p8: document.querySelector('input[name="p8"]:checked')?.value || "N/A",
+            p9: document.querySelector('input[name="p9"]:checked')?.value || "N/A",
+            r10: document.getElementById('r10').value || "N/A",
+            r11: document.getElementById('r11').value || "N/A",
+            r12: document.getElementById('r12').value || "N/A",
+            r13: document.getElementById('r13').value || "N/A",
+            r14: document.getElementById('r14').value || "N/A",
+            r15: document.getElementById('r15').value || "N/A"
+        };
+
+        // 1. Calificar Opción Múltiple (P1 a P9)
+        let aciertosCerrados = 0;
+        const respuestasCorrectas = { p1: "A", p2: "B", p3: "B", p4: "B", p5: "A", p6: "B", p7: "A", p8: "A", p9: "C" };
+
+        for (let key in respuestasCorrectas) {
+            if (respuestasEstudiante[key] === respuestasCorrectas[key]) aciertosCerrados++;
+        }
+
+        // 2. Calificar Abiertas (P10 a P15)
+        let puntajeAbierto = 0;
+        function evaluarTexto(idPregunta, palabrasClave) {
+            const texto = respuestasEstudiante[idPregunta].toLowerCase();
+            if (texto.trim() === "" || texto === "n/a") return 0;
+            let aciertos = 0;
+            palabrasClave.forEach(grupo => {
+                for (let palabra of grupo) {
+                    if (texto.includes(palabra)) { aciertos++; break; }
+                }
+            });
+            return (aciertos / palabrasClave.length) * 20;
+        }
+
+        puntajeAbierto += evaluarTexto('r10', [["alivianada", "maciza", "vacios"], ["inercia", "nervios", "bloques"], ["diferencia", "comportamiento", "flexion"]]);
+        puntajeAbierto += evaluarTexto('r11', [["deflexion", "aumenta", "sube"], ["inversa", "proporcional", "relacion"], ["7.5", "porcentaje", "numero"]]);
+        puntajeAbierto += evaluarTexto('r12', [["modelar", "etabs", "software"], ["maciza", "equivalente", "inercia"], ["altura", "espesor", "h_eq"]]);
+        puntajeAbierto += evaluarTexto('r13', [["inercia", "disminuye", "baja"], ["bloque", "alivianamiento", "vacio"], ["nervio", "seccion", "resistencia"]]);
+        puntajeAbierto += evaluarTexto('r14', [["etica", "responsabilidad", "norma"], ["seguridad", "carga", "supervision"], ["documentar", "reportar", "rechazar"]]);
+        puntajeAbierto += evaluarTexto('r15', [["software", "etabs", "calculadora"], ["manual", "validar", "error"], ["criterio", "etica", "seguridad"]]);
+
+        // 3. Calcular Nota Final
+        const notaCerradas = (aciertosCerrados / 9) * 45;
+        const notaAbiertas = (puntajeAbierto / 100) * 55;
+        const notaFinal = Math.round(notaCerradas + notaAbiertas);
+
+        // 4. Mostrar Resultados
+        document.getElementById('formulario-contenedor').style.display = 'none';
+        document.getElementById('pantalla-resultado').style.display = 'block';
+
+        const divNota = document.getElementById('nota-final');
+        divNota.innerText = notaFinal + " / 100";
+
+        if (notaFinal >= 60) {
+            divNota.className = 'nota-grande aprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
+            document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 01.";
+        } else {
+            divNota.className = 'nota-grande reprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
+            document.getElementById('feedback-niveles').innerHTML = "⚠️ <b>INSUFICIENTE.</b> Repasa el módulo y vuelve a intentarlo.";
+        }
+    }
+
+    function mostrarReporte() {
+        const divReporte = document.getElementById('reporte-detallado');
+        const contenido = document.getElementById('contenido-reporte');
+        const btn = document.getElementById('btn-ver-reporte');
+
+        if (divReporte.style.display === 'block') {
+            divReporte.style.display = 'none';
+            btn.innerText = "📄 Ver Preguntas y Respuestas Correctas";
+            return;
+        }
+
+        const textoPreguntas = [
+            "1. Inercia centroidal (Correcta: A)",
+            "2. Teorema de Steiner (Correcta: B)",
+            "3. Altura equivalente (Correcta: B)",
+            "4. Espesor mínimo ACI (Correcta: B)",
+            "5. Área capa de compresión (Correcta: A)",
+            "6. Área del nervio (Correcta: B)",
+            "7. Altura equivalente h_eq (Correcta: A)",
+            "8. Peso propio de losa (Correcta: A)",
+            "9. Espesor para luz 5.20 m (Correcta: C)"
+        ];
+
+        let html = "<div class='reporte-grid'>";
+        textoPreguntas.forEach((preg, index) => {
+            const id = "p" + (index + 1);
+            const resp = respuestasEstudiante[id];
+            const esCorrecta = (resp === ["A","B","B","B","A","B","A","A","C"][index]);
+            const color = esCorrecta ? "#2ecc71" : "#e74c3c";
+
+            html += `<div class="reporte-item"><p>${preg}</p><p>Tu respuesta: <b style="color:${color};">${resp}</b></p></div>`;
+        });
+        html += "</div>";
+
+        html += "<h4 style='color:#f39c12;margin-top:20px;'>Respuestas Abiertas:</h4>";
+        for (let i = 10; i <= 15; i++) {
+            html += `<div class="reporte-item" style="margin-bottom:10px;"><p><b>Pregunta ${i}:</b> ${respuestasEstudiante['r' + i]}</p></div>`;
+        }
+
+        contenido.innerHTML = html;
+        divReporte.style.display = 'block';
+        btn.innerText = "🔼 Ocultar Reporte de Auditoría";
+    }
+
+    function imprimirReporte() {
+        document.getElementById('reporte-detallado').style.display = 'block';
+        window.print();
+    }
+</script>
+</body>
+</html>
