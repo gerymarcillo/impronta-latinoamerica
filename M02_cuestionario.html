@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M02 - Cuestionario - ECT-UNESUM</title>
     <style>
-        /* ==========================================
-           ESTILOS BASE Y FONDO CUÁNTICO (ADN DEL M01)
-           ========================================== */
+        /* ESTILOS BASE Y FONDO CUÁNTICO (ADN DEL M01) */
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
         .fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
@@ -32,7 +30,7 @@
         .opcion-label input {margin-right: 12px; transform: scale(1.2); accent-color: #5dade2;}
         
         .pregunta textarea {width: 100%; padding: 15px; background: #141a2e; color: white; border: 2px solid #34495e; border-radius: 10px; font-family: inherit; resize: vertical; font-size: 14px; outline: none; transition: 0.3s;}
-        .pregunta textarea:focus {border-color: #5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.2);}
+        .pregunta textarea:focus {border-color:#5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.2);}
         
         .btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:12px;cursor:pointer;margin-top:30px;transition:transform 0.2s, box-shadow 0.2s; letter-spacing: 1px;}
         .btn-epico:hover{transform:scale(1.02); box-shadow: 0 10px 30px rgba(243,156,18,0.4);}
@@ -51,6 +49,29 @@
         /* Botón Volver */
         .btn-volver{background:rgba(52,73,94,0.8);color:white;padding:15px 35px;border-radius:12px;text-decoration:none;font-weight:bold;display:inline-block;transition:0.3s;border:1px solid #5d6d7e;margin-top:20px;}
         .btn-volver:hover{background:#34495e;transform:translateY(-2px);}
+
+        /* ESTILOS DE LA MICRO-CREDENCIAL */
+        #modal-certificado {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(10px);}
+        #certificado-real {background:#fff; width:900px; max-width:95vw; height:auto; min-height:600px; padding:40px; box-sizing:border-box; text-align:center; position:relative; color:#333; border:10px solid #141a2e; box-shadow:0 0 50px rgba(0,0,0,0.8);}
+        .marca-agua {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.05; font-size:150px; font-weight:bold; color:#000; pointer-events:none;}
+        .contenido-cert {border:2px solid #f39c12; padding:20px; height:100%; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box; position:relative;}
+        .header-cert h2 {color:#141a2e; font-size:28px; margin:0 0 5px 0;}
+        .header-cert p {color:#5dade2; font-size:14px; font-weight:bold; letter-spacing:2px; margin:0;}
+        .header-cert hr {border:1px solid #f39c12; margin:15px 0;}
+        .titulo-cert {color:#f39c12; font-size:40px; margin-bottom:15px; font-weight:900;}
+        .texto-cert {font-size:16px; color:#555; line-height:1.6; max-width:700px; margin:0 auto;}
+        .nombre-cert {font-size:32px; color:#141a2e; border-bottom:2px solid #5dade2; display:inline-block; padding:0 20px 5px 20px; margin:15px 0;}
+        .nota-cert {font-size:18px; color:#e74c3c; font-weight:bold; margin-top:10px;}
+        .firmas {display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;}
+        .firma {text-align:center; width:200px;}
+        .firma hr {border-top:1px solid #333; margin-bottom:5px;}
+        .fecha-cert {font-size:10px; color:#999; margin-top:15px;}
+
+        @media print {
+            body * { visibility: hidden; }
+            #certificado-real, #certificado-real * { visibility: visible; }
+            #certificado-real { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; border: 2px solid #f39c12; }
+        }
     </style>
 </head>
 <body>
@@ -67,7 +88,7 @@
     <div class="seccion-modulo" id="formulario-contenedor">
         <form id="formulario-m02" onsubmit="event.preventDefault();">
             
-            <!-- PREGUNTAS NIVEL BÁSICO -->
+            <h2 style="color:#5dade2;margin-bottom:20px;">BLOQUE A — CONCEPTOS (10 pts)</h2>
             <div class="pregunta">
                 <p>1. ¿Cuál es la diferencia principal entre una viga simplemente apoyada y una viga empotrada?</p>
                 <label class="opcion-label"><input type="radio" name="p1" value="A"> A) La simplemente apoyada tiene rotación en los extremos; la empotrada no.</label>
@@ -87,19 +108,19 @@
                 <label class="opcion-label"><input type="radio" name="p3" value="C"> C) 1.4.</label>
             </div>
             <div class="pregunta">
-                <p>4. ¿Qué representa la inercia (\(I\)) en la fórmula de la deflexión?</p>
+                <p>4. ¿Qué representa la inercia (I) en la fórmula de la deflexión?</p>
                 <label class="opcion-label"><input type="radio" name="p4" value="A"> A) La resistencia de la sección a la flexión.</label>
                 <label class="opcion-label"><input type="radio" name="p4" value="B"> B) El peso del concreto.</label>
                 <label class="opcion-label"><input type="radio" name="p4" value="C"> C) La longitud de la viga.</label>
             </div>
             <div class="pregunta">
-                <p>5. En la fórmula de la rigidez \(k = 48EI/L^3\), ¿qué pasa si la longitud \(L\) se duplica?</p>
+                <p>5. En la fórmula de la rigidez k = 48EI/L³, ¿qué pasa si la longitud L se duplica?</p>
                 <label class="opcion-label"><input type="radio" name="p5" value="A"> A) La rigidez aumenta.</label>
                 <label class="opcion-label"><input type="radio" name="p5" value="B"> B) La rigidez disminuye 8 veces.</label>
                 <label class="opcion-label"><input type="radio" name="p5" value="C"> C) La rigidez no cambia.</label>
             </div>
 
-            <!-- PREGUNTAS NIVEL MEDIO -->
+            <h2 style="color:#f39c12;margin:30px 0 20px 0;">BLOQUE B — CÁLCULO (40 pts)</h2>
             <div class="pregunta nivel-2">
                 <p>6. Si la luz de una losa es de 5.20 m, ¿qué espesor de losa alivianada se recomienda según el criterio de predimensionamiento?</p>
                 <label class="opcion-label"><input type="radio" name="p6" value="A"> A) 15 cm.</label>
@@ -113,7 +134,7 @@
                 <label class="opcion-label"><input type="radio" name="p7" value="C"> C) 5 kN·m.</label>
             </div>
             <div class="pregunta nivel-2">
-                <p>8. ¿Para qué sirve la matriz de rigidez \(K\) en el análisis estructural?</p>
+                <p>8. ¿Para qué sirve la matriz de rigidez K en el análisis estructural?</p>
                 <label class="opcion-label"><input type="radio" name="p8" value="A"> A) Para calcular el peso de la estructura.</label>
                 <label class="opcion-label"><input type="radio" name="p8" value="B"> B) Para relacionar las fuerzas nodales con los desplazamientos.</label>
                 <label class="opcion-label"><input type="radio" name="p8" value="C"> C) Para calcular el costo del concreto.</label>
@@ -131,7 +152,7 @@
                 <label class="opcion-label"><input type="radio" name="p10" value="C"> C) PowerPoint.</label>
             </div>
 
-            <!-- PREGUNTAS NIVEL AVANZADO (ABIERTAS) -->
+            <h2 style="color:#e74c3c;margin:30px 0 20px 0;">BLOQUE C — INTERPRETACIÓN (25 pts)</h2>
             <div class="pregunta nivel-3">
                 <p>11. Explique por qué la rotación en los apoyos de una viga simplemente apoyada no es cero, a pesar de que el momento flector en esos puntos sí es cero.</p>
                 <textarea id="r11" rows="3" placeholder="Escriba su explicación..."></textarea>
@@ -141,7 +162,7 @@
                 <textarea id="r12" rows="3" placeholder="Escriba su respuesta..."></textarea>
             </div>
             <div class="pregunta nivel-3">
-                <p>13. Explique la diferencia entre la fórmula cerrada de Sexto (\(5qL^4/384EI\)) y el análisis matricial de Séptimo (Matriz K). ¿Cuándo usaría cada una?</p>
+                <p>13. Explique la diferencia entre la fórmula cerrada de Sexto (5qL⁴/384EI) y el análisis matricial de Séptimo (Matriz K). ¿Cuándo usaría cada una?</p>
                 <textarea id="r13" rows="3" placeholder="Escriba su respuesta..."></textarea>
             </div>
             <div class="pregunta nivel-3">
@@ -163,6 +184,11 @@
         <div id="nota-final" class="nota-grande"></div>
         <div id="feedback-niveles" style="color: #bdc3c7; margin-bottom: 20px; font-size: 14px;"></div>
         
+        <!-- BOTÓN DE LA MICRO-CREDENCIAL -->
+        <div id="contenedor-certificado" style="display:none;">
+            <button onclick="pedirCertificado()" class="btn-epico" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); margin-bottom: 15px;">🎓 Obtener mi Micro-Credencial</button>
+        </div>
+
         <div id="reporte-detallado">
             <h3 style="color: #5dade2; text-align: center; border-bottom: 1px solid #34495e; padding-bottom: 10px;">REPORTE DE AUDITORÍA</h3>
             <div id="contenido-reporte"></div>
@@ -176,9 +202,55 @@
     </div>
 </div>
 
+<!-- MODAL DEL CERTIFICADO -->
+<div id="modal-certificado">
+    <div id="certificado-real">
+        <div class="marca-agua">UNESUM</div>
+        <div class="contenido-cert">
+            <div class="header-cert">
+                <h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p>FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                <hr>
+            </div>
+            <div>
+                <h1 class="titulo-cert">MICRO-CREDENCIAL</h1>
+                <p class="texto-cert">Se otorga el presente reconocimiento a:</p>
+                <h3 id="nombre-certificado" class="nombre-cert">NOMBRE DEL ESTUDIANTE</h3>
+                <p class="texto-cert">
+                    Por haber completado y aprobado exitosamente el <strong>Módulo 02 — Análisis Estructural y Cargas</strong>, demostrando dominio en el cálculo de cargas según NEC-15, formulación matricial y validación experimental. Esta micro-credencial acredita las competencias adquiridas.
+                </p>
+                <p class="nota-cert">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
+            </div>
+            <div class="firmas">
+                <div class="firma">
+                    <hr>
+                    <p style="font-size:12px; margin:0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                    <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
+                </div>
+                <div>
+                    <!-- IMAGEN DEL QR -->
+                    <img src="qr-code.png" alt="Validación QR" style="width: 85px; height: 85px; object-fit: contain;">
+                </div>
+                <div class="firma">
+                    <hr>
+                    <p style="font-size:12px; margin:0;"><strong>Comisión Académica</strong></p>
+                    <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
+                </div>
+            </div>
+            <p class="fecha-cert" style="margin-top: 25px; margin-bottom: 0;">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M02</p>
+        </div>
+    </div>
+    
+    <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
+        <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
+        <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
+    </div>
+</div>
+
 <script>
     let respuestasEstudiante = {};
     let examenCalificado = false;
+    let notaFinalGlobal = 0;
 
     function calificarExamen() {
         if (examenCalificado) return;
@@ -203,7 +275,6 @@
             r15: document.getElementById('r15').value || "N/A"
         };
 
-        // 1. Calificar Opción Múltiple (P1 a P10)
         let aciertosCerrados = 0;
         const respuestasCorrectas = { p1: "A", p2: "B", p3: "B", p4: "A", p5: "B", p6: "C", p7: "A", p8: "B", p9: "B", p10: "A" };
 
@@ -211,7 +282,6 @@
             if (respuestasEstudiante[key] === respuestasCorrectas[key]) aciertosCerrados++;
         }
 
-        // 2. Calificar Abiertas (P11 a P15)
         let puntajeAbierto = 0;
         function evaluarTexto(idPregunta, palabrasClave) {
             const texto = respuestasEstudiante[idPregunta].toLowerCase();
@@ -231,12 +301,11 @@
         puntajeAbierto += evaluarTexto('r14', [["falla", "cedeño", "suelo"], ["inercia", "espesor", "rigidez"], ["incertidumbre", "monte carlo", "dmtp"]]);
         puntajeAbierto += evaluarTexto('r15', [["software", "etabs", "calculadora"], ["manual", "phyphox", "validar"], ["error", "criterio", "etica"]]);
 
-        // 3. Calcular Nota Final
         const notaCerradas = (aciertosCerrados / 10) * 50; 
         const notaAbiertas = (puntajeAbierto / 100) * 50;
         const notaFinal = Math.round(notaCerradas + notaAbiertas);
+        notaFinalGlobal = notaFinal;
 
-        // 4. Mostrar Resultados
         document.getElementById('formulario-contenedor').style.display = 'none';
         document.getElementById('pantalla-resultado').style.display = 'block';
         
@@ -247,6 +316,7 @@
             divNota.className = 'nota-grande aprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
             document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 02.";
+            document.getElementById('contenedor-certificado').style.display = 'block'; // Muestra el botón
         } else {
             divNota.className = 'nota-grande reprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
@@ -254,6 +324,39 @@
         }
     }
 
+    // --- FUNCIONES DE LA MICRO-CREDENCIAL ---
+    function pedirCertificado() {
+        const nombre = prompt("¡Felicidades! Has aprobado el Módulo 02. Ingresa tu Nombre Completo para emitir tu Micro-Credencial:");
+        if (nombre && nombre.trim() !== "") {
+            abrirModalCertificado(nombre, notaFinalGlobal);
+        }
+    }
+
+    function abrirModalCertificado(nombre, nota) {
+        document.getElementById('nombre-certificado').innerText = nombre.toUpperCase();
+        document.getElementById('nota-certificado').innerText = nota;
+        
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('fecha-certificado').innerText = fechaFormateada;
+
+        document.getElementById('modal-certificado').style.display = 'flex';
+        document.getElementById('botones-certificado').style.display = 'block';
+    }
+
+    function cerrarModalCertificado() {
+        document.getElementById('modal-certificado').style.display = 'none';
+    }
+
+    function imprimirCertificado() {
+        document.getElementById('botones-certificado').style.display = 'none';
+        window.print();
+        setTimeout(() => {
+            document.getElementById('botones-certificado').style.display = 'block';
+        }, 500);
+    }
+
+    // --- FUNCIONES DEL REPORTE ---
     function mostrarReporte() {
         const divReporte = document.getElementById('reporte-detallado');
         const contenido = document.getElementById('contenido-reporte');
@@ -309,53 +412,5 @@
         window.print();
     }
 </script>
-    <!-- MODAL DEL CERTIFICADO -->
-<div id="modal-certificado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
-    <div id="certificado-real" style="background:#fff; width:900px; max-width:95vw; height:auto; min-height:600px; padding:40px; box-sizing:border-box; text-align:center; position:relative; color:#333; border:10px solid #141a2e; box-shadow:0 0 50px rgba(0,0,0,0.8);">
-        
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.05; font-size:150px; font-weight:bold; color:#000; pointer-events:none;">UNESUM</div>
-        
-        <div style="border:2px solid #f39c12; padding:20px; height:100%; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;">
-            <div style="margin-bottom:20px;">
-                <h2 style="color:#141a2e; font-size:28px; margin:0 0 5px 0;">UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
-                <p style="color:#5dade2; font-size:14px; font-weight:bold; letter-spacing:2px; margin:0;">FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
-                <hr style="border:1px solid #f39c12; margin:15px 0;">
-            </div>
-            
-            <div>
-                <h1 style="color:#f39c12; font-size:40px; margin-bottom:15px; font-weight:900;">CERTIFICADO</h1>
-                <p style="font-size:16px; color:#555;">Se otorga el presente reconocimiento a:</p>
-                <h3 id="nombre-certificado" style="font-size:32px; color:#141a2e; border-bottom:2px solid #5dade2; display:inline-block; padding:0 20px 5px 20px; margin:15px 0;">NOMBRE DEL ESTUDIANTE</h3>
-                <p style="font-size:16px; color:#555; line-height:1.6; max-width:700px; margin:0 auto;">
-                    Por haber completado y aprobado exitosamente el <strong>Módulo 02 — Análisis Estructural y Cargas</strong>, demostrando dominio en el cálculo de cargas según NEC-15, formulación matricial y validación experimental.
-                </p>
-                <p style="font-size:18px; color:#e74c3c; font-weight:bold; margin-top:10px;">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
-            </div>
-            
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;">
-                <div style="text-align:center; width:200px;">
-                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
-                    <p style="font-size:12px; margin:0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
-                    <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
-                </div>
-                <div style="text-align:center;">
-                    <div style="width:80px; height:80px; background:#eee; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px dashed #ccc; margin:0 auto; font-size:10px; color:#999;">Sello / QR</div>
-                </div>
-                <div style="text-align:center; width:200px;">
-                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
-                    <p style="font-size:12px; margin:0;"><strong>Comisión Académica</strong></p>
-                    <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
-                </div>
-            </div>
-            <p style="font-size:10px; color:#999; margin-top:15px;">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M02</p>
-        </div>
-    </div>
-    
-    <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
-        <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
-        <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
-    </div>
-</div>
-
 </body>
 </html>
