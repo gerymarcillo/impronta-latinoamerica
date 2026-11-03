@@ -193,6 +193,7 @@
                 <p>FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
                 <hr>
             </div>
+            
             <div>
                 <h1 class="titulo-cert">MICRO-CREDENCIAL</h1>
                 <p class="texto-cert">Se otorga el presente reconocimiento a:</p>
@@ -202,6 +203,7 @@
                 </p>
                 <p class="nota-cert">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
             </div>
+            
             <div class="firmas">
                 <div class="firma">
                     <hr>
@@ -209,7 +211,8 @@
                     <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
                 </div>
                 <div>
-                    <div class="sello">Sello / QR</div>
+                    <!-- AQUÍ VA TU IMAGEN DEL QR -->
+                    <img src="qr.png" alt="Validación QR" style="width: 85px; height: 85px; object-fit: contain;">
                 </div>
                 <div class="firma">
                     <hr>
@@ -217,9 +220,10 @@
                     <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
                 </div>
             </div>
-            <p class="fecha-cert">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M01</p>
+            <p class="fecha-cert" style="margin-top: 25px; margin-bottom: 0;">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M01</p>
         </div>
     </div>
+    
     <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
         <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
         <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
