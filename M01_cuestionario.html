@@ -33,6 +33,30 @@
         #reporte-detallado{display:none;text-align:left;background:rgba(20,26,46,0.9);padding:25px;border-radius:12px;margin-top:20px;border:1px solid #34495e}
         .reporte-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px}
         .reporte-item{background:#0a0e1a;padding:15px;border-radius:8px;font-size:13px;border-left:3px solid #3498db}
+
+        /* ESTILOS DE LA MICRO-CREDENCIAL */
+        #modal-certificado {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(10px);}
+        #certificado-real {background:#fff; width:900px; max-width:95vw; height:auto; min-height:600px; padding:40px; box-sizing:border-box; text-align:center; position:relative; color:#333; border:10px solid #141a2e; box-shadow:0 0 50px rgba(0,0,0,0.8);}
+        .marca-agua {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.05; font-size:150px; font-weight:bold; color:#000; pointer-events:none;}
+        .contenido-cert {border:2px solid #f39c12; padding:20px; height:100%; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box; position:relative;}
+        .header-cert h2 {color:#141a2e; font-size:28px; margin:0 0 5px 0;}
+        .header-cert p {color:#5dade2; font-size:14px; font-weight:bold; letter-spacing:2px; margin:0;}
+        .header-cert hr {border:1px solid #f39c12; margin:15px 0;}
+        .titulo-cert {color:#f39c12; font-size:40px; margin-bottom:15px; font-weight:900;}
+        .texto-cert {font-size:16px; color:#555; line-height:1.6; max-width:700px; margin:0 auto;}
+        .nombre-cert {font-size:32px; color:#141a2e; border-bottom:2px solid #5dade2; display:inline-block; padding:0 20px 5px 20px; margin:15px 0;}
+        .nota-cert {font-size:18px; color:#e74c3c; font-weight:bold; margin-top:10px;}
+        .firmas {display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;}
+        .firma {text-align:center; width:200px;}
+        .firma hr {border-top:1px solid #333; margin-bottom:5px;}
+        .sello {width:80px; height:80px; background:#eee; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px dashed #ccc; margin:0 auto; font-size:10px; color:#999;}
+        .fecha-cert {font-size:10px; color:#999; margin-top:15px;}
+
+        @media print {
+            body * { visibility: hidden; }
+            #certificado-real, #certificado-real * { visibility: visible; }
+            #certificado-real { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; border: 2px solid #f39c12; }
+        }
     </style>
 </head>
 <body>
@@ -154,6 +178,53 @@
     </div>
 </div>
 
+<!-- MODAL DE LA MICRO-CREDENCIAL -->
+<div id="modal-certificado">
+    <div id="certificado-real">
+        <div class="marca-agua">UNESUM</div>
+        
+        <div class="contenido-cert">
+            <div class="header-cert">
+                <h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p>FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                <hr>
+            </div>
+            
+            <div>
+                <h1 class="titulo-cert">MICRO-CREDENCIAL</h1>
+                <p class="texto-cert">Se otorga el presente reconocimiento a:</p>
+                <h3 id="nombre-certificado" class="nombre-cert">NOMBRE DEL ESTUDIANTE</h3>
+                <p class="texto-cert">
+                    Por haber completado y aprobado exitosamente el <strong>Módulo 01 — Inercia Equivalente y Altura Equivalente</strong>, demostrando dominio en el cálculo de inercias de secciones compuestas, aplicación del Teorema de Steiner y modelado de losas alivianadas. Esta micro-credencial acredita las competencias adquiridas.
+                </p>
+                <p class="nota-cert">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
+            </div>
+            
+            <div class="firmas">
+                <div class="firma">
+                    <hr>
+                    <p style="font-size:12px; margin:0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                    <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
+                </div>
+                <div>
+                    <div class="sello">Sello / QR</div>
+                </div>
+                <div class="firma">
+                    <hr>
+                    <p style="font-size:12px; margin:0;"><strong>Comisión Académica</strong></p>
+                    <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
+                </div>
+            </div>
+            <p class="fecha-cert">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M01</p>
+        </div>
+    </div>
+    
+    <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
+        <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; box-shadow:0 5px 15px rgba(243,156,18,0.4);">🖨️ Imprimir o Guardar en PDF</button>
+        <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
+    </div>
+</div>
+
 <script>
     let respuestasEstudiante = {};
     let examenCalificado = false;
@@ -181,7 +252,6 @@
             r15: document.getElementById('r15').value || "N/A"
         };
 
-        // 1. Calificar Opción Múltiple (P1 a P9)
         let aciertosCerrados = 0;
         const respuestasCorrectas = { p1: "A", p2: "B", p3: "B", p4: "B", p5: "A", p6: "B", p7: "A", p8: "A", p9: "C" };
 
@@ -189,7 +259,6 @@
             if (respuestasEstudiante[key] === respuestasCorrectas[key]) aciertosCerrados++;
         }
 
-        // 2. Calificar Abiertas (P10 a P15)
         let puntajeAbierto = 0;
         function evaluarTexto(idPregunta, palabrasClave) {
             const texto = respuestasEstudiante[idPregunta].toLowerCase();
@@ -210,12 +279,10 @@
         puntajeAbierto += evaluarTexto('r14', [["etica", "responsabilidad", "norma"], ["seguridad", "carga", "supervision"], ["documentar", "reportar", "rechazar"]]);
         puntajeAbierto += evaluarTexto('r15', [["software", "etabs", "calculadora"], ["manual", "validar", "error"], ["criterio", "etica", "seguridad"]]);
 
-        // 3. Calcular Nota Final
         const notaCerradas = (aciertosCerrados / 9) * 45;
         const notaAbiertas = (puntajeAbierto / 100) * 55;
         const notaFinal = Math.round(notaCerradas + notaAbiertas);
 
-        // 4. Mostrar Resultados
         document.getElementById('formulario-contenedor').style.display = 'none';
         document.getElementById('pantalla-resultado').style.display = 'block';
 
@@ -226,6 +293,14 @@
             divNota.className = 'nota-grande aprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
             document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 01.";
+            
+            setTimeout(() => {
+                const nombre = prompt("¡Felicidades! Has aprobado el Módulo 01. Ingresa tu Nombre Completo para emitir tu Micro-Credencial:");
+                if (nombre && nombre.trim() !== "") {
+                    abrirModalCertificado(nombre, notaFinal);
+                }
+            }, 1500);
+
         } else {
             divNota.className = 'nota-grande reprobado';
             document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
@@ -280,6 +355,31 @@
     function imprimirReporte() {
         document.getElementById('reporte-detallado').style.display = 'block';
         window.print();
+    }
+
+    // --- FUNCIONES DE LA MICRO-CREDENCIAL ---
+    function abrirModalCertificado(nombre, nota) {
+        document.getElementById('nombre-certificado').innerText = nombre.toUpperCase();
+        document.getElementById('nota-certificado').innerText = nota;
+        
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('fecha-certificado').innerText = fechaFormateada;
+
+        document.getElementById('modal-certificado').style.display = 'flex';
+        document.getElementById('botones-certificado').style.display = 'block';
+    }
+
+    function cerrarModalCertificado() {
+        document.getElementById('modal-certificado').style.display = 'none';
+    }
+
+    function imprimirCertificado() {
+        document.getElementById('botones-certificado').style.display = 'none';
+        window.print();
+        setTimeout(() => {
+            document.getElementById('botones-certificado').style.display = 'block';
+        }, 500);
     }
 </script>
 </body>
