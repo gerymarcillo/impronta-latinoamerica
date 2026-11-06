@@ -7,21 +7,21 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.6}
 .container{max-width:1000px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #9b59b6;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
 .header-logo{height:70px}
 .header-texto{text-align:center;flex:1;min-width:300px}
 .header h1{color:#5dade2;font-size:26px;margin-bottom:8px}
 .header h2{color:#ecf0f1;font-size:14px;font-weight:normal;margin-bottom:4px}
 .header h3{color:#bdc3c7;font-size:12px;font-weight:normal;font-style:italic}
-.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
+.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #9b59b6}
 .seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
 .seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
 .seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px}
 .seccion ul{list-style:none;padding-left:0}
 .seccion ul li{padding:6px 0 6px 20px;position:relative;font-size:14px}
 .seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
-.formula{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
-.formula-grande{font-size:20px;color:#f39c12;font-weight:bold}
+.formula{background:#1e1e2e;border:2px solid #9b59b6;border-radius:8px;padding:15px;margin:15px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:15px;text-align:center}
+.formula-grande{font-size:20px;color:#9b59b6;font-weight:bold}
 .tabla{width:100%;border-collapse:collapse;margin:15px 0}
 .tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
 .tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
@@ -51,8 +51,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 .indice li{padding:4px 0;font-size:14px}
 .indice a{color:#5dade2;text-decoration:none}
 .indice a:hover{text-decoration:underline}
-.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
-.alerta h4{color:#e67e22;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -62,7 +60,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
 <div class="header-texto">
 <h1>GUÍA DE ESTUDIO - M05</h1>
-<h2>DISEÑO DE COLUMNA — FLEXO-COMPRESIÓN Y MODELO ESTOCÁSTICO</h2>
+<h2>DISEÑO DE COLUMNA — FLEXO-COMPRESIÓN Y DIAGRAMA P-M</h2>
 <h3>EL CONOCIMIENTO TRANSFORMA - PROYECTO DE FORMACIÓN MODULAR</h3>
 <h3>ESTRUCTURA I - ESTRUCTURA II | Carrera de Ingeniería Civil - UNESUM</h3>
 </div>
@@ -86,65 +84,44 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <div class="seccion" id="presentacion">
 <h2>1. PRESENTACIÓN DEL MÓDULO</h2>
 <p>Este módulo introduce el <strong>diseño de columnas de hormigón armado</strong> sometidas a <strong>flexo-compresión</strong>, aplicando la <strong>NEC-15</strong> y el <strong>ACI 318</strong>.</p>
-<p>La columna es el <strong>elemento crítico del pórtico sismorresistente</strong>: si falla, colapsa toda la estructura. Por eso su diseño debe ser conservador y verificarse con un diagrama de interacción P-M.</p>
+<p>La columna es el elemento más crítico de la estructura: si falla, el colapso es inminente. Por eso, se diseña con el criterio de <strong>"Nudo Fuerte - Viga Débil"</strong>, garantizando que las vigas fallen primero (dúctilmente) y la columna permanezca intacta.</p>
 <p><strong>Duración estimada:</strong> 60 minutos (cuestionario) + 120 minutos (guía)</p>
 </div>
 
 <div class="seccion" id="objetivos">
 <h2>2. OBJETIVOS DE APRENDIZAJE</h2>
 <h3>Objetivo general</h3>
-<p>Diseñar una columna de hormigón armado sometida a flexo-compresión, aplicando los criterios de la NEC-15 y el ACI 318, y verificando su comportamiento mediante el diagrama de interacción P-M.</p>
+<p>Diseñar el acero longitudinal de una columna de hormigón armado para resistir la carga axial (\(P_u\)) y el momento (\(M_d\)) del pórtico, aplicando el diagrama de interacción P-M y la NEC-15.</p>
 <h3>Objetivos específicos</h3>
 <ul>
-<li>Comprender que la columna es el elemento crítico del pórtico sismorresistente</li>
-<li>Aplicar el predimensionamiento con Ag = Pu/76</li>
-<li>Construir el diagrama de interacción P-M (curva continua)</li>
-<li>Identificar el punto de balance (momento máximo)</li>
-<li>Diseñar el refuerzo longitudinal y transversal</li>
-<li>Calcular el confinamiento (Ash) y la zona protegida (Lo)</li>
-<li>Aplicar el modelo estocástico para cuantificar la incertidumbre</li>
+<li>Comprender la diferencia entre columna corta y columna esbelta</li>
+<li>Calcular la cuantía de acero longitudinal (\(\rho\))</li>
+<li>Interpretar el diagrama de interacción P-M</li>
+<li>Verificar que la columna sea "fuerte" respecto a la viga</li>
+<li>Aplicar el confinamiento según la NEC-15</li>
 </ul>
 </div>
 
 <div class="seccion" id="teoria">
 <h2>3. FUNDAMENTO TEÓRICO</h2>
-<h3>3.1 Diferencia entre viga y columna</h3>
-<table class="tabla">
-<thead><tr><th>Aspecto</th><th>Viga</th><th>Columna</th></tr></thead>
-<tbody>
-<tr><td>Solicitación</td><td>Flexión</td><td>Flexo-compresión</td></tr>
-<tr><td>Carga axial</td><td>Baja</td><td>Alta</td></tr>
-<tr><td>Momento</td><td>Centro</td><td>Nudos</td></tr>
-<tr><td>Falla típica</td><td>Flexión</td><td>Compresión + Flexión</td></tr>
-<tr><td>Diseño</td><td>Flexión</td><td>Diagrama P-M</td></tr>
-</tbody>
-</table>
+<h3>3.1 ¿Qué es la flexo-compresión?</h3>
+<p>Es la combinación de <strong>carga axial (\(P\)</strong>) y <strong>momento flector (\(M\)</strong>) que actúan simultáneamente sobre la columna. Es el estado más común en columnas de pórticos sismorresistentes.</p>
 
-<h3>3.2 Predimensionamiento</h3>
-<div class="formula">Ag = Pu × 1000 / 76</div>
+<h3>3.2 Diagrama de Interacción P-M</h3>
+<p>Es una curva que muestra todas las combinaciones de \(P\) y \(M\) que la columna puede resistir. Si el punto \((P_u, M_d)\) cae dentro de la curva, la columna es segura.</p>
 
-<h3>3.3 Diagrama de interacción P-M</h3>
-<p>El diagrama se construye resolviendo el equilibrio para cada posición del eje neutro c:</p>
-<div class="formula">Pn(c) = 0.85·fc·b·β1·c + As·fs' - As·fs</div>
-<div class="formula">Mn(c) = Pn · e(c)</div>
+<h3>3.3 Criterio "Nudo Fuerte - Viga Débil"</h3>
+<p>La columna debe ser más resistente que las vigas que llegan a ella. Esto se logra sobredimensionando el acero de la columna (\(\rho\) mayor) y confinándola adecuadamente.</p>
 
-<h3>3.4 Punto de balance</h3>
-<div class="formula">P_bal ≈ P0 / 3</div>
-<div class="formula">P0 = 0.85·fc·Ag + As·fy</div>
-<p><b>En el punto de balance está el MOMENTO MÁXIMO</b>, no la carga máxima.</p>
+<h3>3.4 Cuantía de acero longitudinal</h3>
+<p>La NEC-15 exige que la cuantía de acero longitudinal esté entre 1% y 6%.</p>
+<div class="formula-grande">1% ≤ ρ ≤ 6%</div>
 
-<h3>3.5 Cuantía mínima</h3>
-<div class="formula-grande">1.2% ≤ ρ ≤ 4%</div>
+<h3>3.5 Carga axial última</h3>
+<div class="formula">Pu = At · Cu · Fm</div>
 
-<h3>3.6 Confinamiento (NEC-15)</h3>
-<div class="formula">Ash = max[0.3·bc·Lo·fc/fy·(Ag/bc/pc - 1), 0.09·bc·Lo·fc/fy]</div>
-
-<h3>3.7 Zona protegida</h3>
-<div class="formula">Lo = max(45 cm, b_col, h/6)</div>
-
-<h3>3.8 Separación de estribos</h3>
-<div class="formula">s_prot = min(d/4, 6·φvar/10, 10 cm)</div>
-<div class="formula">s_cent = min(d/2, 8·φvar/10, 15 cm)</div>
+<h3>3.6 Momento de diseño</h3>
+<div class="formula">Md = Me · f_viga · f_fisura · Fm</div>
 </div>
 
 <div class="seccion" id="formulas">
@@ -152,16 +129,12 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <table class="tabla">
 <thead><tr><th>Concepto</th><th>Fórmula</th><th>Unidades</th></tr></thead>
 <tbody>
-<tr><td>Área tributaria</td><td>At = (L1/2 + L2/2) × (L3/2 + L4/2)</td><td>m²</td></tr>
-<tr><td>Carga última</td><td>Cu = 1.2·(Cm·n) + 1.6·(Cv·n)</td><td>t/m²</td></tr>
-<tr><td>Carga axial</td><td>Pu = At · Cu · Fm</td><td>t</td></tr>
-<tr><td>Predimensionamiento</td><td>Ag_req = 3·Pu·1000 / (0.85·fc + 0.012·fy)</td><td>cm²</td></tr>
-<tr><td>Área de acero</td><td>As = 4·0.00785·φesq² + (n-4)·0.00785·φlong²</td><td>cm²</td></tr>
-<tr><td>Cuantía</td><td>ρ = As / Ag</td><td>—</td></tr>
-<tr><td>Zona protegida</td><td>Lo = max(45, b_col, h/6)</td><td>cm</td></tr>
-<tr><td>Separación confinada</td><td>s_prot = min(d/4, 6·φvar/10, 10)</td><td>cm</td></tr>
-<tr><td>Separación central</td><td>s_cent = min(d/2, 8·φvar/10, 15)</td><td>cm</td></tr>
-<tr><td>Confinamiento</td><td>Ash = max(0.3·bc·Lo·fc/fy·(Ag/bc/pc-1), 0.09·bc·Lo·fc/fy)</td><td>cm²</td></tr>
+<tr><td>Área tributaria</td><td>At = (L1/2 + L2/2) · (L3/2 + L4/2)</td><td>m²</td></tr>
+<tr><td>Carga axial última</td><td>Pu = At · Cu · Fm</td><td>t</td></tr>
+<tr><td>Momento de diseño</td><td>Md = Me · f_viga · f_fisura · Fm</td><td>t·m</td></tr>
+<tr><td>Cuantía de acero</td><td>ρ = As / (b · h)</td><td>—</td></tr>
+<tr><td>Área de acero</td><td>As = ρ · b · h</td><td>cm²</td></tr>
+<tr><td>Límite de cuantía</td><td>1% ≤ ρ ≤ 6%</td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -169,103 +142,45 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <div class="seccion" id="ejemplo">
 <h2>5. EJEMPLO RESUELTO PASO A PASO</h2>
 
-<div class="alerta">
-<h4>📌 Nota de corrección</h4>
-<p>El cálculo original del As en la Guía M05 (DOCX) tenía un error aritmético. El valor correcto es <strong>As = 20.35 cm²</strong> (ρ = 1.41%), validado por el Excel y por los 3 algoritmos del M05.</p>
-</div>
-
 <div class="ejemplo">
 <h4>Datos del problema</h4>
 <ul>
-<li><b>L1 = 5.5 m, L2 = 6.0 m, L3 = 5.5 m, L4 = 6.0 m</b></li>
-<li><b>Cm = 0.62 t/m², Cv = 0.20 t/m²</b></li>
-<li><b>Pisos = 2</b></li>
-<li><b>He = 3.0 m, H_viga = 0.30 m</b></li>
-<li><b>Fm = 1.2</b></li>
-<li><b>fc = 210 kg/cm², fy = 4200 kg/cm²</b></li>
-<li><b>rec = 2.5 cm, φ_long = 14 mm, φ_esq = 16 mm, φ_est = 10 mm</b></li>
+<li><b>At:</b> 29.613 m²</li>
+<li><b>Cu:</b> 1.064 t/m²</li>
+<li><b>Fm:</b> 1.20</li>
+<li><b>Md:</b> 18.016 t·m</li>
+<li><b>b_col:</b> 38 cm</li>
+<li><b>h_col:</b> 38 cm</li>
+<li><b>fc:</b> 210 kg/cm²</li>
+<li><b>fy:</b> 4200 kg/cm²</li>
 </ul>
 </div>
 
-<div class="paso"><strong>PASO 1:</strong> Calcular el área tributaria (At)<br>
-At = (L1/2 + L2/2) × (L3/2 + L4/2)<br>
-At = (5.5/2 + 6.0/2) × (5.5/2 + 6.0/2)<br>
-At = 5.75 × 5.75 = <b>33.06 m²</b></div>
+<div class="paso"><strong>PASO 1:</strong> Calcular la carga axial última (Pu)<br>
+Pu = At · Cu · Fm = 29.613 · 1.064 · 1.20 = <b>37.81 t</b></div>
 
-<div class="paso"><strong>PASO 2:</strong> Calcular la carga última (Cu)<br>
-Cu = 1.2·(0.62·2) + 1.6·(0.20·2)<br>
-Cu = 1.488 + 0.64 = <b>2.128 t/m²</b></div>
+<div class="paso"><strong>PASO 2:</strong> Calcular la cuantía de acero (ρ)<br>
+Asumir ρ = 2% (un valor razonable para columnas sismorresistentes).<br>
+As = ρ · b · h = 0.02 · 38 · 38 = <b>28.88 cm²</b></div>
 
-<div class="paso"><strong>PASO 3:</strong> Calcular la carga axial (Pu)<br>
-Pu = At · Cu · Fm = 33.06 × 2.128 × 1.2 = <b>84.43 t</b></div>
+<div class="paso"><strong>PASO 3:</strong> Seleccionar varillas<br>
+8 varillas de 20 mm = 8 · 3.14 = <b>25.12 cm²</b><br>
+10 varillas de 20 mm = 10 · 3.14 = <b>31.40 cm²</b><br>
+Se elige 10 varillas de 20 mm (As = 31.40 cm²).</div>
 
-<div class="paso"><strong>PASO 4:</strong> Calcular el predimensionamiento (Ag_req)<br>
-Ag_req = 3·Pu·1000 / (0.85·fc + 0.012·fy)<br>
-Ag_req = 3·84.43·1000 / (0.85·210 + 0.012·4200)<br>
-Ag_req = 253,290 / 228.9 = <b>1,106.8 cm²</b></div>
-
-<div class="paso"><strong>PASO 5:</strong> Sección de columna<br>
-b_col = h_col = √Ag_req = √1106.8 = 33.3 cm → <b>38 × 38 cm</b><br>
-Ag = 38 × 38 = <b>1,444 cm²</b><br>
-✅ CUMPLE (1444 ≥ 1106.8)</div>
-
-<div class="paso"><strong>PASO 6:</strong> Ancho confinado<br>
-bc = 38 - 2(2.5) - 1.0 = <b>32.0 cm</b><br>
-pc = 38 - 2(2.5) - 1.0 = <b>32.0 cm</b></div>
-
-<div class="paso"><strong>PASO 7:</strong> Número de varillas<br>
-num = var_a×2 + (var_p-2)×2 = 4×2 + (4-2)×2 = <b>12 varillas</b></div>
-
-<div class="paso"><strong>PASO 8:</strong> Área de acero<br>
-As = 4·0.00785·φesq² + (12-4)·0.00785·φlong²<br>
-As = 4·0.00785·16² + 8·0.00785·14²<br>
-As = 8.04 + 12.31 = <b>20.35 cm²</b></div>
-
-<div class="paso"><strong>PASO 9:</strong> Cuantía<br>
-ρ = As / Ag = 20.35 / 1444 = <b>1.41%</b><br>
-✅ CUMPLE (1.2% ≤ 1.41% ≤ 4%)</div>
-
-<div class="paso"><strong>PASO 10:</strong> Zona protegida (Lo)<br>
-Lo = max(45, max(38, 38), 3.0×16.67)<br>
-Lo = max(45, 38, 50) = <b>50.0 cm</b></div>
-
-<div class="paso"><strong>PASO 11:</strong> Separación en zona protegida (s_prot)<br>
-s_prot = min(6×14/10, 10) = min(8.4, 10) = <b>8.4 cm</b></div>
-
-<div class="paso"><strong>PASO 12:</strong> Ash zona protegida<br>
-Ash = max[0.3·32·50·210/4200·(1444/32/32 - 1), 0.09·32·50·210/4200]<br>
-Ash = max[2.07, 0.72] = <b>2.07 cm²</b></div>
-
-<div class="paso"><strong>PASO 13:</strong> Ramas<br>
-ramas = 2.07 / (0.00785 × 10²) = <b>2.64 u</b></div>
-
-<div class="paso"><strong>PASO 14:</strong> Zona central (Lc)<br>
-Lc = 300 - 30 - 28 = <b>242 cm</b></div>
-
-<div class="paso"><strong>PASO 15:</strong> Ash zona central<br>
-Ash_central = <b>2.07 cm²</b></div>
-
-<div class="paso"><strong>PASO 16:</strong> Separación zona central (s_cent)<br>
-s_cent = min(6×14/10, 15) = min(8.4, 15) = <b>8.4 cm</b></div>
+<div class="paso"><strong>PASO 4:</strong> Verificar la cuantía<br>
+ρ = As / (b · h) = 31.40 / (38 · 38) = <b>0.0217 (2.17%)</b><br>
+✅ 1% ≤ 2.17% ≤ 6% → <b>CUMPLE</b></div>
 
 <div class="ejemplo">
-<h4>Resumen de resultados</h4>
+<h4>Verificación</h4>
 <table class="tabla">
 <thead><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr></thead>
 <tbody>
-<tr><td>At</td><td>33.06</td><td>m²</td></tr>
-<tr><td>Cu</td><td>2.128</td><td>t/m²</td></tr>
-<tr><td>Pu</td><td>84.43</td><td>t</td></tr>
-<tr><td>Ag_req</td><td>1,106.8</td><td>cm²</td></tr>
-<tr><td>Sección</td><td>38 × 38</td><td>cm</td></tr>
-<tr><td>Ag</td><td>1,444</td><td>cm²</td></tr>
-<tr><td><b>As</b></td><td><b>20.35</b></td><td><b>cm²</b></td></tr>
-<tr><td><b>ρ</b></td><td><b>1.41%</b></td><td>—</td></tr>
-<tr><td>Lo</td><td>50.0</td><td>cm</td></tr>
-<tr><td>s_prot</td><td>8.4</td><td>cm</td></tr>
-<tr><td>s_cent</td><td>8.4</td><td>cm</td></tr>
-<tr><td>Ash</td><td>2.07</td><td>cm²</td></tr>
-<tr><td>ramas</td><td>2.64</td><td>u</td></tr>
+<tr><td>Pu</td><td>37.81</td><td>t</td></tr>
+<tr><td>As</td><td>31.40</td><td>cm²</td></tr>
+<tr><td>ρ</td><td>2.17</td><td>%</td></tr>
+<tr><td><b>Estado</b></td><td><b>✅ CUMPLE</b></td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -296,53 +211,31 @@ s_cent = min(6×14/10, 15) = min(8.4, 15) = <b>8.4 cm</b></div>
 <h2>7. EJERCICIOS DE PRÁCTICA</h2>
 
 <div class="ejercicio">
-<h4>Ejercicio 1: Columna con 4 pisos</h4>
-<p>Calcular el diseño de columna para: Luz = 6.0 m, Cm = 0.62 t/m², Cv = 0.20 t/m², Pisos = 4.</p>
-<p><b>Verificar:</b> ¿Cuál es la sección requerida?</p>
+<h4>Ejercicio 1: Carga axial</h4>
+<p>Calcular Pu para At = 25.00 m², Cu = 1.064 t/m², Fm = 1.20.</p>
 <button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
-<div class="solucion"><p><strong>At = 36 m² | Cu = 4.256 t/m² | Pu = 183.86 t | Ag_req = 2,413 cm² | Sección = 50 × 50 cm</strong></p></div>
+<div class="solucion"><p><strong>Pu = 25.00 · 1.064 · 1.20 = 31.92 t</strong></p></div>
 </div>
 
 <div class="ejercicio">
-<h4>Ejercicio 2: Columna de borde</h4>
-<p>Calcular para una columna de borde con: Área tributaria = 17.7 m², Pisos = 2.</p>
-<p><b>Pregunta:</b> ¿Es mayor o menor la sección que la columna interior? ¿Por qué?</p>
+<h4>Ejercicio 2: Cuantía de acero</h4>
+<p>Calcular As para b = 40 cm, h = 40 cm, ρ = 2%.</p>
 <button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
-<div class="solucion"><p><strong>Pu = 45.2 t | Ag_req = 592 cm² | Sección = 25 × 25 cm<br>
-Es menor que la columna interior porque tiene menor área tributaria.</strong></p></div>
+<div class="solucion"><p><strong>As = 0.02 · 40 · 40 = 32 cm²</strong></p></div>
 </div>
 
 <div class="ejercicio">
-<h4>Ejercicio 3: Comparación</h4>
-<p>Completar la tabla:</p>
-<table class="tabla">
-<thead><tr><th>Pisos</th><th>At (m²)</th><th>Pu (t)</th><th>Ag_req (cm²)</th><th>Sección</th></tr></thead>
-<tbody>
-<tr><td>2</td><td>35.39</td><td>?</td><td>?</td><td>?</td></tr>
-<tr><td>3</td><td>35.39</td><td>?</td><td>?</td><td>?</td></tr>
-<tr><td>4</td><td>35.39</td><td>?</td><td>?</td><td>?</td></tr>
-</tbody>
-</table>
-<button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
-<div class="solucion">
-<p>2 pisos: Pu = 90.44 t, Ag_req = 1,190 cm², Sección = 38 × 38 cm<br>
-3 pisos: Pu = 135.66 t, Ag_req = 1,785 cm², Sección = 45 × 45 cm<br>
-4 pisos: Pu = 180.88 t, Ag_req = 2,380 cm², Sección = 50 × 50 cm</p>
-</div>
-</div>
-
-<div class="ejercicio">
-<h4>Ejercicio 4: Reflexión</h4>
+<h4>Ejercicio 3: Reflexión final</h4>
 <ol style="padding-left:20px;font-size:14px">
-<li>¿Por qué la cuantía mínima es 1.2%?</li>
-<li>¿Qué pasa si la columna está en la zona de tensión del diagrama P-M?</li>
-<li>¿Cómo se relaciona Mpr con el diseño a cortante?</li>
+<li>¿Por qué la columna es el elemento más crítico?</li>
+<li>¿Qué pasa si la cuantía de acero es menor al 1%?</li>
+<li>¿Cómo se relaciona la columna con el M03 (viga)?</li>
 </ol>
 <button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
 <div class="solucion">
-<p>1. Porque el 1.2% garantiza ductilidad mínima y evita falla frágil.<br>
-2. La columna fallaría por flexión, no por compresión. Se debe rediseñar.<br>
-3. Mpr es mayor que Md porque incluye el factor de sobrerresistencia 1.25, garantizando falla dúctil.</p>
+<p>1. Porque su falla implica el colapso de la estructura. No hay aviso previo.<br>
+2. No cumple NEC-15. La columna sería muy débil y podría fallar frágilmente.<br>
+3. La columna debe ser más fuerte que la viga (Nudo Fuerte - Viga Débil).</p>
 </div>
 </div>
 </div>
@@ -353,17 +246,17 @@ Es menor que la columna interior porque tiene menor área tributaria.</strong></
 <thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
 <tbody>
 <tr><td>M01</td><td>h_eq</td><td>Cálculo de carga muerta</td></tr>
-<tr><td>M02</td><td>Cu</td><td>Cargas</td></tr>
-<tr><td>M03</td><td>Md, Vu</td><td>Viga + Sismo</td></tr>
-<tr><td>M04</td><td>Estribos viga</td><td>Acero a Cortante</td></tr>
-<tr><td><b>M05</b></td><td><b>As, estribos columna</b></td><td><b>Este módulo</b></td></tr>
-<tr><td>M06</td><td>Acero de losa</td><td>Diseño de Losa</td></tr>
+<tr><td>M02</td><td>Cu, W, Pu</td><td>Este módulo recibe la carga axial</td></tr>
+<tr><td>M03</td><td>Md</td><td>Este módulo recibe el momento</td></tr>
+<tr><td>M04</td><td>Vu</td><td>Este módulo recibe el cortante</td></tr>
+<tr><td><b>M05</b></td><td><b>Pu, Md, Vu</b></td><td><b>Este módulo</b></td></tr>
+<tr><td>M06</td><td>Cu, h_eq</td><td>Diseño de losa</td></tr>
 </tbody>
 </table>
 
 <div class="cita">
-"La rigidez no es solo un número; es energía almacenada, es resiliencia, es vida."
-<br><strong>— Rigidez Energética, Reflexión Final</strong>
+"La viga avisa, la columna no. Por eso, el diseño de la columna es el acto de mayor responsabilidad del ingeniero."
+<br><strong>— Proyecto ECT-UNESUM-2026</strong>
 </div>
 </div>
 
