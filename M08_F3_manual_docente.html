@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual del Docente M08 F3 - Contribución Doctoral</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7}
+.container{max-width:1000px;margin:0 auto}
+.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #c0392b;border-radius:12px;padding:30px;margin-bottom:25px;text-align:center}
+.header-logo{height:90px;margin-bottom:15px}
+.header h1{color:#5dade2;font-size:30px;margin-bottom:10px}
+.header h2{color:#ecf0f1;font-size:17px;font-weight:normal;margin-bottom:8px}
+.header h3{color:#bdc3c7;font-size:13px;font-weight:normal;font-style:italic}
+.badge-prof{display:inline-block;background:#c0392b;color:white;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:10px;letter-spacing:1px}
+.seccion{background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:25px;border-left:4px solid #f39c12}
+.seccion h2{color:#5dade2;font-size:22px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #34495e}
+.seccion h3{color:#f39c12;font-size:17px;margin:20px 0 12px 0}
+.seccion h4{color:#2ecc71;font-size:15px;margin:15px 0 8px 0}
+.seccion p{color:#ecf0f1;margin-bottom:12px;font-size:15px}
+.seccion ul{list-style:none;padding-left:0;margin:12px 0}
+.seccion ul li{padding:8px 0 8px 25px;position:relative;font-size:14px}
+.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
+.tabla{width:100%;border-collapse:collapse;margin:20px 0}
+.tabla th{background:#34495e;color:#5dade2;padding:12px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
+.tabla td{padding:12px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1;vertical-align:top}
+.tabla tr:nth-child(even){background:#34495e}
+.rubrica-card{background:#34495e;border-radius:10px;padding:20px;margin:15px 0;border-left:5px solid #e74c3c}
+.rubrica-card h4{color:#e74c3c;margin-bottom:12px;font-size:16px}
+.criterio{background:#1e1e2e;border-left:3px solid #f39c12;padding:12px 15px;margin:8px 0;border-radius:6px}
+.criterio strong{color:#f39c12}
+.criterio .peso{display:inline-block;background:#e74c3c;color:white;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-left:8px}
+.ejemplo{background:#1e1e2e;border-left:4px solid #2ecc71;padding:15px;margin:12px 0;border-radius:6px;font-size:14px}
+.ejemplo .respuesta{background:#34495e;padding:10px;border-radius:6px;margin:8px 0;font-style:italic;color:#bdc3c7}
+.ejemplo .resultado{background:#2c3e50;padding:10px;border-radius:6px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12}
+.alerta{background:#34495e;border-left:4px solid #e67e22;padding:15px;margin:15px 0;border-radius:6px}
+.alerta h4{color:#e67e22;margin-bottom:8px}
+.cita{font-style:italic;color:#f39c12;text-align:center;margin:20px 0;padding:15px;border-left:4px solid #f39c12;border-right:4px solid #f39c12;background:#34495e;border-radius:8px}
+.indice{background:#34495e;border-radius:10px;padding:20px;margin-bottom:25px}
+.indice h3{color:#f39c12;margin-bottom:12px}
+.indice ol{padding-left:25px;margin:0}
+.indice li{padding:6px 0;font-size:14px}
+.indice a{color:#5dade2;text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.frase-destacada{background:linear-gradient(135deg,#34495e,#2c3e50);border-left:6px solid #f39c12;border-right:6px solid #f39c12;border-radius:12px;padding:25px;margin:25px 0;text-align:center;font-size:17px;color:#f39c12;font-style:italic;line-height:1.8}
+.frase-destacada .autor{display:block;margin-top:15px;font-size:13px;color:#bdc3c7;font-style:normal}
+.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;text-decoration:none;display:inline-block;margin:5px}
+.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.botones{text-align:center;margin:30px 0}
+.pie-pagina{text-align:center;margin-top:40px;padding:25px;border-top:2px solid #34495e;color:#7f8c8d;font-size:13px}
+.pie-pagina p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
+<h1>📙 MANUAL DEL DOCENTE — M08 F3</h1>
+<h2>CONTRIBUCIÓN DOCTORAL — DMTP, IA Y PROPIEDAD INTELECTUAL</h2>
+<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>
+<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
+<span class="badge-prof">DOCUMENTO CONFIDENCIAL — USO DOCENTE</span>
+</div>
+
+<div class="frase-destacada">
+"Un artículo Q4 no mejora la calidad de vida.<br>
+Un modelo dinámico basado en el impacto social y la protección<br>
+de la Propiedad Intelectual sí transforma el territorio."
+<span class="autor">— Proyecto ECT-UNESUM-2026</span>
+</div>
+
+<!-- ÍNDICE -->
+<div class="indice">
+<h3>📑 ÍNDICE DEL MANUAL DOCENTE</h3>
+<ol>
+<li><a href="#proposito">Propósito del manual</a></li>
+<li><a href="#modelo">Modelo base del proyecto</a></li>
+<li><a href="#bloques">Estructura de los 4 bloques</a></li>
+<li><a href="#rubrica">Rúbrica de evaluación detallada</a></li>
+<li><a href="#evaluacion">Cómo evaluar cada bloque</a></li>
+<li><a href="#respuestas">Respuestas esperadas</a></li>
+</ol>
+</div>
+
+<!-- 1. PROPÓSITO -->
+<div class="seccion" id="proposito">
+<h2>1. 🎯 PROPÓSITO DEL MANUAL</h2>
+<p>Este manual proporciona al docente las herramientas necesarias para <strong>evaluar con criterio profesional</strong> las respuestas de los estudiantes en la Fase 3 del Módulo M08 — Contribución Doctoral (DMTP + IA).</p>
+<p>A diferencia de la evaluación tradicional, este sistema evalúa el <strong>pensamiento crítico</strong> del estudiante mediante criterios ponderados, especialmente en los Bloques C (Interpretación) y D (Decisión).</p>
+
+<div class="alerta">
+<h4>⚠️ IMPORTANTE</h4>
+<p>Este manual es <strong>confidencial</strong>. Contiene las respuestas esperadas y los criterios de evaluación. No debe ser distribuido a los estudiantes.</p>
+</div>
+</div>
+
+<!-- 2. MODELO BASE -->
+<div class="seccion" id="modelo">
+<h2>2. 📐 MODELO BASE DEL PROYECTO</h2>
+<p>Todas las preguntas del M08 F3 están ancladas al <strong>modelo base del Proyecto Multidisciplinario</strong>:</p>
+
+<table class="tabla">
+<thead><tr><th>Dato</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>Disipador</td><td>DMTP</td><td>—</td></tr>
+<tr><td>Herramienta de IA</td><td>RNA + XGBoost + PCA</td><td>—</td></tr>
+<tr><td>Estructuras analizadas</td><td>23</td><td>—</td></tr>
+<tr><td>Protección legal</td><td>Decisión 486 / Código INGENIOS</td><td>—</td></tr>
+<tr><td>P_falla (Fase 1)</td><td>0.02</td><td>—</td></tr>
+</tbody>
+</table>
+
+<h3>Resultados esperados:</h3>
+<table class="tabla">
+<thead><tr><th>Resultado</th><th>Valor</th><th>Unidad</th></tr></thead>
+<tbody>
+<tr><td>DMTP (Disipador)</td><td>Propuesto y validado</td><td>—</td></tr>
+<tr><td>Redes Neuronales</td><td>Entrenadas</td><td>—</td></tr>
+<tr><td>Propiedad Intelectual</td><td>Protegida</td><td>—</td></tr>
+<tr><td><strong>Estado</strong></td><td><strong>✅ Contribución Doctoral</strong></td><td>—</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>💡 Valores de referencia</h4>
+<p>Los valores están alineados con la Guía de Estudio M08 F3 y con los algoritmos Python. El valor <b>DMTP</b> es la contribución doctoral del proyecto.</p>
+</div>
+</div>
+
+<!-- 3. ESTRUCTURA DE BLOQUES -->
+<div class="seccion" id="bloques">
+<h2>3. 🏗 ESTRUCTURA DE LOS 4 BLOQUES</h2>
+<table class="tabla">
+<thead>
+<tr><th>Bloque</th><th>Tipo</th><th>Preguntas</th><th>Puntaje</th><th>Método</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Conceptos contextualizados</td><td>4</td><td>10 pts</td><td>Palabras clave</td></tr>
+<tr><td><strong>B</strong></td><td>Cálculo con interpretación</td><td>5</td><td>40 pts</td><td>Numérico exacto</td></tr>
+<tr><td><strong>C</strong></td><td>Interpretación de valores</td><td>4</td><td>25 pts</td><td><strong>Rúbrica por criterios</strong></td></tr>
+<tr><td><strong>D</strong></td><td>Decisión profesional</td><td>2</td><td>25 pts</td><td><strong>Rúbrica + ética</strong></td></tr>
+<tr><td colspan="3"><strong>TOTAL</strong></td><td><strong>100 pts</strong></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 4. RÚBRICA -->
+<div class="seccion" id="rubrica">
+<h2>4. 📏 RÚBRICA DE EVALUACIÓN DETALLADA</h2>
+
+<h3>4.1 Rúbrica para el Bloque B (Cálculo)</h3>
+<table class="tabla">
+<thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+<tbody>
+<tr><td>Resultado exacto con procedimiento correcto</td><td>100%</td></tr>
+<tr><td>Resultado exacto sin procedimiento</td><td>80%</td></tr>
+<tr><td>Procedimiento correcto con error de cálculo</td><td>60%</td></tr>
+<tr><td>Procedimiento incompleto</td><td>30%</td></tr>
+<tr><td>Sin procedimiento o incorrecto</td><td>0%</td></tr>
+</tbody>
+</table>
+
+<h3>4.2 Rúbrica para el Bloque C (Interpretación) — Criterios ponderados</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta C1 — El DMTP</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span><p>Menciona: disipador, energía, sismo.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span><p>Menciona: proteger, amortiguar, reducir.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia</strong><span class="peso">30%</span><p>Menciona: seguridad, resiliencia, ductilidad.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C2 — Redes Neuronales</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la herramienta</strong><span class="peso">40%</span><p>Menciona: RNA, XGBoost, PCA.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span><p>Menciona: predecir, entrenar, datos.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia</strong><span class="peso">30%</span><p>Menciona: anticipar, prevenir, mantener.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C3 — Propiedad Intelectual</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica el concepto</strong><span class="peso">40%</span><p>Menciona: patente, software, activo intangible.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica el uso</strong><span class="peso">30%</span><p>Menciona: proteger, blindar, legal.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia</strong><span class="peso">30%</span><p>Menciona: transferencia, seguridad, futuro.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta C4 — Contribución doctoral</h4>
+<div class="criterio"><strong>Criterio 1 — Identifica la contribución</strong><span class="peso">40%</span><p>Menciona: DMTP, IA, modelo predictivo.</p></div>
+<div class="criterio"><strong>Criterio 2 — Explica el impacto</strong><span class="peso">30%</span><p>Menciona: territorio, resiliencia, comunidad.</p></div>
+<div class="criterio"><strong>Criterio 3 — Consecuencia</strong><span class="peso">30%</span><p>Menciona: cambio, transformación, futuro.</p></div>
+</div>
+
+<h3>4.3 Rúbrica para el Bloque D (Decisión) — Criterios + Ética</h3>
+
+<div class="rubrica-card">
+<h4>Pregunta D1 — Ética en la IA (12 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Técnico</strong><span class="peso">25%</span><p>Menciona: validación, error, datos.</p></div>
+<div class="criterio"><strong>Criterio 2 — Normativo</strong><span class="peso">25%</span><p>Menciona: NEC-15, ACI 318, INGENIOS.</p></div>
+<div class="criterio"><strong>Criterio 3 — Ético</strong><span class="peso">25%</span><p>Menciona: responsabilidad, transparencia, seguridad.</p></div>
+<div class="criterio"><strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span><p>Menciona: documentar, registrar, justificar.</p></div>
+</div>
+
+<div class="rubrica-card">
+<h4>Pregunta D2 — Transferencia tecnológica (13 pts)</h4>
+<div class="criterio"><strong>Criterio 1 — Importancia de la transferencia</strong><span class="peso">25%</span><p>Menciona: el conocimiento debe llegar a la comunidad.</p></div>
+<div class="criterio"><strong>Criterio 2 — Rol de la Propiedad Intelectual</strong><span class="peso">25%</span><p>Menciona: proteger, blindar, legal.</p></div>
+<div class="criterio"><strong>Criterio 3 — Ética profesional</strong><span class="peso">25%</span><p>Menciona: responsabilidad, impacto social.</p></div>
+<div class="criterio"><strong>Criterio 4 — Trazabilidad</strong><span class="peso">25%</span><p>Menciona: documentar, registrar, guardar memorias.</p></div>
+</div>
+</div>
+
+<!-- 5. RESPUESTAS ESPERADAS -->
+<div class="seccion" id="respuestas">
+<h2>5. 📝 RESPUESTAS ESPERADAS DE LAS PREGUNTAS CLAVE</h2>
+<p>Esta sección es <strong>confidencial</strong>. Contiene las respuestas esperadas para la contribución doctoral y la IA.</p>
+
+<h3>Bloque B — Cálculo (Respuestas Clave)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>B1</td><td>¿Qué es el DMTP?</td><td>Disipador Marcillo Tensor-Puntal</td><td>10</td></tr>
+<tr><td>B2</td><td>¿Qué herramienta de IA se usa?</td><td>RNA + XGBoost + PCA</td><td>8</td></tr>
+<tr><td>B3</td><td>¿Cuántas estructuras se analizan?</td><td>23</td><td>8</td></tr>
+<tr><td>B4</td><td>¿Qué ley protege la propiedad intelectual?</td><td>Decisión 486 / Código INGENIOS</td><td>8</td></tr>
+<tr><td>B5</td><td>¿Cuál es el P_falla de la Fase 1?</td><td>0.02</td><td>6</td></tr>
+</tbody>
+</table>
+
+<h3>Bloque C — Interpretación (Respuestas Clave)</h3>
+<table class="tabla">
+<thead><tr><th>ID</th><th>Pregunta</th><th>Respuesta esperada</th><th>Pts</th></tr></thead>
+<tbody>
+<tr><td>C3</td><td>Propiedad Intelectual</td><td>Protege los activos intangibles (software, patentes) para garantizar su transferencia legal y segura.</td><td>6</td></tr>
+<tr><td>C4</td><td>Contribución doctoral</td><td>El DMTP y la IA permiten predecir y proteger las estructuras del territorio, generando resiliencia.</td><td>7</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<h4>🚨 Criterio de Aprobación del Bloque B1</h4>
+<p>El estudiante debe identificar que el DMTP es el <b>Disipador Marcillo Tensor-Puntal</b> y que se usan <b>Redes Neuronales (RNA, XGBoost, PCA)</b>. Si no lo hace, debe revisar la guía de estudio.</p>
+</div>
+</div>
+
+<!-- BOTONES -->
+<div class="botones">
+<a href="M08_F3_guia_estudio.html" class="btn btn-orange">📘 Ver Guía de Estudio</a>
+<a href="M08_F3_cuestionario.html" class="btn">📝 Ir al Cuestionario</a>
+<a href="index.html" class="btn">🏠 Volver al Inicio</a>
+<button class="btn" onclick="window.print()">🖨 Descargar PDF</button>
+</div>
+
+<!-- PIE -->
+<div class="pie-pagina">
+<p><b>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</b></p>
+<p>ESTRUCTURA I / ESTRUCTURA II — Carrera de Ingeniería Civil</p>
+<p>Universidad Estatal del Sur de Manabí — PI 2026</p>
+<p>Docente responsable: Ing. Gery Lorenzo Marcillo Merino</p>
+<p style="margin-top:15px;font-style:italic;color:#f39c12">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M07 - Tutor Socrático - ECT-UNESUM</title>
+    <style>
+        /* Mismos estilos que el M06 */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #16a085;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
+        .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-start; border-left: 3px solid #9b59b6;}
+        .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-end; border-right: 3px solid #3498db;}
+        .input-group {display: flex; gap: 10px;}
+        .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
+        .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
+        .input-group button:hover {background: #8e44ad;}
+        .btn-epico {display: block; width: 100%; padding: 20px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; text-align: center; text-decoration: none; transition: transform 0.2s;}
+        .btn-epico:hover {transform: scale(1.01);}
+        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); transform: none;}
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; transition: background 0.3s;}
+        .btn-volver:hover {background: #2c3e50;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M07 — TUTOR SOCRÁTICO</h1>
+        <p>El Tamiz de la Dinámica Estructural y el Phyphox | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que entiendas qué es el período fundamental y cómo se relaciona con el sismo. Si pasas este tamiz, se desbloqueará el cuestionario.</p>
+            
+            <div id="chat-socratico" class="chat-box">
+                <div class="msg-tutor">
+                    <b>Tutor:</b> Bienvenido al Tamiz del Módulo 07. Para comenzar, dime: <b>Si una estructura es muy rígida (como un edificio de concreto macizo), ¿su período fundamental será corto o largo? ¿Y qué implica eso ante un sismo?</b>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()">Enviar</button>
+            </div>
+        </div>
+        
+        <button id="btn-cuestionario" class="btn-epico" onclick="irAlCuestionario()" disabled>📝 IR AL CUESTIONARIO (Bloqueado)</button>
+        
+        <div style="text-align: center;">
+            <a href="M07_guia_estudio.html" class="btn-volver">← Volver a la Guía de Estudio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
+    let responsorioSocratico = { modulo: "M07", interacciones: [] };
+
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
+
+        if (texto === "") return;
+
+        chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
+        
+        responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: input.value, tipo: "estudiante", hora: new Date().toLocaleTimeString() });
+        localStorage.setItem('responsorio_M07', JSON.stringify(responsorioSocratico));
+
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            let respuesta = "";
+
+            if (nivelTamiz === 0) {
+                if (texto.includes("corto") || texto.includes("bajo")) {
+                    respuesta = "¡Exacto! Una estructura rígida tiene un período corto. Ahora dime: <b>Si el período de la estructura coincide con el período del suelo (resonancia), ¿qué crees que pasa con la vibración?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piensa en una regla de metal: si la sostienes firme, vibra rápido. <b>¿Su período es corto o largo?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("aumenta") || texto.includes("amplifica") || texto.includes("peligro") || texto.includes("resonancia")) {
+                    respuesta = "¡Muy bien! La resonancia amplifica la vibración y puede provocar el colapso. Ahora, para validar el modelo teórico, <b>¿qué herramienta del celular se usa para medir la frecuencia natural real de la estructura?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "La resonancia es como empujar un columpio al ritmo de su balanceo. <b>¿La vibración se amplifica o se detiene?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("phyphox") || texto.includes("acelerometro") || texto.includes("celular")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. Has demostrado que entiendes el período fundamental, la resonancia y el uso de Phyphox. <b>El Cuestionario ha sido desbloqueado.</b>";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.innerText = "📝 IR AL CUESTIONARIO (Desbloqueado)";
+                } else {
+                    respuesta = "La herramienta usa el acelerómetro del celular para medir vibraciones. <b>¿Cómo se llama la app?</b>";
+                }
+            } else {
+                respuesta = "Ya estás listo. Haz clic en el botón verde para ir al Cuestionario. ¡Mucho éxito!";
+            }
+
+            chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: respuesta, tipo: "tutor", hora: new Date().toLocaleTimeString() });
+            localStorage.setItem('responsorio_M07', JSON.stringify(responsorioSocratico));
+
+        }, 1000);
+    }
+
+    function irAlCuestionario() {
+        if (tamizAprobado) {
+            window.location.href = "modulo_07_analisis_dinamico.html"; 
+        }
+    }
+</script>
+
+</body>
+</html>
