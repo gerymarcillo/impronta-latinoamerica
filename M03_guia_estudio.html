@@ -75,6 +75,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <li><a href="#teoria">Fundamento teórico</a></li>
 <li><a href="#formulas">Fórmulas clave</a></li>
 <li><a href="#ejemplo">Ejemplo resuelto paso a paso</a></li>
+<li><a href="#acero">Cálculo del Acero y Ductilidad</a></li>
 <li><a href="#evaluacion">Sistema de evaluación</a></li>
 <li><a href="#ejercicios">Ejercicios de práctica</a></li>
 <li><a href="#conexion">Conexión con otros módulos</a></li>
@@ -99,6 +100,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <li>Calcular el momento estático Me y el momento de diseño Md</li>
 <li>Interpretar el Diagrama Mariposa en el análisis sísmico</li>
 <li>Verificar la deflexión admisible L/240 (NEC-15)</li>
+<li>Calcular el acero As y verificar la ductilidad (ρ ≤ 1%)</li>
 </ul>
 </div>
 
@@ -148,6 +150,8 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;m
 <tr><td>Momento estático</td><td>Me = Cu·Lt·(Lv-bcol)²/8</td><td>t·m</td></tr>
 <tr><td>Momento de diseño</td><td>Md = Me · f_viga · f_fisura · Fm</td><td>t·m</td></tr>
 <tr><td>Deflexión admisible</td><td>δadm = Lv/240</td><td>mm</td></tr>
+<tr><td>Acero requerido</td><td>As = Md / (φ·fy·(d - a/2))</td><td>cm²</td></tr>
+<tr><td>Cuantía</td><td>ρ = As / (b·d) ≤ 1%</td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -219,8 +223,33 @@ Md = 24.154 × 0.65 × 0.85 × 1.35 = <b>18.016 t·m</b></div>
 </div>
 </div>
 
+<div class="seccion" id="acero" style="border-left-color:#2ecc71">
+<h2>6. CÁLCULO DEL ACERO Y DUCTILIDAD</h2>
+<p>Una vez calculado el momento de diseño (\(M_d\)), el siguiente paso es determinar el área de acero requerida (\(A_s\)) y verificar que la viga sea dúctil.</p>
+
+<h3>6.1 Fórmula del Acero</h3>
+<div class="formula">As = Md / (φ · fy · (d - a/2))</div>
+<p>Donde <b>φ = 0.9</b> (factor de reducción por flexión) y <b>a = As·fy / (0.85·fc·b)</b> (bloque de compresiones). Se resuelve de forma iterativa.</p>
+
+<h3>6.2 Regla de Oro: Ductilidad (ρ ≤ 1%)</h3>
+<p>Para garantizar que la viga falle dúctilmente (el acero fluye antes que el concreto se agote), la cuantía de acero debe ser menor al 1%.</p>
+<div class="formula">ρ = As / (b · d) ≤ 0.01</div>
+
+<div class="ejemplo">
+<h4>Ejemplo de Cálculo (Datos del Modelo)</h4>
+<ul>
+<li>\(M_d = 18.016\) t·m</li>
+<li>\(b = 30\) cm, \(d = 40.7\) cm</li>
+<li>\(f'_c = 210\) kg/cm², \(f_y = 4200\) kg/cm²</li>
+</ul>
+<p><b>Paso 1:</b> Iterar para calcular \(A_s\). Resultado: \(A_s \approx 10.0\) cm².</p>
+<p><b>Paso 2:</b> Verificar cuantía: \(\rho = 10.0 / (30 \cdot 40.7) = 0.00819\) (0.82%).</p>
+<p><b>Resultado:</b> ✅ 0.82% ≤ 1%. <b>La viga es DÚCTIL.</b></p>
+</div>
+</div>
+
 <div class="seccion" id="evaluacion">
-<h2>6. SISTEMA DE EVALUACIÓN</h2>
+<h2>7. SISTEMA DE EVALUACIÓN</h2>
 <table class="tabla">
 <thead><tr><th>Bloque</th><th>Tipo</th><th>Puntaje</th></tr></thead>
 <tbody>
@@ -241,7 +270,7 @@ Md = 24.154 × 0.65 × 0.85 × 1.35 = <b>18.016 t·m</b></div>
 </div>
 
 <div class="seccion" id="ejercicios">
-<h2>7. EJERCICIOS DE PRÁCTICA</h2>
+<h2>8. EJERCICIOS DE PRÁCTICA</h2>
 
 <div class="ejercicio">
 <h4>Ejercicio 1: Viga simplemente apoyada</h4>
@@ -278,18 +307,20 @@ Md = 24.154 × 0.65 × 0.85 × 1.35 = <b>18.016 t·m</b></div>
 <li>¿Por qué se aplica Fm = 1.35 en el diseño sísmico?</li>
 <li>¿Qué pasa si la deflexión supera L/240?</li>
 <li>¿Cómo se relaciona Md con el diseño del acero?</li>
+<li>¿Por qué la cuantía debe ser menor al 1%?</li>
 </ol>
 <button class="btn-solucion" onclick="verSolucion(this)">Ver solución</button>
 <div class="solucion">
 <p>1. Porque amplifica el momento estático para considerar la sobrerresistencia y la incertidumbre sísmica.<br>
 2. No cumple NEC-15. Se debe aumentar el peralte, la inercia o reducir la luz.<br>
-3. Md determina el área de acero As requerida en la viga.</p>
+3. Md determina el área de acero As requerida en la viga.<br>
+4. Porque a menor cuantía, el acero fluye antes de que el concreto se agote, garantizando una falla dúctil y segura.</p>
 </div>
 </div>
 </div>
 
 <div class="seccion" id="conexion">
-<h2>8. CONEXIÓN CON OTROS MÓDULOS</h2>
+<h2>9. CONEXIÓN CON OTROS MÓDULOS</h2>
 <table class="tabla">
 <thead><tr><th>Módulo</th><th>Recibe</th><th>Uso</th></tr></thead>
 <tbody>
