@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-GENERADOR DEL INDEX.HTML - VERSIÓN FINAL (M01, M02, M03, M04 ACTUALIZADOS)
+GENERADOR DEL INDEX.HTML - VERSIÓN FINAL (M01, M02, M03, M04, M05 ACTUALIZADOS)
 Proyecto: ECT-UNESUM-2026
 """
 
@@ -363,12 +363,21 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     </div>
     <!-- FIN DEL M04 ACTUALIZADO -->
 
-    <a href="modulo_05_diseno_columna.html" class="modulo-card" style="--color-modulo:#9b59b6">
+    <!-- M05 ACTUALIZADO CON BOTONES INTERNOS -->
+    <div class="modulo-card" style="--color-modulo:#9b59b6; position: relative;">
       <span class="modulo-icon">🏛️</span>
       <h3>M05 — Diseño de Columna</h3>
-      <div class="desc">Flexo-compresión + P-M</div>
+      <div class="desc">Flexo-compresión + Diagrama P-M + Confinamiento</div>
       <div class="status">✅ 15 preguntas</div>
-    </a>
+      
+      <div style="margin-top: 15px; border-top: 1px dashed rgba(93,173,226,0.3); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="M05_guia_estudio.html" class="btn" style="background: linear-gradient(135deg, #3498db, #2980b9); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📘 Guía de Estudio</a>
+        <a href="M05_tutor.html" class="btn" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">🤖 Tutor Socrático</a>
+        <a href="modulo_05_diseno_columna.html" class="btn btn-orange" style="font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📝 Ir al Cuestionario</a>
+      </div>
+    </div>
+    <!-- FIN DEL M05 ACTUALIZADO -->
+
     <a href="modulo_06_diseno_losa.html" class="modulo-card" style="--color-modulo:#2ecc71">
       <span class="modulo-icon">🧱</span>
       <h3>M06 — Diseño de Losa</h3>
@@ -723,7 +732,7 @@ if __name__ == "__main__":
     print("   • Ventana pública + Google Maps")
     print("   • Sorteo con acceso cerrado")
     print("   • 8 módulos (M01-M08 con 3 fases)")
-    print("   • M03 y M04 con botones de acceso directo")
+    print("   • M03, M04 y M05 con botones de acceso directo")
     print("   • Pie institucional SENESCYT")
     print("\n🚀 Ejecutar con: python generar_index.py")
     print("=" * 70)
