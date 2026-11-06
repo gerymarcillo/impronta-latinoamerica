@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-GENERADOR DEL INDEX.HTML - VERSIÓN FINAL
+GENERADOR DEL INDEX.HTML - VERSIÓN FINAL (COMPLETA)
 Proyecto: ECT-UNESUM-2026
-- 23 proyectos georreferenciados
-- Ventana pública + Google Maps
-- Sorteo con 2 intentos
-- 8 módulos (M01-M08 con 3 fases)
-- Pie institucional SENESCYT
 """
 
 from pathlib import Path
@@ -231,7 +226,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
     <button class="btn-epico" onclick="irAlLogin()">🚀 INGRESAR A LA PLATAFORMA</button>
   </div>
 </div>
-<!-- PANTALLA 1.5: VENTANA PÚBLICA -->
+
 <div id="ventana-publica" class="ventana-publica">
   <div class="titulo">
     <h1>📋 PROYECTOS DISPONIBLES</h1>
@@ -266,7 +261,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
   </div>
 </div>
 
-<!-- PANTALLA 2: LOGIN -->
 <div id="pantalla-login" class="hidden">
   <div class="header">
     <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
@@ -309,7 +303,6 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
   </div>
 </div>
 
-<!-- PANTALLA 3: MENÚ -->
 <div id="pantalla-modulos" class="hidden">
   <div class="header">
     <img src="logo_unesum.png" alt="UNESUM" class="header-logo">
@@ -655,8 +648,43 @@ function mostrarProyecto(p, codigo, rol){
   contenedor.innerHTML = html;
 }
 
+// LÓGICA DEL CERTIFICADO
+function abrirModalCertificado() {
+    document.getElementById('modal-certificado').style.display = 'flex';
+    document.getElementById('certificado-real').style.display = 'none';
+    document.getElementById('botones-certificado').style.display = 'none';
+    document.getElementById('formulario-ingreso').style.display = 'block';
+    document.getElementById('nombre-estudiante').value = '';
+}
+
+function cerrarModalCertificado() {
+    document.getElementById('modal-certificado').style.display = 'none';
+}
+
+function generarCertificado() {
+    var nombre = document.getElementById('nombre-estudiante').value.trim();
+    if (nombre === "") { alert("Por favor, ingrese su nombre completo."); return; }
+    document.getElementById('nombre-certificado').textContent = nombre.toUpperCase();
+    var hoy = new Date();
+    document.getElementById('fecha-certificado').textContent = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('formulario-ingreso').style.display = 'none';
+    document.getElementById('certificado-real').style.display = 'block';
+    document.getElementById('botones-certificado').style.display = 'block';
+}
+
+function imprimirCertificado() {
+    var contenido = document.getElementById('certificado-real').innerHTML;
+    var ventanaImpresion = window.open('', '', 'height=800,width=1000');
+    ventanaImpresion.document.write('<html><head><title>Certificado ECT-UNESUM</title>');
+    ventanaImpresion.document.write('<style>body{font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#fff;}.cert-marca-agua{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.05;font-size:150px;font-weight:bold;color:#000;}#certificado-real{background:#fff;width:900px;height:600px;padding:40px;box-sizing:border-box;text-align:center;position:relative;color:#333;border:10px solid #141a2e;}.cert-borde{border:2px solid #f39c12;padding:20px;height:100%;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;}.cert-header h2{color:#141a2e;font-size:28px;margin:0 0 5px 0;}.cert-header p{color:#5dade2;font-size:14px;font-weight:bold;letter-spacing:2px;margin:0;}.cert-header hr{border:1px solid #f39c12;margin:15px 0;}.cert-body h1{color:#f39c12;font-size:40px;margin-bottom:15px;font-weight:900;}.cert-body p{font-size:16px;color:#555;}.cert-nombre{font-size:32px;color:#141a2e;border-bottom:2px solid #5dade2;display:inline-block;padding:0 20px 5px 20px;margin:15px 0;}.cert-descripcion{font-size:16px;color:#555;line-height:1.6;max-width:700px;margin:0 auto;}.cert-firmas{display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px;}.cert-firma-item{text-align:center;width:200px;}.cert-firma-item hr{border-top:1px solid #333;margin-bottom:5px;}.cert-firma-item p{font-size:12px;margin:0;}.cert-firma-item small{font-size:10px;color:#777;}.cert-sello{text-align:center;}.cert-sello-box{width:80px;height:80px;background:#eee;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px dashed #ccc;margin:0 auto;font-size:10px;color:#999;}.cert-footer{font-size:10px;color:#999;margin-top:15px;}@media print {body {height: auto;}}</style></head><body>');
+    ventanaImpresion.document.write('<div id="certificado-real" style="display:block;">' + contenido + '</div>');
+    ventanaImpresion.document.write('</body></html>');
+    ventanaImpresion.document.close();
+    ventanaImpresion.focus();
+    setTimeout(function(){ ventanaImpresion.print(); ventanaImpresion.close(); }, 500);
+}
+
 console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
-console.log('📋 Proyectos:', Object.keys(PROYECTOS).length);
 </script>
 </body>
 </html>
@@ -668,7 +696,7 @@ if __name__ == "__main__":
     with open(ruta, "w", encoding="utf-8") as f:
         f.write(HTML)
     print("=" * 70)
-    print("GENERADOR DEL INDEX.HTML - VERSIÓN FINAL")
+    print("GENERADOR DEL INDEX.HTML - VERSIÓN FINAL COMPLETA")
     print("=" * 70)
     print(f"\n✅ Archivo generado: {ruta}")
     print("\n📊 Contenido:")
