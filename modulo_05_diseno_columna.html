@@ -2,720 +2,382 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>M05 - Diseño de Columna</title>
+<title>M05 - Diseño de Columna - Cuestionario</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1e1e2e;color:#ecf0f1;min-height:100vh;padding:20px}
-.container{max-width:1100px;margin:0 auto}
-.header{background:linear-gradient(135deg,#2c3e50,#1e1e2e);border-left:6px solid #f39c12;border-radius:12px;padding:25px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
-.header-logo{height:70px}
-.header-imagen{height:70px;border-radius:8px;border:2px solid #f39c12}
-.header-texto{text-align:center;flex:1;min-width:300px}
-.header h1{color:#5dade2;font-size:24px;margin-bottom:8px}
-.header h2{color:#ecf0f1;font-size:13px;font-weight:normal;margin-bottom:4px}
-.header h3{color:#bdc3c7;font-size:11px;font-weight:normal;font-style:italic}
-.header p{color:#bdc3c7;font-style:italic;margin-top:10px;font-size:12px}
-.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
-.tab{background:#2c3e50;color:#ecf0f1;border:2px solid #34495e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold}
-.tab.active{background:linear-gradient(135deg,#f39c12,#e67e22);border-color:#f39c12;color:white}
-.tab-content{display:none}
-.tab-content.active{display:block}
-.info-bar{background:#34495e;padding:12px 20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
-.progreso{background:#34495e;border-radius:20px;height:12px;overflow:hidden;margin:10px 0}
-.progreso-bar{background:linear-gradient(90deg,#2ecc71,#f39c12);height:100%;width:0%;transition:width 0.4s}
-.btn{background:linear-gradient(135deg,#3498db,#2980b9);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:bold;margin:6px;text-decoration:none;display:inline-block}
-.btn-orange{background:linear-gradient(135deg,#f39c12,#e67e22)}
-.btn-green{background:linear-gradient(135deg,#2ecc71,#27ae60)}
-.btn-desactivado{background:#7f8c8d !important;color:#bdc3c7 !important;cursor:not-allowed !important;opacity:0.6;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;margin:0}
-.seccion{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px;border-left:4px solid #f39c12}
-.seccion h2{color:#5dade2;font-size:20px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #34495e}
-.seccion h3{color:#f39c12;font-size:16px;margin:15px 0 10px 0}
-.seccion p{color:#ecf0f1;margin-bottom:10px;font-size:14px;line-height:1.6}
-.seccion ul{list-style:none;padding-left:0;margin:10px 0}
-.seccion ul li{padding:6px 0 6px 22px;position:relative;font-size:14px;line-height:1.6}
-.seccion ul li:before{content:"▸";color:#f39c12;position:absolute;left:0;font-weight:bold}
-.formula-box{background:#1e1e2e;border:2px solid #f39c12;border-radius:8px;padding:15px;margin:10px 0;font-family:'Courier New',monospace;color:#5dade2;font-size:14px;text-align:center}
-.formula-box.grande{font-size:18px;color:#f39c12;font-weight:bold}
-.tabla{width:100%;border-collapse:collapse;margin:15px 0}
-.tabla th{background:#34495e;color:#5dade2;padding:10px;text-align:left;font-size:13px;border:1px solid #1e1e2e}
-.tabla td{padding:10px;font-size:13px;border:1px solid #1e1e2e;color:#ecf0f1}
-.tabla tr:nth-child(even){background:#34495e}
-.pregunta-box{background:#2c3e50;border-radius:12px;padding:25px;margin-bottom:20px}
-.pregunta-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:15px;border-bottom:2px solid #f39c12}
-.badge{background:#3498db;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
-.badge.orange{background:#f39c12}
-.badge.red{background:#e74c3c}
-.ejercicio-previo{background:#34495e;border-left:4px solid #f39c12;border-radius:8px;padding:15px;margin:15px 0}
-.ejercicio-previo h4{color:#f39c12;margin-bottom:10px;font-size:14px}
-.ejercicio-previo .campo{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #7f8c8d;font-size:13px}
-.ejercicio-previo .campo strong{color:#2ecc71}
-.enunciado{font-size:15px;line-height:1.6;margin:15px 0;background:#34495e;padding:15px;border-radius:8px;border-left:4px solid #3498db}
-textarea{width:100%;min-height:150px;padding:15px;border:2px solid #3498db;border-radius:8px;background:#1e1e2e;color:#ecf0f1;font-size:14px;font-family:inherit;resize:vertical}
-.rubrica{background:#34495e;border-radius:8px;padding:15px;margin-top:15px;font-size:12px}
-.rubrica h4{color:#f39c12;margin-bottom:10px}
-.rubrica ul{list-style:none}
-.rubrica li{padding:4px 0}
-.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
-.resultado{background:#2c3e50;border:3px solid #f39c12;border-radius:12px;padding:30px;text-align:center;margin:20px 0}
-.puntaje-grande{font-size:60px;font-weight:bold;color:#2ecc71;margin:15px 0}
-.clasif{display:inline-block;padding:10px 25px;border-radius:30px;font-size:20px;font-weight:bold;margin:15px 0}
-.c-insuf{background:#7f8c8d;color:white}
-.c-basico{background:#16a085;color:white}
-.c-comp{background:#f39c12;color:white}
-.c-dest{background:#e67e22;color:white}
-.c-excel{background:#c0392b;color:white}
-.certificado{background:white;color:#2c3e50;border:4px solid #f39c12;border-radius:12px;padding:30px;margin:20px 0;text-align:center;font-family:Georgia,serif}
-.certificado h2{color:#c0392b;margin-bottom:15px;font-size:20px}
-.certificado h3{color:#2c3e50;margin:15px 0;font-size:16px}
-.firmas{display:flex;justify-content:space-around;margin-top:40px;flex-wrap:wrap;gap:20px}
-.firma{text-align:center;min-width:220px}
-.linea-firma{border-top:2px solid #2c3e50;margin-bottom:10px;padding-top:5px}
-.firma p{font-size:12px;margin:2px 0;font-family:Georgia,serif}
-.modalidad{background:#f8f9fa;border:2px dashed #f39c12;border-radius:8px;padding:15px;margin:20px 0;text-align:left;font-family:Georgia,serif;color:#2c3e50}
-.modalidad h4{color:#c0392b;margin-bottom:10px;font-size:14px}
-.modalidad ul{list-style:none}
-.modalidad li{padding:4px 0;font-size:13px}
-.condiciones-box{background:#1e1e2e;border:2px solid #2ecc71;border-radius:8px;padding:15px;margin:15px 0}
-.condiciones-box h4{color:#2ecc71;font-size:14px;margin-bottom:10px}
-.condiciones-box ul{list-style:none;padding-left:0}
-.condiciones-box li{padding:5px 0 5px 25px;position:relative;font-size:13px;color:#ecf0f1}
-.condiciones-box li:before{content:"☐";position:absolute;left:0;color:#2ecc71;font-weight:bold}
-.ejemplo-valido-box{background:#1e1e2e;border-left:4px solid #3498db;border-radius:8px;padding:15px;margin:15px 0}
-.ejemplo-valido-box h4{color:#5dade2;font-size:13px;margin-bottom:8px}
-.ejemplo-valido-box p{color:#bdc3c7;font-size:13px;font-style:italic;margin:0}
-.criterios-box{background:#34495e;border-radius:8px;padding:15px;margin-top:15px}
-.criterios-box h4{color:#f39c12;font-size:13px;margin-bottom:10px}
-.criterios-box ul{list-style:none;padding-left:0}
-.criterios-box li{padding:4px 0;font-size:12px;color:#ecf0f1}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;min-height:100vh;padding:20px;line-height:1.7;overflow-x:hidden}
+.fondo-animado{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(ellipse at 20% 30%,rgba(22,160,133,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(243,156,18,0.12) 0%,transparent 50%),linear-gradient(135deg,#0a0e1a 0%,#141a2e 50%,#0a0e1a 100%)}
+.container{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.header{text-align:center;margin-bottom:30px;border-bottom:2px solid #9b59b6;padding-bottom:20px}
+.header h1{color:#5dade2;font-size:28px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 20px rgba(93,173,226,0.5)}
+.header p{color:#bdc3c7;font-size:14px;font-style:italic}
+.seccion-modulo{background:rgba(20,26,46,0.7);backdrop-filter:blur(15px);padding:30px;border-radius:18px;margin-top:20px;border:1px solid rgba(93,173,226,0.2);box-shadow:0 15px 40px rgba(0,0,0,0.4)}
+.pregunta {margin-bottom: 25px; background: rgba(10,14,26,0.6); padding: 20px; border-radius: 12px; border-left: 4px solid #3498db; transition: 0.3s;}
+.pregunta:hover {background: rgba(10,14,26,0.8); transform: translateX(5px);}
+.pregunta.nivel-2 {border-left-color: #f39c12;}
+.pregunta.nivel-3 {border-left-color: #e74c3c;}
+.pregunta p {color: #ecf0f1; font-weight: bold; font-size: 15px; margin-bottom: 15px;}
+.opcion-label {display: block; color: #bdc3c7; margin: 10px 0; cursor: pointer; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid transparent; transition: 0.3s;}
+.opcion-label:hover {background: rgba(93,173,226,0.1); border-color: #5dade2;}
+.opcion-label input {margin-right: 12px; transform: scale(1.2); accent-color: #5dade2;}
+.pregunta textarea {width: 100%; padding: 15px; background: #141a2e; color: white; border: 2px solid #34495e; border-radius: 10px; font-family: inherit; resize: vertical; font-size: 14px; outline: none; transition: 0.3s;}
+.pregunta textarea:focus {border-color: #5dade2; box-shadow: 0 0 15px rgba(93,173,226,0.2);}
+.btn-epico{width:100%;padding:20px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;border-radius:12px;cursor:pointer;margin-top:30px;transition:transform 0.2s, box-shadow 0.2s; letter-spacing: 1px;}
+.btn-epico:hover{transform:scale(1.02); box-shadow: 0 10px 30px rgba(243,156,18,0.4);}
+#pantalla-resultado {display: none; text-align: center; padding: 40px; background: rgba(10,14,26,0.8); border-radius: 18px; margin-top: 20px; border: 2px solid #3498db; backdrop-filter:blur(15px);}
+.nota-grande {font-size: 60px; font-weight: bold; margin: 20px 0;}
+.aprobado {color: #2ecc71; border-color: #2ecc71; text-shadow: 0 0 20px rgba(46,204,113,0.4);}
+.reprobado {color: #e74c3c; border-color: #e74c3c; text-shadow: 0 0 20px rgba(231,76,60,0.4);}
+#reporte-detallado {display: none; text-align: left; background: rgba(20,26,46,0.9); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid #34495e;}
+.reporte-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;}
+.reporte-item {background: #0a0e1a; padding: 15px; border-radius: 8px; font-size: 13px; border-left: 3px solid #3498db;}
+.btn-volver{background:rgba(52,73,94,0.8);color:white;padding:15px 35px;border-radius:12px;text-decoration:none;font-weight:bold;display:inline-block;transition:0.3s;border:1px solid #5d6d7e;margin-top:20px;}
+.btn-volver:hover{background:#34495e;transform:translateY(-2px);}
+/* Estilos del certificado (simplificado para el ejemplo) */
+#modal-certificado {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(10px);}
+#certificado-real {background:#fff; width:900px; max-width:95vw; height:auto; min-height:600px; padding:40px; box-sizing:border-box; text-align:center; position:relative; color:#333; border:10px solid #141a2e; box-shadow:0 0 50px rgba(0,0,0,0.8);}
+.contenido-cert {border:2px solid #9b59b6; padding:20px; height:100%; display:flex; flex-direction:column; justify-content:space-between; box-sizing:border-box;}
+.nombre-cert {font-size:32px; color:#141a2e; border-bottom:2px solid #9b59b6; display:inline-block; padding:0 20px 5px 20px; margin:15px 0;}
 </style>
 </head>
 <body>
+
+<div class="fondo-animado"></div>
+
 <div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M05 — CUESTIONARIO DE EVALUACIÓN</h1>
+        <p>Diseño de Columna | ECT-UNESUM-2026</p>
+    </div>
 
-<div class="header">
-<img src="logo_unesum.png" alt="UNESUM" class="header-logo">
-<div class="header-texto">
-<h1>🏛️ M05 — DISEÑO DE COLUMNA</h1>
-<h2>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h2>
-<h3>ESTRUCTURA I — ESTRUCTURA II | Carrera de Ingeniería Civil — UNESUM</h3>
-<p>Proyecto Multidisciplinario UNESUM-REZ-2026-JIPIJAPA-001 | Docente: Ing. Gery Lorenzo Marcillo Merino</p>
-</div>
-<img src="portada_estructural.png" alt="Portada" class="header-imagen">
-</div>
+    <div class="seccion-modulo" id="formulario-contenedor">
+        <form id="formulario-m05" onsubmit="event.preventDefault();">
+            
+            <h2 style="color:#5dade2;margin-bottom:20px;">BLOQUE A — CONCEPTOS (10 pts)</h2>
+            <div class="pregunta">
+                <p>1. ¿Por qué la columna es el elemento más crítico de la estructura?</p>
+                <label class="opcion-label"><input type="radio" name="p1" value="A"> A) Porque su falla implica el colapso total del edificio.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="B"> B) Porque es el elemento más barato.</label>
+                <label class="opcion-label"><input type="radio" name="p1" value="C"> C) Porque no soporta cargas.</label>
+            </div>
+            <div class="pregunta">
+                <p>2. ¿Qué significa el criterio "Nudo Fuerte - Viga Débil"?</p>
+                <label class="opcion-label"><input type="radio" name="p2" value="A"> A) La viga debe ser más fuerte que la columna.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="B"> B) La columna debe ser más resistente que la viga para que la viga falle primero.</label>
+                <label class="opcion-label"><input type="radio" name="p2" value="C"> C) No hay diferencia entre viga y columna.</label>
+            </div>
+            <div class="pregunta">
+                <p>3. ¿Qué es la flexo-compresión?</p>
+                <label class="opcion-label"><input type="radio" name="p3" value="A"> A) Solo carga axial.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="B"> B) La combinación de carga axial y momento flector.</label>
+                <label class="opcion-label"><input type="radio" name="p3" value="C"> C) Solo momento flector.</label>
+            </div>
+            <div class="pregunta">
+                <p>4. ¿Cuál es el rango de cuantía de acero longitudinal para columnas según la NEC-15?</p>
+                <label class="opcion-label"><input type="radio" name="p4" value="A"> A) 0.1% a 1%.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="B"> B) 1% a 6%.</label>
+                <label class="opcion-label"><input type="radio" name="p4" value="C"> C) 6% a 10%.</label>
+            </div>
 
-<div class="tabs">
-<button class="tab active" onclick="cambiarTab('clases', this)">🎥 Clases</button>
-<button class="tab" onclick="cambiarTab('consulta', this)">📚 Consulta</button>
-<button class="tab" onclick="cambiarTab('descargas', this)">📖 Descargas</button>
-<button class="tab" onclick="cambiarTab('cuestionario', this)">✏️ Cuestionario</button>
-</div>
+            <h2 style="color:#f39c12;margin:30px 0 20px 0;">BLOQUE B — CÁLCULO (40 pts)</h2>
+            <div class="pregunta nivel-2">
+                <p>5. Calcule el área tributaria (At) para Lv1=6.00 m, Lv2=5.50 m, Lt1=4.80 m, Lt2=5.50 m.</p>
+                <label class="opcion-label"><input type="radio" name="p5" value="A"> A) 29.613 m².</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="B"> B) 25.000 m².</label>
+                <label class="opcion-label"><input type="radio" name="p5" value="C"> C) 35.000 m².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>6. Calcule la carga axial última (Pu) para At=29.613 m², Cu=1.064 t/m², Fm=1.20.</p>
+                <label class="opcion-label"><input type="radio" name="p6" value="A"> A) 31.92 t.</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="B"> B) 37.81 t.</label>
+                <label class="opcion-label"><input type="radio" name="p6" value="C"> C) 40.00 t.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>7. Calcule el área de acero (As) para una columna de 38x38 cm con cuantía ρ=2%.</p>
+                <label class="opcion-label"><input type="radio" name="p7" value="A"> A) 28.88 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="B"> B) 20.00 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p7" value="C"> C) 35.00 cm².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>8. Verifique la cuantía (ρ) si el As real es 31.40 cm² para b=38 cm, h=38 cm.</p>
+                <label class="opcion-label"><input type="radio" name="p8" value="A"> A) ρ = 1.50%.</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="B"> B) ρ = 2.17%.</label>
+                <label class="opcion-label"><input type="radio" name="p8" value="C"> C) ρ = 3.50%.</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>9. Si la columna tiene 10 varillas de 20 mm, ¿cuál es el área total de acero?</p>
+                <label class="opcion-label"><input type="radio" name="p9" value="A"> A) 25.12 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="B"> B) 31.40 cm².</label>
+                <label class="opcion-label"><input type="radio" name="p9" value="C"> C) 40.00 cm².</label>
+            </div>
+            <div class="pregunta nivel-2">
+                <p>10. ¿Qué momento de diseño (Md) se usa para el diagrama P-M de la columna?</p>
+                <label class="opcion-label"><input type="radio" name="p10" value="A"> A) 18.016 t·m.</label>
+                <label class="opcion-label"><input type="radio" name="p10" value="B"> B) 24.154 t·m.</label>
+                <label class="opcion-label"><input type="radio" name="p10" value="C"> C) 27.531 t·m.</label>
+            </div>
 
-<!-- TAB CLASES -->
-<div id="tab-clases" class="tab-content active">
-<div class="seccion">
-<h2>🎥 CLASES GRABADAS — M05</h2>
-<p style="color:#bdc3c7;margin-bottom:20px">Vea las clases del módulo o descárguelas para estudiar sin conexión.</p>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
-<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 1 — Predimensionamiento (At, Cu, Pu, Ag_req)</h4>
-<p style="color:#bdc3c7;font-size:12px;margin:0">📅 28/10/2026 | ⏱ 18 min | 👨‍🏫 Ing. Gery Marcillo</p>
-<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
-<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 2 — Diagrama de Interacción P-M</h4>
-<p style="color:#bdc3c7;font-size:12px;margin:0">📅 30/10/2026 | ⏱ 20 min | 👨‍🏫 Ing. Gery Marcillo</p>
-<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
-<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 3 — Diseño de Acero y Cuantía</h4>
-<p style="color:#bdc3c7;font-size:12px;margin:0">📅 01/11/2026 | ⏱ 15 min | 👨‍🏫 Ing. Gery Marcillo</p>
-<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0">
-<h4 style="color:#5dade2;font-size:15px;margin-bottom:6px">🎬 Clase 4 — Confinamiento y Modelo Estocástico</h4>
-<p style="color:#bdc3c7;font-size:12px;margin:0">📅 03/11/2026 | ⏱ 22 min | 👨‍🏫 Ing. Gery Marcillo</p>
-<button class="btn-desactivado" style="margin-top:10px">🎥 Próximamente</button>
-</div>
-</div>
-</div>
+            <h2 style="color:#e74c3c;margin:30px 0 20px 0;">BLOQUE C — INTERPRETACIÓN (25 pts)</h2>
+            <div class="pregunta nivel-3">
+                <p>11. Explique por qué la columna debe ser más fuerte que la viga.</p>
+                <textarea id="r11" rows="3" placeholder="Escriba su explicación..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>12. Interprete el diagrama de interacción P-M. ¿Qué significa que el punto (Pu, Md) esté dentro de la curva?</p>
+                <textarea id="r12" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>13. ¿Qué pasa si la cuantía de acero de la columna es menor al 1%?</p>
+                <textarea id="r13" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
+            <div class="pregunta nivel-3">
+                <p>14. Explique por qué el confinamiento de la columna es vital en zona sísmica.</p>
+                <textarea id="r14" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
 
-<!-- TAB CONSULTA -->
-<div id="tab-consulta" class="tab-content">
-<div class="seccion">
-<h2>📚 CONSULTA — M05 DISEÑO DE COLUMNA</h2>
-<h3>🎯 ¿Qué es el diseño de columna?</h3>
-<p>Es el proceso de dimensionar una columna de hormigón armado sometida a <b>flexo-compresión</b>, aplicando la NEC-15 y el ACI 318-19 Cap. 18, y verificando su comportamiento mediante el <b>diagrama de interacción P-M</b>.</p>
-<h3>📐 Fórmulas clave</h3>
-<div class="formula-box">Área tributaria: At = (L1/2 + L2/2) × (L3/2 + L4/2)</div>
-<div class="formula-box">Carga última: Cu = 1.2·(Cm·n) + 1.6·(Cv·n)</div>
-<div class="formula-box">Carga axial: Pu = At · Cu · Fm</div>
-<div class="formula-box grande">Predimensionamiento: Ag_req = 3·Pu·1000 / (0.85·fc + 0.012·fy)</div>
-<div class="formula-box">Área de acero: As = 4·0.00785·φesq² + (n-4)·0.00785·φlong²</div>
-<div class="formula-box">Cuantía: ρ = As / Ag</div>
-<div class="formula-box">Zona protegida: Lo = max(45, b_col, h/6)</div>
-<div class="formula-box">Separación confinada: s_prot = min(6·φvar/10, 10)</div>
-<div class="formula-box">Separación central: s_cent = min(6·φvar/10, 15)</div>
-<h3>🔑 Los 4 Análisis del M05</h3>
-<ul>
-<li><b>Análisis 1:</b> Predimensionamiento (At, Cu, Pu, Ag_req)</li>
-<li><b>Análisis 2:</b> Diagrama de interacción P-M</li>
-<li><b>Análisis 3:</b> Diseño de acero y cuantía</li>
-<li><b>Análisis 4:</b> Confinamiento y modelo estocástico</li>
-</ul>
-<h3>📊 Datos del modelo base (Excel)</h3>
-<table class="tabla">
-<tr><th>Parámetro</th><th>Valor</th></tr>
-<tr><td>L1, L2, L3, L4</td><td>6.20, 5.90, 5.70, 6.00 m</td></tr>
-<tr><td>Cm</td><td>0.62 t/m²</td></tr>
-<tr><td>Cv</td><td>0.20 t/m²</td></tr>
-<tr><td>Pisos</td><td>2</td></tr>
-<tr><td>He</td><td>3.0 m</td></tr>
-<tr><td>Fm</td><td>1.2</td></tr>
-<tr><td>fc</td><td>210 kg/cm²</td></tr>
-<tr><td>fy</td><td>4200 kg/cm²</td></tr>
-<tr><td><b>At</b></td><td><b>35.39 m²</b></td></tr>
-<tr><td><b>Cu</b></td><td><b>2.128 t/m²</b></td></tr>
-<tr><td><b>Pu</b></td><td><b>90.44 t</b></td></tr>
-<tr><td><b>Ag_req</b></td><td><b>1190.03 cm²</b></td></tr>
-<tr><td><b>Sección</b></td><td><b>38 × 38 cm</b></td></tr>
-<tr><td><b>As</b></td><td><b>20.35 cm²</b> (12 varillas)</td></tr>
-<tr><td><b>ρ</b></td><td><b>1.41%</b></td></tr>
-<tr><td><b>Lo</b></td><td><b>50 cm</b></td></tr>
-<tr><td><b>s_prot</b></td><td><b>8.4 cm</b></td></tr>
-<tr><td><b>s_cent</b></td><td><b>8.4 cm</b></td></tr>
-</table>
-<div style="text-align:center;margin-top:25px">
-<a href="M05_guia_estudio.html" target="_blank" class="btn btn-green">📗 Ver Guía de Estudio Completa</a>
-</div>
-</div>
-</div>
+            <h2 style="color:#9b59b6;margin:30px 0 20px 0;">BLOQUE D — DECISIÓN (25 pts)</h2>
+            <div class="pregunta nivel-3">
+                <p>15. El constructor propone usar una columna de 30x30 cm en lugar de 38x38 cm para ahorrar concreto. ¿Aprueba el cambio? Justifique técnica y éticamente.</p>
+                <textarea id="r15" rows="3" placeholder="Escriba su respuesta..."></textarea>
+            </div>
 
-<!-- TAB DESCARGAS -->
-<div id="tab-descargas" class="tab-content">
-<div class="seccion">
-<h2>📖 DESCARGAS — M05</h2>
-<p style="color:#bdc3c7;margin-bottom:20px">Descargue los manuales y materiales del módulo.</p>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
-<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📘 Manual del Programa</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Visión completa del proyecto ECT-UNESUM-2026</p></div>
-<a href="manual_programa.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
-<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📗 Guía de Estudio M05</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Material de consulta para estudiantes</p></div>
-<a href="M05_guia_estudio.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
-<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📙 Manual del Docente M05</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Rúbrica por criterios + evaluación</p></div>
-<a href="M05_manual_docente.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
-<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📄 Tabla NEC-15</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Cargas vivas y combinaciones</p></div>
-<a href="tabla_nec15.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-<div style="background:#34495e;border-radius:10px;padding:18px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
-<div><h4 style="color:#5dade2;font-size:15px;margin-bottom:4px">📄 Tabla ACI 318</h4><p style="color:#bdc3c7;font-size:12px;margin:0">Factores de mayoración</p></div>
-<a href="tabla_aci318.html" target="_blank" class="btn">📄 Abrir</a>
-</div>
-</div>
+            <button type="button" class="btn-epico" id="btn-finalizar" onclick="calificarExamen()">🚀 FINALIZAR Y EVALUAR</button>
+        </form>
+    </div>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <div id="pantalla-resultado">
+        <h1 style="color:#5dade2;">RESULTADO M05</h1>
+        <div id="nota-final" class="nota-grande"></div>
+        <div id="feedback-niveles" style="color:#bdc3c7;margin-bottom:20px;font-size:14px;"></div>
+        
+        <div id="contenedor-certificado" style="display:none;">
+            <button onclick="pedirCertificado()" class="btn-epico" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); margin-bottom: 15px;">🎓 Obtener mi Micro-Credencial</button>
+        </div>
+
+        <div id="reporte-detallado">
+            <h3 style="color:#5dade2;text-align:center;border-bottom:1px solid #34495e;padding-bottom:10px;">REPORTE DE AUDITORÍA</h3>
+            <div id="contenido-reporte"></div>
+        </div>
+        <button onclick="mostrarReporte()" id="btn-ver-reporte" class="btn-epico" style="background:#3498db;margin-top:20px;">📄 Ver Preguntas y Respuestas Correctas</button>
+        <button onclick="imprimirReporte()" class="btn-epico" style="background:#2ecc71;">🖨️ Imprimir Reporte</button>
+        <div style="margin-top:20px;">
+            <a href="M05_guia_estudio.html" class="btn-volver">← Volver a la Guía</a>
+        </div>
+    </div>
 </div>
 
-<!-- TAB CUESTIONARIO -->
-<div id="tab-cuestionario" class="tab-content">
-
-<!-- PANTALLA 1: ACÁPITE -->
-<div id="pantalla-acapite" style="background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #f39c12">
-<h2 style="color:#f39c12;font-size:22px;margin-bottom:15px;text-align:center">📖 ACÁPITE DE ESTUDIO — M05</h2>
-<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder el cuestionario, revisa este resumen ejecutivo.<br>Es <b>obligatorio</b> para garantizar que comprendes los criterios de evaluación.</p>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 ¿Qué aprenderás?</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular el área tributaria (At)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Calcular la carga axial (Pu)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Predimensionar la columna (Ag_req)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Diseñar el acero (As) y verificar cuantía (ρ)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:14px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Diseñar el confinamiento (Ash, s_prot, s_cent)</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
-<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">📐 Fórmulas clave</h3>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">At = (L1/2 + L2/2) × (L3/2 + L4/2)</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#5dade2;text-align:center;font-size:14px">Cu = 1.2·(Cm·n) + 1.6·(Cv·n)</div>
-<div style="background:#2c3e50;border:2px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;font-family:'Courier New',monospace;color:#f39c12;font-weight:bold;text-align:center;font-size:16px">Ag_req = 3·Pu·1000 / (0.85·fc + 0.012·fy)</div>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
-<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">💡 Ejemplo resuelto (Excel)</h3>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Datos:</b> L1=6.20, L2=5.90, L3=5.70, L4=6.00 m; Cm=0.62, Cv=0.20; Pisos=2; Fm=1.2</p>
-<p style="font-size:13px;color:#bdc3c7;margin-bottom:8px"><b>Cálculo:</b> At=35.39 m², Cu=2.128 t/m², Pu=90.44 t, Ag_req=1190.03 cm²</p>
-<p style="font-size:13px;color:#f39c12;font-weight:bold"><b>Resultado:</b> Sección 38×38 cm | As=20.35 cm² | ρ=1.41% ✅</p>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #9b59b6">
-<h3 style="color:#c39bd3;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque C?</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Interpretar el diagrama P-M</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Explicar zona protegida (Lo)</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#9b59b6">▸</span> Relacionar cuantía con ductilidad</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #e74c3c">
-<h3 style="color:#e74c3c;font-size:16px;margin-bottom:12px">🎯 ¿Qué se espera en el Bloque D?</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Impacto técnico:</b> cuantía &lt; 1.2%</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Norma aplicable:</b> NEC-15, ACI 318-19 Cap. 18</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Criterio ético:</b> responsabilidad profesional</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#e74c3c">▸</span> <b>Trazabilidad:</b> documentar la decisión</li>
-</ul>
-</div>
-<div style="text-align:center;margin-top:25px">
-<button onclick="marcarAcapiteLeido()" style="background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ HE LEÍDO Y ENTENDIDO — CONTINUAR</button>
-</div>
-</div>
-
-<!-- PANTALLA 2: CONDICIONES -->
-<div id="pantalla-condiciones" style="display:none;background:#2c3e50;border-radius:12px;padding:30px;margin-bottom:20px;border-left:5px solid #2ecc71">
-<h2 style="color:#2ecc71;font-size:22px;margin-bottom:15px;text-align:center">✅ CONDICIONES DE RESPUESTA VÁLIDA — M05</h2>
-<p style="color:#bdc3c7;font-size:14px;text-align:center;margin-bottom:25px">Antes de responder, lee con atención cómo se evalúa cada bloque.</p>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">🎯 CÓMO SE EVALÚA</h3>
-<table style="width:100%;border-collapse:collapse">
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque A:</b> Conceptos</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">10 pts (criterios)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque B:</b> Cálculo</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">40 pts (número exacto)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque C:</b> Interpretación</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (razonamiento)</td></tr>
-<tr><td style="padding:8px;font-size:13px;color:#ecf0f1"><b>Bloque D:</b> Decisión</td><td style="padding:8px;font-size:13px;color:#f39c12;text-align:right">25 pts (criterios + ética)</td></tr>
-</table>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #2ecc71">
-<h3 style="color:#2ecc71;font-size:16px;margin-bottom:12px">✅ QUÉ ESPERA EL SISTEMA</h3>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque A — Concepto:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Explica con tus palabras</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cubre los criterios indicados</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Puedes usar sinónimos</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque B — Cálculo:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Muestra el procedimiento</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Indica unidades</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Da el resultado numérico</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque C — Interpretación:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Menciona el concepto técnico</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Justifica con números</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Conecta con otros módulos o normas</li>
-</ul>
-<p style="color:#f39c12;font-size:13px;margin:10px 0 5px 0"><b>Bloque D — Decisión:</b></p>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Identifica el problema técnico</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Cita la norma aplicable</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Aplica criterio ético</li>
-<li style="padding:3px 0 3px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#2ecc71">▸</span> Documenta tu decisión</li>
-</ul>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #3498db">
-<h3 style="color:#5dade2;font-size:16px;margin-bottom:12px">💡 EJEMPLO DE RESPUESTA VÁLIDA</h3>
-<p style="color:#bdc3c7;font-size:13px;margin-bottom:8px"><b>Pregunta:</b> "¿Qué es flexo-compresión?"</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Es un elemento estructural que soporta simultáneamente carga axial (compresión) y momento flector (flexión)."</p>
-<p style="color:#2ecc71;font-size:13px;margin-bottom:5px">✅ <b>VÁLIDA:</b> "Columna que resiste compresión y flexión al mismo tiempo."</p>
-<p style="color:#e74c3c;font-size:13px;margin-bottom:5px">❌ <b>NO VÁLIDA:</b> "No sé."</p>
-<p style="color:#e74c3c;font-size:13px">❌ <b>NO VÁLIDA:</b> "Es importante." (sin explicar qué)</p>
-</div>
-<div style="background:#1e1e2e;border-radius:8px;padding:20px;margin-bottom:15px;border-left:4px solid #f39c12">
-<h3 style="color:#f39c12;font-size:16px;margin-bottom:12px">🎯 RECUERDA</h3>
-<ul style="list-style:none;padding-left:0">
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> No hay una sola respuesta correcta</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Se valora el razonamiento</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> Puedes expresarte con tus propias palabras</li>
-<li style="padding:5px 0 5px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#f39c12">▸</span> El error es parte del aprendizaje</li>
-</ul>
-</div>
-<div style="text-align:center;margin-top:25px">
-<button onclick="marcarCondicionesLeidas()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:white;border:none;padding:15px 40px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;letter-spacing:1px">✅ ENTENDIDO, COMENZAR PREGUNTAS</button>
-</div>
-</div>
-
-<!-- PANTALLA 3: CUESTIONARIO -->
-<div id="cuestionario-preguntas" style="display:none">
-<div class="info-bar">
-<span>👤 <b id="info-estudiante">Estudiante</b></span>
-<span>⏱ <b id="info-tiempo">00:00</b></span>
-<span>📊 <b id="info-progreso">0/15</b></span>
-</div>
-<div class="progreso"><div class="progreso-bar" id="barra-progreso"></div></div>
-<div id="contenedor-pregunta"></div>
-<div id="pantalla-resultado" style="display:none">
-<div class="resultado">
-<h2>🏆 RESULTADO M05</h2>
-<div class="puntaje-grande" id="resultado-puntaje"></div>
-<div id="resultado-clasificacion"></div>
-</div>
-<div id="contenedor-certificado"></div>
-<div style="text-align:center;margin-top:20px">
-<a href="index.html" class="btn">← Volver al menú</a>
-<button class="btn btn-orange" onclick="window.print()">🖨 Imprimir certificado</button>
-</div>
-</div>
-</div>
-
-</div>
-
+<!-- MODAL DEL CERTIFICADO -->
+<div id="modal-certificado">
+    <div id="certificado-real">
+        <div class="contenido-cert">
+            <div>
+                <h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>
+                <p style="color:#5dade2; font-size:14px; font-weight:bold;">FACULTAD DE CIENCIAS TÉCNICAS — CARRERA DE INGENIERÍA CIVIL</p>
+                <hr style="border:1px solid #9b59b6; margin:15px 0;">
+            </div>
+            <div>
+                <h1 style="color:#9b59b6; font-size:40px; margin-bottom:15px; font-weight:900;">MICRO-CREDENCIAL</h1>
+                <p style="font-size:16px; color:#555;">Se otorga el presente reconocimiento a:</p>
+                <h3 id="nombre-certificado" class="nombre-cert">NOMBRE DEL ESTUDIANTE</h3>
+                <p style="font-size:16px; color:#555; line-height:1.6;">
+                    Por haber completado y aprobado exitosamente el <strong>Módulo 05 — Diseño de Columna</strong>, demostrando dominio en el diseño de flexo-compresión, interpretación del diagrama P-M y criterio de "Nudo Fuerte - Viga Débil".
+                </p>
+                <p style="font-size:18px; color:#e74c3c; font-weight:bold; margin-top:10px;">NOTA OBTENIDA: <span id="nota-certificado"></span> / 100</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;">
+                <div style="text-align:center; width:200px;">
+                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
+                    <p style="font-size:12px; margin:0;"><strong>Ing. Gery L. Marcillo Merino, Msc.</strong></p>
+                    <small style="font-size:10px; color:#777;">Docente Investigador / ECT-UNESUM</small>
+                </div>
+                <div style="text-align:center;">
+                    <div style="width:80px; height:80px; background:#eee; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px dashed #ccc; margin:0 auto; font-size:10px; color:#999;">Sello / QR</div>
+                </div>
+                <div style="text-align:center; width:200px;">
+                    <hr style="border-top:1px solid #333; margin-bottom:5px;">
+                    <p style="font-size:12px; margin:0;"><strong>Comisión Académica</strong></p>
+                    <small style="font-size:10px; color:#777;">Carrera de Ingeniería Civil</small>
+                </div>
+            </div>
+            <p style="font-size:10px; color:#999; margin-top:15px;">Fecha de emisión: <span id="fecha-certificado"></span> | Código: ECT-2026-M05</p>
+        </div>
+    </div>
+    
+    <div id="botones-certificado" style="display:none; margin-top:20px; text-align:center;">
+        <button onclick="imprimirCertificado()" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px;">🖨️ Imprimir o Guardar en PDF</button>
+        <button onclick="cerrarModalCertificado()" style="background:#34495e; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; font-size:16px; margin-left:10px;">Cerrar</button>
+    </div>
 </div>
 
 <script>
-function cambiarTab(tabId, btn){
-document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
-document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
-document.getElementById('tab-'+tabId).classList.add('active');
-btn.classList.add('active');
-}
+    let respuestasEstudiante = {};
+    let examenCalificado = false;
+    let notaFinalGlobal = 0;
 
-var MODULO_ACAPITE = "M05";
-var inicioTiempo = null;
-var intervalo = null;
+    function calificarExamen() {
+        if (examenCalificado) return;
+        examenCalificado = true;
+        document.getElementById('btn-finalizar').disabled = true;
 
-function verificarAcapite() {
-  var leido = localStorage.getItem("acapite_" + MODULO_ACAPITE + "_leido");
-  if (leido === "true") {
-    document.getElementById("pantalla-acapite").style.display = "none";
-    verificarCondiciones();
-  } else {
-    document.getElementById("pantalla-acapite").style.display = "block";
-    document.getElementById("pantalla-condiciones").style.display = "none";
-    document.getElementById("cuestionario-preguntas").style.display = "none";
-  }
-}
+        respuestasEstudiante = {
+            p1: document.querySelector('input[name="p1"]:checked')?.value || "N/A",
+            p2: document.querySelector('input[name="p2"]:checked')?.value || "N/A",
+            p3: document.querySelector('input[name="p3"]:checked')?.value || "N/A",
+            p4: document.querySelector('input[name="p4"]:checked')?.value || "N/A",
+            p5: document.querySelector('input[name="p5"]:checked')?.value || "N/A",
+            p6: document.querySelector('input[name="p6"]:checked')?.value || "N/A",
+            p7: document.querySelector('input[name="p7"]:checked')?.value || "N/A",
+            p8: document.querySelector('input[name="p8"]:checked')?.value || "N/A",
+            p9: document.querySelector('input[name="p9"]:checked')?.value || "N/A",
+            p10: document.querySelector('input[name="p10"]:checked')?.value || "N/A",
+            r11: document.getElementById('r11').value || "N/A",
+            r12: document.getElementById('r12').value || "N/A",
+            r13: document.getElementById('r13').value || "N/A",
+            r14: document.getElementById('r14').value || "N/A",
+            r15: document.getElementById('r15').value || "N/A"
+        };
 
-function marcarAcapiteLeido() {
-  localStorage.setItem("acapite_" + MODULO_ACAPITE + "_leido", "true");
-  document.getElementById("pantalla-acapite").style.display = "none";
-  verificarCondiciones();
-}
+        // 1. Calificar Opción Múltiple (P1 a P10)
+        let aciertosCerrados = 0;
+        const respuestasCorrectas = { p1: "A", p2: "B", p3: "B", p4: "B", p5: "A", p6: "B", p7: "A", p8: "B", p9: "B", p10: "A" };
 
-function verificarCondiciones() {
-  var leido = localStorage.getItem("condiciones_" + MODULO_ACAPITE + "_leido");
-  if (leido === "true") {
-    document.getElementById("pantalla-condiciones").style.display = "none";
-    document.getElementById("cuestionario-preguntas").style.display = "block";
-    mostrar();
-    iniciarCronometro();
-  } else {
-    document.getElementById("pantalla-condiciones").style.display = "block";
-    document.getElementById("cuestionario-preguntas").style.display = "none";
-  }
-}
+        for (let key in respuestasCorrectas) {
+            if (respuestasEstudiante[key] === respuestasCorrectas[key]) aciertosCerrados++;
+        }
 
-function marcarCondicionesLeidas() {
-  localStorage.setItem("condiciones_" + MODULO_ACAPITE + "_leido", "true");
-  document.getElementById("pantalla-condiciones").style.display = "none";
-  document.getElementById("cuestionario-preguntas").style.display = "block";
-  mostrar();
-  iniciarCronometro();
-}
+        // 2. Calificar Abiertas (P11 a P15)
+        let puntajeAbierto = 0;
+        function evaluarTexto(idPregunta, palabrasClave) {
+            const texto = respuestasEstudiante[idPregunta].toLowerCase();
+            if (texto.trim() === "" || texto === "n/a") return 0; 
+            let aciertos = 0;
+            palabrasClave.forEach(grupo => {
+                for (let palabra of grupo) {
+                    if (texto.includes(palabra)) { aciertos++; break; }
+                }
+            });
+            return (aciertos / palabrasClave.length) * 20; 
+        }
 
-function iniciarCronometro() {
-  if (intervalo) return;
-  inicioTiempo = new Date();
-  intervalo = setInterval(function(){
-    var s = Math.floor((new Date() - inicioTiempo) / 1000);
-    var m = Math.floor(s / 60).toString().padStart(2, '0');
-    var ss = (s % 60).toString().padStart(2, '0');
-    document.getElementById('info-tiempo').textContent = m + ':' + ss;
-  }, 1000);
-}
+        puntajeAbierto += evaluarTexto('r11', [["columna", "mas fuerte", "viga", "debil"], ["colapso", "falla", "seguridad"], ["nudo", "criterio", "capacidad"]]);
+        puntajeAbierto += evaluarTexto('r12', [["dentro", "curva", "seguro"], ["p", "m", "carga", "momento"], ["fuera", "falla", "peligro"]]);
+        puntajeAbierto += evaluarTexto('r13', [["no cumple", "nec", "norma"], ["debil", "fragil", "colapso"], ["minimo", "1%", "cuantia"]]);
+        puntajeAbierto += evaluarTexto('r14', [["confinamiento", "estribo", "ductilidad"], ["sismo", "sismico", "carga"], ["concreto", "rompe", "fragil"]]);
+        puntajeAbierto += evaluarTexto('r15', [["no apruebo", "rechazo", "peligro"], ["30", "38", "seccion", "reduce"], ["etica", "responsabilidad", "firma"]]);
 
-var PREGUNTAS = [
-{id:"A1",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué es una columna de hormigón armado sometida a flexo-compresión.",
-ejercicio:null,
-condiciones:["Mencionar carga axial (compresión)","Mencionar momento flector (flexión)","Indicar que es el elemento crítico del pórtico"],
-ejemplo_valido:"Es un elemento estructural que soporta simultáneamente carga axial (compresión) y momento flector (flexión). Es el elemento crítico del pórtico sismorresistente.",
-criterios:[
-{peso:40,desc:"Carga axial (compresión)",keywords:["compresión","compresion","carga axial","axial"]},
-{peso:30,desc:"Momento flector (flexión)",keywords:["flexión","flexion","momento","flector"]},
-{peso:30,desc:"Elemento crítico",keywords:["crítico","critico","importante","pórtico","portico","columna"]}
-]},
-{id:"A2",bloque:"A",nivel:"Concepto",puntaje:2,
-enunciado:"Explique con sus palabras qué es el diagrama de interacción P-M.",
-ejercicio:null,
-condiciones:["Mencionar que es una curva","Indicar que muestra combinación de P y M","Conectar con la capacidad de la columna"],
-ejemplo_valido:"Es una curva que muestra la combinación de carga axial P y momento M que una columna puede resistir. Se construye resolviendo el equilibrio para cada posición del eje neutro.",
-criterios:[
-{peso:40,desc:"Es una curva",keywords:["curva","gráfica","grafico","diagrama"]},
-{peso:30,desc:"Combinación P y M",keywords:["combinación","combinacion","p y m","carga axial","momento"]},
-{peso:30,desc:"Capacidad de columna",keywords:["capacidad","resiste","soporta","columna"]}
-]},
-{id:"A3",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique por qué la cuantía mínima es 1.2% y máxima 4% en columnas.",
-ejercicio:null,
-condiciones:["Mencionar ductilidad","Indicar que 1.2% evita falla frágil","Indicar que 4% evita congestión"],
-ejemplo_valido:"La cuantía mínima del 1.2% garantiza ductilidad y evita falla frágil. La máxima del 4% evita congestión de acero y problemas de vaciado.",
-criterios:[
-{peso:40,desc:"Ductilidad / falla frágil",keywords:["ductilidad","frágil","fragil","falla"]},
-{peso:30,desc:"1.2% mínimo",keywords:["1.2","1,2","mínimo","minimo"]},
-{peso:30,desc:"4% máximo",keywords:["4","máximo","maximo","congestión","congestion"]}
-]},
-{id:"A4",bloque:"A",nivel:"Concepto",puntaje:3,
-enunciado:"Explique qué es la zona protegida (Lo) en una columna y por qué se confina.",
-ejercicio:null,
-condiciones:["Mencionar que es max(45, b_col, h/6)","Indicar que está en los extremos","Explicar que confina para resistir sismo"],
-ejemplo_valido:"Es la zona de confinamiento en los extremos de la columna, igual a max(45 cm, b_col, h/6), donde se necesitan estribos más cercanos para resistir el sismo.",
-criterios:[
-{peso:40,desc:"Fórmula max(45, b, h/6)",keywords:["45","b_col","h/6","máximo","maximo"]},
-{peso:30,desc:"Extremos de columna",keywords:["extremo","extremos","nudo","confinamiento"]},
-{peso:30,desc:"Resistir sismo",keywords:["sismo","sísmico","sismico","resistir","confinar"]}
-]},
-{id:"B1",bloque:"B",nivel:"Cálculo",puntaje:6,
-enunciado:"Calcule el área tributaria At para L1=6.20, L2=5.90, L3=5.70, L4=6.00 m.",
-ejercicio:{instrucciones:"At = (L1/2 + L2/2) × (L3/2 + L4/2)",campos:[{label:"L1/2 + L2/2",valor:6.05},{label:"L3/2 + L4/2",valor:5.85},{label:"At (m²)",valor:35.39}]},
-condiciones:["Aplicar la fórmula del área tributaria","Indicar unidades (m²)","Dar el resultado numérico"],
-ejemplo_valido:"At = (6.20/2 + 5.90/2) × (5.70/2 + 6.00/2) = 6.05 × 5.85 = 35.39 m².",
-criterios:[
-{peso:60,desc:"At correcto",keywords:["35.39","35,39"]},
-{peso:20,desc:"Procedimiento",keywords:["6.05","5.85","6.20","5.90"]},
-{peso:20,desc:"Unidades m²",keywords:["m2","m²"]}
-]},
-{id:"B2",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la carga última Cu para Cm=0.62, Cv=0.20, Pisos=2.",
-ejercicio:{instrucciones:"Cu = 1.2·(Cm·n) + 1.6·(Cv·n)",campos:[{label:"1.2·(0.62·2)",valor:1.488},{label:"1.6·(0.20·2)",valor:0.64},{label:"Cu (t/m²)",valor:2.128}]},
-condiciones:["Aplicar Cu = 1.2·(Cm·n) + 1.6·(Cv·n)","Indicar unidades (t/m²)","Dar el resultado numérico"],
-ejemplo_valido:"Cu = 1.2·(0.62·2) + 1.6·(0.20·2) = 1.488 + 0.64 = 2.128 t/m².",
-criterios:[
-{peso:50,desc:"Cu correcto",keywords:["2.128","2,128"]},
-{peso:30,desc:"Procedimiento",keywords:["1.488","0.64","1.2","1.6"]},
-{peso:20,desc:"Unidades t/m²",keywords:["t/m2","t/m²"]}
-]},
-{id:"B3",bloque:"B",nivel:"Cálculo",puntaje:10,
-enunciado:"Calcule la carga axial Pu para At=35.39, Cu=2.128, Fm=1.2.",
-ejercicio:{instrucciones:"Pu = At · Cu · Fm",campos:[{label:"At (m²)",valor:35.39},{label:"Cu (t/m²)",valor:2.128},{label:"Fm",valor:1.2},{label:"Pu (t)",valor:90.44}]},
-condiciones:["Aplicar Pu = At·Cu·Fm","Indicar unidades (t)","Dar el resultado numérico"],
-ejemplo_valido:"Pu = 35.39 · 2.128 · 1.2 = 90.44 t.",
-criterios:[
-{peso:60,desc:"Pu correcto",keywords:["90.44","90,44"]},
-{peso:20,desc:"Procedimiento",keywords:["35.39","2.128","1.2"]},
-{peso:20,desc:"Unidades t",keywords:["t","tonelada"]}
-]},
-{id:"B4",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule el área de acero As para 4 φ16 + 8 φ14.",
-ejercicio:{instrucciones:"As = 4·0.00785·16² + 8·0.00785·14²",campos:[{label:"4 φ16",valor:8.04},{label:"8 φ14",valor:12.31},{label:"As (cm²)",valor:20.35}]},
-condiciones:["Aplicar As = 4·0.00785·φesq² + 8·0.00785·φlong²","Indicar unidades (cm²)","Dar el resultado numérico"],
-ejemplo_valido:"As = 4·0.00785·16² + 8·0.00785·14² = 8.04 + 12.31 = 20.35 cm².",
-criterios:[
-{peso:60,desc:"As correcto",keywords:["20.35","20,35"]},
-{peso:20,desc:"Procedimiento",keywords:["8.04","12.31","16","14"]},
-{peso:20,desc:"Unidades cm²",keywords:["cm2","cm²"]}
-]},
-{id:"B5",bloque:"B",nivel:"Cálculo",puntaje:8,
-enunciado:"Calcule la cuantía ρ para As=20.35, Ag=1444.",
-ejercicio:{instrucciones:"ρ = As / Ag",campos:[{label:"As (cm²)",valor:20.35},{label:"Ag (cm²)",valor:1444},{label:"ρ (%)",valor:1.41}]},
-condiciones:["Aplicar ρ = As/Ag","Indicar unidades (%)","Verificar que 1.2% ≤ ρ ≤ 4%"],
-ejemplo_valido:"ρ = 20.35 / 1444 = 0.0141 = 1.41%. CUMPLE (1.2% ≤ 1.41% ≤ 4%).",
-criterios:[
-{peso:60,desc:"ρ correcto",keywords:["1.41","1,41"]},
-{peso:20,desc:"Procedimiento",keywords:["20.35","1444"]},
-{peso:20,desc:"Verificación",keywords:["cumple","ok","1.2","4"]}
-]},
-{id:"C1",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"Interprete el diagrama de interacción P-M. ¿Qué representa la zona de tensión y la de compresión?",
-ejercicio:{instrucciones:"P_bal ≈ P0/3",campos:[{label:"P_bal",valor:"~114.6 t"},{label:"M_bal",valor:"~24.4 t·m"}]},
-condiciones:["Identificar la zona de tensión","Identificar la zona de compresión","Mencionar el punto de balance"],
-ejemplo_valido:"La zona de tensión (P < P_bal) es donde la columna falla por flexión. La zona de compresión (P > P_bal) es donde falla por compresión. En el punto de balance está el momento máximo.",
-criterios:[
-{peso:40,desc:"Zona de tensión",keywords:["tensión","tension","flexión","flexion","p < p_bal"]},
-{peso:30,desc:"Zona de compresión",keywords:["compresión","compresion","p > p_bal"]},
-{peso:30,desc:"Punto de balance",keywords:["balance","balanceado","máximo","maximo"]}
-]},
-{id:"C2",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"¿Por qué la zona protegida (Lo) es 50 cm y no 38 cm?",
-ejercicio:null,
-condiciones:["Aplicar Lo = max(45, b_col, h/6)","Identificar el valor crítico","Explicar por qué 50 cm es mayor"],
-ejemplo_valido:"Porque Lo = max(45, 38, 50) = 50 cm. El valor 50 cm viene de He/6 = 300/6 = 50 cm, que es mayor que 45 cm y que el ancho de columna (38 cm).",
-criterios:[
-{peso:40,desc:"Fórmula Lo",keywords:["max","45","38","50","h/6"]},
-{peso:30,desc:"He/6 = 50",keywords:["300","50","he/6"]},
-{peso:30,desc:"Explicación",keywords:["mayor","crítico","critico","gobierna"]}
-]},
-{id:"C3",bloque:"C",nivel:"Interpretación",puntaje:6,
-enunciado:"¿Cómo se relaciona la cuantía con la ductilidad de la columna?",
-ejercicio:null,
-condiciones:["Mencionar que mayor cuantía = mayor ductilidad","Indicar que ρ < 1.2% produce falla frágil","Conectar con disipación de energía"],
-ejemplo_valido:"Una cuantía mayor (hasta 4%) aumenta la ductilidad y la capacidad de disipar energía sísmica. Pero una cuantía muy baja (< 1.2%) produce falla frágil.",
-criterios:[
-{peso:40,desc:"Mayor cuantía = más ductilidad",keywords:["mayor","ductilidad","disipar","energía","energia"]},
-{peso:30,desc:"ρ < 1.2% frágil",keywords:["1.2","frágil","fragil","falla"]},
-{peso:30,desc:"Conexión con sismo",keywords:["sismo","sísmico","sismico","nec"]}
-]},
-{id:"C4",bloque:"C",nivel:"Interpretación",puntaje:7,
-enunciado:"¿Qué pasa si la columna está en la zona de tensión del diagrama P-M?",
-ejercicio:null,
-condiciones:["Indicar que falla por flexión","Explicar que no falla por compresión","Mencionar decisión técnica"],
-ejemplo_valido:"La columna fallaría por flexión, no por compresión. Se debe rediseñar aumentando la sección o el acero longitudinal.",
-criterios:[
-{peso:40,desc:"Falla por flexión",keywords:["flexión","flexion","no compresión","no compresion"]},
-{peso:30,desc:"Explicación física",keywords:["rediseñar","aumentar","sección","seccion","acero"]},
-{peso:30,desc:"Consecuencia estructural",keywords:["colapso","falla","peligro","riesgo"]}
-]},
-{id:"D1",bloque:"D",nivel:"Decisión",puntaje:12,
-enunciado:"El constructor propone reducir la cuantía de 1.41% a 0.90% para ahorrar acero. ¿Aprueba el cambio? Justifique técnica y éticamente.",
-ejercicio:{instrucciones:"Considere NEC-15, ética, trazabilidad",campos:[{label:"ρ actual",valor:"1.41%"},{label:"ρ propuesto",valor:"0.90%"},{label:"ρ mínimo",valor:"1.2%"}]},
-condiciones:["Técnico: ρ < 1.2% produce falla frágil","Normativo: NEC-15, ACI 318-19 Cap. 18","Ético: responsabilidad profesional","Trazabilidad: documentar y notificar"],
-ejemplo_valido:"No apruebo. La cuantía propuesta (0.90%) está por debajo del mínimo del 1.2%, lo que produciría falla frágil. Rechazar el cambio, documentar y notificar. Como ingeniero firmante, soy responsable civil y penal.",
-criterios:[
-{peso:30,desc:"Técnico: ρ < 1.2%",keywords:["0.90","1.2","frágil","fragil","falla"]},
-{peso:20,desc:"Normativo: NEC-15",keywords:["nec","aci","norma"]},
-{peso:25,desc:"Ético: responsabilidad",keywords:["responsabilidad","ético","etico","firma","rechazo"]},
-{peso:25,desc:"Trazabilidad: documentar",keywords:["documentar","notificar","registrar","informe"]}
-]},
-{id:"D2",bloque:"D",nivel:"Decisión",puntaje:13,
-enunciado:"El constructor usa estribos de 8 mm en lugar de 10 mm en la columna. ¿Qué hace usted como ingeniero responsable?",
-ejercicio:{instrucciones:"Considere NEC-15, ACI 318, ética",campos:[{label:"φ especificado",valor:"10 mm"},{label:"φ real",valor:"8 mm"},{label:"Déficit",valor:"-20%"}]},
-condiciones:["Identificar el problema: diámetro especificado vs real","Aplicar normativa: NEC-15, ACI 318, NTE INEN","Acciones concretas: rechazar, notificar, suspender, documentar","Consecuencias legales: responsabilidad civil y penal"],
-ejemplo_valido:"El estribo de 8 mm tiene 20% menos área que el de 10 mm. Esto viola la NEC-15 y el ACI 318. Rechazo el material, notifico por escrito, suspendo la obra y documento todo. El ingeniero firmante es responsable civil y penal.",
-criterios:[
-{peso:25,desc:"Identifica el problema",keywords:["8","10","déficit","deficit","20","menor"]},
-{peso:25,desc:"Aplica normativa",keywords:["nec","aci","nte","inen","norma"]},
-{peso:25,desc:"Acciones concretas",keywords:["rechazar","notificar","suspender","documentar","paralizar"]},
-{peso:25,desc:"Consecuencias legales",keywords:["responsabilidad","civil","penal","denuncia","legal"]}
-]}
-];
+        // 3. Calcular Nota Final
+        const notaCerradas = (aciertosCerrados / 10) * 50; 
+        const notaAbiertas = (puntajeAbierto / 100) * 50;
+        const notaFinal = Math.round(notaCerradas + notaAbiertas);
+        notaFinalGlobal = notaFinal;
 
-var respuestas={},preguntaActual=0;
-var MODULO="M05",TITULO="Diseño de Columna";
-document.getElementById('info-estudiante').textContent=localStorage.getItem('estudiante_nombre')||'Estudiante';
+        // 4. Mostrar Resultados
+        document.getElementById('formulario-contenedor').style.display = 'none';
+        document.getElementById('pantalla-resultado').style.display = 'block';
+        
+        const divNota = document.getElementById('nota-final');
+        divNota.innerText = notaFinal + " / 100";
+        
+        if (notaFinal >= 60) {
+            divNota.className = 'nota-grande aprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#2ecc71';
+            document.getElementById('feedback-niveles').innerHTML = "✅ <b>¡FELICIDADES!</b> Has aprobado el Módulo 05.";
+            document.getElementById('contenedor-certificado').style.display = 'block';
+        } else {
+            divNota.className = 'nota-grande reprobado';
+            document.getElementById('pantalla-resultado').style.borderColor = '#e74c3c';
+            document.getElementById('feedback-niveles').innerHTML = "⚠️ <b>INSUFICIENTE.</b> Recuerda esperar 24 horas para tu próximo intento.";
+        }
+    }
 
-function mostrar(){
-var p=PREGUNTAS[preguntaActual],total=PREGUNTAS.length;
-document.getElementById('barra-progreso').style.width=(preguntaActual/total*100)+'%';
-document.getElementById('info-progreso').textContent=(preguntaActual+1)+'/'+total;
-var h='<div class="pregunta-box">';
-h+='<div class="pregunta-header"><span class="badge">Bloque '+p.bloque+'</span><span class="badge orange">'+p.nivel+'</span><span class="badge red">'+p.puntaje+' pts</span></div>';
-if(p.ejercicio){
-h+='<div class="ejercicio-previo"><h4>📖 EJERCICIO PREVIO (Andamiaje)</h4><p>'+p.ejercicio.instrucciones+'</p>';
-p.ejercicio.campos.forEach(function(c){h+='<div class="campo"><span>'+c.label+'</span><strong>'+c.valor+'</strong></div>';});
-h+='</div>';
-}
-if(p.condiciones){
-h+='<div class="condiciones-box"><h4>✅ CONDICIONES DE RESPUESTA VÁLIDA</h4><p style="color:#bdc3c7;font-size:12px;margin-bottom:10px">Tu respuesta debe cumplir:</p><ul>';
-p.condiciones.forEach(function(c){h+='<li>'+c+'</li>';});
-h+='</ul><p style="color:#7f8c8d;font-size:11px;margin-top:10px;font-style:italic">Puedes usar otras palabras, pero debes cubrir estos criterios.</p></div>';
-}
-if(p.ejemplo_valido){
-h+='<div class="ejemplo-valido-box"><h4>💡 EJEMPLO DE RESPUESTA VÁLIDA</h4><p>"'+p.ejemplo_valido+'"</p></div>';
-}
-h+='<div class="enunciado">❓ '+p.enunciado+'</div>';
-h+='<textarea id="resp_'+p.id+'" placeholder="Escriba su respuesta aquí...">'+(respuestas[p.id]||'')+'</textarea>';
-if(p.criterios){
-h+='<div class="criterios-box"><h4>🎯 CRITERIOS DE EVALUACIÓN</h4><ul>';
-p.criterios.forEach(function(c){h+='<li>✅ '+c.desc+' ('+c.peso+'%)</li>';});
-h+='</ul></div>';
-}
-h+='<div class="rubrica"><h4>🎯 RÚBRICA GENERAL</h4><ul>';
-h+='<li>🟥 Insuficiente (0-40%): No responde o sin justificar</li>';
-h+='<li>🟧 Básico (40-60%): Responde sin cubrir todos los criterios</li>';
-h+='<li>🟨 Competente (60-80%): Cubre la mayoría de criterios</li>';
-h+='<li>🟩 Excelente (80-100%): Cubre todos los criterios con claridad</li>';
-h+='</ul></div></div>';
-h+='<div class="nav-buttons">';
-h+=(preguntaActual>0)?'<button class="btn" onclick="ant()">← Anterior</button>':'<div></div>';
-h+=(preguntaActual<total-1)?'<button class="btn btn-green" onclick="sig()">Siguiente →</button>':'<button class="btn btn-orange" onclick="fin()">🏁 Finalizar</button>';
-h+='</div>';
-document.getElementById('contenedor-pregunta').innerHTML=h;
-}
+    function mostrarReporte() {
+        const divReporte = document.getElementById('reporte-detallado');
+        const contenido = document.getElementById('contenido-reporte');
+        const btn = document.getElementById('btn-ver-reporte');
 
-function guardar(){var p=PREGUNTAS[preguntaActual];var t=document.getElementById('resp_'+p.id);if(t)respuestas[p.id]=t.value;}
-function ant(){guardar();preguntaActual--;mostrar();}
-function sig(){guardar();preguntaActual++;mostrar();}
+        if (divReporte.style.display === 'block') {
+            divReporte.style.display = 'none';
+            btn.innerText = "📄 Ver Preguntas y Respuestas Correctas";
+            return;
+        }
 
-function calcPts(){
-var total=0,maxTotal=0;
-PREGUNTAS.forEach(function(p){
-var r=(respuestas[p.id]||'').toLowerCase();
-var puntosPregunta=0;
-if(p.criterios){
-p.criterios.forEach(function(c){
-var encontrado=false;
-c.keywords.forEach(function(k){
-if(r.indexOf(k.toLowerCase())!==-1) encontrado=true;
-});
-if(encontrado) puntosPregunta += c.peso;
-});
-} else {
-puntosPregunta = r.length > 15 ? 50 : 0;
-}
-total += puntosPregunta * p.puntaje / 100;
-maxTotal += p.puntaje;
-});
-return (total/maxTotal)*100;
-}
+        const textoPreguntas = [
+            "1. Columna crítica <b>(Correcta: A)</b>",
+            "2. Nudo Fuerte - Viga Débil <b>(Correcta: B)</b>",
+            "3. Flexo-compresión <b>(Correcta: B)</b>",
+            "4. Cuantía NEC-15 <b>(Correcta: B)</b>",
+            "5. Área tributaria <b>(Correcta: A)</b>",
+            "6. Carga axial Pu <b>(Correcta: B)</b>",
+            "7. Área de acero As <b>(Correcta: A)</b>",
+            "8. Cuantía ρ <b>(Correcta: B)</b>",
+            "9. Área de 10 varillas <b>(Correcta: B)</b>",
+            "10. Momento de diseño Md <b>(Correcta: A)</b>"
+        ];
 
-function clasificar(p){
-if(p<40)return{txt:'INSUFICIENTE',css:'c-insuf'};
-if(p<60)return{txt:'BÁSICO',css:'c-basico'};
-if(p<80)return{txt:'COMPETENTE',css:'c-comp'};
-if(p<95)return{txt:'DESTACADO',css:'c-dest'};
-return{txt:'EXCELENTE',css:'c-excel'};
-}
+        let html = "<div class='reporte-grid'>";
+        textoPreguntas.forEach((preg, index) => {
+            const id = "p" + (index + 1);
+            const resp = respuestasEstudiante[id];
+            const esCorrecta = (resp === ["A","B","B","B","A","B","A","B","B","A"][index]);
+            const color = esCorrecta ? "#2ecc71" : "#e74c3c";
+            
+            html += `<div class="reporte-item">
+                <p>${preg}</p>
+                <p>Tu respuesta: <b style="color: ${color};">${resp}</b></p>
+            </div>`;
+        });
+        html += "</div>";
 
-function fin(){
-guardar();clearInterval(intervalo);intervalo=null;
-var pts=calcPts();var cl=clasificar(pts);
-document.getElementById('contenedor-pregunta').innerHTML='';
-document.getElementById('pantalla-resultado').style.display='block';
-document.getElementById('resultado-puntaje').textContent=pts.toFixed(1)+' / 100';
-document.getElementById('resultado-clasificacion').innerHTML='<div class="clasif '+cl.css+'">'+cl.txt+'</div>';
-localStorage.setItem(MODULO+'_puntaje',pts);
-if(pts>=60){
-var cod='UNESUM-'+MODULO+'-2026-'+Math.random().toString(36).substring(2,10).toUpperCase();
-var fecha=new Date().toLocaleDateString('es-EC');
-var nombre=localStorage.getItem('estudiante_nombre')||'';
-var cedula=localStorage.getItem('estudiante_cedula')||'';
-var lugar=localStorage.getItem('estudiante_lugar')||'';
-var rol=localStorage.getItem('usuario_rol')||'estudiante';
-var rolTexto=(rol==='docente')?'DOCENTE EXPOSITOR':'ESTUDIANTE';
-document.getElementById('contenedor-certificado').innerHTML=
-'<div class="certificado">'+
-'<img src="logo_unesum.png" alt="UNESUM" style="height:70px;margin-bottom:12px">'+
-'<h2>UNIVERSIDAD ESTATAL DEL SUR DE MANABÍ</h2>'+
-'<h3>FACULTAD DE CIENCIAS TÉCNICAS</h3>'+
-'<h3>CARRERA DE INGENIERÍA CIVIL</h3>'+
-'<hr style="margin:15px 0">'+
-'<h3>EL CONOCIMIENTO TRANSFORMA — PROYECTO DE FORMACIÓN MODULAR</h3>'+
-'<hr style="margin:15px 0">'+
-'<h3>CERTIFICADO DE APROBACIÓN</h3>'+
-'<h3>Módulo M05 — Diseño de Columna</h3>'+
-'<p style="margin:15px 0">La Universidad certifica que:</p>'+
-'<h2 style="color:#2c3e50">'+nombre+'</h2>'+
-'<p>C.C. '+cedula+'</p>'+
-'<p style="margin:10px 0"><b>Rol: '+rolTexto+'</b></p>'+
-'<p style="margin:10px 0"><b>Lugar de intervención:</b> '+lugar+'</p>'+
-'<p style="margin:15px 0">ha completado satisfactoriamente el módulo, obteniendo:</p>'+
-'<h2 style="color:#2ecc71">'+pts.toFixed(1)+' / 100</h2>'+
-'<p><b>Clasificación: '+cl.txt+'</b></p>'+
-'<div class="modalidad">'+
-'<h4>MODALIDAD DE APROBACIÓN:</h4>'+
-'<ul>'+
-'<li>☑ Insumos de Trabajo Autónomo (TA)</li>'+
-'<li>☑ Prácticas Formativas de Aplicación y Experimentación (PFAE)</li>'+
-'</ul></div>'+
-'<div style="margin:25px 0;padding:15px;background:#f8f9fa;border-radius:10px;text-align:left;font-family:Arial;font-size:12px;color:#2c3e50">'+
-'<p><b>Código:</b> '+cod+'</p>'+
-'<p><b>Fecha de emisión:</b> '+fecha+'</p>'+
-'<p><b>Vigencia:</b> Permanente</p>'+
-'</div>'+
-'<div class="firmas">'+
-'<div class="firma"><div class="linea-firma"></div>'+
-'<p><b>Ing. Gery Lorenzo Marcillo Merino</b></p>'+
-'<p>DOCENTE — ESTRUCTURA I / II</p>'+
-'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
-'<div class="firma"><div class="linea-firma"></div>'+
-'<p><b>Ing. Martha Johana Álvarez Álvarez</b></p>'+
-'<p>COORDINADORA DE CARRERA</p>'+
-'<p>CARRERA DE INGENIERÍA CIVIL — UNESUM</p></div>'+
-'</div>'+
-'<hr style="margin:20px 0">'+
-'<p style="font-style:italic;font-size:13px">"Los números son solo el vehículo. El verdadero ingeniero interpreta, decide, contextualiza, se responsabiliza."</p>'+
-'<p style="font-size:12px;margin-top:8px">— Proyecto ECT-UNESUM-2026</p>'+
-'</div>';
-}
-}
+        html += "<h4 style='color: #f39c12; margin-top: 20px;'>Respuestas Abiertas:</h4>";
+        for (let i = 11; i <= 15; i++) {
+            html += `<div class="reporte-item" style="margin-bottom: 10px;">
+                <p><b>Pregunta ${i}:</b> ${respuestasEstudiante['r' + i]}</p>
+            </div>`;
+        }
 
-verificarAcapite();
+        contenido.innerHTML = html;
+        divReporte.style.display = 'block';
+        btn.innerText = "🔼 Ocultar Reporte de Auditoría";
+    }
+
+    function imprimirReporte() {
+        document.getElementById('reporte-detallado').style.display = 'block';
+        window.print();
+    }
+
+    // --- FUNCIONES DEL CERTIFICADO ---
+    function pedirCertificado() {
+        const nombre = prompt("¡Felicidades! Has aprobado el Módulo 05. Ingresa tu Nombre Completo para emitir tu Micro-Credencial:");
+        if (nombre && nombre.trim() !== "") {
+            abrirModalCertificado(nombre, notaFinalGlobal);
+        }
+    }
+
+    function abrirModalCertificado(nombre, nota) {
+        document.getElementById('nombre-certificado').innerText = nombre.toUpperCase();
+        document.getElementById('nota-certificado').innerText = nota;
+        
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('fecha-certificado').innerText = fechaFormateada;
+
+        document.getElementById('modal-certificado').style.display = 'flex';
+        document.getElementById('botones-certificado').style.display = 'block';
+    }
+
+    function cerrarModalCertificado() {
+        document.getElementById('modal-certificado').style.display = 'none';
+    }
+
+    function imprimirCertificado() {
+        document.getElementById('botones-certificado').style.display = 'none';
+        window.print();
+        setTimeout(() => {
+            document.getElementById('botones-certificado').style.display = 'block';
+        }, 500);
+    }
 </script>
 </body>
 </html>
