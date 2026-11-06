@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-GENERADOR DEL INDEX.HTML - VERSIÓN FINAL (COMPLETA)
+GENERADOR DEL INDEX.HTML - VERSIÓN FINAL (M03 ACTUALIZADO)
 Proyecto: ECT-UNESUM-2026
 """
 
@@ -332,12 +332,22 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
       <div class="desc">NEC-15 + ACI 318</div>
       <div class="status">✅ 15 preguntas</div>
     </a>
-    <a href="modulo_03_viga_sismo.html" class="modulo-card" style="--color-modulo:#f1c40f">
+    
+    <!-- M03 ACTUALIZADO CON BOTONES INTERNOS -->
+    <div class="modulo-card" style="--color-modulo:#f1c40f; position: relative;">
       <span class="modulo-icon">🏗️</span>
       <h3>M03 — Viga + Sismo</h3>
-      <div class="desc">Reacciones, cortantes, momentos</div>
+      <div class="desc">Reacciones, cortantes, momentos, acero y ductilidad</div>
       <div class="status">✅ 15 preguntas</div>
-    </a>
+      
+      <div style="margin-top: 15px; border-top: 1px dashed rgba(93,173,226,0.3); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="M03_guia_estudio.html" class="btn" style="background: linear-gradient(135deg, #3498db, #2980b9); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📘 Guía de Estudio</a>
+        <a href="M03_tutor.html" class="btn" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">🤖 Tutor Socrático</a>
+        <a href="modulo_03_viga_sismo.html" class="btn btn-orange" style="font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📝 Ir al Cuestionario</a>
+      </div>
+    </div>
+    <!-- FIN DEL M03 ACTUALIZADO -->
+
     <a href="modulo_04_acero_cortante.html" class="modulo-card" style="--color-modulo:#e74c3c">
       <span class="modulo-icon">✂️</span>
       <h3>M04 — Viga Resiliente</h3>
@@ -704,6 +714,7 @@ if __name__ == "__main__":
     print("   • Ventana pública + Google Maps")
     print("   • Sorteo con acceso cerrado")
     print("   • 8 módulos (M01-M08 con 3 fases)")
+    print("   • M03 con botones de acceso a Guía, Tutor y Cuestionario")
     print("   • Pie institucional SENESCYT")
     print("\n🚀 Ejecutar con: python generar_index.py")
     print("=" * 70)
