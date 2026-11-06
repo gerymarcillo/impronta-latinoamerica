@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M03 - Tutor Socrático - ECT-UNESUM</title>
+    <style>
+        /* Mismos estilos que M01_tutor.html */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #f39c12;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
+        .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-start; border-left: 3px solid #9b59b6;}
+        .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-end; border-right: 3px solid #3498db;}
+        .input-group {display: flex; gap: 10px;}
+        .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
+        .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
+        .input-group button:hover {background: #8e44ad;}
+        .btn-epico {display: block; width: 100%; padding: 20px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; text-align: center; text-decoration: none; transition: transform 0.2s;}
+        .btn-epico:hover {transform: scale(1.01);}
+        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); transform: none;}
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; transition: background 0.3s;}
+        .btn-volver:hover {background: #2c3e50;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M03 — TUTOR SOCRÁTICO</h1>
+        <p>El Tamiz del Pórtico Equivalente y la Ductilidad | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que entiendas por qué no calculamos una viga como si fuera estática cuando hay sismo. Si pasas este tamiz, se desbloqueará el cuestionario.</p>
+            
+            <div id="chat-socratico" class="chat-box">
+                <div class="msg-tutor">
+                    <b>Tutor:</b> Bienvenido al Tamiz del Módulo 03. Para comenzar, dime: <b>Si calculas una viga simplemente apoyada bajo carga vertical, el momento máximo está en el centro. Pero si esa misma viga es parte de un pórtico y recibe un sismo, ¿dónde crees que se generan los momentos más grandes?</b>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()">Enviar</button>
+            </div>
+        </div>
+        
+        <button id="btn-cuestionario" class="btn-epico" onclick="irAlCuestionario()" disabled>📝 IR AL CUESTIONARIO (Bloqueado)</button>
+        
+        <div style="text-align: center;">
+            <a href="M03_guia_estudio.html" class="btn-volver">← Volver a la Guía de Estudio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
+    let responsorioSocratico = { modulo: "M03", interacciones: [] };
+
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
+
+        if (texto === "") return;
+
+        chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
+        
+        responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: input.value, tipo: "estudiante", hora: new Date().toLocaleTimeString() });
+        localStorage.setItem('responsorio_M03', JSON.stringify(responsorioSocratico));
+
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            let respuesta = "";
+
+            if (nivelTamiz === 0) {
+                if (texto.includes("apoyo") || texto.includes("extremo") || texto.includes("nudo")) {
+                    respuesta = "¡Exacto! En un sismo, los momentos máximos se generan en los extremos (en la cara de la columna), no en el centro. Ahora dime: <b>Si el momento máximo está en los extremos, ¿dónde debe ir el acero negativo (As-) y dónde el positivo (As+)?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piensa en cómo empuja el sismo: ¿Empuja la viga hacia abajo como la gravedad, o la sacude de lado? <b>¿Dónde se concentran los esfuerzos?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("extremo") || texto.includes("apoyo") || texto.includes("nudo") || texto.includes("superior")) {
+                    respuesta = "¡Muy bien! El acero negativo (As-) va en los extremos (arriba) y el positivo (As+) en el centro (abajo). Ahora, para que la viga falle de forma segura (dúctil), <b>¿la cuantía de acero (ρ) debe ser mayor o menor al 1%?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "El acero negativo (As-) se coloca donde el momento genera tracción arriba. <b>¿Eso ocurre en el centro o en los extremos de la viga?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("menor") || texto.includes("1") || texto.includes("0.01")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. Has demostrado que entiendes el pórtico equivalente, la reversibilidad sísmica y la ductilidad. <b>El Cuestionario ha sido desbloqueado.</b>";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.innerText = "📝 IR AL CUESTIONARIO (Desbloqueado)";
+                } else {
+                    respuesta = "Para que la viga sea dúctil (el acero fluya antes de que el concreto se rompa), la cuantía debe ser <b>menor</b> al 1%. ¿Crees que es mayor o menor?";
+                }
+            } else {
+                respuesta = "Ya estás listo. Haz clic en el botón verde para ir al Cuestionario. ¡Mucho éxito!";
+            }
+
+            chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: respuesta, tipo: "tutor", hora: new Date().toLocaleTimeString() });
+            localStorage.setItem('responsorio_M03', JSON.stringify(responsorioSocratico));
+
+        }, 1000);
+    }
+
+    function irAlCuestionario() {
+        if (tamizAprobado) {
+            window.location.href = "modulo_03_viga_sismo.html"; 
+        }
+    }
+</script>
+
+</body>
+</html>
