@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M05 - Tutor Socrático - ECT-UNESUM</title>
+    <style>
+        /* Mismos estilos que el M01/M03/M04 */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #9b59b6;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
+        .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-start; border-left: 3px solid #9b59b6;}
+        .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-end; border-right: 3px solid #3498db;}
+        .input-group {display: flex; gap: 10px;}
+        .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
+        .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
+        .input-group button:hover {background: #8e44ad;}
+        .btn-epico {display: block; width: 100%; padding: 20px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; text-align: center; text-decoration: none; transition: transform 0.2s;}
+        .btn-epico:hover {transform: scale(1.01);}
+        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); transform: none;}
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; transition: background 0.3s;}
+        .btn-volver:hover {background: #2c3e50;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M05 — TUTOR SOCRÁTICO</h1>
+        <p>El Tamiz de la Flexo-Compresión y el Nudo Fuerte | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que entiendas por qué la columna es el elemento más crítico de la estructura y cómo se garantiza el criterio de "Nudo Fuerte - Viga Débil". Si pasas este tamiz, se desbloqueará el cuestionario.</p>
+            
+            <div id="chat-socratico" class="chat-box">
+                <div class="msg-tutor">
+                    <b>Tutor:</b> Bienvenido al Tamiz del Módulo 05. Para comenzar, dime: <b>En un sismo, si la viga falla primero (flexión), la estructura avisa y se puede evacuar. Pero si la columna falla primero, ¿qué crees que pasa con el edificio?</b>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()">Enviar</button>
+            </div>
+        </div>
+        
+        <button id="btn-cuestionario" class="btn-epico" onclick="irAlCuestionario()" disabled>📝 IR AL CUESTIONARIO (Bloqueado)</button>
+        
+        <div style="text-align: center;">
+            <a href="M05_guia_estudio.html" class="btn-volver">← Volver a la Guía de Estudio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
+    let responsorioSocratico = { modulo: "M05", interacciones: [] };
+
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
+
+        if (texto === "") return;
+
+        chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
+        
+        responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: input.value, tipo: "estudiante", hora: new Date().toLocaleTimeString() });
+        localStorage.setItem('responsorio_M05', JSON.stringify(responsorioSocratico));
+
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            let respuesta = "";
+
+            if (nivelTamiz === 0) {
+                if (texto.includes("colapsa") || texto.includes("cae") || texto.includes("peligro") || texto.includes("derrumbe")) {
+                    respuesta = "¡Exacto! La falla de la columna implica el colapso total del edificio. Por eso, la norma exige el criterio de <b>'Nudo Fuerte - Viga Débil'</b>. Ahora dime: <b>¿Qué significa que la columna sea 'más fuerte' que la viga?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piensa en una mesa: si se rompe una pata (columna), la mesa cae. Si se dobla el tablero (viga), la mesa sigue en pie. <b>¿Qué pasa si falla la columna?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("mas acero") || texto.includes("sobredimension") || texto.includes("mayor cuantia") || texto.includes("resistente")) {
+                    respuesta = "¡Muy bien! La columna debe tener más acero (mayor cuantía) para que no falle antes que la viga. Ahora, para garantizar que la columna no falle por flexión, <b>¿qué límite de cuantía de acero exige la NEC-15 para columnas?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "La columna debe resistir más que la viga. <b>¿Cómo se logra eso? ¿Con más o menos acero?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("1") && (texto.includes("6") || texto.includes("porcentaje")) || texto.includes("entre 1 y 6") || texto.includes("1% y 6%")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. Has demostrado que entiendes la importancia de la columna, el criterio de Nudo Fuerte y la cuantía de acero. <b>El Cuestionario ha sido desbloqueado.</b>";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.innerText = "📝 IR AL CUESTIONARIO (Desbloqueado)";
+                } else {
+                    respuesta = "La NEC-15 exige que la cuantía de acero longitudinal en columnas esté entre <b>1% y 6%</b>. ¿Cuál es ese rango?";
+                }
+            } else {
+                respuesta = "Ya estás listo. Haz clic en el botón verde para ir al Cuestionario. ¡Mucho éxito!";
+            }
+
+            chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: respuesta, tipo: "tutor", hora: new Date().toLocaleTimeString() });
+            localStorage.setItem('responsorio_M05', JSON.stringify(responsorioSocratico));
+
+        }, 1000);
+    }
+
+    function irAlCuestionario() {
+        if (tamizAprobado) {
+            window.location.href = "modulo_05_diseno_columna.html"; 
+        }
+    }
+</script>
+
+</body>
+</html>
