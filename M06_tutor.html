@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M06 - Tutor Socrático - ECT-UNESUM</title>
+    <style>
+        /* Mismos estilos que el M01/M03/M04/M05 */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;padding:20px;line-height:1.6}
+        .container{max-width:900px;margin:0 auto;}
+        .header{text-align:center;margin-bottom:30px;border-bottom:2px solid #2ecc71;padding-bottom:20px;}
+        .header h1{color:#5dade2;font-size:24px;}
+        .header p{color:#bdc3c7;font-size:14px;}
+        .seccion-modulo{background:#141a2e;padding:30px;border-radius:15px;margin-top:20px;border:1px solid #34495e;}
+        .chat-box {background: #0a0e1a; padding: 15px; border-radius: 8px; height: 350px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; border: 1px solid #34495e;}
+        .msg-tutor {background: rgba(155, 89, 182, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-start; border-left: 3px solid #9b59b6;}
+        .msg-user {background: rgba(52, 152, 219, 0.2); padding: 10px; border-radius: 8px; color: #ecf0f1; font-size: 14px; max-width: 85%; align-self: flex-end; border-right: 3px solid #3498db;}
+        .input-group {display: flex; gap: 10px;}
+        .input-group input {flex: 1; padding: 15px; border-radius: 8px; border: 1px solid #34495e; background: #0a0e1a; color: white; font-size: 15px;}
+        .input-group button {background: #9b59b6; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;}
+        .input-group button:hover {background: #8e44ad;}
+        .btn-epico {display: block; width: 100%; padding: 20px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; text-align: center; text-decoration: none; transition: transform 0.2s;}
+        .btn-epico:hover {transform: scale(1.01);}
+        .btn-epico:disabled {opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); transform: none;}
+        .btn-volver {background: #34495e; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; transition: background 0.3s;}
+        .btn-volver:hover {background: #2c3e50;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo_unesum.png" alt="UNESUM" style="height:50px; margin-bottom:10px;">
+        <h1>M06 — TUTOR SOCRÁTICO</h1>
+        <p>El Tamiz de la Losa Alivianada y el Acero de Temperatura | ECT-UNESUM-2026</p>
+    </div>
+
+    <div class="seccion-modulo">
+        <div style="background: #141a2e; border: 2px solid #9b59b6; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #9b59b6; margin-top: 0;">🤖 TUTOR SOCRÁTICO EXPERTO</h3>
+            <p style="color: #bdc3c7; font-size: 14px;">No te daré la respuesta. Mi rol es hacerte preguntas para que entiendas por qué la losa alivianada necesita acero de temperatura y cómo se relaciona con la inercia equivalente del M01. Si pasas este tamiz, se desbloqueará el cuestionario.</p>
+            
+            <div id="chat-socratico" class="chat-box">
+                <div class="msg-tutor">
+                    <b>Tutor:</b> Bienvenido al Tamiz del Módulo 06. Para comenzar, dime: <b>Si la losa alivianada tiene bloques que reducen el peso, ¿por qué necesita acero de temperatura si no soporta cargas directas?</b>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="input-socratico" placeholder="Escribe tu razonamiento aquí..." onkeypress="if(event.key==='Enter') responderTamiz()">
+                <button onclick="responderTamiz()">Enviar</button>
+            </div>
+        </div>
+        
+        <button id="btn-cuestionario" class="btn-epico" onclick="irAlCuestionario()" disabled>📝 IR AL CUESTIONARIO (Bloqueado)</button>
+        
+        <div style="text-align: center;">
+            <a href="M06_guia_estudio.html" class="btn-volver">← Volver a la Guía de Estudio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let nivelTamiz = 0; 
+    let tamizAprobado = false;
+    let responsorioSocratico = { modulo: "M06", interacciones: [] };
+
+    function responderTamiz() {
+        const input = document.getElementById('input-socratico');
+        const texto = input.value.trim().toLowerCase();
+        const chat = document.getElementById('chat-socratico');
+
+        if (texto === "") return;
+
+        chat.innerHTML += `<div class="msg-user"><b>Tú:</b> ${input.value}</div>`;
+        
+        responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: input.value, tipo: "estudiante", hora: new Date().toLocaleTimeString() });
+        localStorage.setItem('responsorio_M06', JSON.stringify(responsorioSocratico));
+
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            let respuesta = "";
+
+            if (nivelTamiz === 0) {
+                if (texto.includes("fisura") || texto.includes("retraccion") || texto.includes("temperatura") || texto.includes("agrieta")) {
+                    respuesta = "¡Exacto! El acero de temperatura evita las fisuras por retracción del concreto. Ahora dime: <b>¿Qué es la inercia equivalente (h_eq) y por qué es importante para el diseño de la losa?</b>";
+                    nivelTamiz = 1;
+                } else {
+                    respuesta = "Piensa en lo que le pasa al concreto cuando se enfría: se contrae. <b>¿Qué pasa si no tiene acero que lo sostenga?</b>";
+                }
+            } else if (nivelTamiz === 1) {
+                if (texto.includes("inercia") || texto.includes("equivale") || texto.includes("maciza")) {
+                    respuesta = "¡Muy bien! La inercia equivalente es el espesor de una losa maciza ficticia que se comporta igual que la alivianada. Ahora, para garantizar que la losa no se deforme demasiado, <b>¿qué límite de deflexión exige la NEC-15?</b>";
+                    nivelTamiz = 2;
+                } else {
+                    respuesta = "La inercia equivalente se calcula en el M01. <b>¿Para qué crees que sirve?</b>";
+                }
+            } else if (nivelTamiz === 2) {
+                if (texto.includes("240") || texto.includes("l/240") || texto.includes("deformacion")) {
+                    respuesta = "¡Felicidades! Has superado el Tamiz Socrático. Has demostrado que entiendes la necesidad del acero de temperatura, la inercia equivalente y el límite de deflexión. <b>El Cuestionario ha sido desbloqueado.</b>";
+                    nivelTamiz = 3;
+                    tamizAprobado = true;
+                    
+                    const btn = document.getElementById('btn-cuestionario');
+                    btn.disabled = false;
+                    btn.innerText = "📝 IR AL CUESTIONARIO (Desbloqueado)";
+                } else {
+                    respuesta = "La NEC-15 exige que la deflexión máxima sea menor a <b>L/240</b>. ¿Cuál es ese límite?";
+                }
+            } else {
+                respuesta = "Ya estás listo. Haz clic en el botón verde para ir al Cuestionario. ¡Mucho éxito!";
+            }
+
+            chat.innerHTML += `<div class="msg-tutor"><b>Tutor:</b> ${respuesta}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            responsorioSocratico.interacciones.push({ nivel: nivelTamiz, mensaje: respuesta, tipo: "tutor", hora: new Date().toLocaleTimeString() });
+            localStorage.setItem('responsorio_M06', JSON.stringify(responsorioSocratico));
+
+        }, 1000);
+    }
+
+    function irAlCuestionario() {
+        if (tamizAprobado) {
+            window.location.href = "modulo_06_diseno_losa.html"; 
+        }
+    }
+</script>
+
+</body>
+</html>
