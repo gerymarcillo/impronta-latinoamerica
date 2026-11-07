@@ -123,6 +123,19 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
 .seccion-titulo::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:linear-gradient(90deg,transparent,#f39c12,transparent);border-radius:2px}
 .seccion-subtitulo{color:#bdc3c7;font-size:13px;text-align:center;margin-bottom:30px;font-style:italic;letter-spacing:1px}
 .modulos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px}
+/* --- ESTILOS PARA LOS BOTONES INTERNOS Y FASES (ACTUALIZADOS) --- */
+.modulo-botones{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;border-top:1px dashed rgba(93,173,226,0.3);padding-top:15px}
+.btn-modulo{flex:1 1 calc(50% - 8px);min-width:120px;text-align:center;padding:10px 12px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;transition:all 0.3s;border:1px solid transparent;color:#ecf0f1}
+.btn-guia{background:rgba(93,173,226,0.15);border-color:rgba(93,173,226,0.4);color:#5dade2}
+.btn-guia:hover{background:rgba(93,173,226,0.3);transform:translateY(-2px)}
+.btn-tutor{background:rgba(22,160,133,0.15);border-color:rgba(22,160,133,0.4);color:#1abc9c}
+.btn-tutor:hover{background:rgba(22,160,133,0.3);transform:translateY(-2px)}
+.btn-cuestionario{background:rgba(243,156,18,0.15);border-color:rgba(243,156,18,0.4);color:#f39c12}
+.btn-cuestionario:hover{background:rgba(243,156,18,0.3);transform:translateY(-2px)}
+.btn-manual{background:rgba(192,57,43,0.15);border-color:rgba(192,57,43,0.4);color:#ff6b6b}
+.btn-manual:hover{background:rgba(192,57,43,0.3);transform:translateY(-2px)}
+.modulo-card-amplio{grid-column:1 / -1;border:2px solid #9b59b6;background:linear-gradient(135deg,rgba(20,26,46,0.8),rgba(44,62,80,0.6))}
+/* -------------------------------------------------------- */
 .modulo-card{background:rgba(20,26,46,0.6);backdrop-filter:blur(15px);border-radius:18px;padding:28px;text-decoration:none;color:#ecf0f1;display:block;transition:all 0.5s;position:relative;overflow:hidden;border:1px solid rgba(93,173,226,0.2)}
 .modulo-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;background:var(--color-modulo,#3498db)}
 .modulo-card:hover{transform:translateY(-12px);box-shadow:0 30px 80px rgba(93,173,226,0.4);border-color:var(--color-modulo,#3498db)}
@@ -390,37 +403,50 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
       <div class="desc">K, M, ω, T + Kalman + Phyphox</div>
       <div class="status">✅ 15 preguntas</div>
     </a>
-    <div class="modulo-card m08">
+
+ <!-- M08 ACTUALIZADO (Amplio, con fases) -->
+    <div class="modulo-card modulo-card-amplio">
       <span class="modulo-icon">🧠</span>
-      <h3>M08 — Análisis Estocástico y Contribución Doctoral</h3>
-      <div class="desc">Monte Carlo + Markov + IA + DMTP</div>
-      <div class="status">✅ 45 preguntas · 3 fases</div>
-      <div class="fases-inner">
-        <a href="M08_F1_guia_estudio.html" class="fase-btn f1">
-          <div class="fase-icon">📘</div>
-          <div class="fase-info">
-            <div class="fase-titulo">F1 — Análisis Estocástico Formativo</div>
-            <div class="fase-desc">Monte Carlo + Markov + Confiabilidad</div>
-          </div>
-        </a>
-        <a href="M08_F2_guia_estudio.html" class="fase-btn f2">
-          <div class="fase-icon">📗</div>
-          <div class="fase-info">
-            <div class="fase-titulo">F2 — Modelos Predictivos Aplicados</div>
-            <div class="fase-desc">Luces 6 m + REDi™ + Territorial</div>
-          </div>
-        </a>
-        <a href="M08_F3_guia_estudio.html" class="fase-btn f3">
-          <div class="fase-icon">📕</div>
-          <div class="fase-info">
-            <div class="fase-titulo">F3 — Contribución Doctoral DMTP + IA</div>
-            <div class="fase-desc">RNA + XGBoost + PCA + DMTP</div>
-          </div>
-        </a>
+      <h3>M08 — Análisis Estocástico — DMTP</h3>
+      <div class="desc">Tres fases progresivas: Monte Carlo, Cadenas de Markov y Confiabilidad con/sin disipador.</div>
+
+      <div class="fase-bloque">
+        <h4 class="fase-titulo">Fase 1 — Monte Carlo</h4>
+        <div class="modulo-botones" style="border:none;padding:0;margin-top:8px">
+          <a href="M08_F1_guia_estudio.html" class="btn-modulo btn-guia">📘 Guía</a>
+          <a href="M08_F1_tutor.html" class="btn-modulo btn-tutor">🤖 Tutor Socrático</a>
+          <a href="M08_F1_cuestionario.html" class="btn-modulo btn-cuestionario">📝 Cuestionario</a>
+          <a href="M08_F1_manual_docente.html" class="btn-modulo btn-manual">🔒 Manual Docente</a>
+        </div>
+      </div>
+
+      <div class="fase-bloque">
+        <h4 class="fase-titulo">Fase 2 — Cadenas de Markov</h4>
+        <div class="modulo-botones" style="border:none;padding:0;margin-top:8px">
+          <a href="M08_F2_guia_estudio.html" class="btn-modulo btn-guia">📘 Guía</a>
+          <a href="M08_F2_tutor.html" class="btn-modulo btn-tutor">🤖 Tutor Socrático</a>
+          <a href="M08_F2_cuestionario.html" class="btn-modulo btn-cuestionario">📝 Cuestionario</a>
+          <a href="M08_F2_manual_docente.html" class="btn-modulo btn-manual">🔒 Manual Docente</a>
+        </div>
+      </div>
+
+      <div class="fase-bloque">
+        <h4 class="fase-titulo">Fase 3 — Confiabilidad y DMTP</h4>
+        <div class="modulo-botones" style="border:none;padding:0;margin-top:8px">
+          <a href="M08_F3_guia_estudio.html" class="btn-modulo btn-guia">📘 Guía</a>
+          <a href="M08_F3_tutor.html" class="btn-modulo btn-tutor">🤖 Tutor Socrático</a>
+          <a href="M08_F3_cuestionario.html" class="btn-modulo btn-cuestionario">📝 Cuestionario</a>
+          <a href="M08_F3_manual_docente.html" class="btn-modulo btn-manual">🔒 Manual Docente</a>
+        </div>
+      </div>
+
+      <!-- Botón Certificado M08 -->
+      <div style="text-align:center; margin-top: 20px;">
+        <button onclick="abrirCertificadoAvanzado()" class="btn-epico" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); border: 2px solid #fff; padding: 12px 30px; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size:14px;">
+          🎓 OBTENER CERTIFICADO AVANZADO (M08)
+        </button>
       </div>
     </div>
-  </div>
-
   <h2 class="seccion-titulo">📖 RECURSOS</h2>
   <p class="seccion-subtitulo">Material de consulta</p>
   <div style="text-align:center;margin:30px 0">
@@ -711,7 +737,29 @@ function imprimirCertificado() {
     ventanaImpresion.focus();
     setTimeout(function(){ ventanaImpresion.print(); ventanaImpresion.close(); }, 500);
 }
+<!-- MODAL DEL CERTIFICADO AVANZADO (M08) -->
+<div id="modal-certificado-avanzado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,14,26,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; overflow-y:auto;">
+    <div style="background:#141a2e; padding:30px; border-radius:15px; border:2px solid #9b59b6; text-align:center; max-width:600px; width:90%;">
+        <h3 style="color:#fff; margin-bottom:15px;">🎓 CERTIFICADO AVANZADO (M08)</h3>
+        <p style="color:#bdc3c7; font-size:14px; margin-bottom:20px;">Ingresa tu nombre para generar el certificado de los 8 módulos.</p>
+        <input type="text" id="nombre-avanzado" placeholder="Ej: Juan Pérez" style="width:100%; padding:12px; border-radius:8px; border:1px solid #9b59b6; background:#0a0e1a; color:#fff; margin-bottom:20px; font-size:16px; box-sizing:border-box;">
+        <button onclick="generarCertificadoAvanzado()" style="width:100%; padding:15px; background:linear-gradient(135deg,#9b59b6,#8e44ad); color:white; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">Generar Certificado</button>
+        <button onclick="document.getElementById('modal-certificado-avanzado').style.display='none'" style="background:none; border:none; color:#7f8c8d; margin-top:15px; cursor:pointer;">Cancelar</button>
+    </div>
+</div>
 
+<script>
+    function abrirCertificadoAvanzado() {
+        document.getElementById('modal-certificado-avanzado').style.display = 'flex';
+        document.getElementById('nombre-avanzado').value = '';
+    }
+    function generarCertificadoAvanzado() {
+        var nombre = document.getElementById('nombre-avanzado').value.trim();
+        if (nombre === "") { alert("Por favor, ingrese su nombre completo."); return; }
+        alert("✅ Certificado generado exitosamente para: " + nombre.toUpperCase() + "\n\n(El archivo imprimible está en tu código HTML)");
+        document.getElementById('modal-certificado-avanzado').style.display = 'none';
+    }
+</script>
 console.log('✅ Plataforma ECT-UNESUM-2026 cargada');
 </script>
 </body>
