@@ -371,7 +371,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0a0e1a;color:#ecf0f1;m
       <div style="margin-top: 15px; border-top: 1px dashed rgba(93,173,226,0.3); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
         <a href="M04_guia_estudio.html" class="btn" style="background: linear-gradient(135deg, #3498db, #2980b9); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📘 Guía de Estudio</a>
         <a href="M04_tutor.html" class="btn" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">🤖 Tutor Socrático</a>
-        <a href="modulo_04_viga_resiliente.html" class="btn btn-orange" style="font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📝 Ir al Cuestionario</a>
+        <a href="modulo_04_acero_cortante.html" class="btn btn-orange" style="font-size: 13px; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center; margin: 0;">📝 Ir al Cuestionario</a>
       </div>
     </div>
     <!-- FIN DEL M04 ACTUALIZADO -->
